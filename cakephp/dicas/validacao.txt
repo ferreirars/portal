@@ -1,0 +1,333 @@
+Dicas sobre Validação de Dados no Cake
+
+
+Validação bem simples:
+
+class User extends AppModel {
+    public $validate = array(
+        'login' => 'alphaNumeric',
+        'email' => 'email',
+        'born'  => 'date'
+    );
+}
+
+Validação Detalhada:
+
+class User extends AppModel {
+    public $validate = array(
+        'login' => array(
+            'alphaNumeric' => array(
+                'rule'     => 'alphaNumeric',
+                'required' => true,
+                'message'  => 'Alphabets and numbers only'
+            ),
+            'between' => array(
+                'rule'    => array('between', 5, 15),
+                'message' => 'Between 5 to 15 characters'
+            )
+        ),
+        'password' => array(
+            'rule'    => array('minLength', '8'),
+            'message' => 'Minimum 8 characters long'
+        ),
+        'email' => 'email',
+        'born' => array(
+            'rule'       => 'date',
+            'message'    => 'Enter a valid date',
+            'allowEmpty' => true,
+			'required' 	 => false
+        )
+    );
+}
+
+public $validate = array(
+    'password' => array(
+        'rule' => array('minLength', 8)
+    )
+);
+
+public $validate = array(
+    'login' => array(
+        'rule'     => 'alphaNumeric',
+        'required' => true
+    )
+);
+
+public $validate = array(
+    'password' => array(
+        'rule'    => array('minLength', 8),
+        'message' => 'Password must be at least 8 characters long'
+    )
+);
+
+public $validate = array(
+    'login' => array(
+        'loginRule-1' => array(
+            'rule'    => 'alphaNumeric',
+            'message' => 'Only alphabets and numbers allowed',
+         ),
+        'loginRule-2' => array(
+            'rule'    => array('minLength', 8),
+            'message' => 'Minimum length of 8 characters'
+        )
+    )
+);
+
+Expressões regulares
+public $validate = array(
+    'login' => array(
+        'rule'    => '/^[a-z0-9]{3,}$/i',
+        'message' => 'Somente letras minúsculas e inteiros, mínimo de 3 caracteres'
+    )
+);
+Outro:
+		'mes' => array(
+			'soalgarismos' => array(
+				'rule' => array('custom', '/[0-9\/]{7,7}$/i'),
+				'message' => 'Apenas algarismos e a barra, exatamente 7 caracteres'
+			),
+		),
+
+
+Usando uma função:
+
+    public $validate = array(
+        'promotion_code' => array(
+            'rule'    => array('limitDuplicates', 25),
+            'message' => 'Este código já foi usado a quantidade total de vezes.'
+        )
+    );
+
+    public function limitDuplicates($check, $limit) {
+        // $check will have value: array('promotion_code' => 'some-value')
+        // $limit will have value: 25
+        $existing_promo_count = $this->find('count', array(
+            'conditions' => $check,
+            'recursive' => -1
+        ));
+        return $existing_promo_count < $limit;
+    }
+
+Outro
+    public $validate = array(
+        'slug' => array(
+            'rule'    => 'alphaNumericDashUnderscore',
+            'message' => 'Slug can only be letters, numbers, dash and underscore'
+        )
+    );
+
+    public function alphaNumericDashUnderscore($check) {
+        // $data array is passed using the form field name as the key
+        // have to extract the value to make the function generic
+        $value = array_values($check);
+        $value = $value[0];
+
+        return preg_match('|^[0-9a-zA-Z_-]*$|', $value);
+    }
+
+Criando novas regras de validação
+
+The ModelValidator objects allows several ways for adding new fields to the set. The first one is using the add method:
+
+// Inside a model class
+$this->validator()->add('password', 'required', array(
+    'rule' => 'notEmpty',
+    'required' => 'create'
+));
+
+This will add a single rule to the password field in the model. You can chain multiple calls to add to create as many rules as you like:
+
+// Inside a model class
+$this->validator()
+    ->add('password', 'required', array(
+        'rule' => 'notEmpty',
+        'required' => 'create'
+    ))
+    ->add('password', 'size', array(
+        'rule' => array('between', 8, 20),
+        'message' => 'Password should be at least 8 chars long'
+    ));
+
+It is also possible to add multiple rules at once for a single field:
+
+$this->validator()->add('password', array(
+    'required' => array(
+        'rule' => 'notEmpty',
+        'required' => 'create'
+    ),
+    'size' => array(
+        'rule' => array('between', 8, 20),
+        'message' => 'Password should be at least 8 chars long'
+    )
+));
+
+
+$validator = $this->validator();
+$validator['username'] = array(
+    'unique' => array(
+        'rule' => 'isUnique',
+        'required' => 'create'
+    ),
+    'alphanumeric' => array(
+        'rule' => 'alphanumeric'
+    )
+);
+
+===========
+public $validate = array(
+    'password' => array(
+        'rule'    => array('between', 5, 15),
+        'message' => 'Passwords must be between 5 and 15 characters long.'
+    )
+);
+
+public $validate = array(
+    'age' => array(
+        'rule'    => array('comparison', '>=', 18),
+        'message' => 'Must be at least 18 years old to qualify.'
+    )
+);
+
+public $validate = array(
+    'age' => array(
+        'rule'    => array('comparison', 'greater or equal', 18),
+        'message' => 'Must be at least 18 years old to qualify.'
+    )
+);
+
+Exigir certo formato de data
+
+
+    ‘dmy’ e.g. 27-12-2006 or 27-12-06 (separators can be a space, period, dash, forward slash)
+    ‘mdy’ e.g. 12-27-2006 or 12-27-06 (separators can be a space, period, dash, forward slash)
+    ‘ymd’ e.g. 2006-12-27 or 06-12-27 (separators can be a space, period, dash, forward slash)
+    ‘dMy’ e.g. 27 December 2006 or 27 Dec 2006
+    ‘Mdy’ e.g. December 27, 2006 or Dec 27, 2006 (comma is optional)
+    ‘My’ e.g. (December 2006 or Dec 2006)
+    ‘my’ e.g. 12/2006 or 12/06 (separators can be a space, period, dash, forward slash)
+
+O formato default é ymd:
+
+public $validate = array(
+    'born' => array(
+        'rule'       => array('date', 'ymd'),
+        'message'    => 'Enter a valid date in YY-MM-DD format.',
+        'allowEmpty' => true
+    )
+);
+
+public $validate = array(
+    'price' => array(
+        'rule' => array('decimal', 2)
+    )
+);
+
+public $validate = array('email' => array('rule' => 'email'));
+
+public $validate = array(
+    'email' => array(
+        'rule'    => array('email', true),
+        'message' => 'Please supply a valid email address.'
+    )
+);
+
+public $validate = array(
+    'food' => array(
+        'rule'    => array('equalTo', 'cake'),
+        'message' => 'This value must be the string cake'
+    )
+);
+
+public $validate = array(
+    'image' => array(
+        'rule'    => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
+        'message' => 'Please supply a valid image.'
+    )
+);
+
+public $validate = array(
+    'image' => array(
+        'rule' => array('fileSize', '<=', '1MB'),
+        'message' => 'Image must be less than 1MB'
+    )
+);
+
+public $validate = array(
+    'function' => array(
+         'allowedChoice' => array(
+             'rule'    => array('inList', array('Foo', 'Bar')),
+             'message' => 'Enter either Foo or Bar.'
+         )
+     )
+ );
+
+public $validate = array(
+    'pago' => array(
+         'allowedChoice' => array(
+             'rule'    => array('inList', array('0', '1')),
+             'message' => 'Valores válidos: somente 0 ou 1.'
+         )        
+    )
+);
+
+
+public $validate = array(
+    'image' => array(
+        'rule'    => array('mimeType', array('image/gif')),
+        'message' => 'Invalid mime type.'
+    ),
+);
+
+public $validate = array(
+    'multiple' => array(
+        'rule' => array('multiple', array(
+            'in'  => array('do', 're', 'mi', 'fa', 'sol', 'la', 'ti'),
+            'min' => 1,
+            'max' => 3
+        )),
+        'message' => 'Please select one, two or three options'
+    )
+);
+
+Exige formato de telefone dos us:
+public $validate = array(
+    'phone' => array(
+        'rule' => array('phone', null, 'us')
+    )
+);
+
+public $validate = array(
+    'zipcode' => array(
+        'rule' => array('postal', null, 'us')
+    )
+);
+
+public $validate = array(
+    'number' => array(
+        'rule'    => array('range', -1, 11),
+        'message' => 'Please enter a number between 0 and 10'
+    )
+);
+
+public $validate = array(
+    'ssn' => array( // CPF e CNPJ
+        'rule' => array('ssn', null, 'us')
+    )
+);
+
+public $validate = array(
+    'website' => array(
+        'rule' => 'url'
+    )
+);
+
+public $validate = array(
+    'website' => array(
+        'rule' => array('url', true)
+    )
+);
+
+
+http://book.cakephp.org/2.0/en/models/data-validation.html
+http://book.cakephp.org/2.0/en/models/data-validation/validating-data-from-the-controller.html
+

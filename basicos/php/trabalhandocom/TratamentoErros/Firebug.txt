@@ -1,0 +1,16 @@
+
+
+O Firebug ao ser ativado aparece nas parte inferior da tela, que no caso é dividida em duas partes, uma à esquerda e outra a direita.
+À direita temos a parte mais larga, onde encontram-se as abas:
+
+Menu	Console		HTML	CSS		Script (JS)	DOM		Rede (Tempos de downloads dos arquivos)	Reference
+
+Na parte superior fica a página e abaixo o painel do Firebug.
+
+Ao clicar em algo na página, o elemento é mostrado abaixo.
+
+Observe que na aba HTML o Firebug permite editar os atributos. E ao editar o resultado é mostrado automaticamente.
+
+
+Gravar vídeo mostranto o Firebug.
+

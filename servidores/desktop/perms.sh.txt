@@ -1,0 +1,18 @@
+#!/bin/sh
+clear;
+# Permissões para uso em desktop
+echo "Aguarde enquanto configuro as permissões do /var/www/html/$1";
+echo "";
+# addgroup webdevel
+chown -R www-data:webdevel /var/www/html/$1;
+chmod -R g+s /var/www/html/$1;
+find /var/www/html/$1 -type d -exec chmod 2775 {} \;
+find /var/www/html/$1 -type f -exec chmod 2664 {} \;
+echo "";
+echo "Concluído!";
+
+#chmod 700 /usr/local/bin/perms
+#Executar
+#/usr/local/bin/perms
+#ou apenas
+#sudo perms

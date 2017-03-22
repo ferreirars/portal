@@ -1,0 +1,49 @@
+Estendendo Views
+
+
+Extender uma View permite que você inclua uma view dentro de outra. Combinando isto com blocos de views você tem uma maneira poderosa para deixar suas views DRY (enxutas). Por exemplo, sua aplicação tem uma barra lateral (sidebar) que precisa mudar a depender de quando uma view específica é renderizada. Estendendo um mesmo arquivo de view, você pode evitar repetições de marcações em comum e apenas definir as que mudam ou não existem:
+
+// app/View/Common/view.ctp
+<h1><?php echo $this->fetch('title'); ?></h1>
+<?php echo $this->fetch('content'); ?>
+
+<div class="actions">
+    <h3>Related actions</h3>
+    <ul>
+    <?php echo $this->fetch('sidebar'); ?>
+    </ul>
+</div>
+
+O arquivo de view acima pode ser usado como uma view pai. Esta espera que a view que a estende defina os blocos sidebar e title. O bloco content é um bloco especial que o CakePHP cria. Ele conterá todo o conteúdo não-capturado da view que a estende. Considerando que nosso arquivo view tem uma variável $post com informação sobre nosso post, nossa view poderá parecer como:
+
+<?php
+// app/View/Posts/view.ctp
+$this->extend('/Common/view');
+
+$this->assign('title', $post)
+
+$this->start('sidebar');
+?>
+<li>    echo $this->Html->link('edit', array(
+    'action' => 'edit',
+    $post['Post']['id']
+)); ?>
+</li>
+<?php $this->end(); ?>
+
+
+// O conteúdo restante estará disponível como o bloco `content`
+// na view pai.
+echo h($post['Post']['body']);
+
+A view de post acima mostra como você pode estender uma view e preenche-la com um conjunto de blocos. Qualquer conteúdo que não estiver definido em um bloco será capturado e colocado em um bloco especial chamado content. Quando uma view contém uma chamada para extend(), a execução continua até o fim do arquivo view atual. Uma vez finalizada, a view estendida será renderizada. Chamar extend() mais de uma vez em um arquivo view irá sobrescrever a view pai que será processada em seguida:
+
+$this->extend('/Common/view');
+$this->extend('/Common/index');
+
+O trecho acima resultará em /Common/index.ctp sendo renderizada como a view pai para a view atual.
+
+Você pode aninhar views estendidas quantas vezes forem necessárias. Cada view pode estender outra view se quiser. Cada view pai pegará o conteúdo da view anterior como o bloco content.
+
+http://book.cakephp.org/2.0/en/views.html#extending-views
+

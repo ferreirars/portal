@@ -1,0 +1,16 @@
+**********************************
+Arquivos pertencente ao artigo:
+
+"Manipulando dados de formulários com PHP - Parte 1.
+Por Alfred Reinold Baudisch - alfred@estacaonet.com
+Sábado, 24 de janeiro de 2004."
+
+Publicado no Linha de Código: www.linhadecodigo.com.br
+
+Dúvidas, não hesite em contatar-me!
+
+Alfred Reinold Baudisch
+Desenvolvedor de Sistemas Web
+Alfred@estacaonet.com
+www.estacaonet.com
+**********************************

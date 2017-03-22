@@ -1,0 +1,942 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+	<title> &raquo; Firebug Tutorial: Introduction to Firebug :: CSS, JavaScript and XHTML Explained</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="generator" content="WordPress 2.5.1" /> <!-- leave this for stats please -->
+
+	<style type="text/css" media="screen">
+		@import url( http://www.evotech.net/blog/wp-content/themes/rounded-v2-beta/style.css );
+	</style>
+
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.evotech.net/blog/feed/" />
+	<link rel="alternate" type="text/xml" title="RSS .92" href="http://www.evotech.net/blog/feed/rss/" />
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://www.evotech.net/blog/feed/atom/" />
+	<link rel="pingback" href="http://www.evotech.net/blog/xmlrpc.php" />
+    	<link rel='archives' title='September 2009' href='http://www.evotech.net/blog/2009/09/' />
+	<link rel='archives' title='June 2009' href='http://www.evotech.net/blog/2009/06/' />
+	<link rel='archives' title='May 2009' href='http://www.evotech.net/blog/2009/05/' />
+	<link rel='archives' title='April 2009' href='http://www.evotech.net/blog/2009/04/' />
+	<link rel='archives' title='March 2009' href='http://www.evotech.net/blog/2009/03/' />
+	<link rel='archives' title='February 2009' href='http://www.evotech.net/blog/2009/02/' />
+	<link rel='archives' title='December 2008' href='http://www.evotech.net/blog/2008/12/' />
+	<link rel='archives' title='November 2008' href='http://www.evotech.net/blog/2008/11/' />
+	<link rel='archives' title='October 2008' href='http://www.evotech.net/blog/2008/10/' />
+	<link rel='archives' title='September 2008' href='http://www.evotech.net/blog/2008/09/' />
+	<link rel='archives' title='August 2008' href='http://www.evotech.net/blog/2008/08/' />
+	<link rel='archives' title='July 2008' href='http://www.evotech.net/blog/2008/07/' />
+	<link rel='archives' title='May 2008' href='http://www.evotech.net/blog/2008/05/' />
+	<link rel='archives' title='March 2008' href='http://www.evotech.net/blog/2008/03/' />
+	<link rel='archives' title='October 2007' href='http://www.evotech.net/blog/2007/10/' />
+	<link rel='archives' title='September 2007' href='http://www.evotech.net/blog/2007/09/' />
+	<link rel='archives' title='August 2007' href='http://www.evotech.net/blog/2007/08/' />
+	<link rel='archives' title='July 2007' href='http://www.evotech.net/blog/2007/07/' />
+	<link rel='archives' title='June 2007' href='http://www.evotech.net/blog/2007/06/' />
+	<link rel='archives' title='May 2007' href='http://www.evotech.net/blog/2007/05/' />
+	<link rel='archives' title='April 2007' href='http://www.evotech.net/blog/2007/04/' />
+		<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.evotech.net/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.evotech.net/blog/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 2.5.1" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="http://www.evotech.net/blog/wp-content/plugins/sociable/sociable.css" />
+
+<!--[if lt IE 7.]>
+<script defer type="text/javascript" src="http://www.evotech.net/blog/wp-content/themes/rounded-v2-beta/js/pngfix.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+<div id="rap">
+
+
+
+
+<div id="masthead">
+		<div id="pagetab">
+			<div class="ltab">&nbsp;</div>
+			<ul>
+			<li class="page_item page-item-54"><a href="http://www.evotech.net/blog/about/" title="About Estelle">About Estelle</a></li>
+<li class="page_item page-item-85"><a href="http://www.evotech.net/blog/jobs/" title="Jobs">Jobs</a></li>
+			</ul>
+			<div class="rtab">&nbsp;</div>
+		</div><!-- end PAGETAB -->
+		<h1><a href="http://www.evotech.net/blog">CSS, JavaScript and XHTML Explained</a></h1>
+							
+				<h2>Estelle Weyl&#8217;s Blog of quirks, random thoughts and funky finds discovered in day-to-day coding</h2>
+				
+
+</div><!-- end MASTHEAD -->
+
+<div id="main">
+
+<div id="content">
+<!-- end header --><!-- this was to download zip file from offcicial theme's page
+i left the image used, feel free to modify it
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+<div class="post">
+	 <div class="postop"><div class="pheadfill">&nbsp;</div></div>
+							
+							<div class="storycontent">
+
+									 <h3 class="storytitle" id="post-26"><a href="http://www.evotech.net/blog/2007/06/introduction-to-firebug/" rel="bookmark">Firebug Tutorial: Introduction to Firebug</a> <span class="date">June 28, 2007</span></h3>
+
+									<div class="meta">Filed under: <a href="http://www.evotech.net/blog/category/accessibility/" title="View all posts in Accessibility" rel="category tag">Accessibility</a>, <a href="http://www.evotech.net/blog/category/browsers/" title="View all posts in Browsers" rel="category tag">Browsers</a>, <a href="http://www.evotech.net/blog/category/entities/" title="View all posts in Character Entities" rel="category tag">Character Entities</a>, <a href="http://www.evotech.net/blog/category/javascript/" title="View all posts in JavaScript" rel="category tag">JavaScript</a>, <a href="http://www.evotech.net/blog/category/web-development/" title="View all posts in Web Development" rel="category tag">Web Development</a>, <a href="http://www.evotech.net/blog/category/firebug/" title="View all posts in firebug" rel="category tag">firebug</a> &#8212; Estelle Weyl @ 9:58 am 									</div><!-- end META -->
+
+								<h2>A Firebug Tutorial</h2>
+<p>This is an overview of the plugin, not a detailed explanation of all of it&#8217;s amazing features.  This should be enough to get you started.</p>
+<div style="float: right"><script type="text/javascript"><!--
+google_ad_client = "pub-5095172600058476";
+/* 300x250, created 9/2/09 */
+google_ad_slot = "4342979058";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script><br />
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<ul>
+<li><a href="#fb_install">Installing Firebug</a></li>
+<li><a href="#fb_opening">Opening and Closing Firebug </a></li>
+<li><a href="#fb_overview">Firebug Window Overview </a></li>
+<li><a href="#fb_edit">Edit your document on-the-fly.</a></li>
+<li><a href="#fb_css">Inspecting and troubleshooting CSS using Firebug </a></li>
+<li><a href="#fb_bm">The Box Model: Evaluating Height, Width, Padding, Border and Margin</a></li>
+<li><a href="#fb_speed">Evaluating download speed</a></li>
+<li><a href="#fb_js">JavaScript and Firebug </a></li>
+<li><a href="#fb_ajax">AJAX and Firebug</a></li>
+<li><a href="#fb_debug">Debugging AJAX and other JavaScripts </a></li>
+<li><a href="#fb_issues">Problems with Firebug </a></li>
+</ul>
+<h3 id="fb_install">Installing Firebug</h3>
+<p>Firebug works with Firefox.  There is a product called Firebug lite which you can include in a file via a javascript call in your file, for use in non-Firefox browsers, but I am not covering Firebug lite in this tutorial/overview.</p>
+<p>To install Firebug visit the <a href="http://www.getfirebug.com/">Firebug download page</a>. Click on the huge orange button half-way down the page on the right hand side. You can also download it from <a href="http://www.getfirebug.com/">Mozilla&#8217;s FireFox Add-ons</a> site. Install it. Restart FireFox, and you&#8217;re good to go.</p>
+<p>If you&#8217;ve already installed it, get the latest version!  To update your extension, in Firefox select Tools &gt; Add-ons.  Then click on the button in the left hand bottom corner that reads &#8220;Find Updates&#8221;.</p>
+<h3 id="fb_opening">Opening and Closing Firebug</h3>
+<p><a href="http://www.getfirebug.com/keyboard.html">Keyboard and Mouse Shortcuts for Firebug</a> can be found at the Firebug Website.  The three sets I use most often include:</p>
+<ul>
+<li><strong> Open Firebug</strong>: F12 or clicking on the <img src="http://www.evotech.net/articles/images/greencheck.gif" alt="green check mark" width="13" height="13" /> at the  right of the right of the browser status bar.</li>
+<li><strong>Close Firebug</strong>: 12 or clicking on the <img src="http://www.evotech.net/articles/images/greencheck.gif" alt="green check mark" width="13" height="13" /> at the  right of the right of the browser status bar or clicking on the <img src="http://www.evotech.net/articles/images/redx.gif" alt="red x" width="14" height="14" /> in the upper right hand corner of the firebug window.</li>
+<li><strong>Undock Firebug into its own window:</strong> click on the <img src="http://www.evotech.net/articles/images/uparrow.gif" alt="red up arrow" width="14" height="14" /> in the top right corner of the firebug window or Ctrl+F12 / ⌘+F12.</li>
+</ul>
+<p><strong>Firebug settings</strong></p>
+<ul>
+<li><strong>Set Firebug to always undock in a separate window:</strong> open the firebug console. right click on the firebug in the upper left, select &#8220;options&#8221;, then select &#8220;Always Open in  New Window&#8221;</li>
+<li><strong>Increase/Decrease font size:</strong> open the firebug console. right click on the firebug in the upper left, select &#8220;Text Size&#8221;. The font changes are really slight, but it does work.</li>
+<li><strong>Set Firebug to only work for specified sites:</strong> Start by disabling Firebug by right clicking on the <img src="http://www.evotech.net/articles/images/greencheck.gif" alt="green check mark" width="13" height="13" /> and selecting &#8220;disable Firebug&#8221;.  Then right click on the greyed out icon and add the domains you want to enable Firebug on.</li>
+</ul>
+<h3 id="fb_overview">Firebug Window Overview</h3>
+<ul>
+<li><strong>Console Tab:</strong> Contains command line javascript, shows javascript error message log, can enter JavaSript commands after the &gt;&gt;&gt; at the bottom</li>
+<li><strong>HTML Tab:</strong> Shows HTML as an indented hierachy of DOM nodes, which you can open and close to see or hide child nodes.</li>
+<li><strong>CSS Tab:</strong> CSS inspector, view all loaded style sheets, modify styles on the fly. See list of styles sheets and select one to view from this pane by clicking on the drop down list on the top of Firebug window, to the right of &#8220;Edit&#8221;.</li>
+<li><strong>Script Tab: </strong>Shows  the javascript files and the calling document. See list of included JavaScript files and select one to view from this pane by clicking on the drop down list on the top of Firebug window, to the right of &#8220;Inspect&#8221;. Set breakpoints and conditions underwhich break points appear.</li>
+<li><strong>DOM Tab:</strong> Shows all the page objects and properties of the window. As variables are properties of the window object, Firebug displays all JavaScript variables and their values.</li>
+<li><strong>Net Tab:</strong> Shows all the downloads, how long each resource took to download, the HTTP request headers and server response sent for each resource. The XHR tab is useful for <a href="#fb_ajax">AJAX</a> debugging.</li>
+</ul>
+<h3 id="fb_edit">Edit your document on-the-fly.</h3>
+<p>You can change text nodes by selecting the text node with the &#8220;inspect&#8221; function and then clicking on the text node in the HTML panel.</p>
+<p>Firebug is both an inspector and an  editor. All objects in the HTML, CSS and JavaScript files can be edited with a single or double click. As you type, the changes are immediately applied in the browser window providing instant feedback. The DOM inspector allows for full in-place editing of your document structure, not just text nodes. Simply click on the &#8220;edit&#8221; tab next to the &#8220;inspect tab&#8221;, and the left panel becomes a black and white text editor. In the CSS panel, Firebug  autocompletes as you type. In the  DOM inspector, Firebug autocompletes property names when you hit the Tab key.</p>
+<h3 id="fb_css">Inspecting and troubleshooting CSS using Firebug</h3>
+<p>DOM inspector’s CSS tab reveals all applicable CSS rules for elements, including properties inherited from ancestor elements,  lets you toggle on/off and edit individual style declarations and add new CSS rules.</p>
+<p><strong>Firebug hides rules that Firefox  ignores: </strong>For example, Firebug will hide hacks targeting other browsers and  CSS3 selectors that it doesn&#8217;t support. So, it will both hide intentional CSS filters, such as _height:25px; (the underscore is an IE6 hack) and p:first-of-type {color: #ff0000;} (a <a href="http://www.evotech.net/blog/2007/06/targeting-safari-30-with-css/">CSS3 :first-of-type pseudo-class selector currently supported only by Safari 3</a>). This means, however, that if the reason your page isn&#8217;t looking the way you anticipated is because of a typo, you will need to use the developer toolbar to show all CSS and find your error.</p>
+<p><strong>Firebug shows all selectors impacting the selected element</strong>: When you inspect an element or node, Firebug displays the entire cascade of all the CSS attributes impacting that element, including attributes that were overwritten in the cascade.  The right panel displays the selectors and attributes impacting the element in order of the cascade.</p>
+<p><strong>Firebug allows you to turn off styles impacting an element within the CSS</strong>: When you turn off an attribute, if that attribute value was overriding a different value in the cascade, the formerly crossed out value will become active so you can test what the page would look like if the attribute value were removed.  To &#8220;turn off&#8221; an attribute, click to the left of the attribute in the right hand panel.  A red &#8220;do not&#8221; icon <img src="http://www.evotech.net/articles/images/turnoffselector.gif" alt="do not" width="12" height="12" /> will appear, and the attribute will be grayed out or disappear, and the strike-through of the new attribute value effecting the element from the cascade will be removed. You can toggle the attribute value back on by clicking on the <img src="http://www.evotech.net/articles/images/turnoffselector.gif" alt="do not" width="12" height="12" />.  However, if the attribute has &#8220;disappeared&#8221; since it&#8217;s been overwritten, you have to re-inspect the element to see the missing attribute and toggle it back on.</p>
+<p><strong>Firebug allows you to edit attributes and attribute values</strong>: To change an attribute or the value of an attribute,  click on the term or value, and edit it.  Pretty simple! The effect of the change will be immediately visible in the browser window.</p>
+<div style="float: right"><script type="text/javascript"><!--
+google_ad_client = "pub-5095172600058476";
+/* 300x250, created 9/2/09 */
+google_ad_slot = "4342979058";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script><br />
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<p>One of the best components of this feature is figuring out exact positioning, padding and margins. Firebug provides wonderful support for changing numeric values. Simply click on the numeric value you want to change and change it with the numbers on your keyboard, or click on the up or down arrow to increment or decrement the value by one.</p>
+<p><strong>Firebug allows you to add new attribute / value pairs to existing selectors: </strong>To add an attribute to a selector, double click on the selector.  An input box with intelli-sense will appear. Hitting tab will bring you to a value text input box.</p>
+<p><strong>Firebug allows you to easily inspect ancestor elements</strong>: To the right of the keyterm &#8220;inspect&#8221;, Firebug displays all the ancestors of the currently selected element. To inspect an ancestor, simply click on it in the list.  The left and right panels will both change to display the properties of the newly selected element.</p>
+<h3 id="fb_bm">The Box Model: Evaluating Height, Width, Padding, Border and Margin</h3>
+<p>When you inspect an element, the left panel displays the HTML, and the right panel shows the CSS. Next to the CSS label at the top of the right panel is a tab labeled &#8220;Layout&#8221;. This Layout tab illustrates the CSS box model as it applies to the selected element. To view the height or width of any other element on the page, simply select &#8220;inspect&#8221; while this window is open and  hover your mouse over the inline or block level element you wish to inspect.</p>
+<h3 id="fb_speed">Evaluating download speed</h3>
+<p>The Net tab graphs the request times for all http requests that make up a page.  Network monitoring must be turned on for the Net Tab to work, but it&#8217;s on by default (the options drop down on the right hand side of the firebug panel allows you to toggle this feature off and on). This is a handy way to test (and prove) that putting your javascript files at the bottom of your files, especially for javascript heavy pages, improves perceived download time. Total download time will be the same, but since browsers stop loading pages when they hit scripts until the scripts have been downloaded, the page will appear to download faster, which is a better user experience (see<a href="http://www.evotech.net/blog/2007/05/including-javascript-in-xhtml/#js_01"> list item 5</a>).</p>
+<p>By left clicking on the plus sign to the left of the file name, Firebug displays the <strong>HTTP headers</strong> of each file that was downloaded.</p>
+<p>In the 1.0..5 version of Firebug you can see how long it takes for HTML files only to be downloaded, CSS files only, images only, etc., or all files. YSlow, Yahoo!s performance tool, should be available as a plug in for Firefox by the end of the summer.  In the meantime, Firebug&#8217;s Net tab is the next best thing.</p>
+<h3 id="fb_js">JavaScript</h3>
+<p>The DOM inspector provides information about all the properties of all the objects in your document. The coolest feature of Firebug is that while making dynamic updates to your page will not alter the content visible in the &#8220;view source&#8221; feature of the browser, it will update the content in the Firebug panels.  So, dynamically created content is visible not only in the browser (as it should be), but the generated code is inspectible (is that a word?) in Firebug.</p>
+<p>The  JavaScript profiler reports on the execution times of your JavaScript functions, so you can pin down performance JavaScript components that are slowing down your pages or javascript applications. To view the profiler, the submenu should be on &#8220;console&#8221;, and click on &#8220;Profile&#8221; in the top menu (the order of the tabs is &#8220;Inspect |Clear | Profile&#8221;). Firebug lists all the functions that were called and the time spent for each function call. You can target what function you want Firebug to profile by adding console.profile([title]) to the start of the section your want profiled, and console.profileEnd() at the end.</p>
+<p>The command line at the bottom of the console tab, which starts with &#8220;&gt;&gt;&gt;&#8221; accepts commands in JavaScript. The results or your javascript command, if there are any, are then displayed in the console. There is a<a href="http://www.getfirebug.com/commandline.html"> Firebug Command Line API </a>that is worth taking a look at.</p>
+<h3 id="fb_ajax">AJAX</h3>
+<p>As mentioned above, Firebug captures dynamic content and other DOM changes made to your webpage. If you take as an example the <a href="http://www.evotech.net/articles/ajaxlesson.html">sample file</a> created in my tutorial <a href="http://www.evotech.net/blog/2007/05/beginning-ajax-using-the-yui-library/">Beginning AJAX using the YUI Library</a>, if you check the view source after calling the function (click on the link) via the browser&#8217;s functionality, you&#8217;ll only get the link that calls the AJAX function.  If you view the source via Firebug, Firebug reflects changes made to the DOM, and includes the &#8220;Hello World&#8221; content. This is one of the core strengths of Firebug: without Firebug, AJAX requests and responses are invisible. With it, you can view the sent and received text as well as the headers that went along with it. You can also monitor how long it took for each request/response with the Net tab.</p>
+<p>You can see XHR response by clicking on the Net tab, and then the XHR tab in the sub navigation that opens up when you are in the Net view. While the All Net tab is like yslow, the XHR focuses on the AJAX only. If you click on the plus sign to the left of the response file, you can see both the headers and the content of the response.</p>
+<h4>Details of the Net tab&#8217;s XHR sub-tab</h4>
+<p>When a request is made to the server via a XMLHttpRequest object, Firebug logs the POST or GET request, the response headers and the raw text of the response.  To view this data, click on the Net Tab&#8217;s XHR sub-tab. This will show a list of the calls and the time it took for the response.  To the left of the request click on the + or simply click on the request (it is a link).  Three tabs will appear in the case of a GET request, four for a POST:</p>
+<ul>
+<li><strong>Params:</strong> Displays the name/value pairs of the request URL</li>
+<li><strong> Headers: </strong>Displays requestion and response headers</li>
+<li> <strong>Response:</strong> Shows the actual data received from the server as it was received.</li>
+<li><strong>Post.</strong> Displays the data sent to the server from a POST request (tab only shows for POST requests, not GET requests).</li>
+</ul>
+<p>These four tabs are useful in development and debugging. Check the POST and Params tabs to ensure your request are being correctly posted. Check the Response to determine the format of the response and ensure that your JavaScripts are written to handle that formatting. If you don&#8217;t control the feed that you are fetching, you can copy and paste the response into a text editor, format it so it&#8217;s human legible, and work that way.</p>
+<h3 id="fb_debug">Debugging AJAX and other JavaScripts</h3>
+<p>To debug AJAX, it&#8217;s similar to how you debug JavaScript above, except for the console.log is even more helpful, since you are reloading components of the page and not the whole page (reloading the whole page resets the HTML, JS and CSS to what is defined in the static files). Firebug provides the console object that has several methods usable for logging. Properties of <a href="http://www.getfirebug.com/console.html">console object</a> include <code>console.debug</code>, <code>console.info</code>, <code>console.warning</code>, and <code>console.error</code>. When one of these methods produces an output, Firebug links to the line causing the output so you can quickly find the responsible code.</p>
+<p>One of the other ways to debug is to set breakpoints (yay! no more alerts!).  The &#8220;Script&#8221; tab allows you to pause execution on any line. Clicking on the line number in the script tab sets a breakpoint.  You can make that breakpoint conditional by setting  a statement that if true will trigger the breakpoint.  Simply right click to the left of the line number to set an expression (where you had left clicked to set the breakpoint) or right click on the line and select &#8220;Edit breakpoint condition&#8221;: &#8220;this breakpoint will stop only if this expression is true&#8221; is the message you should see. You can contine, step over, step into or step out of a line. The right panel has a &#8220;watch&#8221; tab where you can  inspect the value of local variables (click on  objects to view their properties). Hovering  over an object in the script activates a  tooltip that displays the object&#8217;s  properties.</p>
+<h3 id="fb_issues">Problems with Firebug</h3>
+<p><strong>Webpages never finish loading</strong>: likely because there is a javascript error in the page, and Firebug has put a breakpoint at the error and halted the script.</p>
+<p><strong>Firebug crashes my Firefox</strong> some of the heavier Web 2.0 sites that I visit, like Netflix and Yahoo! Mail. Firebug keeps track of all the errors.  This can use up a lot of memory and crash the browser. Also, likely irrelevant, but  SoThink SWF makes Firebug crash FF.</p>
+<h4>Solutions:</h4>
+<p><strong>Disable Firebug for a particular domain: </strong>Unless you develop for a site that crashes your browser, you can simply turn off Firebug for a domain/subdomain.. To turn off Firebug, right click on the <img src="http://www.evotech.net/articles/images/greencheck.gif" alt="green check mark" width="13" height="13" /> (or  <img src="http://www.evotech.net/articles/images/redcircx.gif" alt="red x" width="13" height="13" /> if there are errors) in the status bar and select &#8220;disable firebug for thisserversname.com&#8221;.</p>
+<p><strong>Disable Network Monitoring:</strong> Sometimes disabling Firebug for a particular domain is not an option . For example, I code a small part of a much larger internet application which throws errors and therefore never finishes loading, but disabling  Firebug is not an option since I am working on that page..  To resolve this issue, click on the Net tab.  When on that tab, to the far right you will see &#8220;options&#8221;.  Select &#8220;Disable Network Monitoring&#8221;.  Since I have selected that, I no longer crash my Firefox, and can work on the website I need to work on. (I did update my Firebug, and that might have helped the issue too. Not sure.)</p>
+<p><strong>Update Your Version of Firebug:</strong> Firebug is continuously being updated and bugs are being fixed.  To update to the latest version of Firebug, in your FF browser window select Tools &gt; Add-Ons &gt; Find Updates, and FF will check for and install upon request, the most recent release of Firebug and all of your other FF extensions.</p>
+<p>Notes:</p>
+<ul>
+<li>Firebug 1.05 and earlier do not work with Firefox 3.0, currently in beta</li>
+<li>Joe Hewitt developed Firebug and offers it for free.  Consider <a href="http://getfirebug.com/contribute.html">giving him some love in the form of money</a>.</li>
+<li>For more in depth view, view  <a href="http://video.yahoo.com/video/play?vid=cccd4aa02a3993ab06e56af731346f78.1755924">Joe Hewitt: Welcome to Firebug</a> which I included below.  The above tutorial is more of what you definitely need to know. The video covers the more advanced features. Take a look at it if my overview doesn&#8217;t provide enough info, especially in the area of JS debugging and XHR debugging.<br />
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="350" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="flashvars" value="id=1755924&amp;emailUrl=http%3A%2F%2Fvideo.yahoo.com%2Futil%2Fmail%3Fei%3DUTF-8%26vid%3D111597&amp;imUrl=http%253A%252F%252Fvideo.yahoo.com%252Fvideo%252Fplay%253Fei%253DUTF-8%2526vid%253D111597&amp;imTitle=Joe%2BHewitt%253A%2B%2526quot%253BWelcome%2Bto%2BFirebug%2B1.0%2526quot%253B&amp;searchUrl=http://video.yahoo.com/video/search?p=&amp;profileUrl=http://video.yahoo.com/video/profile?yid=&amp;creatorValue=ZXJpY21pcmFnbGlh&amp;vid=111597" /><param name="src" value="http://us.i1.yimg.com/cosmos.bcst.yahoo.com/player/media/swf/FLVVideoSolo.swf" /><embed type="application/x-shockwave-flash" width="425" height="350" src="http://us.i1.yimg.com/cosmos.bcst.yahoo.com/player/media/swf/FLVVideoSolo.swf" flashvars="id=1755924&amp;emailUrl=http%3A%2F%2Fvideo.yahoo.com%2Futil%2Fmail%3Fei%3DUTF-8%26vid%3D111597&amp;imUrl=http%253A%252F%252Fvideo.yahoo.com%252Fvideo%252Fplay%253Fei%253DUTF-8%2526vid%253D111597&amp;imTitle=Joe%2BHewitt%253A%2B%2526quot%253BWelcome%2Bto%2BFirebug%2B1.0%2526quot%253B&amp;searchUrl=http://video.yahoo.com/video/search?p=&amp;profileUrl=http://video.yahoo.com/video/profile?yid=&amp;creatorValue=ZXJpY21pcmFnbGlh&amp;vid=111597"></embed></object></li>
+</ul>
+
+<div class="sociable">
+<div class="sociable_tagline">
+<strong>Share and Enjoy:</strong>
+</div>
+<ul>
+	<li><a rel="nofollow" target="_blank" href="http://digg.com/submit?phase=2&amp;url=http%3A%2F%2Fwww.evotech.net%2Fblog%2F2007%2F06%2Fintroduction-to-firebug%2F&amp;title=Firebug%20Tutorial%3A%20Introduction%20to%20Firebug" title="Digg"><img src="http://www.evotech.net/blog/wp-content/plugins/sociable/images/digg.png" title="Digg" alt="Digg" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fwww.evotech.net%2Fblog%2F2007%2F06%2Fintroduction-to-firebug%2F&amp;title=Firebug%20Tutorial%3A%20Introduction%20to%20Firebug" title="StumbleUpon"><img src="http://www.evotech.net/blog/wp-content/plugins/sociable/images/stumbleupon.png" title="StumbleUpon" alt="StumbleUpon" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://del.icio.us/post?url=http%3A%2F%2Fwww.evotech.net%2Fblog%2F2007%2F06%2Fintroduction-to-firebug%2F&amp;title=Firebug%20Tutorial%3A%20Introduction%20to%20Firebug" title="del.icio.us"><img src="http://www.evotech.net/blog/wp-content/plugins/sociable/images/delicious.png" title="del.icio.us" alt="del.icio.us" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.evotech.net%2Fblog%2F2007%2F06%2Fintroduction-to-firebug%2F&amp;t=Firebug%20Tutorial%3A%20Introduction%20to%20Firebug" title="Facebook"><img src="http://www.evotech.net/blog/wp-content/plugins/sociable/images/facebook.png" title="Facebook" alt="Facebook" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=http%3A%2F%2Fwww.evotech.net%2Fblog%2F2007%2F06%2Fintroduction-to-firebug%2F&amp;title=Firebug%20Tutorial%3A%20Introduction%20to%20Firebug" title="Google"><img src="http://www.evotech.net/blog/wp-content/plugins/sociable/images/googlebookmark.png" title="Google" alt="Google" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://myweb2.search.yahoo.com/myresults/bookmarklet?u=http%3A%2F%2Fwww.evotech.net%2Fblog%2F2007%2F06%2Fintroduction-to-firebug%2F&amp;=Firebug%20Tutorial%3A%20Introduction%20to%20Firebug" title="YahooMyWeb"><img src="http://www.evotech.net/blog/wp-content/plugins/sociable/images/yahoomyweb.png" title="YahooMyWeb" alt="YahooMyWeb" class="sociable-hovers" /></a></li>
+</ul>
+</div>
+
+<div class="reset">&nbsp;</div>
+							</div><!-- end STORYCONTENT -->
+
+						
+
+							
+							
+							<!--
+							<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+				xmlns:dc="http://purl.org/dc/elements/1.1/"
+				xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+			<rdf:Description rdf:about="http://www.evotech.net/blog/2007/06/introduction-to-firebug/"
+    dc:identifier="http://www.evotech.net/blog/2007/06/introduction-to-firebug/"
+    dc:title="Firebug Tutorial: Introduction to Firebug"
+    trackback:ping="http://www.evotech.net/blog/2007/06/introduction-to-firebug/trackback/" />
+</rdf:RDF>							-->
+
+
+</div><!-- end POST -->
+
+<div class="feedback">
+																</div><!-- end FEEDBACK -->
+
+
+
+
+<!-- You can start editing here. -->
+
+<div class="comments-post">
+	<h3 id="comments"><span class="arecomments">16 </span><span class="nextcomments"><span class="areflavor">Com</span>ments for this post</span></h3> 
+
+	<div id="commentlist">
+
+	
+					<div class="norm">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>jasonw22</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-97" title="">July 21st, 2007 at 12:36 pm</a> </span>
+
+							<p>Great post!</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="alt">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>GuidoSan</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-106" title="">August 3rd, 2007 at 11:25 pm</a> </span>
+
+							<p>Thanks a lot! That was a wonderful introduction.  Very useful for a novice like myself.</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="norm">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>gagan</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-107" title="">August 5th, 2007 at 11:23 pm</a> </span>
+
+							<p>This is awesome!</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="alt">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>Mitch</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-181" title="">September 12th, 2007 at 12:35 pm</a> </span>
+
+							<p>Great extension and a great post; very helpful.<br />
+Thank you!</p>
+<p>Mitch</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="norm">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>David</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-574" title="">September 27th, 2007 at 6:38 am</a> </span>
+
+							<p>Thank you!</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="alt">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>Aadi</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-7275" title="">January 26th, 2008 at 5:20 pm</a> </span>
+
+							<p>I dont find more words to praise this genious who gifted the Firebug to web world. Thanks a TON .</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="norm">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite><a href='http://www.evotech.net' rel='external nofollow'>Estelle</a></cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-8600" title="">February 17th, 2008 at 3:00 pm</a> </span>
+
+							<p>Added note to Yahoo! Mail crashing Firefox when you have Firebug installed: According to the team of engineers at Yahoo!, this issue has to do with the number of iFrames in the Web 2.0 version.  So, while it is a Firebug issue &#8212; Firebug can&#8217;t handle so many iFrames &#8212; perhaps if Yahoo! Mail were a leaner application this issue could be avoided.</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="alt">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite><a href='http://www.nottingham.ac.uk/nursing/sonet/' rel='external nofollow'>Fred Riley</a></cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-8637" title="">June 18th, 2008 at 7:45 am</a> </span>
+
+							<p>Thanks, Estelle - that&#8217;s a stunningly useful post. I&#8217;ve had Firebug installed for a while following glowing recommendations, but needed a clear and concise introduction to understand how it can be used, and in what situations. This is just the job.</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="norm">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>Echo</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-8660" title="">July 13th, 2008 at 9:30 am</a> </span>
+
+							<p>The screen for demonstration in the viedo is not readable.</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="alt">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite><a href='http://www.mandyleigh.com' rel='external nofollow'>Storm</a></cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-8737" title="">August 28th, 2008 at 10:14 pm</a> </span>
+
+							<p>Thanks alot for the tutorial Estelle, much appreciated :)</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="norm">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>AtlantaKid</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-8923" title="">October 6th, 2008 at 2:03 pm</a> </span>
+
+							<p>What a wonderful wonderful tool FIREBUG is. I have tried it today after I became desperate for quick fix on a hot project.  I am saved big time.</p>
+<p>thank you so much,</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="alt">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>Yogita</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-9610" title="">February 13th, 2009 at 3:52 am</a> </span>
+
+							<p>Awesome,</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="norm">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>Rolf</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-9688" title="">February 24th, 2009 at 3:14 am</a> </span>
+
+							<p>This is really a great Introduction! Thanks very much.<br />
+Yes, I am late, but someone has to put some meaningful comment<br />
+between these spam comments of the last months.</p>
+<p>I am especially thankful for the hint on the XHR. Frankly I had<br />
+no clue, what the abbreviation could mean. And I am delighted to<br />
+see that there is one more person out there, that doesn&#8217;t run the<br />
+browser in maximized mode and hence suggests to have firebug in a<br />
+window on its own.</p>
+<p>Also I want to add a guideline: Have the &#8220;Disable Firebug&#8221; setting<br />
+in the menu turned off only in the first week after installation.<br />
+Then after you are familiar with it generally disable Firebug for<br />
+all sites and only keep a positive exclusion list of the 10 or 15<br />
+sites, that you are really interested in.</p>
+<p>If you happen to read this Tutorial in the first week, you don&#8217;t<br />
+need to wait until the week is completed to only enable Firebug<br />
+for assorted allowed sites ;-)</p>
+<p>One more note: I have often wondered why people use so many of the<br />
+web-Developer add-ins of Firefox. Most of the features could be<br />
+reached in the DOM Inspector, as well. Maybe with 1 or 2 more mouse<br />
+clicks. It&#8217;s like that I never use the escalator to get to the first<br />
+or second floor if there are staircases. But Firebugs brings me to<br />
+the 10th floor &#8230; and in that case I jump into the escalator.<br />
+All the dynamic Javascript Content that is &#8220;inspectable&#8221; in Firebug<br />
+makes the difference.</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="alt">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>Steven</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-10288" title="">May 22nd, 2009 at 7:19 pm</a> </span>
+
+							<p>I&#8217;m having difficulty getting the changes that I make to my blog actually stick. I can tweak the code in either CCS or HTML. But then, it seems to disappear when I reload the page or switch to a different page.</p>
+<p>I might be doing something wrong. I really can&#8217;t figure out how or why. I&#8217;m on a Mac using Firefox with Firebug split below, if this makes a difference. I don&#8217;t see the &#8220;disable Firebug&#8221; setting any where in the interface.</p>
+<p>I&#8217;ve worked a number of hours of work on my blog only to see it disappear.</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="norm">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite><a href='http://estelleweyl.com' rel='external nofollow'>Estelle Weyl</a></cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-10289" title="">May 22nd, 2009 at 7:28 pm</a> </span>
+
+							<p>Steven-</p>
+<p>When you edit using Firebug, your edits will only be in Firebug, which is client side. You need to copy your edits into your CSS file and post them to your server for them to be permanent. Firebug is a debugging/troubleshooting tool, not an editor.</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+					<div class="alt">
+		
+			
+				
+				<div class="licomtop"><div class="cheadfill">&nbsp;</div></div>
+
+					<div class="licombody">
+							<div class="co-content">
+							<cite>chandana das</cite> Says:
+														
+
+							<span class="commentmetadata"><a href="#comment-10922" title="">August 2nd, 2009 at 11:20 pm</a> </span>
+
+							<p>Thanks a lot for this article.<br />
+It helped me a lot.</p>
+							</div>
+					</div>
+
+	
+
+		</div>
+
+
+
+	
+	</div><!-- //commentlist -->
+
+ 
+
+
+<h3 id="respond">Leave a Reply</h3>
+	<div id="commentform-container">
+
+<form action="http://www.evotech.net/blog/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="26" />
+</p>
+
+</form>
+	</div><!-- close commentform-container -->
+</div><!-- close COMMENTS-POST -->
+
+
+
+
+<div id="pagination">
+</div>
+
+</div><!-- end MAIN -->
+</div><!-- end CONTENT -->
+
+<!-- SIDEBAR LINKS -->
+<div id="menu">
+
+<div id="nav">
+
+		<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody">			<h2>About Estelle</h2>			<div class="textwidget"><p style="height: 150px;"><img src="http://todcon.org/images_orlando/speakers/e_weyl.jpg" alt="estelle" style="padding-right: 5px; float: left"/>Thanks for visiting. <br /><br />this is me, begging.... Please vote for my <a href="http://panelpicker.sxsw.com/ideas/view/2292">SXSW Panel</a>. OKthxbai.<br /><br /><a href="http://www.evotech.net/blog/about/">More &hellip;</a></p>
+
+
+
+</div>
+		</div></div>		<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody">			<h2>Most recent posts</h2>			<ul>
+						<li><a href="http://www.evotech.net/blog/2009/09/iphone-screen-orientation-portrait-and-landscape/">iPhone Screen Orientation: Portrait and Landscape </a></li>
+						<li><a href="http://www.evotech.net/blog/2009/09/ie6ie7-implicit-label-bug/">IE6/IE7 Implicit Label Bug </a></li>
+						<li><a href="http://www.evotech.net/blog/2009/09/more-css-xhtml-and-javascript-at-community-mx/">More CSS, XHTML and JavaScript at Community MX </a></li>
+						<li><a href="http://www.evotech.net/blog/2009/06/6-firefox-35-fact-you-need-to-know/">6 Firefox 3.5 updates of interest </a></li>
+						<li><a href="http://www.evotech.net/blog/2009/05/css-properties-values-and-browser-support/">90 CSS Properties, Values and Browser Support </a></li>
+						</ul>
+		</div></div>		<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody">			<form id="searchform" method="get" action="http://www.evotech.net/blog">
+			<div>
+			<input type="text" name="s" id="s" size="15" /><br />
+			<input type="submit" value="Search" />
+			</div>
+			</form>
+		</div></div><div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody"><h2>Accessibility</h2>
+	<ul>
+<li><a href="http://www.evotech.net/blog/2007/08/alternitive-text-for-images-the-alt-attribute/" title="Alternative text for images: the alt attribute">ALT Attribute</a></li>
+<li><a href="http://www.evotech.net/blog/2009/03/wai-aria-accessible-rich-internet-applications-basics/" title="Accessible Rich Internet Applications">ARIA</a></li>
+<li><a href="http://www.evotech.net/blog/2007/06/making-the-web-accessible-2/" title="making the web accessible">WCAG 1.0 guidelines</a></li>
+
+	</ul>
+</div></div>
+<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody"><h2>Browser Quirks &amp; Hacks</h2>
+	<ul>
+<li><a href="http://www.evotech.net/blog/2009/02/css-browser-support/" title="Grid of modern browser support for CSS Selectors, including CSS3 selectors">CSS Selectors &#38; Browser Support</a></li>
+<li><a href="http://www.evotech.net/blog/2008/09/css-hack-for-google-chrome-and-safari-31/" title="Targeting modern browsers with CSS">Google Chrome</a></li>
+<li><a href="http://www.evotech.net/blog/2007/05/css-issues-and-hacks-for-mac-ie-5/" title="CSS issues and hacks for Mac IE5">IE5 on Mac</a></li>
+<li><a href="http://www.evotech.net/blog/2007/04/ie7-only-css-hacks/" title="CSS Hacks targeting IE7">IE7</a></li>
+<li><a href="http://www.evotech.net/blog/2007/05/ie7-css-selectors-how-they-fail/" title="How the CSS Selectors fail in IE7">IE7 CSS Selectors</a></li>
+<li><a href="http://www.evotech.net/blog/2009/03/ie8-css-support/" title="IE8: What you need to know">IE8</a></li>
+<li><a href="http://www.evotech.net/blog/2007/07/web-development-for-the-iphone/" title="iPhone CSS, and other issues around developing for the iPhone">iPhone</a></li>
+<li><a href="http://www.evotech.net/blog/2007/06/targeting-safari-30-with-css/" title="Targeting Safari 3.0 with JS and CSS">Safari 3.0</a></li>
+
+	</ul>
+</div></div>
+<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody"><h2>References</h2>
+	<ul>
+<li><a href="http://www.evotech.net/blog/2009/05/css-properties-values-and-browser-support/" title="Every CSS 2.1 property, valid values and browser support of all those CSS properties and values.">90 CSS properties (values &#38; browser support)</a></li>
+<li><a href="http://www.evotech.net/blog/2008/11/xhtml-elements/" title="the semantics of all of the XHTML elements">All XHTML elements</a></li>
+<li><a href="http://www.evotech.net/blog/2007/08/css-javascript-character-entities/" title="Character Entity Calculator for determining values in JS and CSS">Character Entity Calculator</a></li>
+<li><a href="http://www.evotech.net/blog/2008/08/css-background-properties/" title="CSS Background Properties: possible values, default values, browser support and DOM">CSS Background Properties</a></li>
+<li><a href="http://www.evotech.net/blog/2009/02/css-browser-support/" title="Grid of modern browser support for CSS Selectors, including CSS3 selectors">CSS Selectors &#38; Browser Support</a></li>
+<li><a href="http://www.evotech.net/blog/2007/08/converting-iso-8601-date-in-php/" title="XHTML deprecated elements and Attributes">Deprecated Elements &#38; Attributes</a></li>
+<li><a href="http://www.evotech.net/blog/2007/04/dtd-the-document-type-declaration/" title="DTD: Document Type Declarations">DTD</a></li>
+<li><a href="http://www.evotech.net/blog/2007/04/named-html-entities-in-numeric-order" title="Including HTML entities into CSS content property and in Javascript">HTML entities in CSS &#38; JS</a></li>
+<li><a href="http://www.evotech.net/blog/2008/09/http-equiv-meta-attribute-values-for-http-equiv/" title="meta attribute values for http-equiv">http-equiv</a></li>
+<li><a href="http://www.evotech.net/blog/2007/07/javascript-date-object/" title="Everything you could possibly want to know about the javascript date object.">JavaScript Date Object</a></li>
+<li><a href="http://www.evotech.net/blog/2007/09/javascript-date-object-methods/" title="methods of the javascript date object. the js is broken on this page.">JavaScript Date Object  - methods</a></li>
+<li><a href="http://www.evotech.net/blog/2007/08/first-5800-numeric-html-character-entities/" title="The first 5800 numeric html character entities">XHTML Entities</a></li>
+
+	</ul>
+</div></div>
+<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody"><h2>Resources</h2>
+	<ul>
+<li><a href="http://www.evotech.net/blog/2007/04/css-best-practices/" title="CSS Best Practices">CSS Best Practices</a></li>
+<li><a href="http://www.evotech.net/blog/2007/09/favicons-why-and-how-to-create-favicons/" title="Why and How to create FavIcons">Favicons</a></li>
+<li><a href="http://www.evotech.net/blog/2007/05/including-javascript-in-xhtml/" title="Including JavaScript in Your XHTML: Best Practices">Including JavaScript</a></li>
+<li><a href="http://www.evotech.net/blog/2007/08/converting-iso-8601-date-in-php/" title="ISO 8601 date in PHP by Ryan Kennedy">ISO 8601 date</a></li>
+<li><a href="http://www.evotech.net/blog/2008/12/multiple-firefox-versions/" title="Getting multiple versions of Firefox and IE onto one computer">QA: Multiple browsers</a></li>
+<li><a href="http://www.evotech.net/blog/2007/05/web-developer-resume-screening/" title="Web Developer Resume Screening">Resume Screening</a></li>
+<li><a href="http://www.evotech.net/blog/2009/02/canonical-tag-for-seo/" title="Canonical Tag for SEO">SEO Canonical Tag</a></li>
+<li><a href="http://www.evotech.net/blog/2009/04/22-web-client-ued-questions/" title="22 Questions to ask you client before beginning any design work">Web Design Questions</a></li>
+<li><a href="http://www.evotech.net/blog/2007/05/web-developer-interview-questions/" title="What you may be asked during a (or may want to ask of a) web developer.">Webdeveloper Interview Questions</a></li>
+<li><a href="http://www.evotech.net/blog/2007/06/xhtml-html-strict-transitional-deprecated/" title="Differences between XHTML and HTML">XHTML v HTML</a></li>
+
+	</ul>
+</div></div>
+<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody"><h2>Tutorials</h2>
+	<ul>
+<li><a href="http://www.evotech.net/blog/2007/05/beginning-ajax-using-the-yui-library/" title="Beginning AJAX Using the YUI Library">AJAX / YUI</a></li>
+<li><a href="http://www.evotech.net/blog/2009/05/css-content-counter-increment-counter-reset/" title="CSS content, counter-increment &amp; counter-reset">CSS content &#38; counters</a></li>
+<li><a href="http://www.evotech.net/blog/2007/04/controlling-cursors-with-css-and-creating-cur-files/" title="Controlling cursors with CSS">CSS Cursors</a></li>
+<li><a href="http://www.evotech.net/blog/2007/05/controlling-list-item-bullets-with-css/" title="Creating text bullets using CSS generated content, including non-ASCII characters">CSS generated content &lt;li&gt; bullets</a></li>
+<li><a href="http://www.evotech.net/blog/2007/09/css-image-replacement-method/" title="Yet Another CSS Image Replacement Method (YARIM)">CSS Image Replacement</a></li>
+<li><a href="http://www.evotech.net/blog/2007/05/vertical-centering-with-css/" title="Vertical Centering with CSS">CSS Vertical Centering</a></li>
+<li><a href="http://www.evotech.net/blog/2007/06/introduction-to-firebug/" title="Tutorial: Introduction to Firebug, the Firefox extension">Firebug</a></li>
+<li><a href="http://www.evotech.net/blog/2007/10/using-images-as-bullets-in-xhtml-lists/" title="Using images as bullets in lists">Images for &lt;li&gt; bullets</a></li>
+<li><a href="http://www.evotech.net/blog/2008/10/13-javascript-gotchas/" title="15 javascript issues to watch out for">Javscript Gotchas</a></li>
+<li><a href="http://www.evotech.net/blog/2008/11/jquery-tutorial-dom-manipulation-and-sorting/" title="jQuery Tutorial: DOM Manipulation and Sorting">jQuery</a></li>
+<li><a href="http://www.evotech.net/blog/2008/07/javascript-object-literals-a-definition/" title="A simple definition to help you understand javascript object literals">JS Object Literals</a></li>
+<li><a href="http://www.evotech.net/blog/2007/07/javascript-objects/" title="What is an object in javascript? This explains it.">JS Objects</a></li>
+<li><a href="http://www.evotech.net/blog/2007/07/yslow-tutorial-page-download-optimization-tool/" title="YSlow: the Website Optimization tool">YSlow</a></li>
+
+	</ul>
+</div></div>
+		<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody">			<h2>@webdevtips' Tips</h2>			<div class="textwidget"><ul id="twitter_update_list"></ul>
+<a href="http://twitter.com/webdevtips" id="twitter-link" style="display:block;text-align:right;">Get Daily Tips</a>
+
+<script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+<script type="text/javascript" src="http://twitter.com/statuses/user_timeline/webdevtips.json?callback=twitterCallback2&amp;count=10"></script></div>
+		</div></div>		<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody">			<h2>Like my blog?</h2>			<div class="textwidget">It's all free. But, if you feeling like getting me a gift because I've been oh so helpful, I have an  <a href="http://www.amazon.com/gp/registry/wishlist/1473XRXTNEJMR">Amazon wish list</a>. Or, <a href="http://apps.new.facebook.com/blognetworks/blog/css_javascript_and_xhtml_explained/">Add blog to Facebook</a>.
+
+</div>
+		</div></div>		<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody">			<h2>Community MX</h2>			<div class="textwidget">I also write for <a href="http://communitymx.com">Community MX</a>. Head on over there for an article on <a href="http://www.communitymx.com/abstract.cfm?cid=67EEC">creating 3 columns layouts</a>, an explanation of the <a href="http://www.communitymx.com/abstract.cfm?cid=B81FE">semantics of every HTML element</a> and several other tutorials.</div>
+		</div></div>		<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody">			<h2>Admin Stuff</h2>			<ul>
+						<li><a href="http://www.evotech.net/blog/wp-login.php">Log in</a></li>
+			<li><a href="http://www.evotech.net/blog/feed/" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://www.evotech.net/blog/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+						</ul>
+		</div></div><div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody"><h2>Blog Categories</h2><select name='cat' id='cat' class='postform' >
+	<option value='-1'> Select Category</option>
+	<option value="11">Accessibility&nbsp;&nbsp;(6)</option>
+	<option value="18">AJAX&nbsp;&nbsp;(2)</option>
+	<option value="26">apptastik&nbsp;&nbsp;(1)</option>
+	<option value="12">Best Practices&nbsp;&nbsp;(14)</option>
+	<option value="19">Browsers&nbsp;&nbsp;(14)</option>
+	<option value="29">CalendarApp&nbsp;&nbsp;(1)</option>
+	<option value="14">Character Entities&nbsp;&nbsp;(6)</option>
+	<option value="27">contactApp&nbsp;&nbsp;(1)</option>
+	<option value="3">CSS (including hacks)&nbsp;&nbsp;(23)</option>
+	<option value="8">Cursors &amp; Icons&nbsp;&nbsp;(3)</option>
+	<option value="10">DTD&nbsp;&nbsp;(3)</option>
+	<option value="20">firebug&nbsp;&nbsp;(4)</option>
+	<option value="31">GreatCareersHere&nbsp;&nbsp;(1)</option>
+	<option value="13">HTML&nbsp;&nbsp;(6)</option>
+	<option value="6">IE7&nbsp;&nbsp;(8)</option>
+	<option value="28">InvoiceApp&nbsp;&nbsp;(1)</option>
+	<option value="21">iPhone&nbsp;&nbsp;(4)</option>
+	<option value="17">JavaScript&nbsp;&nbsp;(14)</option>
+	<option value="30">LettersApp&nbsp;&nbsp;(1)</option>
+	<option value="22">PHP&nbsp;&nbsp;(2)</option>
+	<option value="25">scott la plant&nbsp;&nbsp;(1)</option>
+	<option value="24">scottlaplant&nbsp;&nbsp;(1)</option>
+	<option value="23">SEO&nbsp;&nbsp;(4)</option>
+	<option value="32">UED&nbsp;&nbsp;(1)</option>
+	<option value="4">Web Development&nbsp;&nbsp;(61)</option>
+</select>
+
+<script type='text/javascript'>
+/* <![CDATA[ */
+    var dropdown = document.getElementById("cat");
+    function onCatChange() {
+		if ( dropdown.options[dropdown.selectedIndex].value > 0 ) {
+			location.href = "http://www.evotech.net/blog/?cat="+dropdown.options[dropdown.selectedIndex].value;
+		}
+    }
+    dropdown.onchange = onCatChange;
+/* ]]> */
+</script>
+
+</div></div><link type="text/css" rel="stylesheet" href="http://www.evotech.net/blog/wp-content/plugins/friendfeed/friendfeed.css" />
+<div class="sideitem"><div class="boxhead"><div class="headfill">&nbsp;</div></div><div class="boxbody"><h2>Estelle's Friend Feed</h2><ul><li class="lifefeed-item-twitter"><a title="A Twitter FriendFeed entry" href="http://twitter.com/estellevw/statuses/4373404713">I guess I've been banned from @Yelp. None of my 14 reviews are showing up (unless I am logged in. Are they trying to fool me?)</a></li><li class="lifefeed-item-twitter"><a title="A Twitter FriendFeed entry" href="http://twitter.com/estellevw/statuses/4363172048">Just got pinged a question about overflow property as I was testing browser support for overflow-x/y properties. How weird & geeky is that?</a></li><li class="lifefeed-item-twitter"><a title="A Twitter FriendFeed entry" href="http://twitter.com/estellevw/statuses/4350602219">@stefsull Hmmmm, i didn't get the email ;) Good state to be in!</a></li><li class="lifefeed-item-twitter"><a title="A Twitter FriendFeed entry" href="http://twitter.com/estellevw/statuses/4348749741">Looking for a UI developer position in San Francisco, check out http://www.evotech.net/blog/jobs/</a></li><li class="lifefeed-item-twitter"><a title="A Twitter FriendFeed entry" href="http://twitter.com/estellevw/statuses/4334314076">Absolutely loveing Glee.</a></li><li class="lifefeed-item-twitter"><a title="A Twitter FriendFeed entry" href="http://twitter.com/estellevw/statuses/4326078554">Twitter warning: there is a Direct Message phishing scam going on. Don't open links, and tell the sendee that their acct may be compromised.</a></li></ul></div></div>
+	<div class="reset">&nbsp;</div>
+</div><!-- end NAV -->
+</div><!-- end MENU --><script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2292575-1";
+urchinTracker();
+</script>
+
+<div id="clearer"></div>
+
+<div id="footer">
+
+
+	 
+	  <div class="fboxhead"><div class="fheadfill">&nbsp;</div></div> 
+
+		<div id="footercontent">
+
+				
+
+				<div class="credit">
+				<!--24 queries. 1.657 seconds. --> 
+			
+				</div> <!-- end credit -->
+	
+
+				<!-- SITE CREDITS -->
+				<div class="footermeta">
+
+					<span class="rss"><a href="feed:http://www.evotech.net/blog/feed/" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></span>
+						<a href="feed:http://www.evotech.net/blog/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a>
+					
+						
+
+						<a href="http://gmpg.org/xfn/"><abbr title="XHTML Friends Network">XFN</abbr></a>
+						<a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform."><abbr title="WordPress">WP</abbr></a>
+												
+					</div><!-- end footer meta -->
+					<div class="resetfoot"></div>
+		</div><!-- end footercontent-->
+
+</div><!-- end FOOTER -->
+
+<div class="reset2">&nbsp;</div>
+
+</div><!-- end RAP -->
+
+
+<script src="http://stats.wordpress.com/e-200939.js" type="text/javascript"></script>
+<script type="text/javascript">
+st_go({blog:'1084838',v:'ext',post:'26'});
+var load_cmc = function(){linktracker_init(1084838,26,2);};
+if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+else load_cmc();
+</script>
+
+
+
+<div id="externalinks">
+<ul>
+	<li><a href="http://chirosancarlos.com">San Carlos Chiropractor</a></li>
+    <li><a href="http://precisemoves.com" title="Chiropractor San Carlos">Precise Moves Chiropractic : Amie Gregory</a></li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>PHP ActiveRecord - Basic CRUD - An easy to use ORM for PHP</title>
+		<link rel="canonical" href="http://www.phpactiverecord.org/projects/main/wiki/Basic_CRUD"/>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="issue,bug,tracker" />
+		<meta name="description" content="Redmine" />
+		<meta name="googlebot" content="NOODP" />
+		<meta name="robots" content="index,follow,noodp,noydir" />
+		<link href="/stylesheets/blueprint/screen.css?1281816324" media="screen" rel="stylesheet" type="text/css" />
+		<link href="/stylesheets/blueprint/print.css?1281816324" media="print" rel="stylesheet" type="text/css" />
+		<!--[if lt IE 8]><link href="/stylesheets/blueprint/ie.css?1281816324" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<link href="/themes/basecamp/stylesheets/application.css?1276826287" media="screen" rel="stylesheet" type="text/css" />
+		<link href="/stylesheets/jstoolbar.css?1281816324" media="screen" rel="stylesheet" type="text/css" />
+		<!--[if IE]>
+		    <style type="text/css">
+		      * html body{ width: expression( document.documentElement.clientWidth < 900 ? '900px' : '100%' ); }
+		      body {behavior: url(/stylesheets/csshover.htc?1281816324);}
+		    </style>
+		<![endif]-->
+		
+		<!-- page specific tags -->
+		
+  <link href="/stylesheets/scm.css?1281816324" media="screen" rel="stylesheet" type="text/css" />
+		<link href="/themes/basecamp/stylesheets/main.css?1277354265" media="screen" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	
+<div id="wrapper">
+	<div id="header">
+	    <div class="container">
+	        <div class="span-7">
+	            <h1><a href="http://www.phpactiverecord.org/" target="_top">php.activerecord</a></h1>
+	        </div>
+	        <div class="span-12" id="main-nav">
+		        <ul class="horizontal"><li><a href="/projects/main/wiki/Basic_CRUD" class="guides">Wiki</a></li>
+<li><a href="/docs/index/main" class="docs">Docs</a></li>
+<li><a href="/news/index/main?project_id=main" class="news">Notícia</a></li>
+<li><a href="/projects/main/boards" class="boards">Fóruns</a></li>
+<li><a href="/welcome/about/main" class="about-us">About us</a></li></ul>	        </div>
+          <div class="span-5 last" id="account-menu">
+		        <ul class="horizontal"><li><a href="/login" class="login">Entrar</a></li>
+<li><a href="/account/register" class="register">Cadastre-se</a></li></ul>          </div>
+	    </div>
+	</div>
+
+	<div id="main-frame">
+		<div id="breadcrumbs" class="container">
+			<ul class="span-24 last">
+				<li><a href="/">Home</a></li><li><a href="/projects/main/wiki">Wiki</a></li><li class="last"><a href="/projects/main/wiki/Basic_CRUD">Basic CRUD</a></li>
+			</ul>
+		</div>
+
+		<div id="main" class="container">
+			<div id="content" class="span-16 colborder">
+				
+				<div class="contextual">
+
+
+<span id="watcher"></span>
+
+
+
+
+
+
+<a href="/projects/main/wiki/Basic_CRUD/history" class="icon icon-history">Histórico</a>
+</div>
+
+
+
+
+
+<div class="wiki">
+  <h2 id="Basic-CRUD">Basic CRUD<a href="#Basic-CRUD" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li><a href="/projects/main/wiki/Basic_CRUD#create">Create</a></li>
+		<li><a href="/projects/main/wiki/Basic_CRUD#read">Read</a></li>
+		<li><a href="/projects/main/wiki/Basic_CRUD#update">Update</a></li>
+		<li><a href="/projects/main/wiki/Basic_CRUD#delete">Delete</a></li>
+		<li><a href="/projects/main/wiki/Basic_CRUD#massive">Massive</a></li>
+	</ul>
+
+
+	<p><a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete" class="external">CRUD</a> as defined by Wikipedia:</p>
+
+
+<blockquote>
+
+	<p>Create, read, update and delete (CRUD) are the four basic functions of persistent storage, a major part of nearly all computer software. Sometimes CRUD is expanded with the words retrieve instead of read or destroy instead of delete. It is also sometimes used to describe user interface conventions that facilitate viewing, searching, and changing information; often using computer-based forms and reports.</p>
+
+
+</blockquote>
+
+	<p>In other words, CRUD is the day-to-day tedium of saving and reading data. ActiveRecord removes the remedial and encumbering task of hand-writing SQL queries. Instead, you will only need to write the relevant parts to work with your data.</p>
+
+
+	<h4 id="create">Create</h4>
+
+
+	<p>This is where you save records to your database. Here we create a new post by instantiating a new object and then invoking the save() method.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="lv">$post</span> = <span class="r">new</span> <span class="co">Post</span>();
+<span class="no"> 2</span> <span class="lv">$post</span>-&gt;title = <span class="s"><span class="dl">'</span><span class="k">My first blog post!!</span><span class="dl">'</span></span>;
+<span class="no"> 3</span> <span class="lv">$post</span>-&gt;author_id = <span class="i">5</span>;
+<span class="no"> 4</span> <span class="lv">$post</span>-&gt;save();
+<span class="no"> 5</span> <span class="c"># INSERT INTO `posts` (title,author_id) VALUES('My first blog post!!', 5)</span>
+<span class="no"> 6</span> 
+<span class="no"> 7</span> <span class="c"># the below methods accomplish the same thingg</span>
+<span class="no"> 8</span> 
+<span class="no"> 9</span> <span class="lv">$attributes</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">My first blog post!!</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">author_id</span><span class="dl">'</span></span> =&gt; <span class="i">5</span>);
+<span class="no"><strong>10</strong></span> <span class="lv">$post</span> = <span class="r">new</span> <span class="co">Post</span>(<span class="lv">$attributes</span>);
+<span class="no">11</span> <span class="lv">$post</span>-&gt;save();
+<span class="no">12</span> <span class="c"># same sql as above</span>
+<span class="no">13</span> 
+<span class="no">14</span> <span class="lv">$post</span> = <span class="co">Post</span>::create(<span class="lv">$attributes</span>);
+<span class="no">15</span> <span class="c"># same sql as above</span>
+</span></code></pre>
+
+	<h4 id="read">Read</h4>
+
+
+	<p>These are your basic methods to find and retrieve records from your database. See the <a href="/projects/main/wiki/Finders" class="wiki-page">Finders</a> section for more details.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="lv">$post</span> = <span class="co">Post</span>::find(<span class="i">1</span>);
+<span class="no"> 2</span> <span class="pd">echo</span> <span class="lv">$post</span>-&gt;title; <span class="c"># 'My first blog post!!'</span>
+<span class="no"> 3</span> <span class="pd">echo</span> <span class="lv">$post</span>-&gt;author_id; <span class="c"># 5</span>
+<span class="no"> 4</span> 
+<span class="no"> 5</span> <span class="c"># also the same since it is the first record in the db</span>
+<span class="no"> 6</span> <span class="lv">$post</span> = <span class="co">Post</span>::first();
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="c"># using dynamic finders</span>
+<span class="no"> 9</span> <span class="lv">$post</span> = <span class="co">Post</span>::find_by_name(<span class="s"><span class="dl">'</span><span class="k">The Decider</span><span class="dl">'</span></span>);
+<span class="no"><strong>10</strong></span> <span class="lv">$post</span> = <span class="co">Post</span>::find_by_name_and_id(<span class="s"><span class="dl">'</span><span class="k">The Bridge Builder</span><span class="dl">'</span></span>,<span class="i">100</span>);
+<span class="no">11</span> <span class="lv">$post</span> = <span class="co">Post</span>::find_by_name_or_id(<span class="s"><span class="dl">'</span><span class="k">The Bridge Builder</span><span class="dl">'</span></span>,<span class="i">100</span>);
+<span class="no">12</span> 
+<span class="no">13</span> <span class="c"># using some conditions</span>
+<span class="no">14</span> <span class="lv">$posts</span> = <span class="co">Post</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>,<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name=?</span><span class="dl">'</span></span>,<span class="s"><span class="dl">'</span><span class="k">The Bridge Builder</span><span class="dl">'</span></span>)));
+</span></code></pre>
+
+	<h4 id="update">Update</h4>
+
+
+	<p>To update you would just need to find a record first and then change one of its attributes. It keeps an array of attributes that are "dirty" (that have been modified) and so our sql will only update the fields modified.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$post</span> = <span class="co">Post</span>::find(<span class="i">1</span>);
+<span class="no">2</span> <span class="pd">echo</span> <span class="lv">$post</span>-&gt;title; <span class="c"># 'My first blog post!!'</span>
+<span class="no">3</span> <span class="lv">$post</span>-&gt;title = <span class="s"><span class="dl">'</span><span class="k">Some real title</span><span class="dl">'</span></span>;
+<span class="no">4</span> <span class="lv">$post</span>-&gt;save();
+<span class="no">5</span> <span class="c"># UPDATE `posts` SET title='Some real title' WHERE id=1</span>
+<span class="no">6</span> 
+<span class="no">7</span> <span class="lv">$post</span>-&gt;update_attributes(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Some other title</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">author_id</span><span class="dl">'</span></span> =&gt; <span class="i">1</span>));
+<span class="no">8</span> <span class="c"># UPDATE `posts` SET title='Some other title', author_id=1 WHERE id=1</span>
+</span></code></pre>
+
+	<h4 id="delete">Delete</h4>
+
+
+	<p>Deleting a record will not destroy the object. This means that it will call sql to delete the record in your database, however, you can still use the object.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$post</span> = <span class="co">Post</span>::find(<span class="i">1</span>);
+<span class="no">2</span> <span class="lv">$post</span>-&gt;<span class="pd">delete</span>();
+<span class="no">3</span> <span class="c"># DELETE FROM `posts` WHERE id=1</span>
+<span class="no">4</span> 
+<span class="no">5</span> <span class="pd">echo</span> <span class="lv">$post</span>-&gt;title; <span class="c"># Some other title</span>
+</span></code></pre>
+
+	<h4 id="massive">Massive Update or Delete</h4>
+
+
+	<p>You can do a massive update or massive delete easily. Look at this example:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># MASSIVE UPDATE</span>
+<span class="no"> 2</span> <span class="c"># Model::table()-&gt;update(AttributesToUpdate, WhereToUpdate);</span>
+<span class="no"> 3</span> <span class="co">Post</span>::table()-&gt;update(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Massive title!</span><span class="dl">'</span></span>, <span class="c">/* Other attributes... */</span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">id</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="i">1</span>, <span class="i">3</span>, <span class="i">7</span>));
+<span class="no"> 4</span> <span class="c"># UPDATE `posts` SET title = `Massive title!` WHERE id IN (1, 3, 7)</span>
+<span class="no"> 5</span> 
+<span class="no"> 6</span> <span class="c"># MASSIVE DELETE</span>
+<span class="no"> 7</span> <span class="c"># Model::table()-&gt;delete(WhereToDelete);</span>
+<span class="no"> 8</span> <span class="co">Post</span>::table()-&gt;<span class="pd">delete</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">id</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="i">5</span>, <span class="i">9</span>, <span class="i">26</span>, <span class="i">30</span>));
+<span class="no"> 9</span> <span class="c"># DELETE FROM `posts` WHERE id IN (5, 9, 26, 30)</span>
+</span></code></pre>
+</div>
+
+
+
+
+
+
+<p class="other-formats">Exportar para
+	<span><a href="/projects/main/wiki/Basic_CRUD?format=html&amp;version=14" class="html" rel="nofollow">HTML</a></span>
+	<span><a href="/projects/main/wiki/Basic_CRUD?format=txt&amp;version=14" class="txt" rel="nofollow">TXT</a></span>
+</p>
+
+
+
+
+
+
+
+				
+			</div>
+
+			<div id="sidebar" class="span-7 last">
+				<div class="r-button" id="stable-build">
+					<a href="/download">Get Stable Build - <em>v1.0</em><p>June 27 2010</p></a>
+				</div>
+				<div class="r-button" id="nightly-build">
+					<a href="/download">Get Nightly Build <p>May 10, 2011 00:00</p></a>
+				</div>
+		
+				
+
+				<h2 id="news-header">
+	<a href="/news">Latest News</a>
+	<a class="feed" href="/projects/main/news.atom"><img src="/images/feed-icon-14x14.png"/></a>
+</h2>
+
+<ul id="news-summary" class="icon-list">
+	
+	<li class="article">
+		<a href="/news/5-did-you-know-php-ar-has-eager-loading">Did you know? PHP-AR has Eager Loading</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-08-31T23:31:08Z">Tue Aug 31 19:31:08 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="/news/4-php-activerecord-1-0-released">php-activerecord 1.0 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-28T00:02:55Z">Sun Jun 27 20:02:55 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="/news/3-website-updated-with-forums-and-wiki">Website updated with forums and wiki</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-18T21:37:23Z">Fri Jun 18 17:37:23 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="/news/2-php-activerecord-1-0-rc1-released">php-activerecord 1.0 RC1 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-04-07T00:00:15Z">Tue Apr 06 20:00:15 -0400 2010</em> ago
+			
+			<span class="comments"><a href="/news/2-php-activerecord-1-0-rc1-released">15</a></span>
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="/news/1-welcome-to-phpactiverecord-org">Welcome to phpactiverecord.org!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2009-08-02T00:00:15Z">Sat Aug 01 20:00:15 -0400 2009</em> ago
+			
+			<span class="comments"><a href="/news/1-welcome-to-phpactiverecord-org">7</a></span>
+			
+		</div>
+		
+	</li>
+	
+</ul>
+
+
+
+
+				<h2><a href="/projects/main/activity">Recent Activity</a></h2>
+<ul id="recent-activity" class="icon-list">
+		<li class="message">
+	  
+		<a href="/boards/4/topics/795-please-help-me-understand-when-where-to-put-the-plural">I have a class called &quot;QuizUser&quot;.
+
+I can reference and successfully retrieve da...</a>
+		
+		<div class="author">
+			by <a href="/users/779">Andrew Sinning</a>
+			<em class="relative" title="2011-07-15T14:42:53Z">Fri Jul 15 10:42:53 -0400 2011</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="/boards/4/topics/794-how-does-php-activerecord-treat-camelcase-and-under_scores">Could somebody please clarify the rules for how php.activerecord deals with camel...</a>
+		
+		<div class="author">
+			by <a href="/users/779">Andrew Sinning</a>
+			<em class="relative" title="2011-07-15T14:01:17Z">Fri Jul 15 10:01:17 -0400 2011</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="/boards/4/topics/793-re-help-with-relationships">ok Ive worked it out: 
+
+$hardware = Hardware::find_by_id('847' , array('include...</a>
+		
+		<div class="author">
+			by <a href="/users/790">james cowie</a>
+			<em class="relative" title="2011-07-15T11:27:12Z">Fri Jul 15 07:27:12 -0400 2011</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="/boards/4/topics/792-help-with-relationships">Hello I have to tables Hardware &amp; HardwareHosts. hardware has ID and name and Har...</a>
+		
+		<div class="author">
+			by <a href="/users/790">james cowie</a>
+			<em class="relative" title="2011-07-15T11:16:37Z">Fri Jul 15 07:16:37 -0400 2011</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="/boards/4/topics/791-re-stable-vs-nightly">Thanks I will grab the nightly build and give it a try then.</a>
+		
+		<div class="author">
+			by <a href="/users/785">Vincent Lu</a>
+			<em class="relative" title="2011-07-13T03:56:30Z">Tue Jul 12 23:56:30 -0400 2011</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/1e4dd2881803a8d67396047664a3223e8e734a22">only check directory exists if something was supplied</a>
+		
+		<div class="author">
+			by <a href="/users/4">Kien La</a>
+			<em class="relative" title="2011-04-25T03:47:57Z">Sun Apr 24 23:47:57 -0400 2011</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/490f119acda09a32be93a4515ce7add4d97689a7">GH-134: Expressions parsing was using field = null instead of IS</a>
+		
+		<div class="author">
+			by <a href="/users/3">Jacques Fuentes</a>
+			<em class="relative" title="2011-03-23T02:15:01Z">Tue Mar 22 22:15:01 -0400 2011</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/769a869c4c82af4d3cff79a05502f6938e11dc7a">fix default port for memcached and namespace option</a>
+		
+		<div class="author">
+			by <a href="/users/3">Jacques Fuentes</a>
+			<em class="relative" title="2011-03-23T01:57:17Z">Tue Mar 22 21:57:17 -0400 2011</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/7250e9a620c159915974e071ca4d04305eb8983f">Merge branch 'gh101-has_many-through' of https://github.com/greut/php-activerecor...</a>
+		
+		<div class="author">
+			by <a href="/users/3">Jacques Fuentes</a>
+			<em class="relative" title="2011-03-23T01:55:10Z">Tue Mar 22 21:55:10 -0400 2011</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/a780ad14bae71d7531b59177bc31722a79e01510">cache namespace should come first and provide a delimiter</a>
+		
+		<div class="author">
+			by <a href="/users/3">Jacques Fuentes</a>
+			<em class="relative" title="2011-03-23T01:30:11Z">Tue Mar 22 21:30:11 -0400 2011</em>
+		</div>
+	</li>
+	</ul>
+
+
+				
+  
+<h3>Wiki</h3>
+
+<a href="/projects/main/wiki">Página inicial</a><br />
+<a href="/projects/main/wiki/Page_index">Índice por título</a><br />
+<a href="/projects/main/wiki/Date_index">Índice por data</a><br />
+
+
+				
+			</div>
+		</div>
+	</div>
+
+	<div id="ajax-indicator" style="display:none;"><span>Carregando...</span></div>
+
+	<div id="footer">
+	    <div class="container">
+	        <div class="span-24 last">
+			    <ul class="horizontal">
+	<li><a href="/">Home</a></li>
+	<li><a href="/projects/main/wiki/Basic_CRUD">Wiki</a></li>
+	<li><a href="/docs">Documentation</a></li>
+	<li><a href="http://github.com/kla/php-activerecord/issues">Issues</a></li
+	<li><a href="/news">News</a></li>
+	<li><a href="/projects/main/boards">Forums</a></li>
+	<li class="last"><a href="/welcome/about">About Us</a></li>
+</ul>
+<p>
+	<a href="http://www.phpactiverecord.org/" target="_top">phpactiverecord.org - An easy to use ORM for PHP</a><br/>
+	<a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>
+</p>
+
+	        </div>
+	    </div>
+	</div>
+</div>
+
+
+<script src="/assets/core.js?1281816347" type="text/javascript"></script>
+
+
+<script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10078176-1"); pageTracker._trackPageview();} catch(err) {}</script>
+
+
+
+</body>
+</html>

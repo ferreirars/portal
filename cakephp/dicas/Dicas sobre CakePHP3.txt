@@ -1,0 +1,31 @@
+Dicas sobre CakePHP3
+
+Capturar nome do action atual:
+$this->request->action
+
+Capturar nome do controller:
+$this->request->controller
+
+Usando o MessageHelper para exibir:
+<?=$this->Message->msg($this->request->controller) ?>
+
+Criando link com o HtmlHelper:
+<?= $this->Html->link(__('Lista de Usuário'), ['action' => 'index']) ?>
+
+Criando formulário com o FormHelper
+    <?= $this->Form->create($user) ?>
+        <legend><?= __('Editar Usuário') ?></legend>
+        <?php
+            echo $this->Form->input('username');
+            echo $this->Form->input('password');
+            echo $this->Form->input('role', ['admin'=>'Administrador','user'=>'Usuário']);
+        ?>
+    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->end() ?>
+
+
+Campo input simular select em FormHelper e mudando o label:
+
+echo $this->Form->label('Tipo');  // Criando o Label
+echo $this->Form->select('role', ['user'=>'Usuário','admin'=>'Administrador'], ['default' => 'admin']);
+

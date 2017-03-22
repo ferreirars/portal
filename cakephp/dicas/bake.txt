@@ -1,0 +1,159 @@
+Usando o bake para gerar código pela console
+
+Bake, uma ferramenta do CakePHP para a console é um outro esforço para facilitar e executar em CakePHP  rapidamente. O console do Bake pode criar qualquer um dos ingredientes básicos do CakePHP: models, viwes e controllers. E não estamos falando apenas de classes skeleton: Bake pode criar um aplicativo totalmente funcional em poucos minutos. Na verdade, o Bake é um passo natural a seguir.
+
+Gerar o código completo do CRUD para uma tabela:
+cd /var/www/cakeapp/app/Console
+./cake bake all
+
+Gerar o código para os actions "admin_" em todos os controllers: 
+./cake bake controller all --admin 
+
+Gerar todas as views iniciadas com admin_: 
+./cake bake view all --admin 
+
+Outras formas:
+./cake bake model group 
+./cake bake view group 
+ 
+./cake bake model user 
+./cake bake view user 
+
+./cake bake model 
+./cake bake controller 
+./cake bake view 
+
+Rodando Interativamente 
+./cake bake 
+
+Outras formas
+./cake bake db_config 
+./cake bake project 
+./cake bake fixture 
+./cake bake test 
+./cake bake plugin plugin_name 
+
+Gerar todos os models: 
+./cake bake model all 
+
+
+Entendendo a geração de código no Cake
+
+Quando geramos um CRUD através do bake, especialmente no que diz respeito ao model gerado, ele cria validação para os campos, mas somente para aqueles que têm alguma restrição (pelo menos NOT NULL) e também armazena no model o respectivo código para os relacionamentos (quando seguimos as convenções do Cake para relacionamentos).
+
+Um exemplo: o model Cliente.php (cuja tabela é relacionada com a tabela pedidos).
+
+Veja a tabela:
+
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` char(45) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `data_nasc` date DEFAULT NULL,
+  `cpf` char(11) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+Observe que os campos email e data_nasc tem NULL como default, ou seja não exigem qualquer informação. Aceitam qualquer valor para ser salvo, inclusive nenhum valor. 
+
+Em pedidos existe um relacionamento com clientes, assim como com funcionários e produtos:
+
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cliente_id` int(11) NOT NULL,
+  `funcionario_id` int(11) NOT NULL,
+  `produto_id` int(11) NOT NULL,
+  `data` date NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  `preco` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cliente_id` (`cliente_id`),
+  KEY `funcionario_id` (`funcionario_id`),
+  KEY `produto_id` (`produto_id`)
+);
+
+Agora veja o código gerado pelo Bake para o model Cliente:
+
+class Cliente extends AppModel {
+
+	/**
+	 * Validation rules
+	 *
+	 * @var array
+	 */
+		public $validate = array(
+			'nome' => array(
+				'notempty' => array(
+					'rule' => array('notempty'),
+					//'message' => 'Your custom message here',
+					//'allowEmpty' => false,
+					//'required' => false,
+					//'last' => false, // Stop validation after this rule
+					//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				),
+			),
+			'cpf' => array(
+				'notempty' => array(
+					'rule' => array('notempty'),
+					//'message' => 'Your custom message here',
+					//'allowEmpty' => false,
+					//'required' => false,
+					//'last' => false, // Stop validation after this rule
+					//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				),
+			),
+		);
+
+	/**
+	 * hasMany associations 
+	 *
+	 * @var array
+	 */
+		public $hasMany = array(
+			'Pedido' => array(
+				'className' => 'Pedido',
+				'foreignKey' => 'cliente_id',
+				'dependent' => false,
+				'conditions' => '',
+				'fields' => '',
+				'order' => '',
+				'limit' => '',
+				'offset' => '',
+				'exclusive' => '',
+				'finderQuery' => '',
+				'counterQuery' => ''
+			)
+		);
+
+}
+
+Veja, que somente tem validação os campos nome e cpf. O código da associação/relacionamento entre clientes e pedidos (hasMany - um cliente tem muitos pedidos).
+
+Já o relacionamento entre pedidos e clientes (veja em Pedido.php) é do tipo belogsTo (pedido pertence a cliente). Veja:
+
+	public $belongsTo = array(
+		'Cliente' => array(
+			'className' => 'Cliente',
+			'foreignKey' => 'cliente_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+
+Em termos de segurança dos dados no banco, o relacionamento é muito importante. Num banco de dados como o banco acima seria lamentável ter pedidos cadastrados no banco de clientes que já foram excluídos, por exemplo. O relacionamento é muito importante e deve ser implementado inclusive no banco e não somente no Cake.
+
+Referências:
+http://book.cakephp.org/2.0/en/console-and-shells/code-generation-with-bake.html
+
+
+1) Bake your plugin:
+
+cake bake plugin PluginNameInCamelCase
+
+2) Bake everything else:
+
+cake bake controller ControllerName --plugin PluginNameInCamelCase
+
+See this page for further documentation in baking plugins
+
+

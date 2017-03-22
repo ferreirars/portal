@@ -1,0 +1,376 @@
+<html>
+<head>
+		<title>
+ONLamp.com: Working with Files in PHP, Part Two</title>
+        <script language="javascript" src="/common.js"></script>
+<meta name="GOOGLEBOT" content="NOARCHIVE">
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+</head>
+<body  bgcolor="#ffffff" text="#000000">
+
+
+<a href="http://www.onlamp.com/">
+
+<img src="http://onlamp.com/images/onlamp/onlamp-logo.gif" alt="ONLamp.com" width="240" height="88" align="left" border="0" /></a>
+
+<dummy>&nbsp;&nbsp;&nbsp;</dummy>
+
+<br clear="all" />
+
+&nbsp;<font face="verdana,arial,helvetica" size="1">Published on <b>
+
+<a href="http://www.onlamp.com/">ONLamp.com</a></b> (<a href="http://www.onlamp.com/">http://www.onlamp.com/</a>)<br />
+
+ <!-- ---------- End of PERL --------------------- -->
+
+
+&nbsp;<a href='http://www.onlamp.com/pub/a/php/2002/12/12/php_foundations.html'>http://www.onlamp.com/pub/a/php/2002/12/12/php_foundations.html</a><br />
+&nbsp;<a href="/pub/a/general/print_code.html">See this</a> if you're having trouble printing code examples</font><br /><br clear="all" />
+
+<!-- ISI_LISTEN_START -->
+<span class=ISI_MESSAGE>
+<!--  
+This article is brought to you by Oreilly Net, your source for all
+PHP 
+ news.  -->
+</span>    
+
+<!--CS_PAGE_BREAK-->
+<h2>
+<!-- begin graphic_link.view --><a href="/pub/ct/29"><img src="/images/php/111-php_foundations.jpg" height="91" width="111" alt="PHP Foundations" border="0" align="left" hspace="10" vspace="0"></a><!-- end ct/graphic_link.view -->
+
+
+
+
+
+
+
+
+
+
+Working with Files in PHP, Part Two</h2>
+by <a href="/pub/au/135">John Coggeshall</a><br />
+12/12/2002<br clear="all">
+<!-- sidebar begins -->
+<!-- don't move sidebars -->
+<!-- sidebar ends -->
+
+<p>Welcome back to PHP Foundations. <a
+href="/pub/a/php/2002/10/03/php_foundations.html">Last time</a> I
+introduced you to the basic file access methods available to PHP:
+<code>fopen()</code>, <code>fputs()</code>, and
+<code>fgets()</code>. Although very useful, these functions work only with
+strings.  This week I'll introduce to you more advanced file access
+functions that read and write binary files.  We'll talk about
+<code>fread()</code> (used for reading), <code>fseek()</code> (used to
+find specific parts of a given file), along with a few other useful file
+access functions.</p>
+
+<p style="margin: 0px; margin-bottom: 0px; margin-left: 0px; 
+margin-right: 0px; margin-top: 0px; padding: 0px; padding-bottom: 0px; 
+padding-left: 0px; padding-right: 0px; padding-top: 0px; font-size: 
+1px;"></p>
+
+<h3>Basic Binary File I/O</h3>
+
+<p>As you may recall from my last column, PHP provides two fundamental
+functions for reading and writing text-based data. You'll be happy to know
+that when working with binary files, three of the functions you learned
+last time are still useful. We'll use <code>fopen()</code> to open our files, <code>fclose()</code> to close them, and <code>fputs()</code> / <code>fwrite()</code> to write data to the appropriate file.</p>
+
+<p><code>fputs()</code>, although it wasn't discussed earlier, is really
+an alias for the function <code>fwrite()</code>. There is no difference
+between the two functions; the different names follow the convention
+established in other programming languages. If you feel more comfortable
+with <code>fputs()</code> instead of <code>fwrite()</code>, use it without
+consequence. However, it is good practice to use <code>fwrite()</code>
+when dealing with binary data and <code>fputs()</code> for text,
+especially if you are doing both at the same time.</p>
+
+
+
+<!-- sidebar begins -->
+<table width="140" border="1" cellspacing="2" cellpadding="10" align="right" style="border: 1px solid #333333; margin: 8px;"><tr>
+<td width="140" valign="top" bgcolor="#ffffff" style="border: none;">
+<p class="headline">Related Reading</p>
+
+<a href="http://www.oreilly.com/catalog/9781565926813/index.html?CMP=ILL-4GV796923290">
+
+<img src="/catalog/covers/1565926811_cat.gif" alt="PHP Cookbook" border="0" />
+
+</a>
+<p class="medlist"><span class="title"><a href="http://www.oreilly.com/catalog/9781565926813/index.html?CMP=ILL-4GV796923290">PHP Cookbook</a></span><strong><br />
+
+By <a href="http://www.oreillynet.com/pub/au/985">David Sklar</a>, <a href="http://www.oreillynet.com/pub/au/986">Adam Trachtenberg</a></strong>
+</p>
+<div class="secondary">
+<!-- builds links to list in sidebar -->
+ <a href="http://www.oreilly.com/catalog/9781565926813/toc.html?CMP=ILL-4GV796923290">Table of Contents</a><br /> 
+  <a href="http://www.oreilly.com/catalog/9781565926813/inx.html?CMP=ILL-4GV796923290">Index</a><br /> 
+  <a href="http://www.oreilly.com/catalog/9781565926813/chapter/index.html?CMP=ILL-4GV796923290">Sample Chapter</a><br /> 
+ 
+
+
+
+<br /><b><a href="http://safari.oreilly.com/?cid=orm-cat-readnow-">Read Online--Safari</a></b>
+<span class="tiny">Search this book on Safari:</span>
+<form action="http://safari.oreilly.com/JVXSL.asp" method="post">
+<input type="hidden" name="s" value="1" /><input type="hidden" name="b" value="1" />
+<input type="hidden" name="t" value="1" /><input type="hidden" name="f" value="1" />
+<input type="hidden" name="c" value="1" /><input type="hidden" name="l" value="1" />
+<input type="hidden" name="view" value="section" />
+<input tabindex="1" name="se_text" type="text" value="" size="15" />&nbsp;<input name="go" type="image" title="Execute the search" src="http://www.oreillynet.com/images/safari_btn_go.gif" width="23" height="17" border="0" align="absmiddle"  alt="Go" /><br />
+<select name="se_isbn">
+<option value="1-56592-681-1">Only This Book</option>
+<option value="">All of Safari</option>
+</select><br />
+<input type="checkbox" name="code" value="1" /><span class="tiny">Code Fragments only</span>
+</form>						  
+
+</div>
+</td>
+</tr></table>
+<!-- sidebar ends -->
+
+
+<h3>Reading Binary data from a file</h3>
+
+<p>You'll notice that one function that I am not revisiting this week is
+the <code>fgets()</code> function. When working with binary data, you need
+a function named <code>fread()</code>. Like <code>fgets()</code>, the
+<code>fread()</code> function accepts two parameters:</p>
+
+<pre><code>fread($file_reference, $length);</code></pre>
+
+<p>Note that, unlike <code>fgets()</code>, <code>fread()</code> requires
+the <code>$length</code> parameter (the number of bytes to read from the
+file) to be specified. Upon success this function will return a string
+representation of the binary data read from the file or false (<code>null</code>) upon
+failure. How would you use this function to read binary data from a file?
+Here's a quick example.
+</p>
+
+<pre><code>&lt;?php
+   $fr   = fopen('/path/to/myfile.dat', 'r');
+   $data = fread($fr, 1024);
+   fclose($fr);
+?&gt;</code></pre>
+
+<p>On systems running PHP which differentiate between binary and text
+files (such as Windows), you'll need to open the file in binary mode by
+including <code>b</code> along with any other modes that you may
+require. To read a file on a Windows system using binary mode you'd use
+<code>rb</code> instead of the <code>r</code> you'd use on a
+UNIX-compatible system.  Also, if you have "magic quotes" enabled,
+<code>fread()</code> may not function as expected (especially when dealing
+with a null character).  PHP will automatically convert the "<code>null</code>"
+character to its escaped version <code>\0</code> in the resulting
+input. Toggling "magic quotes" can be done by using the
+<code>set_magic_quotes_runtime()</code> and
+<code>get_magic_quotes_runtime()</code> functions whose information is
+available in the PHP manual. </p>
+
+<!-- sidebar begins -->
+<table width="200" border="0" cellspacing="12" cellpadding="6" align="right"><tr><td width="170" valign="top" bgcolor="#efefef">
+<p class="headline">Also in PHP Foundations:</p>
+<p class="smalltext"><a href="/pub/a/php/2004/03/18/php_foundations.html">Using MySQL from PHP, Part 2</a></p><p class="smalltext"><a href="/pub/a/php/2004/02/19/php_foundations.html">Using MySQL from PHP</a></p><p class="smalltext"><a href="/pub/a/php/2004/01/29/php_foundations.html">MySQL Crash Course, Part 3</a></p><p class="smalltext"><a href="/pub/a/php/2004/01/09/php_foundations.html">MySQL Crash Course, Part 2</a></p><p class="smalltext"><a href="/pub/a/php/2003/12/23/php_foundations.html">MySQL Crash Course</a></p>
+</td></tr></table>
+<!-- sidebar ends -->
+
+<p>As you might expect, these code snippets read one kilobyte (1024 bytes)
+from the file referred to by <code>$fr</code>. Although this works just
+fine in a large file of hundreds of thousands (if not millions) of bytes,
+it works sequentially.  Accessing a specific part of the file would be a
+matter of reading and discarding everything up to that point.  Writing is
+more difficult.  For instance, how would you read the 1,432,342nd byte
+from a file? What about writing a byte in the middle of a binary file?
+Both of these tasks can be solved using the <code>fseek()</code>
+function. </p>
+
+<h3>Moving the pointer within a file</h3>
+
+<p>In order to solve the problem of accessing a specific location within a
+file, we'll need a way to adjust the file pointer.  What is a file
+pointer?  It's the marker used by PHP to keep track of where the currently
+executing file operations take place. For instance, when a file is first
+created the file pointer is adjusted to the beginning of the file.
+Likewise, when a file is opened in append mode, the file is opened and the
+pointer points to the very end of the file. The <code>fseek()</code>
+function allows us to adjust the file pointer to anywhere within the
+file.</p>
+
+<p>When using <code>fseek()</code> where the file pointer is placed
+(called an offset) is done in reference to one of three different
+locations: the beginning of the file, the end of the file, or the current
+pointer location. In PHP, these locations are represented by constants as
+shown below:</p>
+
+<table border="0" cellpadding="8" cellspacing="0">
+<tr><td><strong>PHP Constant</strong></td><td><strong>File Offset</strong></td></tr>
+<tr><td><code>SEEK_SET</code></td><td>Starting from the beginning of the file</td></tr>
+<tr><td><code>SEEK_CUR</code></td><td>Starting from the current pointer location</td></tr>
+<tr><td><code>SEEK_END</code></td><td>Starting from the end of the file</td></tr>
+</table>
+
+<p>To use these constants, we need to understand how the
+<code>fseek()</code> function works. Its syntax is</p>
+
+<pre><code>fseek($file_reference, $offset, [$reference_point]);</code></pre>
+
+<p>where <code>$file_reference</code> represents the value returned by
+<code>fopen()</code>, and <code>$offset</code> represents the number of
+bytes to adjust the file pointer by starting from either
+<code>$reference_point</code>, if provided, or <code>SEEK_SET</code> if
+omitted. When executed, <code>fseek()</code> returns zero (0) upon success
+or negative one (-1) upon failure.  </p>
+
+<p>Let's take a look at a few examples. Assume the file being opened
+exists and is one kilobyte (1024 bytes) in size:</p>
+
+<pre><code>&lt;?php
+   $fr = fopen('/myfile.dat', 'r');
+   echo "File opened, pointer is at start of file (SEEK_SET)&lt;BR&gt;";
+
+   fseek($fr, 512);
+   $byte = fread($fr, 1);
+   echo "The byte is: $byte&lt;BR&gt;";
+   echo "Pointer is now midway through the file (SEEK_SET+512)&lt;BR&gt;";
+
+   fseek($fr, -256, SEEK_CUR);
+   $byte = fread($fr, 1);
+   echo "The byte is: $byte&lt;BR&gt;";
+   echo "Pointer is now a fourth through the file (SEEK_SET+256)&lt;BR&gt;";
+
+   fseek($fr, 1024, SEEK_CUR);
+   $byte = fread($fr, 1);
+   echo "The byte is: $byte&lt;BR&gt;";
+   echo "Seek failed, 256+1024 is greater than the file size. 
+         (still at SEEK_SET+256)";
+
+   fseek($fr, -1024, SEEK_END);
+   $byte = fread($fr, 1);
+   echo "The byte is: $byte&lt;BR&gt;";
+   echo "Back at start of file. (SEEK_END-1024 equals SEEK_SET)&lt;BR&gt;";
+
+   $byte = fread($fr, 1);
+   echo "The byte is: $byte&lt;BR&gt;";
+   fclose($fr);
+?&gt;</code></pre>
+
+<p>Although here we elected to read from our file, this example could have
+been just as easily applied to write data at specific points within the
+file by using <code>fputs()</code>/<code>fwrite()</code> instead of
+<code>fread()</code>. </p>
+
+<h3>Determining where the file pointer is</h3>
+
+<p>To wrap up today's conversation, let's take a look at one more function
+which will tell you where exactly within a file the file pointer is. This
+function is called <code>ftell()</code> and has the following syntax:</p>
+
+<pre><code>ftell($file_reference);</code></pre>
+
+<p>This function returns false on error or the current offset of the file
+pointer starting from the beginning of the file:</p>
+
+<pre><code>&lt;?php
+   $fr = fopen("/path/to/myfile.dat", 'r');
+   fseek($fr, rand(1, 1024));
+   $offset = ftell($fr);
+   echo "We randomly landed on the $offset byte of the file.&lt;BR&gt;";
+?&gt;></code></pre>
+
+<h3>More about Files to come!</h3>
+
+<p>That's all I have for you today on files, which are an important part
+of PHP. By now you've learned how to deal with both binary and text
+files. In coming issues, I'll be discussing file permissions, directories,
+and more, so come back soon.  </p>
+
+<p><i>
+<a href="/pub/au/135">John Coggeshall</a> 
+is a a PHP consultant and author who started losing sleep over PHP around five years ago.
+
+</i></p>
+
+<hr size="1" noshade />
+
+<p><i>Read more <a href="/pub/ct/29"><b>PHP Foundations</a></b> columns</i>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Return to the <a href="/php/">PHP DevCenter</a>.</p><br />
+
+
+
+
+
+
+
+
+
+
+
+<p><font face="verdana,arial,helvetica" size="1">Copyright &copy; 2007 O'Reilly Media, Inc.</font></p>
+
+<!-- ISI_LISTEN_STOP -->  
+
+ <!--WEBSIDESTORY CODE HBX1.0 (Universal)-->
+    <!--COPYRIGHT 1997-2004 WEBSIDESTORY,INC. ALL RIGHTS RESERVED. U.S.PATENT No. 6,393,479B1. MORE INFO:http://websidestory.com / privacy-->
+    <script language="javascript" type="text/javascript">
+    var _hbEC=0,_hbE=new Array;function _hbEvent(a,b){b=_hbE[_hbEC++]=new Object();b._N=a;b._C=0;return b;}
+    var hbx=_hbEvent("pv");hbx.vpc="HBX0100u";hbx.gn="ehg-oreilly.hitbox.com";
+
+    //"BCB: onlamp.com,/a/3002, DM550308O2RV";
+
+    hbx.acct="DM550308O2RV;DM520404M4ZR"; //ACCOUNT NUMBER(S)
+    hbx.pn="Working+with+Files+in+PHP,+Part+Two"; //PAGE NAME(S)
+    hbx.mlc="/lpt/a/;/onlamp.com/lpt/a/"; //MULTI-LEVEL CONTENT CATEGORY
+    hbx.pndef="title"; //DEFAULT PAGE NAME
+    hbx.ctdef="full"; //DEFAULT CONTENT CATEGORY
+
+    hbx.lt="auto"; //LINK TRACKING 
+    hbx.dlf="n"; //DOWNLOAD FILTER
+    hbx.dft="n"; //DOWNLOAD FILE NAMING
+    hbx.elf="n"; //EXIT LINK FILTER
+
+    //SEGMENTS AND FUNNELS
+    hbx.seg=""; //VISITOR SEGMENTATION
+    hbx.fnl=""; //FUNNELS
+
+    //CAMPAIGNS
+    hbx.cmp=""; //CAMPAIGN ID
+    hbx.cmpn="CMP"; //CAMPAIGN ID IN QUERY
+    hbx.hra=""; //RESPONSE ATTRIBUTE
+    hbx.hqsr=""; //RESPONSE ATTRIBUTE IN REFERRAL QUERY
+    hbx.hqsp="ATT"; //RESPONSE ATTRIBUTE IN QUERY
+    hbx.hlt=""; //LEAD TRACKING
+    hbx.hla=""; //LEAD ATTRIBUTE
+    hbx.gp=""; //CAMPAIGN GOAL
+    hbx.gpn=""; //CAMPAIGN GOAL IN QUERY
+    hbx.hcn=""; //CONVERSION ATTRIBUTE
+    hbx.hcv=""; //CONVERSION VALUE
+    hbx.cp="null"; //LEGACY CAMPAIGN
+    hbx.cpd=""; //CAMPAIGN DOMAIN
+
+    //CUSTOM VARIABLES
+    hbx.ci="";//CUSTOMER ID
+    hbx.hc1="";//CUSTOM 1
+    hbx.hc2="";//CUSTOM 2
+    hbx.hc3="";//CUSTOM 3
+    hbx.hc4="";//CUSTOM 4 
+    hbx.pec="";//ERROR CODES
+    </script><script language="javascript1.1" defer="defer"  src="http://www.oreillynet.com/hbx.js" type="text/javascript"></script><!--//-->  
+    <!-- END WEBSIDESTORY CODE  -->
+ </body>
+
+
+</html>

@@ -1,0 +1,55 @@
+Dicas sobre Schemas
+
+
+Criar o banco
+Gerar o aplicativo com o bake ou manualmente
+
+Executar os comandos:
+./cake schema generate
+
+O comando acima gerará o arquivo app/Config/Schema/schema.php. Somente processará tabelas que tenham seu respectivo mmodel definido.
+
+Adicionar nesse arquivo acima o código para geração do esquema. Exemplo:
+
+<?php 
+class AppSchema extends CakeSchema {
+
+	public function before($event = array()) {
+		return true;
+	}
+
+	public function after($event = array()) {
+	}
+
+	public $despesas = array(
+		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
+		'tipo' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 3, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
+		'descricao' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 30, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
+		'mes' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 7, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
+		'valor' => array('type' => 'float', 'null' => false, 'default' => null, 'length' => '5,2'),
+		'obs' => array('type' => 'text', 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
+		'indexes' => array(
+			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+		),
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_unicode_ci', 'engine' => 'InnoDB')
+	);
+}
+Com o código acima o Cake cria a tabela despesas não importando qual seja o SGBD, desde que seja um dos suportados.
+
+Criar as tabelas
+./cake schema create
+
+O comando acima dropa as tabelas se existirem e cria as tabelas no SGBD partindo de schema.php
+
+
+Gerar o arquivo sql com create table ...
+./cake schema dump --write filename.sql
+
+Criará em app/Config/Schema/filename.sql
+
+Esquemas permitem a criação de instaladores para aplicativos que criam automaticamente o banco de dados.
+ 
+
+http://book.cakephp.org/2.0/en/console-and-shells/schema-management-and-migrations.html
+
+

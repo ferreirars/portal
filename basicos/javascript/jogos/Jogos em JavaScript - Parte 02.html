@@ -1,0 +1,391 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+	<title>iMasters - Por uma Internet mais criativa e dinâmica</title>
+	<meta name="resource-types" content="document">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta name="revisit-after" content="1">
+	<meta name="classification" content="Internet">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta name="Description" content="Comunidade de profissionais, estudantes e mestres em tecnlogias e ferramentas voltadas para o desenvolvimento web.">
+
+	<meta name="Keywords" content="programação, microsoft, asp, php, internet, linux, curso online, webmaster, java, flash, delphi, sql, oracle, cursos online, javascript, css, XHTML, HTML,  photoshop, semantica, web standards,  interbase, fireworks, dreamweaver, tableless, standards, browsers, compatibilidade, XML, usabilidade, acessibilidade, web, internet">
+	<meta name="robots" content="ALL">
+	<meta name="distribution" content="Global">
+	<meta name="rating" content="General">
+	<meta name="author" content="WebStudio iMasters">
+	<meta name="language" content="pt-br">
+	<meta name="doc-class" content="Completed">
+	<meta name="doc-rights" content="Public">
+	<link rel="shortcut icon" href="http://www.imasters.com.br/favicon.ico">
+
+	<!-- base href="http://www.imasters.com.br/" -->
+	<style type="text/css" media="screen">
+		
+		#imprimir { width:487px; }
+		body { font-family:Arial; font-size: 12px; }
+		span { float:left font-size:11px; padding:2px; }
+		h1 { font-size:16px; padding: 3px; }
+		h2 { font-size:14px; }
+		h3 { font-size:13px; }
+		h3 { font-size:12px; }
+		
+	</style>
+</head><body>
+<div id="imprimir">
+	<img src="Jogos%20em%20JavaScript%20-%20Parte%2002_arquivos/topo_imprimir.gif">
+	<br>
+	<span>Wilker Silva</span>
+	<span>Quarta-feira, 18 de abril de 2007</span>
+	<h1>Jogos em JavaScript - Parte 02</h1>
+	
+<p>Olá Pessoal. Estou de volta para o meu segundo artigo sobre desenvolvimento de jogos em javascript.</p>
+
+<p>No <a href="http://www.imasters.com.br/artigo/5918/javascript/jogos_em_javascript/" class="int">primeiro artigo</a> nós demos uma pequena olhada em como usar o Canvas para efetuar desenhos no painel. Agora vamos começar a fazer nosso jogo!</p>
+
+<p>Uma das coisas mais importantes para o bom funcionamento do jogo é a
+engine (base onde o jogo vai ser feito). Nós faremos nossa própria
+engine, de forma simples, mas que serve perfeitamente para o nosso
+jogo. O trabalho da engine é principalmente controlar o jogo, definir o
+que acontecerá e quando ser desenhado na tela. Let's go!</p>
+
+<p>Faremos uma engine que funciona baseada no tempo passado. Como
+muitos devem saber, os jogos tem o chamado FPS (Frames por segundo). Um
+frame seria um quadro, ou seja, toda vez que trocamos qualquer coisa
+que seja na tela do jogo, nos estamos mudando de frame. Normalmente os
+jogos de PC limitam o jogo a 60fps para manter o jogo rodando
+aparentemente igual em vários computadores, e também para sincronizar
+com a taxa de refresh do monitor (que normalmente é 60).</p>
+
+<p>Na nossa engine nós não vamos limitar o fps, deixaremos livre.
+Quanto melhor for o computador de quem está acessando, mais frames
+serão exibidos por segundo (isso não quer dizer que o jogo vai ser mais
+rápido ou mais lento, apenas muda a fluência dos movimentos). Só um
+aviso, a partir de agora trabalharemos em geral com classes em
+JavaScript, conceitos de bind e prototype. Se você não conseguir
+entender, procure artigos sobre o assunto ou me pergunte.</p>
+
+<h3>Binding</h3>
+
+<p>Esse é um conceito que algumas pessoas conhecem, outras conhecem mas
+não sabem que esse é o nome e outras desconhecem... Então vou dar uma
+breve explicada. Para entender o binding você precisa ter noção sobre
+objetos e escopos. Quem achar que precisa saber um pouco mais sobre
+isso, leia os artigos abaixo:</p>
+
+<ul>
+<li><a href="http://jsdev.blogspot.com/2006/09/conceitos-variveis-e-funes.html" class="ext">para ver escopo</a></li>
+
+<li><a href="http://jsdev.blogspot.com/2006/09/estruturas-de-controle-e-objetos.html" class="ext">para ver objetos</a></li>
+
+</ul>
+
+<p>Ótimo, agora eu já tenho em mente que você sabe sobre escopos e objetos. Então vamos continuar.</p>
+Imagine a seguinte situação (muito comum por acaso), onde você tem uma
+função, e você vai precisar dar um timeout nela (mandar ela ser
+executada num tempo futuro), mas com um detalhe: você tem que lembrar
+que qualquer função passada como parâmetro acaba sendo executada no
+escopo de <strong>window</strong>.
+Em vários casos isso não é um problema, mas imagine que essa função é
+na verdade um método de um objeto, e você precisa que ela seja usada no
+escopo daquele objeto para poder usar as variáveis do objeto. Agora
+você tem um problema.
+<p>Mas existe uma solução! O binding! O binding consegue de uma forma
+"mágica" trocar o escopo de uma função antes dela ser executada! Para
+fazer esse bind, iremos criar funções auxiliares:</p>
+
+<div class="codigo"><pre><code>A = function(enumerable) {
+	var array = ;
+	
+	for(var i = 0; i &lt; enumerable.length; i)
+		array[i] = enumerable[i];
+	
+	return array;
+};
+
+Function.prototype.bind = function() {
+	var __method = this, args = A(arguments), object = args.shift();
+	return function() {
+		return __method.apply(object, args.concat(A(arguments)));
+	};
+};</code></pre></div>
+
+<p>A função <strong>A</strong> simplesmente transforma um enumerável em
+um array. A diferença é basicamente nos métodos. Existem métodos no
+array que não existem nos enumeráveis. Depois nós fazemos uma extensão
+nas funções. Por incrível que pareça, uma função também tem seus
+próprios métodos. Agora nós temos nosso próprio esquema de bind, e com
+ele nós podemos definir o escopo onde a função será executada e também
+podemos passar variáveis que serão enviadas quando a função for
+executada. </p>
+
+<p><span class="c1"><strong>Obs</strong></span>: Sim. Esse bind é uma cópia do bind feito pela biblioteca <a href="http://www.prototypejs.org/" class="ext">Prototype</a>.</p>
+
+<p>Antes de continuar na engine do jogo, vamos logo adicionar 2 funções muito úteis para os nosso jogos:</p>
+
+<div class="codigo"><pre><code>getMilliTime = function() {
+	var d = new Date();
+	
+	return d.getMilliseconds() 
+		   d.getSeconds()  * 1000 
+		   d.getMinutes()  * 60  * 1000 
+		   d.getHours()    * 60  * 60 * 1000 
+		   d.getDay()      * 24  * 60 * 60 * 1000 
+		   d.getMonth()    * 30  * 24 * 60 * 60 * 1000 
+		   d.getFullYear() * 365 * 30 * 24 * 60 * 60 * 1000;
+};
+
+randomRange = function(min, max) {
+	return Math.random() * max  min;
+};</code></pre></div>
+
+<p>A primeira função pega o tempo atual em milésimos de segundo. Quando
+trabalhamos com jogos, precisamos usar a maior precisão possível, e no
+caso do JavaScript essa precisão é em milésimos de segundo, suficiente
+para nossos jogos. A segunda função é bem simples. Pegará um número
+aleatório dentro de um alcance (de <strong>x</strong> a <strong>y</strong>).</p>
+
+<h3>Game Canvas</h3>
+
+<p>A classe que criaremos agora será responsável por calcular o tempo
+passado desde o frame anterior, e dispara eventos avisando ao jogo que
+ele deve ser atualizado e renderizado. Vocês entenderão melhor quando
+nós começarmos a usá-la.</p>
+
+<div class="codigo"><pre><code>GameCanvas = function(canvas) {
+	this.canvas = typeof canvas == 'string' ? document.getElementById(canvas) : canvas;
+	this.timer = 0;
+	this.paused = false;
+	this.update = function() {};
+	this.render = function() {};
+	
+	this.lastUpdate = getMilliTime();
+	
+	this._update();
+};
+
+GameCanvas.prototype = {
+	_update: function() {
+		if(!this.paused) {
+			var time = getMilliTime();
+			var elapsed = time - this.lastUpdate;
+			this.lastUpdate = time;
+			
+			this.update(elapsed, this.canvas);
+			this._render();
+		}
+
+		var ref = this;
+
+		this.timer = setTimeout(this._update.bind(this), 5);
+	},
+	
+	_render: function() {
+		var ctx = this.canvas.getContext('2d');
+		
+		this.render(ctx, this.canvas);
+	}
+};</code></pre></div>
+
+<p>Essa classe recebe apenas 1 argumento na criação. Esse argumento
+apenas pega o elemento canvas da tela onde o jogo será exibido. O
+argumento passado pode ser uma referência direta do objeto, ou pode ser
+uma string contendo o ID do elemento canvas que será usado. Ela
+basicamente executa o update do jogo, em seguida desenha, e depois
+disso faz um timeout para ela mesma no update.</p>
+
+<p>Nós devemos usar o setTimeout no lugar de mandar executar
+diretamente o update, pois se fizessemos isso, o jogo travaria e nunca
+seria exibido na tela. Reparem que já fazemos uso no bind para isso,
+pois o update deve ser executado dentro do escopo do próprio objeto.</p>
+
+<p><span class="c1"><strong>Obs</strong></span>: você pode colocar
+esses códigos dentro do mesmo arquivo. Minha recomendação por hora é
+criar um arquivo chamado engine.js, e vá colocando os códigos um abaixo
+do outro. No HTML apenas iremos incluir esse js externo e os códigos do
+jogo propriamente dito. Em grandes projetos é recomendável o uso de
+arquivos separados no ambiente de produção, e depois a união de tudo em
+apenas um arquivo na hora de exportar o projeto (pois leva muito menos
+tempo carregar apenas 1 js grande do que vários pequenos).</p>
+
+<h3>Começando o Jogo</h3>
+
+<p>Ótimo, já temos uma base inicial para começar nosso jogo. A primeira
+parte que faremos é o background do jogo. Pra nosso jogo de nave
+faremos 2 camadas de background, e a camada mais ao fundo será uma
+imagem que ficará passando devagar de cima para baixo na tela, sendo a
+outra, a camada com vários pontos passando de cima para baixo na tela,
+para dar uma impressão de movimento ao jogador. Inicialmente faremos a
+camada dos pontos, pois ela não precisa de imagens e é mais simples de
+fazer, mas antes de codificar vamos criar o HTML do nosso jogo:</p>
+
+<div class="codigo"><pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;:: Game Engine ::&lt;/title&gt;
+&lt;script type="text/javascript" src="engine.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+
+//o codigo do jogo deve vir aqui
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;center&gt;
+&lt;canvas id="gamecanvas" width="230" height="320"&gt;&lt;/canvas&gt;
+&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+
+<p>Vamos separar as coisas da seguinte forma: os códigos da engine em
+si ficarão no arquivo engine.js e os códigos relativos ao nosso jogo
+ficarão direto no HTML. Sendo assim, vamos ao código da nossa primeira
+camada de background:</p>
+
+<div class="codigo"><pre><code>FallDots = function(n, width, height) {
+	this.dots = new Array(n);
+	
+	for(var i = 0; i &lt; this.dots.length; i) {
+		this.dots[i] = {};
+		this.restartDot(i, width);
+		this.dots[i].y = randomRange(0, height - this.dots[i].size);
+	}
+};
+
+FallDots.prototype = {
+	restartDot: function(i, width) {
+		this.dots[i].size = randomRange(1, 1.8);
+		this.dots[i].x = randomRange(0, width - this.dots[i].size);
+		this.dots[i].y = -this.dots[i].size;
+		this.dots[i].speed = randomRange(.05, .25);
+		this.dots[i].waiting = false;
+	},
+	
+	update: function(elapsed, canvas) {
+		for(var i = 0; i &lt; this.dots.length; i) {
+			if(this.dots[i].waiting)
+				continue;
+			
+			this.dots[i].y = this.dots[i].speed * elapsed;
+			
+			if(this.dots[i].y &gt; canvas.height) {
+				this.dots[i].waiting = true;
+				setTimeout(this.restartDot.bind(this, i, canvas.width), 1000);
+			}
+		}
+	},
+	
+	render: function(ctx) {
+		ctx.save();
+		ctx.fillStyle = 'CCC';
+		
+		for(var i = 0; i &lt; this.dots.length; i) {
+			ctx.fillRect(this.dots[i].x, this.dots[i].y, this.dots[i].size, this.dots[i].size);
+		}
+		
+		ctx.restore();
+	}
+};</code></pre></div>
+
+<p>Certo, a idéia é simples. Essa classe é iniciada dizendo o número de
+pontos que devem cair, a largura da tela do jogo, e a altura (para
+serem usados nos cálculos). Com a quantidade de pontos definidas, nós
+geramos aleatoriamente as posições iniciais dos pontos. Como podem ver,
+eu gosto de separar as 2 funções para os objetos. Uma que vai fazer a
+atualização de estado (o update) e outra que será usada para desenhar
+os pontos na tela. A rotina dos pontos é o seguinte:</p>
+
+<ol>
+<li>Gerar dados aleatórios para: posição x, tamanho, velocidade de queda</li>
+
+<li>Cair até o final da tela</li>
+
+<li>Ao ultrapassar a tela, esperar um tempo aleatório para reiniciar novamente</li>
+
+</ol>
+
+<p>Desta forma, nossos pontos vão sempre estar caindo e subindo. A
+única diferença nessa rotina é realmente na inicialização, onde a
+posição Y também é colocada aleatoriamente, para já haver pontos
+espalhados na tela no início. Notem também o uso da variável <strong>elapsed</strong>.
+Percebam que na hora de mover as coisas, nós sempre multiplicamos o
+valor por essa variável. É feito dessa forma justamente para manter o
+jogo na velocidade certa. Como eu disse antes, nós faremos as coisas
+sempre nos baseando no tempo passado e não na quantidade de frames
+exibidos, então fazer essa multiplicação mantém a velocidade
+independente do frame rate.</p>
+
+<p>É bom reparar que esse valor de elapsed geralmente fica entre 20 e
+100. Então nossas velocidades sempre tem valores baixos para compensar
+essa multiplicação.</p>
+
+<p>Agora vamos colocar as coisas que fizemos juntas, para ter a primeira visualização do nosso game:</p>
+
+<div class="codigo"><pre><code>canvas = null;
+bgFall = null;
+
+window.onload = function() {
+	canvas = new GameCanvas('gamecanvas');
+	bgFall = new FallDots(8, canvas.canvas.width, canvas.canvas.height);
+	
+	canvas.update = function(elapsed, canvas) {
+		//atualizar o background
+		bgFall.update(elapsed, canvas);
+	};
+	
+	canvas.render = function(ctx, canvas) {
+		ctx.save();
+		
+		//desenhar fundo preto
+		ctx.fillStyle = "000";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);			
+		
+		//desenhar os pontos
+		bgFall.render(ctx, canvas);
+		
+		ctx.restore();
+	};
+};</code></pre></div>
+
+<p>Viram que beleza? Definimos nossas variáveis iniciais como nulo e
+iniciamos tudo depois que o documento for carregado. Caso contrário,
+nosso canvas não iria existir, e isso causaria um erro. Se tudo deu
+certo, vocês devem ver um bloco preto na tela, onde pontos cinzas ficam
+caindo. Eu defini que seriam 8 pontos em cada, pois acho o suficiente
+levando o tamanho da nossa tela.</p>
+
+<p>Outra coisa é o uso do nosso GameCanvas. Lembrem que na classe
+tínhamos definido as funções update e render como funções em branco
+(funções que não fazem nada) e agora, na hora do uso, nós
+sobrescrevemos essas funções para serem usadas no jogo. Seguindo a
+lógica, você pode ver que sempre que precisamos atualizar algum dado no
+jogo faremos isso dentro da função update, e tudo na parte de
+renderizar ficará dentro da função render.</p>
+
+<p>Por hoje terminamos. Hoje vocês viram o início do nosso game e
+aprenderam algumas técnicas para desenvolvimento de jogos, além de
+criar o background do jogo.</p>
+
+<p>Antes de me despedir, eu tenho uma novidade para vocês. Pesquisei no meio da semana e achei um projeto do Google muito legal, o <strong>ExCanvas</strong>.
+Esse projeto é para fazer uma implementação do Canvas no Internet
+Explorer. Ele usa uma DLL, o VML que permite fazer drawing no IE, e a
+versão atual já consegue desenhar imagens, formas, gradientes... O
+problema é que ela ainda é muito lenta comparada à versão do Firefox e
+outros, mas ela é muito boa para você usar o canvas para coisas não
+animadas como gráficos por exemplo.</p>
+
+<p>Outra coisa legal é seu uso, pois é muito transparente, basta
+incluir o arquivo JS e pronto, está feito. O link do projeto é esse: <a href="http://sourceforge.net/projects/excanvas/" class="ext">http://sourceforge.net/projects/excanvas/</a></p>
+
+<p>Vou me despedindo de vocês por essa semana. Semana que vem iremos
+começar a trabalhar com imagens, faremos nosso carregador de imagens e
+a segunda camada do background. Para quem não conseguiu fazer os
+códigos por qualquer motivo, clique <a href="http://conteudo.imasters.com.br/5979/gameengine.zip" class="int">aqui</a> para fazer download dos arquivos.</p>
+
+<p>Grande abraço pessoal, e espero que estejam gostando dos artigos.</p>
+
+<p>See you next week!</p>
+
+</div>
+</body></html>

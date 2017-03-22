@@ -1,0 +1,546 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Custom-Built Quizzes</title>
+
+<script src="writeinput.js"></script>
+
+<script>
+	
+	//allow choice b/w select and radio buttons
+	
+	
+	var qutobeupdatedid = -1
+	var anstobeupdatedid = -1
+	var questionnum = -1
+	var filestring = ""
+	var letters = new Array("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
+	var notallowed = new Array(".","'","\"","<",">","?","/",":","*","|");	
+	
+	function show()
+	{
+		var	initial;
+		num++
+		questionnum = num-1;
+		qnum.innerHTML = num + ")"
+//		eval("var answers"+num+" = new Array()")
+		answers.push(new Array())
+		newquestion.style.display=''	
+		fillans(num);
+		fillansreal(num);
+		document.form1.newanswer.value=""
+		document.form1.qu.value=""
+	}
+	
+	function modifyqu(id)
+	{
+		//'shows' question data
+		qutobeupdatedid = id;
+		questionnum = id;
+		//qutobeupdatedid = -1
+		qnum.innerHTML = id+1 + ")"
+		fillans(questionnum+1)
+		fillansreal(questionnum+1)
+		document.form1.newanswer.value=""
+		document.form1.qu.value = questions[id]//.substring(0,questions[id].length-1)
+		document.form1.explanation.value = expl[id]
+		document.form1.rightanswer.options[(real[id]-1)].selected = true
+		newquestion.style.display=''	
+		document.form1.qubutton.value="Update question"
+		document.form1.qubutton.onclick=updatequ
+	}
+	
+	function updatequ()
+	{
+		//updates question data
+		//alert("Updating question id: " + qutobeupdatedid)
+		var id = qutobeupdatedid
+		qutobeupdatedid = -1
+		questions[id] = document.form1.qu.value// + "?"
+		//alert(questions[id])
+		real[id] = document.form1.rightanswer.options[document.form1.rightanswer.selectedIndex].value
+		expl[id] = document.form1.explanation.value
+		document.form1.qu.value=""
+		document.form1.rightanswer.selectedIndex=0
+		document.form1.explanation.value=""
+		newquestion.style.display="none"
+		document.form1.qubutton.value="Add question"
+		document.form1.qubutton.onclick=addquestion
+		fillqus()
+	}
+	
+	function deletequ(id)
+	{
+		if(confirm("Are you sure you want to delete question " + (id+1) + "?"))
+		{dodeletequ(id)}
+	}
+
+	function dodeletequ(id)
+	{
+		//deletes question data
+		num--
+		questions.splice(id,1)
+		real.splice(id,1)
+		expl.splice(id,1)
+		answers.splice(id,1)
+		document.form1.qu.value=""
+		document.form1.rightanswer.selectedIndex=0
+		document.form1.explanation.value=""
+		newquestion.style.display="none"
+		document.form1.qubutton.value="Add question"
+		document.form1.qubutton.onclick=addquestion
+		fillqus()
+	}
+	
+	function addanswer()
+	{
+//		alert(answers.length)
+	//	alert(eval("answers"+num))
+		//eval("answers"+num+".push(document.form1.newanswer.value)")
+		answers[answers.length-1].push(document.form1.newanswer.value)
+		fillans(num);
+		fillansreal(num);
+		document.form1.newanswer.value=""
+	}
+	
+	function deleteans(id)
+	{
+//		alert(questionnum)
+		if(confirm("Are you sure you want to delete answer " + letters[id] + ") ?"))
+			{answers[questionnum].splice(id,1)}
+		fillans(questionnum+1);
+		fillansreal(questionnum+1);
+	}
+	
+	function modifyans(id)
+	{
+		anstobeupdatedid = id
+		document.form1.newanswer.value = answers[questionnum][id]
+		document.form1.ansbutton.value = "Modify"
+		document.form1.ansbutton.onclick = updateans
+	}
+	
+	function updateans()
+	{
+		var id = anstobeupdatedid
+		anstobeupdatedid = -1		
+		answers[questionnum][id] = document.form1.newanswer.value
+		document.form1.newanswer.value = ""
+		document.form1.ansbutton.value = "Add"
+		document.form1.ansbutton.onclick = addanswer
+		fillans(questionnum+1)
+		fillansreal(questionnum+1)
+
+	}
+	
+	function preview()
+	{
+		if(questions.length > 1)
+		{
+			prepstr();
+			document.viewit.stringbox.value = filestring
+		
+			//location.href="file.php?filestring=" + filestring2
+		
+			document.viewit.submit()
+		}
+		else
+		{
+			alert("You must add more than one question!")
+		}
+	}
+	
+	function prepstr()
+	{
+		filestring = ""
+		//document.form1.codebox.value
+		//code.style.display=""
+		var quizname = document.form1.title.value
+		quizname = quizname.replace(/'/gi,"&rsquo;")
+		quizname = quizname.replace(/"/gi,"&quot;")				
+		var desc = document.form1.descrip.value
+		desc = desc.replace(/'/gi,"&rsquo;")	
+		desc = desc.replace(/"/gi,"&quot;")			
+		filestring += 'var quizname = "' + quizname + '"\n'
+		filestring += "var desc = '" + desc + "'\n"
+		filestring += "var questions = new Array("
+		for(i=0;i<questions.length;i++)
+		{	
+			questions[i] = questions[i].replace(/'/gi,"&rsquo;")	
+			questions[i] = questions[i].replace(/"/gi,"&quot;")			
+			if(i != (questions.length-1))
+				{filestring += "\"" + questions[i] + "\","}
+			else
+				{filestring += "\"" + questions[i] + "\""}
+		} 
+		filestring += ")\n"
+		filestring += "var num = questions.length \n"		
+		filestring += "var answers = ["
+		for(i in answers)
+		{
+			filestring += "["	
+			for(j in answers[i])
+			{
+				answers[i][j] = answers[i][j].replace(/'/gi,"&rsquo;")	
+				answers[i][j] = answers[i][j].replace(/"/gi,"&quot;")			
+				if(j != (answers[i].length-1))
+					{filestring += "\"" + answers[i][j] + "\","}
+				else
+					{filestring += "\"" + answers[i][j] + "\""}
+			}
+			if(i != (answers.length-1))
+				{filestring += "],"}
+			else
+				{filestring += "]"}
+		}
+		filestring += "]\n"
+		filestring += "var real = new Array(" + real + ")\n"
+		filestring += "var expl = new Array("
+		for(i=0;i<expl.length;i++)
+		{	
+			expl[i] = expl[i].replace(/'/gi,"&rsquo;")	
+			expl[i] = expl[i].replace(/"/gi,"&quot;")	
+			if(i != (expl.length-1))
+				{filestring += "\"" + expl[i] + "\","}
+			else
+			{filestring += "\"" + expl[i] + "\""}
+		} 
+		filestring += ")\n"
+				
+//		alert(filestring)
+	
+	}
+	
+	function replace(find,replacewith,text)
+	{
+		if(text.indexOf(find) == -1)
+			{var quot = ""}
+		else
+			{var quot = text.split(find)}
+		//alert(quot)
+		if(quot.length>0)
+		{
+			text=""
+			for(i=0;i<quot.length;i++)
+			{
+				if(i!=(quot.length-1))
+					{text+=quot[i]+replacewith}
+				else
+					{text+=quot[i]}
+			}
+		}
+		//alert(text)
+		return text;
+	}
+	
+	function gencode()
+	{
+		if(checkfilename() == true && questions.length > 1)
+		{
+			prepstr();
+			document.sendit.stringbox.value = filestring
+			document.sendit.filename.value = document.form1.filename.value
+		
+			//location.href="file.php?filestring=" + filestring2
+		
+			document.sendit.submit()
+		}
+		else if(questions.length <= 1)
+		{
+			alert("You must add more than one question!")
+		}
+		else
+		{
+			var msg = notallowed.toString()
+			msg = replace(",","   ",msg)
+//			msg = msg.replace(","," ")
+			alert("The file name must not contain the following characters: \n\n " + msg)	
+		}
+	}
+	
+	function checkfilename()
+	{
+		var fn = document.form1.filename.value
+		if(fn.length == 0)
+		{return false;}
+		for(i = 0; i < fn.length; i++)
+		{
+			for(j = 0; j < notallowed.length; j++)
+			{
+				if(fn.charAt(i) == notallowed[j])
+				{return false;}
+			}
+		}
+		return true;
+	}
+	
+	function addquestion()
+	{
+		if(answers[num-1].length > 1)
+		{
+		with(document.form1)
+		{
+		questions[num-1] = qu.value// + "?"
+		real[num-1] = rightanswer.options[rightanswer.selectedIndex].value
+		expl[num-1] = explanation.value
+		qu.value=""
+		rightanswer.selectedIndex=0
+		explanation.value=""
+		}
+		newquestion.style.display="none"
+		fillqus()
+		}
+		else
+		{
+			alert("You must enter more than one answer!")
+		}
+	}
+	
+</script>
+
+</head>
+
+<body vlink="blue" alink="blue">
+
+<font face="Arial">
+
+<h1>Quiz Editor</h1>
+
+<!-- Add question section -->
+
+<form action="" name="form1">
+
+<div id="newquestion" style="display:none;">
+<table align="right" cellspacing="2" cellpadding="2" border="0" width="50%">
+<tr>
+	<td><b><span id="qnum"></span></b></td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+    <td colspan=2>Question (omit '?') &nbsp;  &nbsp; <input type="text" name="qu" size="35"></td>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+    <td><b>Answers</b></td>
+    <td></td>
+</tr>
+<tr>
+	<td id="dynans"x></td>
+	<td valign="top">
+	
+	
+	
+	<!-- <form name="answerform"> -->
+   <input type="text" name="newanswer"> &nbsp; <input type="button" value="Add" id="ansbutton" onclick="addanswer()"><BR>
+	<font size="-1">Answer text</font>
+<!-- 	//</form> -->
+	
+	</td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td colspan=2 id="dynansreal">
+	<!-- 	Right answer: &nbsp; &nbsp;
+		
+		<select name="rightanswer">
+		<option value="1">a)
+		<option value="2">b)
+		<option value="3">c)					
+		<option value="4">d)								
+		</select> -->
+	
+	</td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr valign="top">
+	<td>Explanation when wrong</td>
+	<td><textarea rows=3 cols=30 name="explanation" style="font-family:Arial;"></textarea></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+    <td><input type="button" value="Add question" id="qubutton" onclick="addquestion()"></td>
+    <td></td>
+</tr>
+
+</table> 
+</div>
+Modify the fields below to alter your quiz:<BR><BR>   
+
+
+
+
+<!-- Body of page -->
+
+<table cellspacing="2" cellpadding="2" border="0" width="50%">
+<tr>
+    <td width="20%">Quiz Title</td>
+    <td width="30%"><input type="text" name="title"></td>
+</tr>
+<tr>
+    <td>Quiz Description</td>
+    <td><input type="text" name="descrip" size="32"></td>
+</tr>
+<tr>
+	<td>File name (omit extension)</td>
+	<td><input type="text" name="filename" size="32"></td>
+</tr><tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+    <td><h2>Questions</h2></td>
+    <td></td>
+</tr>
+<tr>
+	<td colspan=2  id="dynqu">
+<!-- 	<span id="dynqu">
+	</span> -->
+	</td>
+</tr>
+
+
+</table>
+
+<br></form>
+<form action="http://www.coolwebeffects.net/quiz/preview.php" method="post" name="viewit" target="_blank">
+<input type="button" value="Preview/Take Quiz" onclick="preview()">
+<input type="hidden" name="stringbox">
+</form>
+<form name="sendit" action="http://www.coolwebeffects.net/quiz/file.php" method="post"><input type="button" value="Generate Code" onclick="gencode()">
+<BR><BR>
+<input type="hidden" name="stringbox">
+<input type="hidden" name="filename">
+<!-- <div id="code" style="display:none;">		<textarea cols="70" rows="15" name="codebox" style="font-family:Arial;"></textarea>	</div> -->
+</form>
+</font>
+
+<script>
+
+document.form1.title.value = quizname;
+document.form1.descrip.value = desc;
+document.form1.filename.value = file.substring(0,file.length-3);
+
+function fillqus()
+{
+//alert(questions[0])
+
+var output = "" 
+
+	if(questions.length > 0)
+	{
+		output += "<table width='70%' border=0 cellspacing=2 cellpadding=2>"
+
+		for(i=0;i<num;i++)
+		{
+		output += "<tr style='font-size:10pt;' valign='top'><td style='font-size:10pt;'><b>"+(i+1)+")</b></td><td>"+questions[i]+"?</td><td><a href='javascript:modifyqu("+i+")'>Modify</a></td><td><a href='javascript:deletequ("+i+")'>Delete</a></td></tr>"
+		}
+		
+		output += "<tr><td colspan=3><a href='javascript:show();'>Add new question</a><b></b></td></tr></table>"
+
+	}
+	else
+	{
+		output = "No questions. &nbsp;  &nbsp;  &nbsp; <a href='javascript:show();'>Add new question</a><b></b>"
+	}
+	
+	dynqu.innerHTML = output;
+}
+
+function fillans(id)
+{
+
+//alert(answers[id])
+
+var output = "" 
+/* && answers[num-1] != undefined*/
+	if(answers.length > 0 && answers[id-1].length > 0)
+	{
+		output += "<table width='70%' border=0 cellspacing=2 cellpadding=2>"
+
+		for(i=0;i<answers[id-1].length;i++)
+		{
+		output += "<tr style='font-size:10pt;' valign='top'><td style='font-size:10pt;'><b>"+(letters[i])+")</b></td><td>"+answers[id-1][i]+"</td><td><a href='javascript:modifyans("+i+")'>Modify</a></td><td><a href='javascript:deleteans("+i+")'>Delete</a></td></tr>"
+		}
+		
+//		output += "<tr><td colspan=3><a href='javascript:showaddanswer();'>Add new answer</a><b></b></td></tr></table>"
+
+	}
+	else
+	{
+		output = "No answers. &nbsp;  &nbsp;  &nbsp; "
+	}
+	
+	dynans.innerHTML = output;
+}
+
+function fillansreal(id)
+{
+var output = "" 
+
+	if(answers.length > 0 && answers[id-1].length > 0)
+	{
+		output = "Right answer: &nbsp; &nbsp; <select name='rightanswer'>"
+		
+		for(i=0;i<answers[id-1].length;i++)
+		{
+			output+="<option value='"+(i+1)+"'>"+letters[i]+")"
+		}
+
+		output += "</select>"
+
+	}
+	else
+	{
+		output = ""
+	}
+	
+	dynansreal.innerHTML = output;
+}
+
+fillansreal(num)
+fillans(num)
+fillqus()	
+
+</script>
+
+<!--  
+
+*************************************************
+#
+//--------------------------
+INVALID CHARACTERS
+//--------------------------
+#
+
+1.    +
+2.    \
+
+#
+//----------------------------------------
+MUST DO FORM VALIDATION TO AVOID ERRORS
+//----------------------------------------
+#
+
+*************************************************
+
+-->
+</body>
+</html>

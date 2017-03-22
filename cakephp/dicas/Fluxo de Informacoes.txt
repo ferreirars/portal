@@ -1,0 +1,62 @@
+Fluxo de Informações entre controllers, models e view/templates
+
+Temos o aplicativo clientes
+
+UsersController.php
+UsersTable.php
+Template/Users/index.ctp
+
+Criar em UsersTable.php a função:
+
+	public function teste(){
+		$query = $this->find('all', [
+			'order' => ['Users.id' => 'ASC']
+		]);
+		$row = $query->first(); // Ou ->last()
+		print "Model<br>";
+		return $row->username;
+	}
+
+Chamar no index() do UsersController.php:
+
+    public function index()
+    {
+        $clientes = $this->paginate($this->Users);
+
+        $this->set(compact('users'));
+        $this->set('_serialize', ['users']);
+
+		print "Controller<br>";
+		
+		// Mostrar o primeiro username:		
+  		print $this->Users->teste();//exit;
+
+    }
+
+Chamar pela web 
+
+http://localhost/clientes/users/index
+
+Mostrará
+
+Controller
+Model
+admin
+
+Listagem de Users
+
+View
+
+Veja a ordem:
+1) O controller recebe a requisição do usuário para mostrar o endereço:
+http://localhost/clientes/users/index
+
+2) O Controller envia para o Model pedindo o primeiro username e a listagem de
+users
+
+3) O Model processa e devolve
+
+4) Então o controller envia para a view o username e a listagem de users
+
+4) 
+

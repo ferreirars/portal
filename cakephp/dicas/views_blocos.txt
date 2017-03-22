@@ -1,0 +1,72 @@
+Usando Blocos de Views (Visões)
+
+View blocks pode agora (2.4) operar em qualquer objeto que possa ser convertido para uma string.
+
+Blocos de views substituem $scripts_for_layout e provêm uma API flexível que permite criar slots ou blocos em suas views/layouts que podem ser definidas em qualquer lugar. Por exemplo, blocos são ideais para implementar recursos como barras laterais ou regiões para carregar seções na parte de baixo ou no topo do layout. Blocos podem ser definidos de duas formas. Seja capturando um bloco ou por atribuição direta. Os métodos start(), append() e end() permitem trabalhar com captura de blocos:
+
+// cria um bloco lateral.
+$this->start('sidebar');
+echo $this->element('sidebar/recent_topics');
+echo $this->element('sidebar/recent_comments');
+$this->end();
+
+
+// Concatena na barra lateral em seguida.
+$this->append('sidebar');
+echo $this->element('sidebar/popular_topics');
+$this->end();
+
+Também é possível concatenar blocos utilizando o método start() múltiplas vezes. O método assign() pode ser usado para limpar ou sobrescrever o bloco:
+
+// Limpa o conteúdo anterior da barra lateral.
+$this->assign('sidebar', '');
+
+Você deve evitar o uso de content como o nome de um bloco em sua aplicação. CakePHP usa este nome em views estendidas para conteúdos não-capturados .
+Exibindo blocos
+
+Você pode exibir blocos usando o método fetch(). fecht() irá retornar um bloco de maneira segura, retornando ‘’ se o bloco não existir”:
+
+echo $this->fetch('sidebar');
+
+Você também pode usar o fetch para exibir condicionalmente um conteúdo que deve envolver um bloco que deveria existir. Isto é útil em layouts ou views estendidas, nas quais você queira mostrar cabeçalhos e outras marcações condicionalmente:
+
+// em app/View/Layouts/default.ctp
+<?php if ($this->fetch('menu')): ?>
+<div class="menu">
+    <h3>Menu options</h3>
+    <?php echo $this->fetch('menu'); ?>
+</div>
+<?php endif; ?>
+
+Utilizando blocos para arquivos de script e CSS
+
+Blocos substituem a variável obsoleta $scripts_for_layout do layout. Em vez de usá-la, você deve usar blocos. A HtmlHelper vincula-se aos blocos da view e a cada um dos seus métodos php:meth:~HtmlHelper::script(), css() e meta() quando o bloco com o mesmo nome utiliza a opção inline = false:
+
+<?php
+// no seu arquivo de view
+$this->Html->script('carousel', array('inline' => false));
+$this->Html->css('carousel', null, array('inline' => false));
+?>
+
+// no seu arquivo de layout
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title><?php echo $this->fetch('title'); ?></title>
+    <?php echo $this->fetch('script'); ?>
+    <?php echo $this->fetch('css'); ?>
+    </head>
+
+    // o resto do layout continua
+
+A HtmlHelper também permite você controlar para que bloco os scripts e CSS vão:
+
+// na sua view
+$this->Html->script('carousel', array('block' => 'scriptBottom'));
+
+// no seu layout
+echo $this->fetch('scriptBottom');
+
+
+http://book.cakephp.org/2.0/en/views.html#using-view-blocks
+

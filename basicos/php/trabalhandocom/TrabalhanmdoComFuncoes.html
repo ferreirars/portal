@@ -1,0 +1,678 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt" dir="ltr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta name="generator" content="MediaWiki 1.16alpha-wmf" />
+		<meta name="keywords" content="Aplicativos em PHP/Trabalhando em PHP com/Funções" />
+		<link rel="alternate" type="application/x-wiki" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es&amp;action=edit" />
+		<link rel="edit" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es&amp;action=edit" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikilivros (pt)" />
+		<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/" />
+		<link rel="alternate" type="application/rss+xml" title="Feed RSS Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=rss" />
+		<link rel="alternate" type="application/atom+xml" title="Feed Atom Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=atom" />
+		<title>Aplicativos em PHP/Trabalhando em PHP com/Funções - Wikilivros</title>
+		<link rel="stylesheet" href="/skins-1.5/common/shared.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/common/commonPrint.css?233xz" type="text/css" media="print" />
+		<link rel="stylesheet" href="/skins-1.5/monobook/main.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/chick/main.css?233xz" type="text/css" media="handheld" />
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE50Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE55Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/skins-1.5/monobook/IE60Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/skins-1.5/monobook/IE70Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="print" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Handheld.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="handheld" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=-&amp;action=raw&amp;maxage=2678400&amp;smaxage=0&amp;ts=20090810192510&amp;gen=css" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.css&amp;action=raw&amp;ctype=text/css" type="text/css" />
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins-1.5/common/IEFixes.js?233xz"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/skins-1.5";
+		var wgArticlePath = "/wiki/$1";
+		var wgScriptPath = "/w";
+		var wgScript = "/w/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://pt.wikibooks.org";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Aplicativos_em_PHP/Trabalhando_em_PHP_com/Funções";
+		var wgTitle = "Aplicativos em PHP/Trabalhando em PHP com/Funções";
+		var wgAction = "view";
+		var wgArticleId = "14450";
+		var wgIsArticle = true;
+		var wgUserName = "Ribafs";
+		var wgUserGroups = ["*", "user", "autoconfirmed"];
+		var wgUserLanguage = "pt-br";
+		var wgContentLanguage = "pt";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = 110822;
+		var wgVersion = "1.16alpha-wmf";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = [",	.", " 	,"];
+		var wgDigitTransformTable = ["", ""];
+		var wgMainPageTitle = "Página principal";
+		var wgMWSuggestTemplate = "http://pt.wikibooks.org/w/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest";
+		var wgDBname = "ptwikibooks";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["com sugestões", "sem sugestões"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		var wgAjaxWatch = {"watchMsg": "Vigiar", "unwatchMsg": "Desinteressar-se", "watchingMsg": "Vigiando...", "unwatchingMsg": "Deixando de vigiar..."};
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="/skins-1.5/common/wikibits.js?233xz"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="/skins-1.5/common/ajax.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/ajaxwatch.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/mwsuggest.js?233xz"></script>
+		<script type="text/javascript">/*<![CDATA[*/
+		var wgNotice='';var wgNoticeLocal='';
+		/*]]>*/</script>
+		<script type="text/javascript" src="http://upload.wikimedia.org/centralnotice/wikibooks/pt-br/centralnotice.js?233xz"></script>
+
+		<script type="text/javascript" src="/w/index.php?title=-&amp;action=raw&amp;smaxage=0&amp;gen=js&amp;useskin=monobook"><!-- site js --></script>
+		<script type="text/javascript" src="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.js&amp;action=raw&amp;ctype=text/javascript"></script>
+	</head>
+<body class="mediawiki ltr ns-0 ns-subject page-Aplicativos_em_PHP_Trabalhando_em_PHP_com_Funções skin-monobook">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+		<div id="siteNotice"><script type='text/javascript'>if (wgNotice != '') document.writeln(wgNotice);</script></div>		<h1 id="firstHeading" class="firstHeading">Aplicativos em PHP/Trabalhando em PHP com/Funções</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">De Wikilivros</h3>
+			<div id="contentSub"><span class="subpages">&lt; <a href="/wiki/Aplicativos_em_PHP" title="Aplicativos em PHP">Aplicativos em PHP</a> | <a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com" title="Aplicativos em PHP/Trabalhando em PHP com">Trabalhando em PHP com</a></span></div>
+									<div id="jump-to-nav">Ir para: <a href="#column-one">navegação</a>, <a href="#searchInput">pesquisa</a></div>			<!-- start content -->
+			<p>Funções são blocos de código, conjuntos de instruções, que ficam quietos, sem vida, até que sejam chamadas em algum lugar do código. Funções reduzem o trabalho de digitação, o tamanho dos scripts em geral, os erros, reaproveitando código, facilitando e organizando o trabalho de desenvolvimento.</p>
+<p><br /></p>
+<table id="toc" class="toc" summary="Tabela de conteúdo">
+<tr>
+<td>
+<div id="toctitle">
+<h2>Tabela de conteúdo</h2>
+</div>
+<ul>
+<li class="toclevel-1"><a href="#Exemplos_de_fun.C3.A7.C3.B5es_definidas_pelo_usu.C3.A1rio"><span class="tocnumber">1</span> <span class="toctext">Exemplos de funções definidas pelo usuário</span></a></li>
+<li class="toclevel-1"><a href="#Vari.C3.A1veis_globais"><span class="tocnumber">2</span> <span class="toctext">Variáveis globais</span></a></li>
+<li class="toclevel-1"><a href="#Vari.C3.A1vel_externa_acess.C3.ADvel_na_fun.C3.A7.C3.A3o"><span class="tocnumber">3</span> <span class="toctext">Variável externa acessível na função</span></a></li>
+<li class="toclevel-1"><a href="#Acessando_vari.C3.A1veis_Externas"><span class="tocnumber">4</span> <span class="toctext">Acessando variáveis Externas</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Vari.C3.A1vel_externa_inacess.C3.ADvel"><span class="tocnumber">4.1</span> <span class="toctext">Variável externa inacessível</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Vari.C3.A1veis_est.C3.A1ticas"><span class="tocnumber">5</span> <span class="toctext">Variáveis estáticas</span></a></li>
+<li class="toclevel-1"><a href="#Recursiva"><span class="tocnumber">6</span> <span class="toctext">Recursiva</span></a></li>
+<li class="toclevel-1"><a href="#Declarando_vari.C3.A1veis_static"><span class="tocnumber">7</span> <span class="toctext">Declarando variáveis static</span></a></li>
+<li class="toclevel-1"><a href="#Retornar_mais_de_um_valor_de_uma_fun.C3.A7.C3.A3o"><span class="tocnumber">8</span> <span class="toctext">Retornar mais de um valor de uma função</span></a></li>
+<li class="toclevel-1"><a href="#Passando_Argumentos_atrav.C3.A9s_de_Fun.C3.A7.C3.B5es"><span class="tocnumber">9</span> <span class="toctext">Passando Argumentos através de Funções</span></a></li>
+<li class="toclevel-1"><a href="#Por_Valor"><span class="tocnumber">10</span> <span class="toctext">Por Valor</span></a></li>
+<li class="toclevel-1"><a href="#Por_Refer.C3.AAncia"><span class="tocnumber">11</span> <span class="toctext">Por Referência</span></a></li>
+<li class="toclevel-1"><a href="#Otimiza.C3.A7.C3.A3o_do_tempo_de_execu.C3.A7.C3.A3o"><span class="tocnumber">12</span> <span class="toctext">Otimização do tempo de execução</span></a></li>
+<li class="toclevel-1"><a href="#Fun.C3.A7.C3.A3o_com_par.C3.A2metro_default"><span class="tocnumber">13</span> <span class="toctext">Função com parâmetro default</span></a></li>
+<li class="toclevel-1"><a href="#Trabalhando_com_Fun.C3.A7.C3.B5es_OB"><span class="tocnumber">14</span> <span class="toctext">Trabalhando com Funções OB</span></a></li>
+</ul>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+//<![CDATA[
+ if (window.showTocToggle) { var tocShowText = "mostrar"; var tocHideText = "esconder"; showTocToggle(); } 
+//]]>
+</script>
+<p><a name="Exemplos_de_fun.C3.A7.C3.B5es_definidas_pelo_usu.C3.A1rio" id="Exemplos_de_fun.C3.A7.C3.B5es_definidas_pelo_usu.C3.A1rio"></a></p>
+<h2><span class="mw-headline">Exemplos de funções definidas pelo usuário</span></h2>
+<pre>
+function quadrado($numero) {
+	print $numero*$numero;
+}
+</pre>
+<p>Executando:</p>
+<p>quadrado(6); // Saída: 36</p>
+<p><br /></p>
+<p><a name="Vari.C3.A1veis_globais" id="Vari.C3.A1veis_globais"></a></p>
+<h2><span class="mw-headline">Variáveis globais</span></h2>
+<pre>
+$var1 = 5;
+function testeGlobal1(){
+        $var1 = 1;
+        print "&lt;br&gt;Valor de \$var1: $var1";
+}
+echo testeGlobal1();
+</pre>
+<p><a name="Vari.C3.A1vel_externa_acess.C3.ADvel_na_fun.C3.A7.C3.A3o" id="Vari.C3.A1vel_externa_acess.C3.ADvel_na_fun.C3.A7.C3.A3o"></a></p>
+<h2><span class="mw-headline">Variável externa acessível na função</span></h2>
+<pre>
+$var2 = 10;
+function testeGlobal2(){
+        global $var2;
+        print "&lt;br&gt;Valor de \$var2 $var2";
+}
+echo testeGlobal2();
+
+$var5 = 15;
+function testeGlobal5(){
+	$var5 = 5;
+    print "&lt;br&gt;&lt;br&gt;A variável global vale $GLOBALS[var5], ";
+    print "Já a variável local vale $var5&lt;br&gt;&lt;br&gt;";
+}
+
+testeGlobal5();
+
+function cliente($codigo, $idade = 18){
+	print "Código = $codigo, Idade = $idade";
+}       
+
+cliente(1);  //Exibirá: Código = 1, Idade = 18
+
+function cubo($num){
+        return ($num*$num*$num);
+}
+
+$var1 = 2 * cubo(5);echo "&lt;br&gt;".$var1;
+</pre>
+<p><br /></p>
+<p><a name="Acessando_vari.C3.A1veis_Externas" id="Acessando_vari.C3.A1veis_Externas"></a></p>
+<h2><span class="mw-headline">Acessando variáveis Externas</span></h2>
+<p>Normalmente de dentro de uma função não temos acesso às variáveis que estão fora dela. Mas veja como contornar isso:</p>
+<p><a name="Vari.C3.A1vel_externa_inacess.C3.ADvel" id="Vari.C3.A1vel_externa_inacess.C3.ADvel"></a></p>
+<h3><span class="mw-headline">Variável externa inacessível</span></h3>
+<pre>
+$var1 = 5;
+function testeGlobal1(){
+        $var1 = 1;
+        print ”Valor de \$var1: $var1”;
+}
+echo testeGlobal1();
+Variável externa acessível na função
+
+$var2 = 10;
+function testeGlobal2(){
+        global $var2;
+        print ”Valor de \$var2 $var2”;
+}
+echo testeGlobal2();
+</pre>
+<p>Outra alternativa é usar o array $GLOBALS[], que contém todas as variáveis globais. Veja um exemplo:</p>
+<pre>
+$var5 = 15;
+function testeGlobal5(){
+        $var5 = 5;
+        print "&lt;br&gt;&lt;br&gt;A variável global vale $GLOBALS[var5], ";
+        print "Já a variável local vale $var5&lt;br&gt;&lt;br&gt;";
+}
+
+testeGlobal5();
+</pre>
+<p><a name="Vari.C3.A1veis_est.C3.A1ticas" id="Vari.C3.A1veis_est.C3.A1ticas"></a></p>
+<h2><span class="mw-headline">Variáveis estáticas</span></h2>
+<pre>
+function contador(){
+        static $x = 0;
+        return $x++;
+}
+echo "&lt;br&gt;";
+echo contador();echo contador();echo contador();
+//A saída será: 012
+
+function contador2(){
+        $x = 0;
+        return $x++;
+}
+echo "&lt;br&gt;";
+echo contador2();echo contador2();echo contador2();
+//A saída será: 000.
+
+  function staticfunction() {
+   static $count = 0;
+   $count++;
+	if ($count==1){
+       echo "A Função foi executada $count vez&lt;br&gt;";
+	}else{
+	   echo "A Função foi executada $count vezes&lt;br&gt;";
+	}
+  }
+
+  for($i = 0; $i &lt; 5; $i++) {
+   staticfunction();
+  }
+
+function Teste1()
+{
+    static $a = 0;
+    echo $a;
+    $a++;
+}
+
+for($x=0;$x&lt;=10;$x++){
+	echo Teste1()." ";
+}
+</pre>
+<p><br /></p>
+<p><a name="Recursiva" id="Recursiva"></a></p>
+<h2><span class="mw-headline">Recursiva</span></h2>
+<pre>
+function Teste()
+{
+    static $count = 0;
+
+    $count++;
+    echo $count." ";
+    if ($count &lt; 10) {
+        Teste ();
+    }
+    $count--;
+}
+
+Teste();
+</pre>
+<p><a name="Declarando_vari.C3.A1veis_static" id="Declarando_vari.C3.A1veis_static"></a></p>
+<h2><span class="mw-headline">Declarando variáveis static</span></h2>
+<pre>
+function foo(){
+    static $int = 0;          // correro
+   // static $int = 1+2;        // errado (é uma expressão)
+   // static $int = sqrt(121);  // errado  (é uma expressão também)
+
+    $int++;
+    echo $int;
+}
+
+
+function aumentoSalario($sal, $perc=5){
+        $salario = $sal * $perc/100;
+        echo $salario;
+}
+echo "&lt;br&gt;Aumento: " . aumentoSalario(1956);
+
+function redirecionar($url){
+        header("Location: $url");
+}
+echo "&lt;br&gt;";
+redirecionar("http://ribafs.phpnet.us/");
+echo "&lt;br&gt;";
+</pre>
+<p><a name="Retornar_mais_de_um_valor_de_uma_fun.C3.A7.C3.A3o" id="Retornar_mais_de_um_valor_de_uma_fun.C3.A7.C3.A3o"></a></p>
+<h2><span class="mw-headline">Retornar mais de um valor de uma função</span></h2>
+<p>usa-se arrays e list()</p>
+<p>array() retorna e list() exibe</p>
+<p>//Exemplo:</p>
+<pre>
+function recebe_hoje(){
+	$data_abreviada=date("d/m/Y");
+	$data_extensa=date("l, d F \d\e Y");
+	
+	return array($data_abreviada, $data_extensa);
+}
+
+list($data_abreviada, $data_extensa)=recebe_hoje();
+	print $data_extensa;
+echo "&lt;br&gt;";
+	print $data_abreviada;
+
+
+&lt;h2&gt;Declaração dinâmica de função&lt;/h2&gt;
+
+&lt;pre&gt;
+if ($f == 1){
+	function f1(){
+		echo "funcao1";
+	}
+}else{
+	function f2(){
+		echo "funcao2";
+	}
+}
+
+&lt;h2&gt;Retornando o número de argumentos de uma função&lt;/h2&gt;
+
+&lt;pre&gt;
+function ret_args_funcao() {
+    $numargs = func_num_args();
+    echo "Número de argumentos: $numargs&lt;br&gt;\n";
+    if ($numargs &gt;= 2) {
+    echo "Segundo argumento vale : " . func_get_arg (1) . "&lt;br&gt;\n";
+    }
+    $arg_list = func_get_args();
+    for ($i = 0; $i &lt; $numargs; $i++) {
+    echo "Argumento $i vale: " . $arg_list[$i] . "&lt;br&gt;\n";
+    }
+} 
+
+ret_args_funcao (1, 2, 3);
+
+</pre>
+<p><a name="Passando_Argumentos_atrav.C3.A9s_de_Fun.C3.A7.C3.B5es" id="Passando_Argumentos_atrav.C3.A9s_de_Fun.C3.A7.C3.B5es"></a></p>
+<h2><span class="mw-headline">Passando Argumentos através de Funções</span></h2>
+<p>O default é 'por valor', que passa uma cópia do valor da variável.</p>
+<p>Também podemos passar 'por referência', onde se passa o endereço da própria variável. Quando atribuímos uma variável a outra passando como referência, não fazemos cópia alguma, mas sim passamos o endereço da variável original, portanto qualquer alteração nesta referência refletirá na variável original.</p>
+<p>ByRef é mais eficiente em termos de memória ao lidar com variáveis e arrays grandes e também permite alterar o valor da variável original, o que não acontece com o ByVal, mas a vantagem de desempnho somente é percebida em grandes arrays em grandes loops.</p>
+<p>Para maior segurança setar:</p>
+<p>allow_call_time_pass_reference no php.ini</p>
+<p>Impede a passagem de valores por referência nas chamadas, mas permite somente na definição das funções.</p>
+<p>$var1 = &amp; $var2;</p>
+<p>Agora ambas apontam para o mesmo endereço e valor.</p>
+<p>Reter valor de variáveis entre chamadas (static)</p>
+<p>(Guarda o valor da última chamada até o final da execução do script, tantas vezes quantas a função for chamada).</p>
+<p><br />
+Exemplo:</p>
+<pre>
+$valor = 4;
+$ref = &amp;$valor; 
+
+$ref = 3;       
+
+$valor = 4;
+$ref = &amp;$valor; // Aqui tornamos ambas as variáveis com o mesmo endereço
+                // O que alterarmos em $ref alteramos em $valor
+                        
+$ref = 3;       // Com isso também alteramos $valor para 3, veja abaixo.
+echo $valor . "&lt;br&gt;";
+
+$valor=0;	   // Com isso também alteramos $ref para 0, veja abaixo.
+
+echo $ref;
+</pre>
+<p><br /></p>
+<p><a name="Por_Valor" id="Por_Valor"></a></p>
+<h2><span class="mw-headline">Por Valor</span></h2>
+<pre>
+function val_subtracao($num1, $num2){
+        if($num1 &lt; $num2){
+                die("Números negativos");
+        }else{
+                $return_result=0;
+                while($num1 &gt; $num2){
+                        $num1 = $num1 - 1;
+                        $return_result = $return_result + 1;
+                }
+        }
+        return($return_result);
+}
+
+$primeiro_op=493;
+$segundo_op=355;
+$resultado1 = val_subtracao($primeiro_op, $segundo_op);
+print ("Resultado1 é $resultado1&lt;br&gt;");
+$resultado2 = val_subtracao($primeiro_op, $segundo_op);
+print("Resultado2 é $resultado2&lt;br&gt;");
+</pre>
+<p><a name="Por_Refer.C3.AAncia" id="Por_Refer.C3.AAncia"></a></p>
+<h2><span class="mw-headline">Por Referência</span></h2>
+<pre>
+function subtracao_ref(&amp;$num1, &amp;$num2){
+        if($num1 &lt; $num2){
+                die("Números negativos");
+        }else{
+                $return_result=0;
+                while($num1 &gt; $num2){
+                        $num1 = $num1 - 1;
+                        $return_result = $return_result + 1;
+                }
+        }
+        return($return_result);
+}
+
+$primeiro_op=493;
+$segundo_op=355;
+$resultado1 = subtracao_ref($primeiro_op, $segundo_op);
+print ("&lt;br&gt;&lt;br&gt;Resultado1 é $resultado1&lt;br&gt;");
+$resultado2 = subtracao_ref($primeiro_op, $segundo_op);
+print("Resultado2 é $resultado2&lt;br&gt;");
+
+echo "Agora, se se nós executarmos exatamente a mesma chamada da subtração como fizemos a primeira vez, receberemos a saída: 
+resultado1 é 138 e resultado2 é 0";
+
+
+/*
+Sugestão de chamada de função:
+
+if (nome_funcao($argumento){
+	....
+	....
+}else{
+	....
+}
+
+*/
+?&gt;
+
+&lt;?php
+// Retorna o tipo e o valor de variável
+function ss_as_string (&amp;$thing, $column = 0) {
+    if (is_object($thing)) {
+        return ss_object_as_string($thing, $column);
+    }
+    elseif (is_array($thing)) {
+        return ss_array_as_string($thing, $column);
+    }
+    elseif (is_double($thing)) {
+        return "Double(".$thing.")";
+    }
+    elseif (is_long($thing)) {
+        return "Long(".$thing.")";
+    }
+    elseif (is_string($thing)) {
+        return "String(".$thing.")";
+    }
+    else {
+        return "Unknown(".$thing.")";
+    }
+}
+
+// Retorna o tipo e o valor de array
+function ss_array_as_string (&amp;$array, $column = 0) {
+    $str = "Array(&lt;BR&gt;\n";
+    while(list($var, $val) = each($array)){
+        for ($i = 0; $i &lt; $column+1; $i++){
+            $str .= "    ";
+        }
+        $str .= $var.' ==&gt; ';
+        $str .= ss_as_string($val, $column+1)."&lt;BR&gt;\n";
+    }
+    for ($i = 0; $i &lt; $column; $i++){
+        $str .= "    ";
+    }
+    return $str.')';
+}
+
+// Retorna o tipo e o valor de objeto
+function ss_object_as_string (&amp;$object, $column = 0) {
+    if (empty($object-&gt;classname)) {
+        return "$object";
+    }
+    else {
+        $str = $object-&gt;classname."(&lt;BR&gt;\n";
+        while (list(,$var) = each($object-&gt;persistent_slots)) {
+            for ($i = 0; $i &lt; $column; $i++){
+                $str .= "    ";
+            }
+            global $$var;
+            $str .= $var.' ==&gt; ';
+            $str .= ss_as_string($$var, column+1)."&lt;BR&gt;\n";
+        }
+        for ($i = 0; $i &lt; $column; $i++){
+            $str .= "    ";
+        }
+        return $str.')';
+    }
+}
+
+$var="Riba";
+echo ss_as_string($var);
+//echo ss_as_string($GLOBALS);
+</pre>
+<p><br /></p>
+<p><a name="Otimiza.C3.A7.C3.A3o_do_tempo_de_execu.C3.A7.C3.A3o" id="Otimiza.C3.A7.C3.A3o_do_tempo_de_execu.C3.A7.C3.A3o"></a></p>
+<h2><span class="mw-headline">Otimização do tempo de execução</span></h2>
+<pre>
+function ss_timing_start ($name = 'default') {
+    global $ss_timing_start_times;
+    $ss_timing_start_times[$name] = explode(' ', microtime());
+}
+
+function ss_timing_stop ($name = 'default') {
+    global $ss_timing_stop_times;
+    $ss_timing_stop_times[$name] = explode(' ', microtime());
+}
+
+function ss_timing_current ($name = 'default') {
+    global $ss_timing_start_times, $ss_timing_stop_times;
+    if (!isset($ss_timing_start_times[$name])) {
+        return 0;
+    }
+    if (!isset($ss_timing_stop_times[$name])) {
+        $stop_time = explode(' ', microtime());
+    }
+    else {
+        $stop_time = $ss_timing_stop_times[$name];
+    }
+    // do the big numbers first so the small ones aren't lost
+    $current = $stop_time[1] - $ss_timing_start_times[$name][1];
+    $current += $stop_time[0] - $ss_timing_start_times[$name][0];
+    return $current;
+}
+
+?&gt;
+</pre>
+<p><a name="Fun.C3.A7.C3.A3o_com_par.C3.A2metro_default" id="Fun.C3.A7.C3.A3o_com_par.C3.A2metro_default"></a></p>
+<h2><span class="mw-headline">Função com parâmetro default</span></h2>
+<p>Parâmetro default é aquele cujo valor já faz parte da função, sendo opcional.</p>
+<pre>
+function cliente($codigo, $idade = 18){
+        print "Código = $codigo, Idade = $idade";
+}       
+
+cliente(1);  //Exibirá: Código = 1, Idade = 18
+</pre>
+<p><a name="Trabalhando_com_Fun.C3.A7.C3.B5es_OB" id="Trabalhando_com_Fun.C3.A7.C3.B5es_OB"></a></p>
+<h2><span class="mw-headline">Trabalhando com Funções OB</span></h2>
+<p><a href="http://www.revistaphp.com.br/artigo.php?id=80" class="external text" title="http://www.revistaphp.com.br/artigo.php?id=80" rel="nofollow">- Artigo do Adriano Oliveira Gonçalves na Revista do PHP</a></p>
+
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 45/1000000
+Post-expand include size: 9/2048000 bytes
+Template argument size: 0/2048000 bytes
+Expensive parser function count: 0/500
+-->
+
+<!-- Saved in parser cache with key ptwikibooks:pcache:idhash:14450-0!1!0!!pt-br!2 and timestamp 20090810192702 -->
+<div class="printfooter">
+Obtido em "<a href="http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es">http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es</a>"</div>
+			<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="/wiki/Especial:Categorias" title="Especial:Categorias">Categoria</a>: <span dir='ltr'><a href="/wiki/Categoria:Aplicativos_em_PHP" title="Categoria:Aplicativos em PHP">Aplicativos em PHP</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Acessos</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+	
+				 <li id="ca-nstab-main" class="selected"><a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es" title="Ver a página de conteúdo [c]" accesskey="c">módulo</a></li>
+				 <li id="ca-talk" class="new"><a href="/w/index.php?title=Discuss%C3%A3o:Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es&amp;action=edit&amp;redlink=1" title="Discussão sobre o conteúdo da página [t]" accesskey="t">Discussão</a></li>
+				 <li id="ca-edit"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es&amp;action=edit" title="Você pode editar esta página. Por favor, utilize o botão Mostrar Previsão antes de salvar. [e]" accesskey="e">Editar</a></li>
+				 <li id="ca-history"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es&amp;action=history" title="Edições anteriores desta página. [h]" accesskey="h">História</a></li>
+				 <li id="ca-move"><a href="/wiki/Especial:Mover/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es" title="Mover esta página [m]" accesskey="m">Mover</a></li>
+				 <li id="ca-watch"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es&amp;action=watch" title="Adicionar esta página aos artigos vigiados [w]" accesskey="w">Vigiar</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Ferramentas pessoais</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+				<li id="pt-acaibeta"><a href="http://pt.wikibooks.org/w/index.php?title=Especial:UsabilityInitiativeOptIn&amp;from=Aplicativos_em_PHP%2FTrabalhando_em_PHP_com%2FFun%C3%A7%C3%B5es" class="no-text-transform">Experimente o Beta</a></li>
+				<li id="pt-userpage"><a href="/wiki/Usu%C3%A1rio:Ribafs" title="Sua página de utilizador [.]" accesskey=".">Ribafs</a></li>
+				<li id="pt-mytalk"><a href="/wiki/Usu%C3%A1rio_Discuss%C3%A3o:Ribafs" title="Sua página de discussão [n]" accesskey="n">Minha discussão</a></li>
+				<li id="pt-preferences"><a href="/wiki/Especial:Prefer%C3%AAncias" title="Minhas preferências">Minhas preferências</a></li>
+				<li id="pt-watchlist"><a href="/wiki/Especial:P%C3%A1ginas_vigiadas" title="Lista de artigos vigiados. [l]" accesskey="l">Páginas vigiadas</a></li>
+				<li id="pt-mycontris"><a href="/wiki/Especial:Contribui%C3%A7%C3%B5es/Ribafs" title="Lista das suas contribuições [y]" accesskey="y">Minhas contribuições</a></li>
+				<li id="pt-logout"><a href="/w/index.php?title=Especial:Sair&amp;returnto=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es" title="Sair">Sair</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(http://upload.wikimedia.org/wikibooks/pt/b/bc/Wiki.png);" href="/wiki/P%C3%A1gina_principal" title="Página principal [z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div id="p-search" class="portlet">
+		<h5 lang="pt-br" xml:lang="pt-br"><label for="searchInput">Pesquisa</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/w/index.php" id="searchform"><div>
+				<input type='hidden' name="title" value="Especial:Busca"/>
+				<input id="searchInput" name="search" type="text" title="Pesquisar nesta wiki [f]" accesskey="f" value="" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Ir" title="Ir a uma página com este exato nome, caso exista" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Pesquisa" title="Procurar por páginas contendo este texto" />
+			</div></form>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5 lang="pt-br" xml:lang="pt-br">Navegação</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/wiki/P%C3%A1gina_principal">Página principal</a></li>
+				<li id="n-Library"><a href="/wiki/Wikilivros:Biblioteca">Biblioteca</a></li>
+				<li id="n-recentchanges"><a href="/wiki/Especial:Mudan%C3%A7as_recentes" title="A lista de mudanças recentes nesta wiki. [r]" accesskey="r">Mudanças recentes</a></li>
+				<li id="n-randompage"><a href="/wiki/Especial:Aleat%C3%B3ria" title="Carregar página aleatória [x]" accesskey="x">Página aleatória</a></li>
+				<li id="n-help"><a href="/wiki/Ajuda:Conte%C3%BAdos" title="Um local reservado para auxílio.">Ajuda</a></li>
+				<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Donate/pt" title="Ajude-nos">Doações</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-Project'>
+		<h5 lang="pt-br" xml:lang="pt-br">projeto</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-about"><a href="/wiki/Wikilivros:Sobre">Sobre</a></li>
+				<li id="n-portal"><a href="/wiki/Wikilivros:Portal_comunit%C3%A1rio" title="Sobre o projeto e coisas que você poder fazer aqui.">Portal comunitário</a></li>
+				<li id="n-Staff-lounge"><a href="/wiki/Wikilivros:Staff_lounge">Esplanada</a></li>
+				<li id="n-Wikijunior"><a href="/wiki/Wikij%C3%BAnior">Wikijúnior</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-coll-create_a_book'>
+		<h5 lang="pt-br" xml:lang="pt-br">Criar uma coleção</h5>
+		<div class='pBody'>
+<ul id="collectionPortletList"><li id="coll-add_page"><a href="/w/index.php?title=Especial:Livro/add_article/&amp;arttitle=Aplicativos+em+PHP%2FTrabalhando+em+PHP+com%2FFun%C3%A7%C3%B5es&amp;oldid=0" title="Adicionar a página wiki atual ao seu livro" onclick="collectionCall(&#039;AddArticle&#039;, [&#039;removepage&#039;, wgNamespaceNumber, wgTitle, 0]); return false;" rel="nofollow">Adicionar página ao livro</a></li><li id="coll-help_collections"><a href="/wiki/Ajuda:Livros" title="Mostrar ajuda sobre a ferramenta de livros">Ajuda sobre livros</a></li></ul><script type="text/javascript">/*<![CDATA[*/
+		var wgCollectionAddRemoveSate = "addpage";
+		/*]]>*/</script>
+<script type="text/javascript" src="/w/extensions/Collection/collection/portlet.js?2"></script>		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5 lang="pt-br" xml:lang="pt-br">Ferramentas</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/wiki/Especial:P%C3%A1ginas_afluentes/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es" title="Lista de todas as páginas que ligam-se a esta [j]" accesskey="j">Páginas afluentes</a></li>
+				<li id="t-recentchangeslinked"><a href="/wiki/Especial:Novidades_relacionadas/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es" title="Mudanças recentes em páginas relacionadas a esta [k]" accesskey="k">Alterações relacionadas</a></li>
+<li id="t-upload"><a href="/wiki/Especial:Carregar_imagem" title="Carregar arquivos [u]" accesskey="u">Carregar arquivo</a></li>
+<li id="t-specialpages"><a href="/wiki/Especial:P%C3%A1ginas_especiais" title="Lista de páginas especiais [q]" accesskey="q">Páginas especiais</a></li>
+				<li id="t-print"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es&amp;printable=yes" rel="alternate" title="Versão para impressão desta página [p]" accesskey="p">Versão para impressão</a></li>				<li id="t-permalink"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Fun%C3%A7%C3%B5es&amp;oldid=110822" title="Link permanente para esta versão desta página">Link permanente</a></li><li id="t-download-as-pdf"><a href="/w/index.php?title=Especial:Livro/render_article/&amp;arttitle=Aplicativos+em+PHP/Trabalhando+em+PHP+com/Fun%C3%A7%C3%B5es&amp;oldid=110822&amp;writer=rl" rel="nofollow">Versão em PDF</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/skins-1.5/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></div>
+				<div id="f-copyrightico"><a href="http://wikimediafoundation.org/"><img src="/images/wikimedia-button.png" alt="Wikimedia Foundation"/></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> Esta página foi modificada pela última vez às 17h12min, 5 de dezembro de 2008.</li>
+					<li id="copyright">O texto está disponível sob a licença <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>; condições adicionais podem-se aplicar. Veja <a href="http://wikimediafoundation.org/wiki/Terms_of_Use">Condições de Uso</a> para detalhes.</li>
+					<li id="privacy"><a href="/wiki/Wikilivros:Pol%C3%ADtica_de_privacidade" title="Wikilivros:Política de privacidade">Política de privacidade</a></li>
+					<li id="about"><a href="/wiki/Wikilivros:Sobre" title="Wikilivros:Sobre">Sobre</a></li>
+					<li id="disclaimer"><a href="/wiki/Wikilivros:Aviso_geral" title="Wikilivros:Aviso geral">Alerta de Conteúdo</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served by srv104 in 0.237 secs. --></body></html>

@@ -1,0 +1,129 @@
+public function beforeFilter() {
+
+    //Configure AuthComponent
+    // Admin
+    if($this->Auth->user('group_id') == '12') {
+        $this->Auth->allow('admin_index'); 
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => FALSE);
+        $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'index', 'admin' => TRUE);
+        $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login', 'admin' => FALSE);
+
+        $this->set("group", "admin");
+
+    // Staff
+    }
+
+    if($this->Auth->user('group_id') == '13') {
+        $this->Auth->allow('admin_index'); 
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => FALSE);
+        $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'index', 'admin' => TRUE);
+        $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login', 'admin' => FALSE);
+
+        $this->set("group", "staff");
+	}
+
+class AppController extends Controller {
+    public $components = array('Auth', 'Session');
+   
+    public function beforeFilter() {
+        $this->Auth->authorize = array('Controller');
+		// Somente usuários ativos
+        $this->Auth->authenticate = array(
+            'all' => array (
+                'scope' => array('User.is_active' => 1)
+            ),
+            'Form'
+        );
+    }
+   
+    public function isAuthorized($user) {
+        if (($this->params['prefix'] === 'admin') && ($user['is_admin'] != 1)) {
+            return false;            
+        }
+        return true;
+    }
+}
+
+ //Auth method. If set to controller,
+ $this->Auth->authorize = 'controller';
+
+If Auth->authorize is set to “controller”, you’ll need to add a method called isAuthorized() to your controller. This method allows you to do some more authentication checks and then return either true or false. In this case, we put isAuthorized() into our users_controller.php
+
+function isAuthorized() {
+ if( $this->action=='index' || $this->action=='view' || $this->action=='add' || $this->action=='edit' || $this->action=='delete') {
+	 if($this->Auth->user('group_id')==4)
+		 return true;
+	 }
+ //Redirect to error notification page
+ $this->Session->setFlash('Sorry, you don\'t have permission to access that page.');
+ $this->redirect('/');
+ return false;
+}
+
+
+public function isAuthorized() {
+    if (isset($this->params['admin']) && $this->Auth->user('role') == 'admin') {
+        return true;
+    }
+    return false;
+}
+
+'Auth' => array(
+        'loginAction' => array(
+            'controller' => 'users',
+            'action' => 'login',
+        ),
+        'authError' => "Your username and password is incorrect, please try again.",
+        'authenticate' => array(
+            'Form' => array(
+                'scope' => array('User.user_status_id' => 1)
+            )
+        ),
+        'authorize' => array('Controller'), // <- here
+        'redirect' => array("controller" => "users", "action" => "profile"),
+        'loginRedirect' => array("controller" => "users", "action" => "profile")
+    )
+
+No contorller clientes
+if ($this->Document->Profile->isOwnedBy($document_id, $user['id'])) {
+    return true;
+}
+
+
+class AppController extends Controller
+{
+
+var $components = array('Auth');
+
+function beforeFilter()
+{
+    $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+    $this->Auth->loginRedirect = array('controller' => 'pages', 'display' => 'home');
+    $this->Auth->logoutRedirect = '/';
+    $this->Auth->authorize = 'controller';
+    $this->Auth->userScope = array('User.active' => 1);
+}
+
+function isAuthorized()
+{
+    if (strpos($this->action, "admin_") != false)
+    {
+    	if ($this->Auth->user('isAdmin') == '0')
+    	{
+    		return false;
+    	}
+    }
+    return true;
+}
+}
+
+
+You need to add also in public $components
+
+public $components = array(
+    'Auth' => array(
+        'authorize' => array('Controller') // Added this line
+    )
+);
+
+

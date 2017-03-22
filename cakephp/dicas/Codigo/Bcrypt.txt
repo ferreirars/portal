@@ -1,0 +1,65 @@
+
+
+Copie o arquivo BcryptFormAuthenticate.php para:
+
+cakebcrypt/lib/Cake/Controller/Component/Auth
+
+O Bcrypt aumenta a segurança dos aplicativos e provavelmente virá implementado por padrão nas próximas versões do Cake.
+
+Implementação da autenticação com Bcrypt. 
+
+As alterações para que funcionasse com bcrypt foram em: 
+
+app/Model/User 
+
+No início: 
+App::uses('BcryptFormAuthenticate', 'Controller/Component/Auth');
+
+No código da classe: 
+Alterar o beforeSave para este 
+
+    function beforeSave($options = Array()) { 
+        if (isset($this->data['User']['password'])) { 
+            $this->data['User']['password'] = BcryptFormAuthenticate::hash($this->data['User']['password']); 
+        } 
+        return true; 
+    } 
+
+No app/Controller/AppController: 
+
+Alteração no $components ... 
+	public $components = array( 
+		'Session', 
+		'Auth' => array( 
+        'authenticate' => array( 
+		    'Blowfish' => array( 
+			    'fields' => array('username' => 'username')) 
+		    ),// https://groups.google.com/forum/#!msg/cake-php/s8RXjtg3IWE/LjdTOVWH7q0J 
+		    'loginRedirect' => array('controller' => '/clientes', 'action' => 'index'), 
+		    'logoutRedirect' => array('controller' => 'users', 'action' => 'login'), 
+		    'authorize' => array('Controller') // Adicionamos essa linha 
+		) 
+	); 
+Agora veja a diferença entre os hashs: 
+Usando o hash padrão do Auth - 99790b128030b417877948352809548a5d3c55f5 
+Usando o hash do Bcrypt - $2a$10$DYhG93b0qyJfIxfs2guVoOWUva7s4SWbWRR/RtNzvuZOVDU/jwdP. 
+
+Por isso outra alteração obrigatória deve ser aumentar o tamanho do campo password para 60. 
+Outra exigência do bcrypt: o salt alfanumérico no core.php deve ser sempre maior que 20 dígitos. 
+
+Testando
+
+Permita ao público add e adicione o usuário “admin”.
+
+Adicione o usuário admin no grupo admins:
+http://localhost/cakebcrypt/users 
+
+Altere para não permitir add pelo público.
+
+Acesse
+http://localhost/cakebcrypt/logout 
+
+Depois
+http://localhost/cakebcrypt/users/login 
+E teste o aplicativo.
+

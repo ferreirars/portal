@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - Web</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">Introdução à Web</h2>
+
+<p><strong>Instala&ccedil;&atilde;o</strong></p>
+
+<p><strong>Servidor Web</strong></p>
+
+<p>Evitar os arquivos de desenvolvimento sempre que poss&iacute;vel, para n&atilde;o instalar bibliotecas e compiladores.</p>
+
+<p><strong>RedHat e Clones</strong></p>
+
+<p>M&oacute;dulos do Apache<br />
+Descomentar se comentados em:<br />
+nano /etc/httpd/conf/httpd.conf<br />
+service httpd restart</p>
+
+<p>nano /etc/apache2/apache2.conf<br />
+Adicione ao final do arquivo:<br />
+ServerName localhost</p>
+
+<p><br />
+Refer&ecirc;ncia para o SELinux<br />
+chcon -R --reference=/var/www/html /var/www/html/Joomla</p>
+
+<p><br />
+<strong>Debian e clones</strong></p>
+
+<p>apt-get update<br />
+apt-get install -y apache2</p>
+
+<p>apt-get install -y php5 libapache2-mod-php5 php5-gd php5-mysql php5-pgsql php5-imap php-pear curl php-auth php5-ming php5-snmp php5-xmlrpc php5-xsl<br />
+apt-get install -y phpmyadmin<br />
+apt-get install vlogger webalizer awstats geoip-database libclass-dbi-mysql-perl</p>
+
+<p>Criar um usu&aacute;rio no MySQL que acesse o SGBD somente da esta&ccedil;&atilde;o do DBA e o mesmo para o PostgreSQL</p>
+
+<p><br />
+<strong>Esconder vers&atilde;o do Apache</strong><br />
+Editar o httpd.conf no RedHat</p>
+
+<p>E no Debian em<br />
+nano /etc/apache2/conf-available/security.conf</p>
+
+<p>mudando as duas linhas abaixo:</p>
+
+<p>ServerTokens ProductOnly<br />
+ServerSignature Off</p>
+
+<p><br />
+<strong>Habilitar o mod_rewrite</strong><br />
+a2enmod rewrite</p>
+
+<p><strong>Caso queira Desabilitar o m&oacute;dulo</strong><br />
+a2dismod rewrite</p>
+
+<p><strong>Habilitar site</strong><br />
+a2ensite gnuteca</p>
+
+<p><strong>Se necess&aacute;rio remover o link do site, exemplo:</strong><br />
+rm /etc/apache2/sites-enabled/gnuteca</p>
+
+<p><strong>Habilitar a porta 443 (Habiltiada por default):</strong></p>
+
+<p>&nbsp;
+<p>Editar /etc/apache2/ports.conf<br />
+Listen 80<br />
+Listen 443</p>
+</p>
+
+<p>nano /etc/webalizer/webalizer.conf</p>
+
+<p>Mudar<br />
+LogFile /var/log/apache2/access.log.1<br />
+para<br />
+LogFile /var/log/apache2/access.log</p>
+
+<p>Executar<br />
+webalizer<br />
+Restartar apache:<br />
+service apache2 restart</p>
+
+<p><strong>Editar</strong></p>
+
+<p>nano /var/www/webalizer/index.html</p>
+
+<p>Adicionar na se&ccedil;&atilde;o<br />
+&lt;HEADER&gt;<br />
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=utf-8&quot; /&gt;</p>
+
+<p>Ver configura&ccedil;&otilde;es do awstats</p>
+
+<p><br />
+<strong>Permiss&otilde;es ideiais para docRoot</strong></p>
+
+<p>Criando um grupo de administradores para o documentroot<br />
+que ter&atilde;o plenos poderes no mesmo, al&eacute;m de permitir que outros do grupo tamb&eacute;m o fa&ccedil;am sem impedimentos</p>
+
+<p><strong>RedHat</strong><br />
+groupadd webdevel<br />
+useradd -G webdevel ribafs<br />
+useradd -G webdevel apache<br />
+chown -R root:webdevel /var/www/html<br />
+find /var/www/html -type d -exec chmod 2775 {} \;<br />
+find /var/www/html -type f -exec chmod 0664 {} \;<br />
+Reiniciar o servidor</p>
+
+<p><strong>Debian</strong><br />
+addgroup webdevel<br />
+adduser ribafs webdevel<br />
+adduser www-data webdevel<br />
+chown -R root:webdevel /var/www/html<br />
+find /var/www/html -type d -exec chmod 2775 {} \;<br />
+find /var/www/html -type f -exec chmod 0664 {} \;</p>
+
+<p>echo &quot;umask u=rwx,g=rwx,o=rx&quot; &gt;&gt; /etc/skel/.bashrc</p>
+
+<p><br />
+Para os usu&aacute;rios que j&aacute; tenham sido criados antes devemos adicionar em<br />
+exit<br />
+echo &quot;umask u=rwx,g=rwx,o=rx&quot; &gt;&gt; /home/ribafs/.bashrc</p>
+
+<p><br />
+reboot</p>
+
+<p>Agora qualquer usu&aacute;rio do grupo webdevel pode alterar os arquivos existentes, remover e criar novos.</p>
+
+<p><br />
+- Testar Apache com PHP<br />
+nano /var/www/html/tt.php</p>
+
+<p>&lt;?php<br />
+phpinfo();<br />
+?&gt;</p>
+
+<p><br />
+- Pequeno teste para ver se o PHP est&aacute; com suporte ao PostgreSQL</p>
+
+<p>nano /var/www/html/pg.php</p>
+
+<p>&lt;?php<br />
+$conn = pg_connect(&quot;host=localhost user=postgres password=postgres dbname=template1&quot;);</p>
+
+<p>if($conn){<br />
+&nbsp;&nbsp; &nbsp;print &#39;PHP com suporte a PostgreSQL habilitado!&#39;;<br />
+}else{<br />
+&nbsp;&nbsp; &nbsp;print &#39;PHP sem suporte a PostgreSQL!&#39;;<br />
+}<br />
+?&gt;<br />
+Obs.: Lembrar que para fazer este teste a VM sgbd deve estar ligada.</p>
+
+<p>&nbsp;</p>
+

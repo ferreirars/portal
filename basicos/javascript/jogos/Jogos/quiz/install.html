@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>How to install the CWE Quiz Program</title>
+
+	<style>
+	
+	body
+	{
+		font-family:Arial;
+	}
+	</style>
+</head>
+
+<body>
+<font size=6>How to install the CWE Quiz Program</font><BR><BR>
+Please read the following page carefully and in detail to ensure an error free installation of the quiz program.  It can be used on a website which is online (on the WWW), or one which is offline (such as a company intranet).
+
+<blockquote><font style="font-size:20pt;"><b>Contents</b></font></blockquote>
+
+<blockquote><blockquote><ol type="I">
+
+	<li type="I"><a href="#pre">Prerequisites</a></li>
+	<li type="I"><a href="#pre">Required Downloads</a></li>
+	<li type="I"><a href="#build">The online builder</a></li>
+	<li type="I"><a href="#edit">The editor</a></li>
+	<li type="I"><a href="#link">Linking to the quiz</a></li>
+	<li type="I"><a href="#web">Using on a website</a></li>
+	<li type="I"><a href="#tales">A few cautionary tales</a></li>
+	<li type="I"><a href="#shoot">Troubleshooting</a></li>
+
+</ol>
+</blockquote></blockquote>
+
+<blockquote>
+
+<font size=5><a name="pre">I.   &nbsp;  Prerequisites</a></font>
+<blockquote>
+A text editor.<BR>
+HTML knowledge is helpful.
+</blockquote>
+
+<font size=5><a name="down">II.  &nbsp;Required Downloads</a></font>
+<blockquote>
+The CWE Quiz program, version 1<BR>
+As a result, you should have 5 files:  <i>index.html, install.html, edit.html, writeinput.js</i> &amp;<i> write.js </i>
+</blockquote>
+
+<font size="5"><a name="build">III.&nbsp; The online builder</a></font>
+<blockquote>
+To make it easy to create a quiz, we designed a builder for you.  This can be found <a href="http://www.coolwebeffects.net/quiz/build.html" target="new">here</a>.  (The quiz builder must be used online to work - it uses server side scripting)<BR><Br>
+You can add a question, followed by its choices and select the right answer and its explanation.  There is no limit to how many questions or answer choices you can add, but there is a minimum of two questions and two answer choices per question.<BR><br>
+ <!-- Explanation of fields:<BR><BR> -->
+<!-- Please note that the <b>Quiz Title</b> will be used as the file name of the data file.  You can rename the data file once downloaded if you need to. -->
+<!-- <b>Quiz Description</b> - A brief description about the quiz which immediately appears below the title.<BR> -->
+We think the builder should be fairly self-explanatory - so try it out!.
+</blockquote>
+<font size="5"><a name="edit">IV.&nbsp; The editor</a></font>
+<blockquote>
+The <i>edit.html</i> file is to edit the quiz once it has been created, not to create new ones.  You can edit your data offline, but then connect to our website to re-generate the file in the correct format and re-download the data file. It still requires server-side scripting for this process. Editing the data file itself is not recommended unless you know advanced JavaScript!
+</blockquote>
+
+<font size="5"><a name="link">V.  &nbsp;Linking to the quiz</a></font>
+<blockquote>
+
+So that you can have multiple quizzes, you can download more than one quiz file from the online builder, without needing to re-download more copies of the quiz program.  To enable this, you must link to each quiz differently in the following way:<BR><BR>
+
+	<tt>&lt;a href="index.html?file=<font color="red">quiz.js</font>"&gt;Quiz title&lt;/a&gt;</tt>
+	<BR><BR>
+
+Just change the section in red to the name of the quiz data file that you downloaded using the online builder.
+ 
+</blockquote>
+
+<font size="5"><a name="web">VI.  &nbsp; Using on a website</a></font>
+<blockquote>
+On the website, you need to put all the files that were downloaded into the same folder.  Then link to the quizzes as outlined above.
+
+</blockquote>
+
+<font size="5"><a name="tales">VII.  &nbsp;A few cautionary tales</a></font>
+<blockquote>
+Do not edit any of the JavaScript and HTML code that the quiz uses to generate the question and answer display.  If you have knowledge of HTML/CSS, you can change the formatting, but please use caution.  The code in this program is complicated, and can easily be corrupted if you are careless when making changes.
+</blockquote>
+
+<font size="5"><a name="shoot">VIII.&nbsp;Troubleshooting</a></font><BR><BR>
+<blockquote>If did not find a solution to the problem here, please <a href="http://www.coolwebeffects.net/games/contact.html">contact us</a>.</blockquote>
+
+
+</blockquote>
+</body>
+</html>

@@ -1,0 +1,56 @@
+Dicas sobre o Behavior Containable
+
+
+Uma nova adição ao core do CakePHP 1.2 é a ContainableBehavior. Este behavior do model permite filtrar e limitar operações encontradas no model. Usando Containable irá ajudá-lo a reduzir o desgaste desnecessário e o desgaste em seu banco de dados, aumentando a velocidade e o desempenho geral de sua aplicação. A classe também irá ajudá-lo a pesquisar e filtrar os dados para seus usuários de forma limpa e consistente.
+
+Containable permite agilizar e simplificar as operações em seus models vinculados. Ele funciona temporariamente ou permanentemente alterando as associações/relacionamentos de seus modelos. Containable apenas modifica as relações existentes que não irão permitir que você restringa os resultados de associações distantes. Em vez disso você deve consultar Join para tabelas:
+http://book.cakephp.org/2.0/en/models/associations-linking-models-together.html#joining-tables
+
+Este behavior permite filtrar e limitar operações encontradas no model.
+
+Aumenta a velocidade e o desempenho geral de sua aplicação.
+
+Também ajuda a pesquisar e filtrar os dados para seus usuários de forma limpa e consistente.
+
+Ele funciona temporariamente ou permanentemente alterando as associações de seus modelos.
+
+Apenas modifica as relações existentes.
+
+Para usar o novo behavior, você pode adicionar este para a propriedade $actsAs do seu model:
+
+class Post extends AppModel {
+    public $actsAs = array('Containable');
+}
+
+Você também pode anexar o behavior "on the fly":
+$this->Post->Behaviors->load('Containable');
+
+Uma coisa que o ContainableBehavior faz é ajudá-lo a reduzir o retorno do find().
+
+Por exemplo, para obter apenas as informações relacionadas depois, você pode fazer o seguinte:
+
+$this->Post->contain();
+$this->Post->find('all');
+
+Você também pode chamar a "magia" do Containable de dentro do find ():
+$this->Post->find('all', array('contain' => false));
+
+Você pode fazer isso sem o ContainableBehavior, fazendo algo parecido com isto:
+$this->Post->recursive = -1;
+$this->Post->find('all');
+
+Se quiséssemos buscar todas as mensagens e suas tags relacionadas (sem qualquer informação comentário), poderiamos tentar algo como isto:
+$this->Post->contain('Tag');
+$this->Post->find('all');
+
+Mais uma vez, podemos usar a chave contain dentro de uma chamada find():
+$this->Post->find('all', array('contain' => 'Tag'));
+
+$this->Post->contain('Comment.author');
+$this->Post->find('all');
+
+// ou..
+$this->Post->find('all', array('contain' => 'Comment.author'));
+
+http://book.cakephp.org/2.0/en/core-libraries/behaviors/containable.html
+

@@ -1,0 +1,50 @@
+Descomentar em app/Config/core.php:
+	Configure::write('Routing.prefixes', array('admin'));
+
+Obs:
+Antes de descomentar o prefixo podemos chamar um endereço destes:
+http://localhost/admin2/clientes/admin_add
+
+Após descomentar o endereço acima não é aceito, precisa ficar com o formato:
+http://localhost/cakeadmin/admin/clientes/add
+
+No link da view (exemplo) para clientes fica assim:
+<?php echo $this->Html->link(__('New Cliente'), array('controller'=>'admin/clientes','action' => 'add')); ?>
+
+Usar um layout para o aplicativo (default) e outro para o admin (admin)
+$this->layout = 'default';   // nos actions do app
+$this->layout = 'admin';   // nos actions do admin
+
+Actions/Views
+
+index() - index.ctp
+view() - view.ctp
+admin_add() - admin_add()
+admin_edit() - admin_edit.ctp
+admin_delete()
+
+index e view com acesso público e os admin_* com acesso apenas administrativo.
+
+No controller Users, precisei adicionar o action:
+
+admin_login
+
+Adicionei sem conteúdo, apenas com o render, para que acesse a view login existente:
+	public function admin_login() {
+		$this->render('login');
+	}
+
+
+Routes
+
+	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
+	Router::connect('/', array('controller' => 'clientes', 'action' => 'index'));
+
+Assim podemos chamar pela url:
+http://localhost/admin2/login
+http://localhost/admin2/logout
+http://localhost/admin2/
+
+Confira o aplicativo para detalhes.
+

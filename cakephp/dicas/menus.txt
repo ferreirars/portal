@@ -1,0 +1,124 @@
+Dicas sobre Menus
+
+
+- Menus guardados no banco (submenu vertical)
+	clientes, funcionarios, produtos e pedidos serão assim:
+		público: somente menus (do submenus)
+		usuario: index e view
+		restritos ao gerente: admin_add, admin_edit e admin_delete
+	privileges, submenus, groups e users
+		Sem acesso público, exceto menus de submenus
+		restritos ao admin: index, view, add, edit, delete e admin mais login e logout (users)
+
+Após a criação dos CRUDs criar o action e view menus para submenus.
+
+Controller Submenus, actions menus() e admin():
+	public function menus() {
+		$valor = $this->Session->read('Auth.User');
+		$usuario=$valor['username'];
+		$this->set('usuario', $usuario);
+	
+		$conditions=array('conditions'=>array('Submenu.action'=>'index'), 
+		'fields'=>array('Submenu.title','Submenu.controller','Submenu.action')); 
+		$this->set('submenus', $this->Submenu->find('all',$conditions)); 
+	} 
+
+	public function admin() { 
+		$this->set('submenus', $this->Submenu->find('all')); 
+	} 
+
+Views admin e menus:
+menus.ctp
+<div class="actions"> 
+	<h2><?php echo __('Produtos'); ?></h2> 
+	<ul> 
+	<?php foreach ($submenus as $menu): 
+if($menu['Submenu']['title'] == 'Clientes' || $menu['Submenu']['title'] == 'Funcionários' || $menu['Submenu']['title'] == 'Produtos' || $menu['Submenu']['title'] == 'Pedidos'){
+?> 
+
+		<li class="actions"> 
+			<?php 
+			echo $this->Html->link(__($menu['Submenu']['title']), array('controller'=>$menu['Submenu']['controller'],'action'=>$menu['Submenu']['action'])); 
+}
+			?> 
+		</li> 
+	<?php endforeach; 
+?> 
+
+admin.ctp
+Ocultando itens de menu de usuários não autorizados. 
+Aqui oculto um item para admin caso o usuário não seja admin
+
+<div class="actions"> 
+	<ul> 
+	<?php foreach ($submenus as $menu): ?> 
+		<li class="actions"> 
+			<?php 
+	  if($menu['Menu']['action'] =='admin'){ 
+				if($menu['Submenu']['action'] =='index' || $menu['Submenu']['action'] =='login' ||$menu['Submenu']['action'] =='logout'){ 			
+				echo $this->Html->link(__($menu['Submenu']['title']), (array('controller'=>$menu['Submenu']['controller'],'action'=>$menu['Submenu']['action']))); 
+				}else{ 
+				echo $this->Html->link(__($menu['Submenu']['title']), (array('action'=>'../'.$menu['Submenu']['action']))); 
+	  		} 
+		} 
+		?> 
+		</li> 
+	<?php endforeach; ?> 
+		<li>&nbsp;</li>
+<li><?php echo $this->Html->link(__('<< Voltar'), array('controller' => 'submenus', 'action' => 'menus')); ?> </li>
+	</ul> 
+</div> 
+
+
+- Menu fixo na horizontal (no layout)
+Criar Element View/Elements/menutopo.ctp:
+
+- Neste Element mostramos o nome de usuário logado
+
+<ul class="actions"> 
+	<h4><?php 
+		$valor = $this->Session->read('Auth.User');
+		$usuario=$valor['username'];
+		$grupo=$valor['group_id'];
+
+		if(!$usuario) $usuario='Não logado!';
+		echo 'Logado como: '. $usuario; ?></h4>
+
+	<?php 
+	echo $this->Html->link('Produtos', '/submenus/menus'); 
+	if($grupo==1){
+		echo $this->Html->link('Administração', '/submenus/admin'); 
+	}
+
+	if($usuario=='Não logado!'){
+				echo $this->Html->link(__('Login'), array('controller'=>'users','action'=>'login')); 
+	}else{
+				echo $this->Html->link(__('Logout'), array('controller'=>'users','action'=>'logout'));
+	} 
+	?>
+</ul> 
+
+Inserir o element acima no Layout em uso, no nosso caso o default.ctp:
+Adicione na parte inferior do id header:
+		<div id="header">
+			<h1><?php echo $this->Html->link('Aplicativo Modelo em CakePHP - 2.3.7', 'http://cakephp.org'); ?></h1>
+			<?php echo $this->element('menutopo');?>
+		</div>
+
+- Adicionar botão/link ao menu para voltar ao item anterior 
+Adicionar um botão ao index.ctp para voltar ao menu anterior (Submenus/menus)
+Editar index.ctp e adicionar ao final:
+<li><?php echo $this->Html->link(__('<< Voltar'), array('controller' => 'submenus', 'action' => 'menus')); ?> </li>
+	</ul>
+
+Agora podemos adicionar itens ao menu Submenus apenas acessando como admin e chamando
+
+http://localhost/cakemodelo2/submenus/
+com ele podemos gerenciar os menus: listar, adicionar, editar e excluir.
+
+De forma semelhante proceder para os demais (ver aplicação app_modelo3).
+
+
+http://book.cakephp.org/2.0/en/views.html
+http://book.cakephp.org/2.0/en/core-libraries/behaviors/tree.html
+

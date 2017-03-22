@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>CSS Wizard</title></head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(0, 204, 204);" alink="#000099" link="#000099" vlink="#990099">
+
+<h3 align="center">CSS Wizard</h3>
+
+<table align="center" border="1" cellpadding="2" cellspacing="2" width="60%">
+    <tr>
+      <form name="form1" methot="post" action="">
+	<td align="center" width="20">
+
+	       	<input onClick="document.form1.ta.value='Include do CSS\n\n'+
+			'<link rel=\'STYLESHEET\' href=\'estilos.inc.css\' type=\'text/css\'>\n'";
+		value="Include      " title="Include do CSS" type="button"&gt;<br>
+
+	       	<input onClick="document.form1.ta.value='CSS direto na página\n\n'+
+'<html><head>'+
+'<style type=\'text/css\'>\n'+
+'body {background-color: yellow}\n'+
+'h1 {background-color: #00ff00}\n'+
+'h2 {background-color: transparent}\n'+
+'p {background-color: rgb(250,0,255)}\n'+
+'</style></head><body>\n'+
+'<h1>Este é o header 1</h1>\n'+
+'<h2> Este é o header 2</h2>\n'+
+'<p> Este é um parágrafo</p>\n'+
+'</body></html>'"
+		value="NaPágina  " title="CSS direto na página" type="button"&gt;<br>
+
+	       	<input onClick="document.form1.ta.value='CSS Redefinindo as TAGs\n\n'+
+'BODY, TD {\n'+
+'       background-color: #E8FFFF;\n'+
+'       color: Green;\n'+
+'       font-family: \'Times New Roman\', \'Bookman Old Style\', serif;\n'+
+'       font-size: 12px;\n'+
+'       text-align: left;\n'+
+'}\n'+
+'H2 {\n'+
+'       font-size: 14pt;\n'+
+'}\n'+
+'A{\n'+
+'       color: Navy;\n'+
+'}\n'+
+'A:Hover {\n'+
+'       color: Lime;\n'+
+'}\n'+
+'HR {\n'+
+'       height: 1pt;\n'+
+'}'"
+		value="Nas TAGs  " title="CSS redefinindo as TAGs" type="button"&gt;<br>
+
+	       	<input onClick="document.form1.ta.value='Quebra de Página\n\n'+
+			'<img src=s2slogo.gif width=100 height=100>\n'+
+			'<div style=page-break-after:always>Quebra de Página</div>\n'+
+			'<img src=internetdotcomlogo.gif width=120 height=151><br>'"
+		value="PageBreak" title="Quabra de Página com CSS" type="button"&gt;<br>
+
+	</td>
+	<td><textarea cols="70" rows="20" name="ta">Aqui aparece a sintaxe</textarea></td>
+      </form>
+    </tr>
+</table>
+</body></html>

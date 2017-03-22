@@ -1,0 +1,332 @@
+ACL - Access Controll List (Lista de Controle de Acesso)
+
+
+A funcionalidade de lista de controle de acesso do CakePHP é um dos mais freqüentemente discutidas. Muito provavelmente porque ela é a mais procurada, mas também porque pode ser a mais confusa. Se você está procurando uma boa maneira de começar a trabalhar com ACLs em geral, continue a ler.
+
+Seja corajoso e fique com ela, mesmo se as coisas correrem mal. Uma vez que você pegue o jeito dela, ela será uma ferramenta extremamente poderosa para ter à mão quando desenvolver sua aplicação.
+
+Controllar o Acesso de uma Aplicação através do Componente ACL do CakePHP
+
+Criaremos este aplicativo partindo do cakeauth, ou seja, este é uma cópia de cakeauth adaptada.
+
+Tradução bastante livre do original em inglês Simple Acl controlled Application
+http://book.cakephp.org/2.0/en/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html
+
+Mantenha groups e users sem registros, para adicionarmos pelo aplicativo.
+
+Componentes Auth e Acl
+Não adicione os componentes Auth e Acl para nenhum controller por enquanto, pois no tutorial diremos como e quando fazer.
+
+Preparando para Adicionar Auth
+
+- Contorller - Adicione ao final o código dos actions login e logout no controller UsersController:
+
+	public function login() {
+		if ($this->request->is('post')) {
+		    if ($this->Auth->login()) {
+		        $this->redirect($this->Auth->redirect());
+		    } else {
+		        $this->Session->setFlash('Your username or password was incorrect.');
+		    }
+		}
+	}
+
+	public function logout() {
+		//Deixe vazio por enquanto.
+	}
+
+- Criar a view app/Users/login.ctp contendo:
+
+<h2>Login</h2>
+<?php
+echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' => 'login')));
+echo $this->Form->input('User.username');
+echo $this->Form->input('User.password');
+echo $this->Form->end('Login');
+?>
+
+
+- Atualizar o model User para add hash à senha antes de jogar no banco. Senhas em texto puro são muito inseguras e o componente AuthComponent adiciona hash à senha. 
+
+Em app/Model/User.php adicione com cuidado o código abaixo:
+
+No início do arquivo, logo abaixo de:
+App::uses('AppModel', 'Model');
+
+Entre com:
+App::uses('AuthComponent', 'Controller/Component');
+
+Dentro da classe adicione ao final:
+
+	public function beforeSave($options = array()) {
+	    $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+	    return true;
+	}
+
+- Deixe o AppController (app/Contorller/AppController.php) assim:
+
+class AppController extends Controller {
+    public $components = array(
+        'Acl',
+        'Auth' => array(
+            'authorize' => array(
+                'Actions' => array('actionPath' => 'controllers')
+            )
+        ),
+        'Session'
+    );
+    public $helpers = array('Html', 'Form', 'Session');
+
+    public function beforeFilter() {
+        //Configure AuthComponent
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+        $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
+        $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');
+    }
+}
+
+
+Com o componente AuthComponente ativo não podemos acessar nada em nosso aplicativo, tendo em vista que não estamos logados. Experimente acessar e tentar listar, criar um post, etc.
+Vamos então adicionar algumas exceções ao AuthComponente, para que nos permita criar grupos e usuários.
+
+- Adicionar a função abaixo aos dois contorllers: GroupsController e UsersController:
+
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('index','view');
+	}
+
+Isso orienta ao Cake para liberar para o público: users e groups. É apenas temporário. Depois que criarmos os usuários e grupos este código será removido.
+
+Não adicione nenhum usuário ou grupo ainda. Aguarde.
+
+
+Inicializar as Tabelas do Acl
+
+Antes de adicionar usuário ou grupo precisamos conectar para o Acl. Até o momento não temos nenhuma tabela Acl.
+Para isso execute no terminal:
+
+./cake schema create DbAcl
+
+Responsa y e y novamente.
+
+Alternativamente poderá importar o script: app/Config/Schema/db_acl.sql.
+
+
+Acts como um Request
+
+Para Auth e Acl funcionarme adequadamente nós devemos associar nossos usuários e grupos aos registros das tabelas Acl. Para fazer isso devemos usar o AclBehavior. Ele permite a conexão automagic de models com as tabelas Acl. Ele usa requerer uma implementação do parentNode() no seu model.
+
+Em nosso User model adicione:
+
+    public $actsAs = array('Acl' => array('type' => 'requester'));
+
+    public function parentNode() {
+        if (!$this->id && empty($this->data)) {
+            return null;
+        }
+        if (isset($this->data['User']['group_id'])) {
+            $groupId = $this->data['User']['group_id'];
+        } else {
+            $groupId = $this->field('group_id');
+        }
+        if (!$groupId) {
+            return null;
+        } else {
+            return array('Group' => array('id' => $groupId));
+        }
+    }
+
+
+Ao Group model adicione:
+
+    public $actsAs = array('Acl' => array('type' => 'requester'));
+
+    public function parentNode() {
+        return null;
+    }
+
+Isso faz com que toda vez que você cria um usuário ou grupo ele gravará uma entrada na tabela "aros". Isso é um recurso do Cake transparente para as tabelas users e groups. Sempre que criar/excluir usuário/grupo as tabelas aros serão atualizadas.
+
+
+Criando Grupos e Usuários
+
+Nossos controllers e models estão agora preparados para adicionar alguns dados e nossos models Group e User estão ligados às tabelas Acl.
+
+Criar os grupos: administrators, managers e users.
+
+http://localhost/cakeacl/groups/add
+
+Grupos
+1 - admins
+2 - gerentes
+3 - usuarios
+4 - visitanes
+
+http://localhost/cakeacl/users/add
+
+Usuários
+- admin - 1
+- gerente - 2
+- usuario - 3
+- visitante - 4
+
+
+Criar os usuários, um em cada grupo respectivo. Use como senha o nome do usuário para evitar esquecer.
+
+Depois de cadastrar execute no SQL do phpmyadmin: SELECT * FROM aros;
+
+Agora podemos configurar permissões por grupos e por usuários.
+
+Para simplificar, usaremos apenas permissões por grupo, adicionar ao User model:
+
+	public function bindNode($user) {
+		return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
+	}
+
+
+Criando ACOs (Access Control Objects)
+
+Agora que temos nossos usuários e grupos (aros), nós podemos começar a imputar nossos controllers existentes na Acl e configurar permissões para nossos grupos e usuários, como também habilitar login e logout.
+
+Nossos AROs são automaticamente criados sempre que novos usuários e grupos são criados.
+
+
+Gerando ACOs com o Plugin AclExtras
+
+Download
+https://github.com/markstory/acl_extras/zipball/master
+
+Descompacte, renomeie a pasta para acl_extras e copie para:
+app/Plugin (app/Plugin/AclExtras)
+
+Adicionar ao final do app/Config/boostrap.php:
+CakePlugin::load('AclExtras');
+
+Execute no terminal para gerar todos os nós ACO:
+./cake AclExtras.AclExtras aco_sync
+
+Guia dos comandos disponíveis:
+/var/www/projeto/app/Console/cake AclExtras.AclExtras -h
+/var/www/projeto/app/Console/cake AclExtras.AclExtras aco_sync -h
+
+ALERTA
+Sempre que adicionar alguma tabela com seu controller, um action ou coisa parecida, precisará rodar novamente.
+
+Especialmente se receber uma mensagem destas:
+
+Warning (512): DbAcl::check() - Failed ARO/ACO node lookup in permissions check. Node references:
+cake AclExtras.AclExtras aco_sync
+
+Setando Permissões
+
+Ajuda:
+/var/www/projeto/app/Console/cake acl --help
+
+Permissões por grupo
+
+1 (admins) - tudo é permitido
+2 (gerentes) - tudo na tabela funcionarios
+3 (usuarios) - funcionarios/index e	funcionarios/view
+4 (visitantes) - negar tudo
+
+
+Adicionar os comandos abaixo temporariamente ao UsersController 
+
+// Comente o beforeFilter existente
+public function beforeFilter() {
+    parent::beforeFilter();
+    $this->Auth->allow('initDB'); // We can remove this line after we're finished
+}
+
+public function initDB() {
+    $group = $this->User->Group;
+    //Allow admins to everything
+    $group->id = 1;
+    $this->Acl->allow($group, 'controllers');
+
+    //allow managers to clientes, funcionarios, produtos e pedidos
+    $group->id = 2;
+    $this->Acl->deny($group, 'controllers');
+    $this->Acl->allow($group, 'controllers/Funcionarios');
+
+    //allow users to only add and edit on clientes and funcionarios
+    $group->id = 3;
+    $this->Acl->deny($group, 'controllers');
+    $this->Acl->allow($group, 'controllers/Funcionarios/index');
+    $this->Acl->allow($group, 'controllers/Funcionarios/view');
+
+    //negar tudo aos visitantes
+    $group->id = 4;
+    $this->Acl->deny($group, 'controllers');
+
+    //we add an exit to avoid an ugly "missing views" error message
+    echo "all done";
+    exit;
+}
+
+Chamar com:
+
+http://localhost/cakeacl/users/initdb
+
+Receberá a mensagem: all done
+
+Após concluir remova ou comente o código adicionado acima e volte a descomentar o beforeFilter().
+
+
+Execute para verificar o resultado:
+SELECT * FROM aros_acos;
+
+Aparecerá vários 1 e -1 mostrando que as permissões foram setadas.
+
+
+Dar permissões aos visitantes não logados ao index e view
+
+Adicione ao controller funcionarios
+
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('index');
+	}
+
+O público somente acessa actions listados. Para os demais é exigido login.
+
+No AppController::beforeFilter() adicione:
+		$this->Auth->allow('display');
+
+
+Redirecionamento
+
+Nosso aplicativo está agora sob Acl. Qualquer tentativa de acessar uma página não pública redireciona para o Login.
+
+
+Concluindo o Logout:
+
+Adicione à função logout no contorller Users:
+
+		$this->Session->setFlash('Good-Bye');
+		$this->redirect($this->Auth->logout());
+
+Nossa aplicação usando Auth e Acl está pronta. Agora as permissões são pelo grupo, mas podemos aplicar por usuário, por controller, por action e global.
+
+Experimente agora acessar como cada um dos usuários para testar as permissões.
+
+Caso queira liberar manualmente o acesso de um usuário para um action precisa alterar o método allow no método beforeFirst(). Se quizer dar acesso ao público no action add de funcionários faça assim:
+
+Edite o controller Funcionarios e altere o método assim:
+
+		$this->Auth->allow('index','add');
+
+Caso queira adicionar ou editar usuários sempre use o sistema e nunca faça diretamente no banco, pois não funcionará:
+
+Primeiro faça o login como admin, que é o único que pode mexer nos usuários e então acesse:
+http://localhost/cakeacl/users
+
+
+Referências:
+http://book.cakephp.org/2.0/en/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html
+http://book.cakephp.org/2.0/en/tutorials-and-examples/simple-acl-controlled-application/part-two.html
+http://book.cakephp.org/2.0/en/core-libraries/components/access-control-lists.html
+http://book.cakephp.org/2.0/en/core-libraries/behaviors/acl.html
+http://book.cakephp.org/2.0/en/console-and-shells/acl-shell.html
+

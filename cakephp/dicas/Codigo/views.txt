@@ -1,0 +1,48 @@
+Dicas sobre Views
+
+== Título do Aplicativo
+Adicionar ao AppController.php:
+
+	function beforeFilter(){
+		$this->set('title_for_layout','Controle de Finanças Pessoais');
+	}
+
+Será usado no Layout/default.ctp, aqui assim:
+	<title>
+		<?php echo $title_for_layout .' - '. ucfirst($this->params['controller']).'/'.$this->params['action']; ?>
+	</title>
+
+Isso mostrará no title do navegador a variável $title_for_layout definida no AppController mais o controller e o action atuais.
+
+== Melhorando Tradução
+Melhorar tradução de botão na view edit:
+		<li><?php echo $this->Form->postLink(__('Delete').(' Despesa'), array('action' => 'delete', $this->Form->value('Despesa.id')), null, __('Tem certeza de que deseja excluir # %s?', $this->Form->value('Despesa.id'))); ?></li>
+
+Adicionei: .(' Despesa')
+
+E mais abaixo na div header do layout:
+		<div id="header">
+			<h3><?php echo '&nbsp;&nbsp;'.$title_for_layout .' - '. ucfirst($this->params['controller']).'/'.$this->params['action'];?></h3>
+			<?php echo $this->element('menutopo2');?>
+		</div>
+
+==Alteração no CSS
+Copiei o app/webroot/css/cake.generic.css para app/webroot/css/cake.financas.css
+Editei e alterei a cor do H#:
+
+h3 {
+	color: #B2F7EC;
+	font-family:'Gill Sans','lucida grande', helvetica, arial, sans-serif;
+	font-size: 165%;
+}
+
+Alterei o View/Layout/default.ctp, mudando o css padrão para o financas, que criei:
+		echo $this->Html->css('cake.financas');
+
+
+==Trocando campo do tipo text por select:
+
+$options = array(''=>'Selecione','colegioelias' => 'Colégio do Elias', 'eliasmesada'=>'Elias Mesada','eliasmerenda'=>'Elias Merenda','meire' => 'Meire Salário', 'coelce'=>'COELCE', 'condominio'=>'Condomínio Ferreira', 'gvt'=>'GVT', 'carnes'=>'Carnes','mercantil'=>'Mercantil','almoco'=>'Almoço Trabalho','passagens'=>'Passagens','remedio'=>'Remédio');
+		echo $this->Form->input('descricao', array('type'=>'select','label' => 'Descrição da Despesa','options' => $options,'default'=>'0'));
+
+

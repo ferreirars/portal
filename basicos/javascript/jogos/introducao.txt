@@ -1,0 +1,47 @@
+Jogos em Javascript
+Com Javascript pode-se criar jogos, e ainda que a linguagem não se presta precisamente a facilitar as coisas, com esforço se pode conseguir um jogo "curioso". Neste artigo, veremos alguns exemplos de jogos.
+
+Por Miguel Angel Alvarez - Tradução de JML
+
+Javascript se encaixa dentro das linguagens para a web do lado do cliente. É compatível com os navegadores mais habituais, embora não com todos. Outra das características desta linguagem é que pode variar de um navegador a outro, inclusive pode ser diferente em versões distintas do mesmo navegador.
+
+Por tudo isso e porque Javascript é muito simples de utilizar para pequenos programas e muito complicado para aplicações mais elaboradas, não é uma linguagem muito apropriada para fazer jogos para a web. Pode acontecer que um jogo não se veja corretamente em todos os navegadores ou que não funcione em certas plataformas. Em qualquer caso, certamente é muito difícil de manter e de melhorar uma vez realizado.
+
+Não obstante, no mundo há pessoas para tudo e muitos loucos do Javascript nos deixaram autênticas obras de arte e de engenho, que nos demonstram que não é tão difícil fazer aplicações avançadas para a web com esta linguagem. Neste artigo, vamos mostrar vários jogos de Javascript, realizados com muita dedicação e que em quase todos os casos, podemos incluir livremente em nossas páginas web.
+
+JsTetris
+
+O conhecido jogo de peças que caem e temos que colocar da maneira mais ordenada. Funciona tanto em Internet Explorer como em Nestcape. O único que não funciona ainda muito rápido como deveria são os eventos do teclado, que às vezes não respondem tão rápido como se desejaria.
+http://gosu.pl/dhtml/JsTetris.html
+
+Buscaminas
+
+O típico jogo do Windows, muito útil aliás não só para exercitar a lógica, como também para adquirir uma maior soltura com o manejo do mouse, para aqueles que possuem dificuldade em move-lo.
+http://www.ecirce.com/dhtml/minesweeper/
+
+Memory Game
+
+Um jogo que temos várias cartas que devem ser agrupadas por duplas. Neste caso, proporciona-se o jogo em várias versões para Javascript, Flash, Java e PHP...
+http://mypage.bluewin.ch/katzenseite/docs/en/games/games.html
+
+Serpente
+
+Um clássico onde estiver. Você maneja uma serpente que come bolinhas e cada vez se torna maior.
+http://www.dynamicdrive.com/dynamicindex12/snake/index.htm
+
+Puzzle de bolhas
+
+Trata-se de lançar bolhas coloridas. Quando consegue-se 3 bolhas juntas da mesma cor, se descartam da tela. Perde-se quando não cabem mais bolhas na tela. É algo parecido ao Tetris.
+http://www.javafile.com/games/bubbles/bubbles.php
+
+Existem muito mais jogos em Javascript. Aqui só assinalamos alguns que nos parecem divertidos ou muito avançados tecnicamente. Para encontrar outros jogos em Javascript recomendamos acessar a algumas páginas com coleções de scripts como Hotscripts http://www.hotscripts.com ou javafile http://www.javafile.com. 
+
+http://www.criarweb.com/artigos/jogos-javascript.html
+
+Outros:
+http://www.imasters.com.br/artigo/5918/javascript/jogos_em_javascript/
+http://imasters.com.br/artigo/5979/javascript/jogos_em_javascript_parte_02/
+http://imasters.com.br/artigo/6021/jogos_em_javascript_parte_03
+http://www.scriptbrasil.com.br/forum/index.php?showtopic=142936
+
+

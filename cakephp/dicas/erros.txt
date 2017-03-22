@@ -1,0 +1,68 @@
+Dicas sobre erros no Cake
+
+
+Tratamento de erro é uma missão nobre em aplicativos.
+Aplicativos onde o programador prevê erros em todas as situações onde ele imagina que pode haver erro são aplicativos mais robustos. Os softwares de teste como o PHPUnit tem a missão de ajudar com isso.
+
+
+Mensagens de Erro
+Try Catch
+Debug
+Ferramentas
+
+Inserir no controller que deseja monitorar:
+	public function appError($method, $messages='Erro no Plugin<br><br>'){
+	   die('<pre>Mensagem: '.$messages.'Application error: called handler method<br>'.$method.'</pre>');
+	}
+
+
+Configure::write('Error', array(
+    'handler' => 'ErrorHandler::handleError',
+    'level' => E_ALL & ~E_DEPRECATED,
+    'trace' => true
+));
+
+Criando seu próprio manipulador de erro
+
+//in app/Config/core.php
+Configure::write('Error.handler', 'AppError::handleError');
+
+//in app/Config/bootstrap.php
+App::uses('AppError', 'Lib');
+
+//in app/Lib/AppError.php
+class AppError {
+    public static function handleError($code, $description, $file = null, $line = null, $context = null) {
+        echo 'There has been an error!';
+    }
+}
+
+Usando (requer PHP5.3 ou superior:
+
+Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
+    echo 'Oh no something bad happened';
+});
+
+
+Mudando o comportamento do erro fatal:
+//in app/Config/core.php
+Configure::write('Error.handler', 'AppError::handleError');
+
+//in app/Config/bootstrap.php
+App::uses('AppError', 'Lib');
+
+//in app/Lib/AppError.php
+class AppError {
+    public static function handleError($code, $description, $file = null, $line = null, $context = null) {
+        list(, $level) = ErrorHandler::mapErrorCode($code);
+        if ($level === LOG_ERROR) {
+            // Ignore fatal error. It will keep the PHP error message only
+            return false;
+        }
+        return ErrorHandler::handleError($code, $description, $file, $line, $context);
+    }
+}
+
+http://book.cakephp.org/2.0/en/development/errors.html
+http://book.cakephp.org/2.0/en/development/exceptions.html
+

@@ -1,0 +1,59 @@
+Codificação nos Models
+
+    public function __dataBeforeSave($data){
+        return implode("-",array_reverse(explode("/", $data)));
+        return date('Y-m-d', strtotime($data));
+    }
+    
+    public function beforeSave($options = array()) {
+        if(!empty($this->data['Cliente']['aniversario'])){
+            $this->data['Cliente']['aniversario'] = $this->__dataBeforeSave($this->data['Cliente']['aniversario']);
+        }
+        return true;
+    }
+
+
+	public function beforeSave($options = array()){		
+		// Toda a lógica deste callback é aplicada após a validação e antes de salvar
+		// Para continuar deve retornar true
+
+		if($this->data['Despesa']['descricao']=='meire'){
+			// Salvar o 'valor' será acrescido de 20% do INSS a cada add ou edit
+			// Cuidado: cada a cada alteração o valor será acrescido de 20%
+			if(!empty($this->data['Despesa']['valor'])){
+				$this->data['Despesa']['valor'] = $this->data['Despesa']['valor']*(1.2);
+				return true;
+			}
+		}
+	}
+
+	public function despesasTotal($mes){
+        $despesas = $this->find('all', array(
+            'conditions'=>array('Despesa.data'=>$mes),			
+            'fields'=>array('sum(Despesa.valor) as total')
+        ));
+
+		if(isset($despesas[0][0]['total'])){
+			return $despesas[0][0]['total'];
+		}
+	}
+
+	public function receitasTotal($mes){
+        $receitas = $this->find('all', array(
+            'conditions'=>array('Receita.data'=>$mes),			
+            'fields'=>array('sum(Receita.valor) as total')
+        ));
+		if(isset($receitas[0][0]['total'])){
+			return $receitas[0][0]['total'];
+		}
+	}
+
+Validação com expressões regulares
+		'data' => array(
+			'soalgarismos' => array(
+				'rule' => array('custom', '/[0-9\/]{7,7}$/i'),
+				'message' => 'Mês com apenas algarismos e a barra. Exatamente 7 caracteres'
+			),
+		),
+
+

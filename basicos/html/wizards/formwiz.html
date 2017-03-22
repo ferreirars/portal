@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+  
+  <title>FormWiz</title>
+</head>
+
+
+<body style="color: rgb(0, 0, 0); background-color: rgb(0, 204, 204);" alink="#000099" link="#000099" vlink="#990099">
+
+
+<h3 align=center>Form Wizard</h3>
+
+<table align="center" border="1" cellpadding="2" cellspacing="2" width="60%">
+    <tr><td width="20" align=center>
+      <form name="form1" methot="post" action="">
+        <input onclick="document.form1.ta.value='TEXT\n\n<input type=text name=text1 value=text1><br>'" value="Texto      " title="Bot&atilde;o tipo Text" type="button"><br>
+        <input onclick="document.form1.ta.value='PASSWORD\n\n<input type=password name=pass1 value=pass1><br>'" value="Senha     " title="Bot&atilde;o tipo Password" type="button"><br>
+        <input onclick="document.form1.ta.value='SELECT\n\n'+
+	'<select name=sel1>\n'+
+	'<option value=op1>Opção1</option>\n'+
+	'<option value=op2>Opção2</option>\n'+
+	'<option value=op3 selected>Opção3</option>\n'+
+	'</select><br>'" value="Select     " title="Controle tipo Select" type="button"><br>
+
+        <input onclick="document.form1.ta.value='TEXTAREA\n\n<textarea name=texta cols=60 rows=5>\nTexto Default\n</textarea><br>'" value="Textarea " title="Controle Textarea" type="button"><br>
+
+        <input onclick="document.form1.ta.value='CHECKBOX\n\n<input type=checkbox name=check1 value=Check1 checked>Check1<br>\n<input type=checkbox name=check2 value=Check2 >Check2<br>'" value="Checkbox" title="Controle checkbox" type="button"><br>
+
+        <input onclick="document.form1.ta.value='RADIO\n\n<input type=radio name=radgr1 value=Radio1 checked>Radio1<br>\n<input type=radio name=radgr1 value=Radio2 >Radio2<br>'" value="Radio      " title="Controle radio" type="button"><br>
+
+        <hr>
+        <input onclick="document.form1.ta.value='SUBMIT\n\n<input type=submit name=sub value=Enviar><br>'" value="Submit   " title="Bot&atilde;o tipo submit" type="button"><br>
+
+        <input onclick="document.form1.ta.value='BUTTON\n\n<input type=button name=but value=EnviarBut><br>'" value="Button    " title="Bot&atilde;o tipo button" type="button"><br>
+
+        <input onclick="document.form1.ta.value='RESET\n\n<input type=reset name=res value=Limpar><br>'" value="Reset      " title="Bot&atilde;o tipo reset" type="button"><br>
+
+        <input onclick="document.form1.ta.value='IMAGE Submit\n\n<input type=image src=imagem.png name=subimg ><br>'" value="Image     " title="Bot&atilde;o tipo imagem_submit" type="button"><br>
+
+      </td>
+      <td>      
+      <textarea cols="70" rows="20" name="ta"></textarea>
+      </td>
+    </tr>
+      </form>
+</table>
+
+</body>
+</html>

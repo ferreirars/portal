@@ -1,0 +1,72 @@
+<head>
+<script>
+function create_request_string(theForm)
+{
+	var reqStr = "";
+
+	for(i=0; i < theForm.elements.length; i++)
+	{
+		isFormObject = false;
+
+		switch (theForm.elements[i].tagName)
+		{
+			case "INPUT":
+			switch (theForm.elements[i].type)
+			{
+				case "text":
+				case "hidden":
+					reqStr += theForm.elements[i].name + "=" + encodeURIComponent(theForm.elements[i].value);
+					isFormObject = true;
+				break;
+
+				case "checkbox":
+					if (theForm.elements[i].checked)
+					{
+						reqStr += theForm.elements[i].name + "=" + theForm.elements[i].value;
+					}else{
+						reqStr += theForm.elements[i].name + "=";
+					}
+					isFormObject = true;
+				break;
+
+				case "radio":
+					if (theForm.elements[i].checked)
+					{
+						reqStr += theForm.elements[i].name + "=" + theForm.elements[i].value;
+						isFormObject = true;
+					}
+			}
+			break;
+
+			case "TEXTAREA":
+				reqStr += theForm.elements[i].name + "=" + encodeURIComponent(theForm.elements[i].value);
+				isFormObject = true;
+				break;
+
+			case "SELECT":
+				var sel = theForm.elements[i];
+				reqStr += sel.name + "=" + sel.options[sel.selectedIndex].value;
+				isFormObject = true;
+				break;
+			}
+
+		if ((isFormObject) && ((i+1) != theForm.elements.length-1))
+		{
+			reqStr += "&";
+		}
+
+	}
+
+	return reqStr;
+}
+</script>
+</head>
+<body>
+
+<form name="frm" onSubmit="alert(create_request_string(frm))">
+<input name="c1" value="Joao"><br>
+<input name="c2" value="Pedro"><br>
+<input type="submit" value="Enviar">
+</form>
+</body>
+

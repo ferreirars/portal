@@ -1,0 +1,73 @@
+Exemplos de Autenticação
+
+    public function initialize() {
+        parent::initialize();
+
+        $this->loadComponent('RequestHandler');
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => [
+                'Acl.Actions' => ['actionPath' => 'controllers/']
+            ],
+            'loginAction' => [
+                'plugin' => false,
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'loginRedirect' => [
+                'plugin' => false,
+                'controller' => 'Users',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'plugin' => false,
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'unauthorizedRedirect' => [
+                'controller' => 'Pages',
+                'action' => 'display',
+                'prefix' => false
+            ],
+            'authError' => 'You are not authorized to access that location.',
+            'flash' => [
+                'element' => 'error'
+            ]
+        ]);
+        
+        // Only for ACL setup
+        $this->Auth->allow();
+    }
+
+
+---------
+$this->loadComponent('Auth', [
+	'authorize' => [
+		'Acl.Actions' => ['actionPath' => 'controllers/']
+	],
+	'loginAction' => [
+		'plugin' => false,
+		'controller' => 'Users',
+		'action' => 'login'
+	],
+	'loginRedirect' => [
+		'plugin' => false,
+		'controller' => 'Posts',
+		'action' => 'index'
+	],
+	'logoutRedirect' => [
+		'plugin' => false,
+		'controller' => 'Users',
+		'action' => 'login'
+	],
+	'unauthorizedRedirect' => [
+		'controller' => 'Users',
+		'action' => 'login',
+		'prefix' => false
+	],
+	'authError' => 'You are not authorized to access that location.',
+	'flash' => [
+		'element' => 'error'
+	]
+]);
+

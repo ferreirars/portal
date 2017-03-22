@@ -1,0 +1,371 @@
+<html>
+<head>
+		<title>
+ONLamp.com: Working with Files in PHP</title>
+        <script language="javascript" src="/common.js"></script>
+<meta name="GOOGLEBOT" content="NOARCHIVE">
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+</head>
+<body  bgcolor="#ffffff" text="#000000">
+
+
+<a href="http://www.onlamp.com/">
+
+<img src="http://onlamp.com/images/onlamp/onlamp-logo.gif" alt="ONLamp.com" width="240" height="88" align="left" border="0" /></a>
+
+<dummy>&nbsp;&nbsp;&nbsp;</dummy>
+
+<br clear="all" />
+
+&nbsp;<font face="verdana,arial,helvetica" size="1">Published on <b>
+
+<a href="http://www.onlamp.com/">ONLamp.com</a></b> (<a href="http://www.onlamp.com/">http://www.onlamp.com/</a>)<br />
+
+ <!-- ---------- End of PERL --------------------- -->
+
+
+&nbsp;<a href='http://www.onlamp.com/pub/a/php/2002/10/03/php_foundations.html'>http://www.onlamp.com/pub/a/php/2002/10/03/php_foundations.html</a><br />
+&nbsp;<a href="/pub/a/general/print_code.html">See this</a> if you're having trouble printing code examples</font><br /><br clear="all" />
+
+<!-- ISI_LISTEN_START -->
+<span class=ISI_MESSAGE>
+<!--  
+This article is brought to you by Oreilly Net, your source for all
+PHP 
+ news.  -->
+</span>    
+
+<!--CS_PAGE_BREAK-->
+<h2>
+<!-- begin graphic_link.view --><a href="/pub/ct/29"><img src="/images/php/111-php_foundations.jpg" height="91" width="111" alt="PHP Foundations" border="0" align="left" hspace="10" vspace="0"></a><!-- end ct/graphic_link.view -->
+
+
+
+
+
+
+
+
+
+
+Working with Files in PHP</h2>
+by <a href="/pub/au/135">John Coggeshall</a><br />
+10/03/2002<br clear="all">
+<!-- sidebar begins -->
+<!-- don't move sidebars -->
+<!-- sidebar ends -->
+
+<p style="margin: 0px; margin-bottom: 0px; margin-left: 0px; 
+margin-right: 0px; margin-top: 0px; padding: 0px; padding-bottom: 0px; 
+padding-left: 0px; padding-right: 0px; padding-top: 0px; font-size: 
+1px;"></p>
+
+<p>Welcome back. In <a href="/pub/a/php/2002/09/12/php_foundations.html">my last column</a>, I finished my discussion of using references in PHP to do some pretty powerful things. This week, I'll be changing gears completely and begin my discussion of working with the file system through the use of an extensive set of PHP functions. I'll cover the fundamentals of reading and writing text files first, then cover some of the more advanced features and offer a few great shortcut functions. Let's get started.</p>
+
+<h3>Basic File IO</h3>
+
+<h4>Opening and Closing Files</h4>
+
+<p>The most versatile file IO (input and output) function available to the PHP developer is the 
+<code>fopen()</code> (or file open) command. This function is the most common starting point for any 
+file operations that occur within most PHP scripts. The syntax for the <code>fopen()</code> command 
+is as follows:</p>
+
+<pre><code>fopen(string filename, string mode [, int use_include_path])</code></pre>
+
+<p>The <code>fopen()</code> function when called returns an integer called a <code>file reference</code> (or pointer, 
+depending on personal preference) or zero if the operation failed.  This integer value in 
+most cases must be saved into a variable because a great number of the file IO functions 
+available to PHP require it as a parameter when called. As you can see, the <code>fopen()</code> 
+function requires two parameters and allows an optional third. The first, the <code>filename</code>, 
+obviously represents the name of the file in the file system that will be accessed. This file 
+may or may not actually exist, depending on whether you are creating a new file or working with an 
+existing one. The second required parameter, the <code>mode</code>, is used to determine how the file is 
+intended to be accessed. The possible modes of access available in PHP are listed in the 
+table below:</p>
+
+<table border="1" cellpadding="4" cellspacing="0"><tr>
+<td><strong>String</strong></td>
+<td><strong>Access Mode</strong></td></tr>
+<tr><td><code>r</code></td>
+<td>Access the file for reading only, start access from beginning of the file.</td></tr>
+<tr><td><code>r+</code></td>
+<td>Access the file for both reading and writing, start access <code>f</code> from beginning of the file.</td></tr>
+<tr><td><code>w</code></td>
+<td>Access the file for writing only, If the file exists, erase all contents. If file does not exist, an attempt will be made to create the file. In either case access the file from the beginning.</td></tr>
+<tr><td><code>w+</code></td>
+<td>Access the file for both reading and writing, If the file exists erase all contents. If the file does not exist, an attempt will be made to create the file. In either case, access the file from the beginning.</td></tr>
+<tr><td><code>a</code></td>
+<td>Open the file for writing only. If the file does not exist, an attempt will be made to create it. If the file does exist, access will start from the end of the file (no erasing). </td></tr>
+<tr><td><code>a+</code></td>
+<td>Open the file for reading and writing. If the file does not	exist, an attempt will be made to create it. If the file does exist, access will start from the end of the file (no erasing).</td>
+</tr></table>
+
+<p>As you can see, these modes can be boiled down into three basic groups: reading, 
+writing, and appending. Only one of these strings may be used as the <code>mode</code> parameter for 
+the <code>fopen()</code> command. </p>
+
+
+
+<!-- sidebar begins -->
+<table width="140" border="1" cellspacing="2" cellpadding="10" align="right" style="border: 1px solid #333333; margin: 8px;"><tr>
+<td width="140" valign="top" bgcolor="#ffffff" style="border: none;">
+<p class="headline">Related Reading</p>
+
+<a href="http://www.oreilly.com/catalog/9781565926813/index.html?CMP=ILL-4GV796923290">
+
+<img src="/catalog/covers/1565926811_cat.gif" alt="PHP Cookbook" border="0" />
+
+</a>
+<p class="medlist"><span class="title"><a href="http://www.oreilly.com/catalog/9781565926813/index.html?CMP=ILL-4GV796923290">PHP Cookbook</a></span><strong><br />
+
+By <a href="http://www.oreillynet.com/pub/au/985">David Sklar</a>, <a href="http://www.oreillynet.com/pub/au/986">Adam Trachtenberg</a></strong>
+</p>
+<div class="secondary">
+<!-- builds links to list in sidebar -->
+ <a href="http://www.oreilly.com/catalog/9781565926813/toc.html?CMP=ILL-4GV796923290">Table of Contents</a><br /> 
+  <a href="http://www.oreilly.com/catalog/9781565926813/inx.html?CMP=ILL-4GV796923290">Index</a><br /> 
+  <a href="http://www.oreilly.com/catalog/9781565926813/chapter/index.html?CMP=ILL-4GV796923290">Sample Chapter</a><br /> 
+ 
+
+
+
+<br /><b><a href="http://safari.oreilly.com/?cid=orm-cat-readnow-">Read Online--Safari</a></b>
+<span class="tiny">Search this book on Safari:</span>
+<form action="http://safari.oreilly.com/JVXSL.asp" method="post">
+<input type="hidden" name="s" value="1" /><input type="hidden" name="b" value="1" />
+<input type="hidden" name="t" value="1" /><input type="hidden" name="f" value="1" />
+<input type="hidden" name="c" value="1" /><input type="hidden" name="l" value="1" />
+<input type="hidden" name="view" value="section" />
+<input tabindex="1" name="se_text" type="text" value="" size="15" />&nbsp;<input name="go" type="image" title="Execute the search" src="http://www.oreillynet.com/images/safari_btn_go.gif" width="23" height="17" border="0" align="absmiddle"  alt="Go" /><br />
+<select name="se_isbn">
+<option value="1-56592-681-1">Only This Book</option>
+<option value="">All of Safari</option>
+</select><br />
+<input type="checkbox" name="code" value="1" /><span class="tiny">Code Fragments only</span>
+</form>						  
+
+</div>
+</td>
+</tr></table>
+<!-- sidebar ends -->
+
+
+<p>The final optional parameter <code>use_include_path</code> is an integer representing a boolean value. If the value of this parameter is true (an integer value of 1,) then when an attempt is made to open a file that does not exist in the specified directory, an attempt will be made to file the file in the directories specified by PHP's include path before further action is taken.</p>
+
+<p><strong>Important note:</strong> In order for a file to be accessed or created, the directory and/or 
+file in question must have the appropriate permissions. Also note that access must 
+be granted to the user under which the PHP script will be executed (usually the 
+same username as the web server).</p> 
+
+<p>Once a file reference has been created, and any reading/writing done to the file opened is 
+complete, it is necessary that the file be closed before it can be opened again. Although all 
+file references are automatically closed upon the termination of the PHP script which 
+opened them, it is good programming practice to close the files manually. To do this, PHP 
+provides the <code>fclose()</code> function. This function takes a single parameter (the <code>file reference</code>) 
+and returns a boolean value indicating the success or failure.</p>
+
+For example, the below code will open and close a file in the <em>/tmp/</em> directory called 
+<em>test.txt</em> using the <code>a+</code> (Append read/write) mode:
+
+<pre><code>&lt;?php
+   $fr = fopen('/tmp/test.txt', 'a+');
+   if(!$fr) {
+      echo "Error! Couldn't open the file.";
+   } else {
+      // $fr now can be used to represent the opened file
+   }
+   if(!fclose($fr)) {
+      echo "Error! Couldn't close the file.";
+   } 
+?&gt;</code></pre>
+
+<h4>Reading and Writing Strings</h4>
+		
+<p>Now that we have discussed opening a file, how do we read any data from it? Although 
+there are many different methods, one of the most basic methods is the <code>fgets()</code> function. 
+The syntax for the <code>fgets()</code> function is as follows:</p>
+
+<pre><code>fgets(int file reference [, int length])</code></pre>
+
+<p>As you can see, the only required parameter to the <code>fgets()</code> function is the <code>file reference</code> 
+returned by the <code>fopen()</code> function. The optional parameter represents the number of bytes 
+to read from the file (minus one). If this parameter is not provided, the <code>fgets()</code> will read 
+one kilobyte (1024 bytes) from the file until a new line character is read or until the 
+function reaches the end of the file. The return value from the <code>fgets()</code> function is the 
+string read from the file. Please note that in the event that the <code>fgets()</code> function stops 
+reading because a new line character is encountered, the new line character will be returned 
+as part of the string. This is not true, however, if the end of file is reached. In that case, the 
+end of file character is omitted from the resulting string. </p>
+
+<p>Of course, for this function to work the <code>file reference</code> used must have been created by 
+opening a file in the proper mode (any mode allowing reading).</p> 
+
+<p>The complement of the <code>fgets()</code> function, <code>fputs()</code> is the basic function available in PHP for writing a string to a file. Unlike <code>fgets()</code>, <code>fputs()</code> requires a minimum of two parameters (the <code>file reference</code> and the <code>string</code> to write) with a third optional parameter 
+representing the amount of the passed string to actually write to the file.</p>
+ 
+<p>Now that we are familiar with the ways to open, close, read, and write to a file in PHP, let's 
+make a simple counter script. The purpose of this script is simply to count the number of 
+times the script has been executed. When placed on a Web page, this script can be used to 
+count the number of times the page has been viewed. To create this script we'll need to 
+store an string representing the number of times the page has been accessed into a file, then 
+every time the script is executed, we'll read that value, add one, and write it back to the file. </p>
+
+<p>Let's get started.</p>
+
+<p>First, we'll need to open the file. For our purposes, I'll use the file <em>counter.txt</em> in the 
+<em>/tmp/</em> directory for reading:</p>
+
+<pre><code>&lt;?php
+   $visitors = 0;	// Initialize the visitors to zero
+   $fr = fopen('/tmp/counter.txt', 'r');</code></pre>
+   
+<p>Because the first time the script is executed, the file shouldn't exist we have to first test the 
+<code>file reference</code> to see if the <code>fopen()</code> command was successful. If not we need to create the 
+file, set the total visitors to one, and write that value into the file:</p>
+
+<pre><code>   if(!$fr) {
+      $visitors = 1;		// Our first visitor
+      $fr = fopen('/tmp/counter.txt','w');
+      if(!$fr) {
+         echo "Could not create the counter file!";
+         exit;
+      }
+      fputs($fr, $visitors);
+      fclose($fr);</code></pre>
+	  
+<p>If we were successful at opening the <em>counter.txt</em> file, then our next step is to read the string 
+containing the total visitors from the file, add one to it, and display it to the user:</p>
+		
+<pre><code>   } else {
+      $visitors = fgets($fr);
+
+      $visitors++;
+      echo "You are visitor number: $visitors";</code></pre>
+		 
+<p>Now, we need to close the current <code>file reference</code> (as it's in the wrong mode) and re-open the 
+file in writing mode. Once that's done, we can write the new visitor number back to the 
+file, close it, and we're all done:</p>
+
+<pre><code>      fclose($fr);
+      $fr = fopen('/tmp/counter.txt','w');
+      if(!$fr) {
+         echo "Could not re-create the counter file!";
+         exit;
+      }
+      fputs($fr, $visitors);
+      fclose($fr);
+   }
+?&gt;</code></pre>
+
+<h3>That's All for Today</h3>
+
+<p>That concludes our introduction to accessing the file system with PHP. Now that you are 
+familiar with some of the fundamental functions used when accessing files, in the coming 
+weeks I'll be continuing our discussion including some shortcuts, dealing with permissions 
+and working with the directory structure. See you then.</p>
+
+<p> <em>Editor's Note, 8 October 2002: due to an unfortunate typo, the previous
+versions of this article left out the initial argument to the
+<code>fputs()</code> calls.  This has now been fixed.</em> </p>
+
+<p><i>
+<a href="/pub/au/135">John Coggeshall</a> 
+is a a PHP consultant and author who started losing sleep over PHP around five years ago.
+
+</i></p>
+
+<hr size="1" noshade />
+
+<p><i>Read more <a href="/pub/ct/29"><b>PHP Foundations</a></b> columns</i>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Return to the <a href="/php/">PHP DevCenter</a>.</p><br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><font face="verdana,arial,helvetica" size="1">Copyright &copy; 2007 O'Reilly Media, Inc.</font></p>
+
+<!-- ISI_LISTEN_STOP -->  
+
+ <!--WEBSIDESTORY CODE HBX1.0 (Universal)-->
+    <!--COPYRIGHT 1997-2004 WEBSIDESTORY,INC. ALL RIGHTS RESERVED. U.S.PATENT No. 6,393,479B1. MORE INFO:http://websidestory.com / privacy-->
+    <script language="javascript" type="text/javascript">
+    var _hbEC=0,_hbE=new Array;function _hbEvent(a,b){b=_hbE[_hbEC++]=new Object();b._N=a;b._C=0;return b;}
+    var hbx=_hbEvent("pv");hbx.vpc="HBX0100u";hbx.gn="ehg-oreilly.hitbox.com";
+
+    //"BCB: onlamp.com,/a/2703, DM550308O2RV";
+
+    hbx.acct="DM550308O2RV;DM520404M4ZR"; //ACCOUNT NUMBER(S)
+    hbx.pn="Working+with+Files+in+PHP"; //PAGE NAME(S)
+    hbx.mlc="/lpt/a/;/onlamp.com/lpt/a/"; //MULTI-LEVEL CONTENT CATEGORY
+    hbx.pndef="title"; //DEFAULT PAGE NAME
+    hbx.ctdef="full"; //DEFAULT CONTENT CATEGORY
+
+    hbx.lt="auto"; //LINK TRACKING 
+    hbx.dlf="n"; //DOWNLOAD FILTER
+    hbx.dft="n"; //DOWNLOAD FILE NAMING
+    hbx.elf="n"; //EXIT LINK FILTER
+
+    //SEGMENTS AND FUNNELS
+    hbx.seg=""; //VISITOR SEGMENTATION
+    hbx.fnl=""; //FUNNELS
+
+    //CAMPAIGNS
+    hbx.cmp=""; //CAMPAIGN ID
+    hbx.cmpn="CMP"; //CAMPAIGN ID IN QUERY
+    hbx.hra=""; //RESPONSE ATTRIBUTE
+    hbx.hqsr=""; //RESPONSE ATTRIBUTE IN REFERRAL QUERY
+    hbx.hqsp="ATT"; //RESPONSE ATTRIBUTE IN QUERY
+    hbx.hlt=""; //LEAD TRACKING
+    hbx.hla=""; //LEAD ATTRIBUTE
+    hbx.gp=""; //CAMPAIGN GOAL
+    hbx.gpn=""; //CAMPAIGN GOAL IN QUERY
+    hbx.hcn=""; //CONVERSION ATTRIBUTE
+    hbx.hcv=""; //CONVERSION VALUE
+    hbx.cp="null"; //LEGACY CAMPAIGN
+    hbx.cpd=""; //CAMPAIGN DOMAIN
+
+    //CUSTOM VARIABLES
+    hbx.ci="";//CUSTOMER ID
+    hbx.hc1="";//CUSTOM 1
+    hbx.hc2="";//CUSTOM 2
+    hbx.hc3="";//CUSTOM 3
+    hbx.hc4="";//CUSTOM 4 
+    hbx.pec="";//ERROR CODES
+    </script><script language="javascript1.1" defer="defer"  src="http://www.oreillynet.com/hbx.js" type="text/javascript"></script><!--//-->  
+    <!-- END WEBSIDESTORY CODE  -->
+ </body>
+
+
+</html>

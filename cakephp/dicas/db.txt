@@ -1,0 +1,167 @@
+Dicas sobre o uso de bancos de dados no Cake
+
+Comexão com o PostgreSQL
+
+	public $default = array(
+		'datasource' => 'Database/Postgres',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'root',
+		'password' => '',
+		'database' => 'dnocs',
+		'schema' => 'recursos_humanos',
+		'prefix' => '',
+		//'encoding' => 'utf8',
+	);
+
+
+Query no Model
+$this->query("SELECT * FROM clientes;");
+
+Query no Controller
+$this->Cliente->query("SELECT * FROM clientes;");
+
+Salvando Dados
+if ($this->ModelName->save($this->request->data)) {
+    $this->Session->setFlash('Data Saved!');
+}
+
+Salvar Muitos
+
+$data = array(
+    array('title' => 'title 1'),
+    array('title' => 'title 2'),
+);
+$this->ModelName->saveAll($data);
+
+Excluir
+$this->Model->delete($this->request->data('Model.id'));
+
+Delete all
+$this->Model->deleteAll(array('Model.spam' => true), false);
+
+
+Uso do LIKE
+
+$keyword =$this->params['named']['keyword']; 
+$this->paginate['conditions'] = array("Cliente.nome LIKE" => "%$keyword%"); 
+
+$this->Post->find('first', array (
+    "Author.name" => "Bob", 
+    "OR" => array (
+        "Post.title LIKE" => "%magic%",
+        "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
+    )
+));
+
+$this->Post->find("all",array('condition'=>array('Author LIKE'=>"ad%")));
+
+$this->Post->find("all",array('condition'=>array("OR"=>array('Author LIKE'=>"ad%",'Author LIKE'=>"bo%"))));
+
+
+Complexas conditions
+
+// Diferente
+array("Post.title !=" => "This is a post")
+
+array (
+    "Post.title" => array("First post", "Second post", "Third post"),
+    "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
+)
+
+// Ou
+array("OR" => array(
+    "Post.title" => array("First post", "Second post", "Third post"),
+    "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
+))
+
+array(
+    "Author.name" => "Bob",
+    "OR" => array(
+        "Post.title LIKE" => "%magic%",
+        "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
+    )
+)
+
+array('OR' => array(
+    array('Post.title LIKE' => '%one%'),
+    array('Post.title LIKE' => '%two%')
+))
+
+// BETWEEN
+array('Post.read_count BETWEEN ? AND ?' => array(1,10))
+
+// Group By
+array(
+    'fields' => array(
+        'Product.type',
+        'MIN(Product.price) as price'
+    ),
+    'group' => 'Product.type'
+)
+
+// Datasource
+Should you need even more control over your queries, you can make use of prepared statements. This allows you to talk directly to the database driver and send any custom query you like:
+
+Se você precisar de mais controle sobre suas consultas, você pode fazer uso de instruções preparadas. Isso permite que você se comunique diretamente com o driver de banco de dados e enviar qualquer consulta personalizada que você queira:
+
+$db = $this->getDataSource();
+$db->fetchAll(
+    'SELECT * from users where username = ? AND password = ?',
+    array('jhon', '12345')
+);
+$db->fetchAll(
+    'SELECT * from users where username = :username AND password = :password',
+    array('username' => 'jhon','password' => '12345')
+);
+
+Outro exemplo:
+$query = "SELECT * FROM user WHERE id=:user_id"
+$data = $this->getDataSource()->fetchAll($query, array("usery_id" => $user_id), array("cache" => false));
+
+
+Cakephp – Conexões com banco de dados(postgres, oracle, sqlserver e mysql)
+
+Estou testando na versão 1.3
+/meuprojeto/app/config/database.php
+
+<?php
+class DATABASE_CONFIG {
+//postgres
+var $default = array(
+‘driver’ => ‘postgres’,
+‘persistent’ => false,
+‘host’ => ‘local_db’,
+‘login’ => ‘usuario_db’,
+‘password’ => ‘senha_db’,
+‘database’ => ‘banco_db’,
+);
+
+//oracle
+var $oracle = array(
+‘driver’ => ‘oracle’,
+‘persistent’ => false,
+‘login’ => ‘usuario_db’,
+‘password’ => ‘senha_db’,
+‘database’ => ‘local_db:porta_db/banco_db’,
+);
+//mysql
+var $mysql = array(
+‘driver’ => ‘mysql’,
+‘persistent’ => false,
+‘host’ => ‘local_db’,
+‘login’ => ‘usuario_db’,
+‘password’ => ‘senha_db’,
+‘database’ => ‘banco_db’,
+);
+//sqlserver
+var $mssql= array(
+‘driver’ => ‘mssql’,
+‘persistent’ => false,
+‘host’ => ‘local_db’,
+‘login’ => ‘usuario_db’,
+‘password’ => ‘senha_db’,
+‘database’ => ‘banco_db’,
+);
+}
+?>

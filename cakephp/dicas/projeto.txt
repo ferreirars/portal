@@ -1,0 +1,84 @@
+Dicas sobre Projeto de Aplicativos
+
+
+Primeiro de tudo: DRY
+
+Sempre que usar customização em cada aplicativo procurar criar plugins para isso, contendo:
+	Helpers
+	Elements
+	Components
+	Lauouts
+	AppController, AppModel, AppHelper, bootstrap, etc
+
+Load classes using App:uses() e Vendor files using App:import()
+
+Caso tenha vários projetos é recomendável extender a classe VENDOR
+
+require_once(VENDORS.'my_model.php');
+class AppModel extends MyModel {}
+
+Assim também extender AppController, AppHelper, bootstrap e similares.
+
+Para Cake 2.0 e superiores recomendo usar Libs para incluir ao invés de App::uses()
+
+Melhor Feedback
+Adicione ao AppModel para ser notificado sobre erros em associações/relacionamentos de models:
+
+public function __construct($id = false, $table = null, $ds = null) {
+    parent::__construct($id, $table, $ds);
+ 
+    # avoiding AppModel instances instead of real Models without telling you about it
+ if (!is_a($this, $this->name) && $this->displayField  !== 'id' && !Configure::read('Core.disableModelInstanceNotice')) {
+        trigger_error('AppModel instance! Expected: '.$this->name);
+    }
+}
+
+Debugar SQL:
+/**
+ * quick sql debug from controller dynamically
+ * or statically from just about any other place in the script
+ * @param bool $die: TRUE to output and die, FALSE to log to file and continue
+ */
+function sql($die = true) {
+    if (isset($this->Controller)) {
+        $object = $this->Controller->{$this->Controller->modelClass};
+    } else {
+        $object = ClassRegistry::init(defined('CLASS_USER')?CLASS_USER:'User');
+    }
+ 
+    $log = $object->getDataSource()->getLog(false, false);
+    foreach ($log['log'] as $key => $value) {
+        if (strpos($value['query'], 'SHOW ') === 0 || strpos($value['query'], 'SELECT CHARACTER_SET_NAME ') === 0) {
+            unset($log['log'][$key]);
+            continue; 
+        }
+    }
+    # output and die?
+ if ($die) {
+        debug($log);
+        die();
+    }
+    # log to file then and continue
+ $log = print_r($log, true);
+    CakeLog::write('sql', $log);
+}
+
+Executando em um behavior:
+CommonComponent::sql();
+
+
+Sugestões
+
+Remover os arquivos que não serão usados:
+build.properties
+build.xml
+CONTRIBUTING.md
+README.md
+
+Remover a pasta:
+lib/Cake/Test
+
+Permissões para a pasta app/tmp:
+Esta pasta deve oferecer permissão de escrita para o Apache
+
+

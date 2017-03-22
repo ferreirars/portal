@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt" dir="ltr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta name="generator" content="MediaWiki 1.16alpha-wmf" />
+		<meta name="keywords" content="Aplicativos em PHP/Trabalhando em PHP com/Validação de Dados" />
+		<link rel="alternate" type="application/x-wiki" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados&amp;action=edit" />
+		<link rel="edit" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados&amp;action=edit" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikilivros (pt)" />
+		<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/" />
+		<link rel="alternate" type="application/rss+xml" title="Feed RSS Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=rss" />
+		<link rel="alternate" type="application/atom+xml" title="Feed Atom Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=atom" />
+		<title>Aplicativos em PHP/Trabalhando em PHP com/Validação de Dados - Wikilivros</title>
+		<link rel="stylesheet" href="/skins-1.5/common/shared.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/common/commonPrint.css?233xz" type="text/css" media="print" />
+		<link rel="stylesheet" href="/skins-1.5/monobook/main.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/chick/main.css?233xz" type="text/css" media="handheld" />
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE50Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE55Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/skins-1.5/monobook/IE60Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/skins-1.5/monobook/IE70Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="print" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Handheld.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="handheld" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=-&amp;action=raw&amp;maxage=2678400&amp;smaxage=0&amp;ts=20090810192510&amp;gen=css" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.css&amp;action=raw&amp;ctype=text/css" type="text/css" />
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins-1.5/common/IEFixes.js?233xz"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/skins-1.5";
+		var wgArticlePath = "/wiki/$1";
+		var wgScriptPath = "/w";
+		var wgScript = "/w/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://pt.wikibooks.org";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Aplicativos_em_PHP/Trabalhando_em_PHP_com/Validação_de_Dados";
+		var wgTitle = "Aplicativos em PHP/Trabalhando em PHP com/Validação de Dados";
+		var wgAction = "view";
+		var wgArticleId = "14510";
+		var wgIsArticle = true;
+		var wgUserName = "Ribafs";
+		var wgUserGroups = ["*", "user", "autoconfirmed"];
+		var wgUserLanguage = "pt-br";
+		var wgContentLanguage = "pt";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = 110812;
+		var wgVersion = "1.16alpha-wmf";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = [",	.", " 	,"];
+		var wgDigitTransformTable = ["", ""];
+		var wgMainPageTitle = "Página principal";
+		var wgMWSuggestTemplate = "http://pt.wikibooks.org/w/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest";
+		var wgDBname = "ptwikibooks";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["com sugestões", "sem sugestões"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		var wgAjaxWatch = {"watchMsg": "Vigiar", "unwatchMsg": "Desinteressar-se", "watchingMsg": "Vigiando...", "unwatchingMsg": "Deixando de vigiar..."};
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="/skins-1.5/common/wikibits.js?233xz"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="/skins-1.5/common/ajax.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/ajaxwatch.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/mwsuggest.js?233xz"></script>
+		<script type="text/javascript">/*<![CDATA[*/
+		var wgNotice='';var wgNoticeLocal='';
+		/*]]>*/</script>
+		<script type="text/javascript" src="http://upload.wikimedia.org/centralnotice/wikibooks/pt-br/centralnotice.js?233xz"></script>
+
+		<script type="text/javascript" src="/w/index.php?title=-&amp;action=raw&amp;smaxage=0&amp;gen=js&amp;useskin=monobook"><!-- site js --></script>
+		<script type="text/javascript" src="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.js&amp;action=raw&amp;ctype=text/javascript"></script>
+	</head>
+<body class="mediawiki ltr ns-0 ns-subject page-Aplicativos_em_PHP_Trabalhando_em_PHP_com_Validação_de_Dados skin-monobook">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+		<div id="siteNotice"><script type='text/javascript'>if (wgNotice != '') document.writeln(wgNotice);</script></div>		<h1 id="firstHeading" class="firstHeading">Aplicativos em PHP/Trabalhando em PHP com/Validação de Dados</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">De Wikilivros</h3>
+			<div id="contentSub"><span class="subpages">&lt; <a href="/wiki/Aplicativos_em_PHP" title="Aplicativos em PHP">Aplicativos em PHP</a> | <a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com" title="Aplicativos em PHP/Trabalhando em PHP com">Trabalhando em PHP com</a></span></div>
+									<div id="jump-to-nav">Ir para: <a href="#column-one">navegação</a>, <a href="#searchInput">pesquisa</a></div>			<!-- start content -->
+			<table id="toc" class="toc" summary="Tabela de conteúdo">
+<tr>
+<td>
+<div id="toctitle">
+<h2>Tabela de conteúdo</h2>
+</div>
+<ul>
+<li class="toclevel-1"><a href="#.C3.93timo_artigo_em_5_partes_na_Revista_do_PHP_de_autoria_do_Er_Abbott"><span class="tocnumber">1</span> <span class="toctext">Ótimo artigo em 5 partes na Revista do PHP de autoria do Er Abbott</span></a></li>
+<li class="toclevel-1"><a href="#Valida.C3.A7.C3.A3o_de_e-mails"><span class="tocnumber">2</span> <span class="toctext">Validação de e-mails</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Check_valid_e-mail"><span class="tocnumber">2.1</span> <span class="toctext">Check valid e-mail</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Tipos_de_Vari.C3.A1veis"><span class="tocnumber">3</span> <span class="toctext">Tipos de Variáveis</span></a></li>
+</ul>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+//<![CDATA[
+ if (window.showTocToggle) { var tocShowText = "mostrar"; var tocHideText = "esconder"; showTocToggle(); } 
+//]]>
+</script>
+<p><a name=".C3.93timo_artigo_em_5_partes_na_Revista_do_PHP_de_autoria_do_Er_Abbott" id=".C3.93timo_artigo_em_5_partes_na_Revista_do_PHP_de_autoria_do_Er_Abbott"></a></p>
+<h2><span class="mw-headline">Ótimo artigo em 5 partes na Revista do PHP de autoria do Er Abbott</span></h2>
+<p><a href="http://revistaphp.com.br/artigo.php?id=125" class="external text" title="http://revistaphp.com.br/artigo.php?id=125" rel="nofollow">- Validação de Formulários - 5º e última parte: Validando no servidor</a></p>
+<p><a href="http://revistaphp.com.br/artigo.php?id=124" class="external text" title="http://revistaphp.com.br/artigo.php?id=124" rel="nofollow">- Validação de Formulários - Parte 04 (A fonteira cliente/servidor)</a></p>
+<p><a href="http://revistaphp.com.br/artigo.php?id=108" class="external text" title="http://revistaphp.com.br/artigo.php?id=108" rel="nofollow">- Validação de Formulários - Parte 3: O baile de máscaras</a></p>
+<p><a href="http://revistaphp.com.br/artigo.php?id=107" class="external text" title="http://revistaphp.com.br/artigo.php?id=107" rel="nofollow">- Validação de Formulários - Parte 2: Os Campos Especiais</a></p>
+<p><a href="http://revistaphp.com.br/artigo.php?id=106" class="external text" title="http://revistaphp.com.br/artigo.php?id=106" rel="nofollow">- Validação de formulários - Parte 1 (O Planejamento)</a></p>
+<p><br /></p>
+<p><a href="http://www.revistaphp.com.br/print.php?id=141" class="external text" title="http://www.revistaphp.com.br/print.php?id=141" rel="nofollow">Turbinando a Validação de Formulários</a></p>
+<p><br /></p>
+<p><a name="Valida.C3.A7.C3.A3o_de_e-mails" id="Valida.C3.A7.C3.A3o_de_e-mails"></a></p>
+<h2><span class="mw-headline">Validação de e-mails</span></h2>
+<p><a name="Check_valid_e-mail" id="Check_valid_e-mail"></a></p>
+<h3><span class="mw-headline">Check valid e-mail</span></h3>
+<pre>
+function esEmailValido($email)
+{
+    if (ereg("^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([_a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]{2,200}\.[a-zA-Z]{2,6}$", $email ) )
+	{
+       return true;
+    }
+	else
+	{
+       return false;
+    }
+}
+</pre>
+<p><a href="http://snippets.dzone.com/posts/show/4346" class="external free" title="http://snippets.dzone.com/posts/show/4346" rel="nofollow">http://snippets.dzone.com/posts/show/4346</a></p>
+<p><br /></p>
+<p><a name="Tipos_de_Vari.C3.A1veis" id="Tipos_de_Vari.C3.A1veis"></a></p>
+<h2><span class="mw-headline">Tipos de Variáveis</span></h2>
+<pre>
+&lt;?php
+
+function ss_array_as_string (&amp;$array, $column = 0) {
+    $str = "Array(&lt;BR&gt;\n";
+    while(list($var, $val) = each($array)){
+        for ($i = 0; $i &lt; $column+1; $i++){
+            $str .= "    ";
+        }
+        $str .= $var.' ==&gt; ';
+        $str .= ss_as_string($val, $column+1)."&lt;BR&gt;\n";
+    }
+    for ($i = 0; $i &lt; $column; $i++){
+        $str .= "    ";
+    }
+    return $str.')';
+}
+
+function ss_object_as_string (&amp;$object, $column = 0) {
+    if (empty($object-&gt;classname)) {
+        return "$object";
+    }
+    else {
+        $str = $object-&gt;classname."(&lt;BR&gt;\n";
+        while (list(,$var) = each($object-&gt;persistent_slots)) {
+            for ($i = 0; $i &lt; $column; $i++){
+                $str .= "    ";
+            }
+            global $$var;
+            $str .= $var.' ==&gt; ';
+            $str .= ss_as_string($$var, column+1)."&lt;BR&gt;\n";
+        }
+        for ($i = 0; $i &lt; $column; $i++){
+            $str .= "    ";
+        }
+        return $str.')';
+    }
+}
+
+function ss_as_string (&amp;$thing, $column = 0) {
+    if (is_object($thing)) {
+        return ss_object_as_string($thing, $column);
+    }
+    elseif (is_array($thing)) {
+        return ss_array_as_string($thing, $column);
+    }
+    elseif (is_double($thing)) {
+        return "Double(".$thing.")";
+    }
+    elseif (is_long($thing)) {
+        return "Long(".$thing.")";
+    }
+    elseif (is_string($thing)) {
+        return "String(".$thing.")";
+    }
+    else {
+        return "Unknown(".$thing.")";
+    }
+}
+
+$my_variable=3;
+//echo ss_as_string($my_variable);
+echo ss_as_string($GLOBALS);
+?&gt;
+
+</pre>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 8/1000000
+Post-expand include size: 20/2048000 bytes
+Template argument size: 0/2048000 bytes
+Expensive parser function count: 0/500
+-->
+
+<!-- Saved in parser cache with key ptwikibooks:pcache:idhash:14510-0!1!0!!pt-br!2 and timestamp 20090810192927 -->
+<div class="printfooter">
+Obtido em "<a href="http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados">http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados</a>"</div>
+			<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="/wiki/Especial:Categorias" title="Especial:Categorias">Categoria</a>: <span dir='ltr'><a href="/wiki/Categoria:Aplicativos_em_PHP" title="Categoria:Aplicativos em PHP">Aplicativos em PHP</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Acessos</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+	
+				 <li id="ca-nstab-main" class="selected"><a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados" title="Ver a página de conteúdo [c]" accesskey="c">módulo</a></li>
+				 <li id="ca-talk" class="new"><a href="/w/index.php?title=Discuss%C3%A3o:Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados&amp;action=edit&amp;redlink=1" title="Discussão sobre o conteúdo da página [t]" accesskey="t">Discussão</a></li>
+				 <li id="ca-edit"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados&amp;action=edit" title="Você pode editar esta página. Por favor, utilize o botão Mostrar Previsão antes de salvar. [e]" accesskey="e">Editar</a></li>
+				 <li id="ca-history"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados&amp;action=history" title="Edições anteriores desta página. [h]" accesskey="h">História</a></li>
+				 <li id="ca-move"><a href="/wiki/Especial:Mover/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados" title="Mover esta página [m]" accesskey="m">Mover</a></li>
+				 <li id="ca-watch"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados&amp;action=watch" title="Adicionar esta página aos artigos vigiados [w]" accesskey="w">Vigiar</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Ferramentas pessoais</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+				<li id="pt-acaibeta"><a href="http://pt.wikibooks.org/w/index.php?title=Especial:UsabilityInitiativeOptIn&amp;from=Aplicativos_em_PHP%2FTrabalhando_em_PHP_com%2FValida%C3%A7%C3%A3o_de_Dados" class="no-text-transform">Experimente o Beta</a></li>
+				<li id="pt-userpage"><a href="/wiki/Usu%C3%A1rio:Ribafs" title="Sua página de utilizador [.]" accesskey=".">Ribafs</a></li>
+				<li id="pt-mytalk"><a href="/wiki/Usu%C3%A1rio_Discuss%C3%A3o:Ribafs" title="Sua página de discussão [n]" accesskey="n">Minha discussão</a></li>
+				<li id="pt-preferences"><a href="/wiki/Especial:Prefer%C3%AAncias" title="Minhas preferências">Minhas preferências</a></li>
+				<li id="pt-watchlist"><a href="/wiki/Especial:P%C3%A1ginas_vigiadas" title="Lista de artigos vigiados. [l]" accesskey="l">Páginas vigiadas</a></li>
+				<li id="pt-mycontris"><a href="/wiki/Especial:Contribui%C3%A7%C3%B5es/Ribafs" title="Lista das suas contribuições [y]" accesskey="y">Minhas contribuições</a></li>
+				<li id="pt-logout"><a href="/w/index.php?title=Especial:Sair&amp;returnto=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados" title="Sair">Sair</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(http://upload.wikimedia.org/wikibooks/pt/b/bc/Wiki.png);" href="/wiki/P%C3%A1gina_principal" title="Página principal [z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div id="p-search" class="portlet">
+		<h5 lang="pt-br" xml:lang="pt-br"><label for="searchInput">Pesquisa</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/w/index.php" id="searchform"><div>
+				<input type='hidden' name="title" value="Especial:Busca"/>
+				<input id="searchInput" name="search" type="text" title="Pesquisar nesta wiki [f]" accesskey="f" value="" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Ir" title="Ir a uma página com este exato nome, caso exista" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Pesquisa" title="Procurar por páginas contendo este texto" />
+			</div></form>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5 lang="pt-br" xml:lang="pt-br">Navegação</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/wiki/P%C3%A1gina_principal">Página principal</a></li>
+				<li id="n-Library"><a href="/wiki/Wikilivros:Biblioteca">Biblioteca</a></li>
+				<li id="n-recentchanges"><a href="/wiki/Especial:Mudan%C3%A7as_recentes" title="A lista de mudanças recentes nesta wiki. [r]" accesskey="r">Mudanças recentes</a></li>
+				<li id="n-randompage"><a href="/wiki/Especial:Aleat%C3%B3ria" title="Carregar página aleatória [x]" accesskey="x">Página aleatória</a></li>
+				<li id="n-help"><a href="/wiki/Ajuda:Conte%C3%BAdos" title="Um local reservado para auxílio.">Ajuda</a></li>
+				<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Donate/pt" title="Ajude-nos">Doações</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-Project'>
+		<h5 lang="pt-br" xml:lang="pt-br">projeto</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-about"><a href="/wiki/Wikilivros:Sobre">Sobre</a></li>
+				<li id="n-portal"><a href="/wiki/Wikilivros:Portal_comunit%C3%A1rio" title="Sobre o projeto e coisas que você poder fazer aqui.">Portal comunitário</a></li>
+				<li id="n-Staff-lounge"><a href="/wiki/Wikilivros:Staff_lounge">Esplanada</a></li>
+				<li id="n-Wikijunior"><a href="/wiki/Wikij%C3%BAnior">Wikijúnior</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-coll-create_a_book'>
+		<h5 lang="pt-br" xml:lang="pt-br">Criar uma coleção</h5>
+		<div class='pBody'>
+<ul id="collectionPortletList"><li id="coll-add_page"><a href="/w/index.php?title=Especial:Livro/add_article/&amp;arttitle=Aplicativos+em+PHP%2FTrabalhando+em+PHP+com%2FValida%C3%A7%C3%A3o+de+Dados&amp;oldid=0" title="Adicionar a página wiki atual ao seu livro" onclick="collectionCall(&#039;AddArticle&#039;, [&#039;removepage&#039;, wgNamespaceNumber, wgTitle, 0]); return false;" rel="nofollow">Adicionar página ao livro</a></li><li id="coll-help_collections"><a href="/wiki/Ajuda:Livros" title="Mostrar ajuda sobre a ferramenta de livros">Ajuda sobre livros</a></li></ul><script type="text/javascript">/*<![CDATA[*/
+		var wgCollectionAddRemoveSate = "addpage";
+		/*]]>*/</script>
+<script type="text/javascript" src="/w/extensions/Collection/collection/portlet.js?2"></script>		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5 lang="pt-br" xml:lang="pt-br">Ferramentas</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/wiki/Especial:P%C3%A1ginas_afluentes/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados" title="Lista de todas as páginas que ligam-se a esta [j]" accesskey="j">Páginas afluentes</a></li>
+				<li id="t-recentchangeslinked"><a href="/wiki/Especial:Novidades_relacionadas/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados" title="Mudanças recentes em páginas relacionadas a esta [k]" accesskey="k">Alterações relacionadas</a></li>
+<li id="t-upload"><a href="/wiki/Especial:Carregar_imagem" title="Carregar arquivos [u]" accesskey="u">Carregar arquivo</a></li>
+<li id="t-specialpages"><a href="/wiki/Especial:P%C3%A1ginas_especiais" title="Lista de páginas especiais [q]" accesskey="q">Páginas especiais</a></li>
+				<li id="t-print"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados&amp;printable=yes" rel="alternate" title="Versão para impressão desta página [p]" accesskey="p">Versão para impressão</a></li>				<li id="t-permalink"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Valida%C3%A7%C3%A3o_de_Dados&amp;oldid=110812" title="Link permanente para esta versão desta página">Link permanente</a></li><li id="t-download-as-pdf"><a href="/w/index.php?title=Especial:Livro/render_article/&amp;arttitle=Aplicativos+em+PHP/Trabalhando+em+PHP+com/Valida%C3%A7%C3%A3o+de+Dados&amp;oldid=110812&amp;writer=rl" rel="nofollow">Versão em PDF</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/skins-1.5/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></div>
+				<div id="f-copyrightico"><a href="http://wikimediafoundation.org/"><img src="/images/wikimedia-button.png" alt="Wikimedia Foundation"/></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> Esta página foi modificada pela última vez às 17h10min, 5 de dezembro de 2008.</li>
+					<li id="copyright">O texto está disponível sob a licença <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>; condições adicionais podem-se aplicar. Veja <a href="http://wikimediafoundation.org/wiki/Terms_of_Use">Condições de Uso</a> para detalhes.</li>
+					<li id="privacy"><a href="/wiki/Wikilivros:Pol%C3%ADtica_de_privacidade" title="Wikilivros:Política de privacidade">Política de privacidade</a></li>
+					<li id="about"><a href="/wiki/Wikilivros:Sobre" title="Wikilivros:Sobre">Sobre</a></li>
+					<li id="disclaimer"><a href="/wiki/Wikilivros:Aviso_geral" title="Wikilivros:Aviso geral">Alerta de Conteúdo</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served by srv93 in 0.313 secs. --></body></html>

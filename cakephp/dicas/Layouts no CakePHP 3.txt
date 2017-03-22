@@ -1,0 +1,63 @@
+Layouts no CakePHP 3
+
+Os layouts são camadas de software que organizam o espaço nas páginas.
+Definem o que fica no cabeçalho, menus etc.
+O que fica na região de conteúdo.
+Na região de cabeçalho,
+etc.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title><?= h($this->fetch('title')) ?></title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<!-- Include external files and scripts here (See HTML helper for more info.) -->
+<?php
+echo $this->fetch('meta');
+echo $this->fetch('css');
+echo $this->fetch('script');
+?>
+</head>
+<body>
+
+<!-- If you'd like some sort of menu to
+show up on all of your views, include it here -->
+<div id="header">
+    <div id="menu">...</div>
+</div>
+
+<!-- Here's where I want my views to be displayed -->
+<?= $this->fetch('content') ?>
+
+<!-- Add a footer to each displayed page -->
+<div id="footer">...</div>
+
+</body>
+</html>
+
+Podemos definir vários layouts para nosso aplicativo.
+
+Os layouts devem ficar no diretório
+src/Template/Layout
+
+O CakePHP já vem com um layout default.ctp.
+
+Atribuindo título para o aplicativo e definindo um layout no AppController:
+
+
+class UsersController extends AppController
+{
+    public function view_active()
+    {
+        $this->set('title', 'View Active Users');
+        $this->viewBuilder()->layout('default_small_ad');
+   }
+
+    public function view_image()
+    {
+        $this->viewBuilder()->layout('image');
+    }
+}
+
+

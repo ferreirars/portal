@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>Frame Wizard</title></head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(0, 204, 204);" alink="#000099" link="#000099" vlink="#990099">
+
+<h3 align="center">Frame Wizard</h3>
+
+<table align="center" border="1" cellpadding="2" cellspacing="2" width="60%">
+    <tr>
+      <form name="form1" methot="post" action="">
+	<td align="center" width="20">
+        	<img onClick="document.form1.ta.value='Horizontal (dois frames)\n\n'+
+		'<frameset rows=17%,*>\n'+
+			'\t<frame src=cabecalho.html name=cabecalho scrolling=no'+
+				'noresize>\n'+
+			'\t<frame src=corpo.html name=corpo>\n'+
+		'</frameset><br>'"
+		src="imagens/horizontais.png" title="Frames Horizontais" &gt;<br>
+
+        	<img onClick="document.form1.ta.value='Verticais (dois frames)\n\n'+
+		'<frameset rows=25%,75%>\n'+
+			'\t<frame src=esquerda.html name=esquerda scrolling=no'+
+				'noresize>\n'+
+			'\t<frame src=direita.html name=direita>\n'+
+		'</frameset><br>'"
+		src="imagens/verticais.png"  title="Frames Verticais" &gt;<br>
+
+        	<img onClick="document.form1.ta.value='Em T (três frames)\n\n'+
+		'<frameset rows=25%,75%>\n'+
+			'\t<frame src=superior.html name=superior>\n'+
+			'\t<frameset cols=50%,50%>\n'+
+				'\t\t<frame src=esquerda.html name=esquerda>\n'+
+				'\t\t<frame src=direita.html name=direita>\n'+
+			'\t</frameset>\n'+
+		'</frameset><br>\n\n'+
+		'Para um botão que está no frame superior abrir uma página\n'+
+		'no frame da direita:\n'+
+		'<input type=button value=Início onClick=\'top.corpo.location=corpo.html\'\n'+ 			'title=\'Voltar ao menu Inicial\'>'"
+		src="imagens/emte.png"  title="Frames em T"&gt;<br>
+
+        	<img onClick="document.form1.ta.value='Verticais/Horizontais (três frames)\n\n'+
+		'<frameset cols=25%,75%>\n'+
+			'\t<frame src=esquerda.html name=esquerda>\n'+
+			'\t<frameset rows=50%, 50%>\n'+
+				'\t\t<frame src=superior.html name=superior>\n'+
+				'\t\t<frame src=inferior.html name=inferior>\n'+
+			'\t</frameset>\n'+
+		'</frameset><br>'"
+		src="imagens/emteesq.png"  title="Frames Verticais/Horizontais"&gt;<br>
+
+        	<img onClick="document.form1.ta.value='Em T duplo (três frames)\n\n'+
+		'<frameset cols=25%,75%>\n'+
+			'\t<frame src=superior.html name=superior>\n'+
+			'\t<frameset cols=20%, 40%, 40%>\n'+
+				'\t\t<frame src=esquerda.html name=esquerda>\n'+
+				'\t\t<frame src=centro.html name=centro>\n'+
+				'\t\t<frame src=direita.html name=direita>\n'+
+			'\t</frameset>\n'+
+		'</frameset><br>'"
+		src="imagens/emteduplo.png"  title="Frames em T duplo"&gt;<br>
+
+	</td>
+	<td><textarea cols="70" rows="20" name="ta">Aqui aparece a sintaxe</textarea></td>
+      </form>
+    </tr>
+</table>
+</body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"> 
+  <title>TableWiz</title></head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(0, 204, 204);" alink="#000099" link="#000099" vlink="#990099">
+
+<h3 align=center>Table Wizard</h3>
+<table align="center" border="1" cellpadding="2" cellspacing="2" width="60%">
+    <tr><td width="20" align=center>
+      <form name="form1" methot="post" action="">
+        <input onclick="document.form1.ta.value='TABLE\n\n<table border=1 bordercolor=red '+
+				'align=center width=80%>\n'+
+				'<tr><td>Linha1Coluna1</td><td>Linha1Coluna2</td></tr>\n'+
+				'<tr><td>Linha2Coluna1</td><td>Linha2Coluna2</td></tr>\n'+
+				'<tr><td>Linha3Coluna1</td><td>Linha3Coluna2</td></tr>\n'+
+				'</table>'+
+				'<!--BORDERCOLORLIGHT=YELLOW BORDERCOLORDARK=BLUE-->'" value="Table         " title="Criação de Tabela" type="button"><br>
+        <input onclick="document.form1.ta.value='TR\n\n<TR align=left width=200>'" value="TR              " title="TR - Linha" type="button"><br>
+        <input onclick="document.form1.ta.value='TH\n\n<tr><th align=center width=200></th></tr>'" value="TH             " title="TH - Cabeçalho de Tabela" type="button"><br>
+        <input onclick="document.form1.ta.value='TD\n\n'+
+				'<tr><td bordercolor=blue align=20% valign=top></td</tr>'" value="TD             " title="Célula, sempre dentro de uma linha (TR)" type="button"><br>
+        <input onclick="document.form1.ta.value='CELLSPACING\n\n<table border=1 bordercolor=red '+
+				'align=center width=80% cellspacing=10>\n'+
+				'<tr><td>Linha1Coluna1</td><td>Linha1Coluna2</td></tr>\n'+
+				'<tr><td>Linha2Coluna1</td><td>Linha2Coluna2</td></tr>\n'+
+				'<tr><td>Linha3Coluna1</td><td>Linha3Coluna2</td></tr>\n'+
+				'</table>'" value="Celspacing" title="Espaçamento entre Células" type="button"><br>
+        <input onclick="document.form1.ta.value='CELLPADING\n\n<table border=1 bordercolor=red '+
+				'align=center width=80% cellpading=10>\n'+
+				'<tr><td>Linha1Coluna1</td><td>Linha1Coluna2</td>Linha1Coluna3</td></tr>\n'+
+				'<tr><td>Linha2Coluna1</td><td>Linha2Coluna2</td>Linha2Coluna3</td></tr>\n'+
+				'<tr><td>Linha3Coluna1</td><td>Linha3Coluna2</td>Linha3Coluna3</td></tr>\n'+
+				'</table>'" value="Cellpading " title="Largura das Células" type="button"><br>
+        <input onclick="document.form1.ta.value='COLSPAN\n\n<table border=1 bordercolor=red '+
+				'align=center width=80%>\n'+
+				'<tr><td colspan=2>L1C1eL1C2</td><td>L1C3</td></tr>\n'+
+				'<tr><td colspan=3>L2C1,L2C2eL2C3</td></tr>\n'+
+				'<tr><td>L3C1</td><td>L3C2</td><td>L3C3</td></tr>\n'+
+				'</table>'" value="Colspan     " title="Fusão de colunas" type="button"><br>
+        <input onclick="document.form1.ta.value='ROWSPAN\n\n<table border=4 bordercolor=red '+
+				'align=center width=80%>\n'+
+				'<tr><td rowspan=3>L1C1,L2C1eL3C3</td></tr>\n'+
+				'<tr><td>L2C1</td><td>L2C2</td><td>L2C3</td></tr>\n'+
+				'<tr><td>L3C1</td><td rowspan=2>L3C2,L3C3</td></tr>\n'+
+				'</table>'" value="Rowspan    " title="Fusão de linhas" type="button"><br>        
+        <input onclick="document.form1.ta.value='RULES=ROWS FRAME=BOX\n\n<table border=1 '+
+				'cellpadding=3 cellspacing=1 rules=rows frame=box>\n'+
+				'<tr><td>Linha1Coluna1</td><td>Linha1Coluna2</td><td>Linha1Coluna3</td></tr>\n'+
+				'<tr><td>Linha2Coluna1</td><td>Linha2Coluna2</td><td>Linha2Coluna3</td></tr>\n'+
+				'<tr><td>Linha3Coluna1</td><td>Linha3Coluna2</td><td>Linha3Coluna3</td></tr>\n'+
+				'</table>'" value="EmLinhas  " title="Tabelas em linhas" type="button"><br>
+        <input onclick="document.form1.ta.value='RULES=ROWS FRAME=HSIDES\n\n<table border=1 '+
+				'cellpadding=3 cellspacing=1 rules=rows frame=hsides>\n'+
+				'<tr><td>Linha1Coluna1</td><td>Linha1Coluna2</td><td>Linha1Coluna3</td></tr>\n'+
+				'<tr><td>Linha2Coluna1</td><td>Linha2Coluna2</td><td>Linha2Coluna3</td></tr>\n'+
+				'<tr><td>Linha3Coluna1</td><td>Linha3Coluna2</td><td>Linha3Coluna3</td></tr>\n'+
+				'</table>'" value="LinhasSB   " title="Tabelas em linhas sem bordas" type="button"><br>
+        <input onclick="document.form1.ta.value='RULES=COLS FRAME=BOX\n\n<table border=1 '+
+				'cellpadding=3 cellspacing=1 rules=cols frame=box>\n'+
+				'<tr><td>Linha1Coluna1</td><td>Linha1Coluna2</td><td>Linha1Coluna3</td></tr>\n'+
+				'<tr><td>Linha2Coluna1</td><td>Linha2Coluna2</td><td>Linha2Coluna3</td></tr>\n'+
+				'<tr><td>Linha3Coluna1</td><td>Linha3Coluna2</td><td>Linha3Coluna3</td></tr>\n'+
+				'</table>'" value="Emcolunas" title="Tabelas em Colunas" type="button"><br>
+        <input onclick="document.form1.ta.value='RULES=COLS FRAME=VSIDES\n\n<table border=1 '+
+				'cellpadding=3 cellspacing=1 rules=cols frame=vsides>\n'+
+				'<tr><td>Linha1Coluna1</td><td>Linha1Coluna2</td><td>Linha1Coluna3</td></tr>\n'+
+				'<tr><td>Linha2Coluna1</td><td>Linha2Coluna2</td><td>Linha2Coluna3</td></tr>\n'+
+				'<tr><td>Linha3Coluna1</td><td>Linha3Coluna2</td><td>Linha3Coluna3</td></tr>\n'+
+				'</table>'" value="ColunasSB" title="Tabelas em Colunas sem Bordas" type="button"><br>
+        <input onclick="document.form1.ta.value='TR BACKGROUND COLOR\n\n<table border=1 '+
+				'cellpadding=3 cellspacing=1>\n'+
+				'<tr bgColor=red><td>Linha1Coluna1</td><td>Linha1Coluna2</td></tr>\n'+
+				'<tr><td>Linha2Coluna1</td><td>Linha2Coluna2</td></tr>\n'+
+				'<tr><td>Linha3Coluna1</td><td>Linha3Coluna2</td></tr>\n'+
+				'</table>'+
+				'<!-- Espaço horizontal para vizinhos da tabela:\n'+
+				'HSPACE=10 - Espaço vertical: VSPACE=10 -->'" value="TRBgColor " title="TR Background Color" type="button"><br>
+        <input onclick="document.form1.ta.value='RULES=NOME FRAME=BOX\n\n'+
+				'<table border=1 rules=nome frame=box>\n'+
+				'<tr><td>Linha1Coluna1</td><td>Linha1Coluna2</td><td>Linha1Coluna3</td></tr>\n'+
+				'<tr><td>Linha2Coluna1</td><td>Linha2Coluna2</td><td>Linha2Coluna3</td></tr>\n'+
+				'<tr><td>Linha3Coluna1</td><td>Linha3Coluna2</td><td>Linha3Coluna3</td></tr>\n'+
+				'</table>'" value="BordasFin " title="Tabela com bordas finas" type="button"><br>
+        <input onclick="document.form1.ta.value='RULES=GROUPS FRAME=BOX\n\n<table border=1 '+
+				'cellpadding=3 cellspacing=1 rules=cols frame=vsides>\n'+
+				'<TABLE CELLPADDING=6 RULES=GROUPS  FRAME=BOX>'+
+				'<THEAD>'+
+				'<TR><TH>Dia</TH><TH>Data</TH><TH>Gerente</TH><TH>Quant</TH></TR>'+
+				'</THEAD>'+
+				'<TBODY>'+
+				'<TR><TD>Mon</TD> <TD>09/11</TD> <TD>Kelsey</TD>  <TD>639</TD>  </TR>'+
+				'<TR><TD>Tue</TD> <TD>09/12</TD> <TD>Lindsey</TD> <TD>596</TD>  </TR>'+
+				'<TR><TD>Wed</TD> <TD>09/13</TD> <TD>Randy</TD>   <TD>1135</TD> </TR>'+
+				'<TR><TD>Thu</TD> <TD>09/14</TD> <TD>Susan</TD>   <TD>1002</TD> </TR>'+
+				'<TR><TD>Fri</TD> <TD>09/15</TD> <TD>Randy</TD>   <TD>908</TD>  </TR>'+
+				'<TR><TD>Sat</TD> <TD>09/16</TD> <TD>Lindsey</TD> <TD>371</TD>  </TR>'+
+				'<TR><TD>Sun</TD> <TD>09/17</TD> <TD>Susan</TD>   <TD>272</TD>  </TR>'+
+				'</TBODY>'+
+				'<TFOOT>'+
+				'<TR><TH ALIGN=LEFT COLSPAN=3>Total</TH> <TH>4923</TH> </TR>'+
+				'</TFOOT>'+
+				'</table>\n\n<br><br>'+
+'<TABLE RULES=GROUPS FRAME=BOX>'+
+'<THEAD>'+
+'<TR> <TH>Dia</TH> <TH>Data</TH>  <TH>Gerente</TH> </TR>'+
+'</THEAD>'+
+'<TBODY>'+
+'<TR> <TD>Monday</TD>    <TD>09/11/2000</TD> <TD align=right>Kelsey</TD>  </TR>'+
+'<TR> <TD>Tuesday</TD>   <TD>09/12/2000</TD> <TD align=right>Lindsey</TD> </TR>'+
+'<TR> <TD>Wednesday</TD> <TD>09/13/2000</TD> <TD align=right>Randy</TD>   </TR>'+
+'<TR> <TD>Thursday</TD>  <TD>09/14/2000</TD> <TD align=right>Susan</TD>   </TR>'+
+'<TR> <TD>Friday</TD>    <TD>09/15/2000</TD> <TD align=right>Randy</TD>   </TR>'+
+'<TR> <TD>Saturday</TD>  <TD>09/16/2000</TD> <TD align=right>Lindsey</TD> </TR>'+
+'<TR> <TD>Sunday</TD>    <TD>09/17/2000</TD> <TD align=right>Susan</TD>   </TR>'+
+'</TBODY>'+
+'<TBODY>'+
+'<TR> <TD>Monday</TD>    <TD>09/18/2000</TD> <TD align=center>Melody</TD>     </TR>'+
+'<TR> <TD>Tuesday</TD>   <TD>09/19/2000</TD> <TD align=center>Christiane</TD> </TR>'+
+'<TR> <TD>Wednesday</TD> <TD>09/20/2000</TD> <TD align=center>Symphony</TD>   </TR>'+
+'<TR> <TD>Thursday</TD>  <TD>09/21/2000</TD> <TD align=center>Starflower</TD> </TR>'+
+'<TR> <TD>Friday</TD>    <TD>09/22/2000</TD> <TD align=center>Miko</TD>       </TR>'+
+'<TR> <TD>Saturday</TD>  <TD>09/23/2000</TD> <TD align=center>Cleo</TD>       </TR>'+
+'<TR> <TD>Sunday</TD>    <TD>09/24/2000</TD> <TD align=center>Alyx</TD>       </TR>'+
+'</TBODY>'+
+'<TBODY>'+
+'<TR> <TD>Monday</TD>    <TD>09/25/2000</TD> <TD>Dancing Star</TD> </TR>'+
+'<TR> <TD>Tuesday</TD>   <TD>09/26/2000</TD> <TD>Dawn</TD>         </TR>'+
+'<TR> <TD>Wednesday</TD> <TD>09/27/2000</TD> <TD>Josh</TD>         </TR>'+
+'<TR> <TD>Thursday</TD>  <TD>09/28/2000</TD> <TD>Ryan</TD>         </TR>'+
+'<TR> <TD>Friday</TD>    <TD>09/29/2000</TD> <TD>Mary Kay</TD>     </TR>'+
+'<TR> <TD>Saturday</TD>  <TD>09/30/2000</TD> <TD>Hallie</TD>       </TR>'+
+'<TR> <TD>Sunday</TD>    <TD>10/01/2000</TD> <TD>Paul</TD>         </TR>'+
+'</TBODY>'+
+'</TABLE><br><br>\n\n'+
+'<!--Agrupamento em Colunas --\n'+
+'<COLGROUP></COLGROUP>'+
+'<COLGROUP SPAN=3></COLGROUP>-->'" 
+value="GruposLin " title="Bordas entre grupos de linhas" type="button"><br>
+    </td><td><textarea cols="75" rows="20" name="ta"></textarea></td></tr></form></table>
+	<center><a href="http://www.htmlcodetutorial.com/">Ótimo Tutorial de HTML</a></center>
+	</body></html>

@@ -1,0 +1,19 @@
+<script type="text/javascript" src="/js/styles.js"></script>
+
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+
+HTML
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+XML ou JavaScript ou AJAX
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+ASP:
+<% Response.Charset="ISO-8859-1" %>
+
+PHP:
+<?php header("Content-Type: text/html;  charset=UTF-8",true) ?>
+
+JSP:
+<%@ page contentType="text/html; charset=ISO-8859-1" %>
+

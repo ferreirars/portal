@@ -1,0 +1,16 @@
+Dicas de CakePHP
+
+Dicas sobre displayfield
+
+Clientes relacionados com users
+
+No Model ClientesTable.php
+
+initialize()
+        $this->displayField('nome');
+
+Na View src/Template/Clientes/index.ctp
+
+  echo $this->Form->input('user_id', ['options' => $users]);
+  
+bin/cake plugin load FileManager --routes --bootstrap  

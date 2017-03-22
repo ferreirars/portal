@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - MVC</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">MVC</h2>
+
+<p>Abordagem sobre as 3 camadas: &nbsp;<br />
+Controller, View e Model<br />
+&nbsp;<br />
+Um bom exemplo de uso do MVC &eacute; o a CakePKP.<br />
+&nbsp;<br />
+<strong>Model</strong> - representa os dados. A parte do c&oacute;digo que manipula os dados para ler e escrever no banco.<br />
+<strong>View</strong> - representa a visualiza&ccedil;&atilde;o dos dados. A parte do c&oacute;digo que mostra os dados para o usu&aacute;rio.<br />
+<strong>Controller</strong> - manipula e roteia as requisi&ccedil;&otilde;es dos usu&aacute;rios. A parte do c&oacute;digo que recebe as &nbsp;<br />
+requisi&ccedil;&otilde;es do usu&aacute;rio atrav&eacute;s de um site (exemplo), processa, roteia e envia para o model, se for<br />
+o caso. Tamb&eacute;m &eacute; respons&aacute;vel por receber dados do banco e devolver para a View.<br />
+&nbsp;<br />
+<strong>De forma mais completa o fluxo acontece assim no CakePHP:</strong><br />
+- O usu&aacute;rio clica num link para editar um registro<br />
+- O dispatcher (expedidor) verifica a URL requisitada (/cakes/comprar) e redireciona ao controller correto;<br />
+- O controller executa a l&oacute;gica espec&iacute;fica da aplica&ccedil;&atilde;o. Por exemplo, verifica se o Ricardo est&aacute; logado e tem acesso ao site;<br />
+- O controller tamb&eacute;m usa os models para acessar os dados da sua aplica&ccedil;&atilde;o. Muitas vezes, os models representam as tabelas do banco de dados, mas podem representar registros LDAP, feeds de RSS ou at&eacute; mesmo arquivos do sistema. &nbsp;<br />
+- Neste exemplo, o controller usa o model para trazer ao usu&aacute;rio as &uacute;ltimas compras do banco de dados;<br />
+- Depois que o controller fez sua m&aacute;gica sobre os dados, ele repassa para a view. A view faz com que os dados fiquem prontos para a representa&ccedil;&atilde;o do usu&aacute;rio;<br />
+- Uma vez que a view tenha usado os dados provenientes do controller para construir a p&aacute;gina, o conte&uacute;do &eacute; retornado ao browser do usu&aacute;rio.<br />
+&nbsp;<br />
+Ao final relatar que bons softwares usam MVC: CakePHP, Joomla, etc<br />
+&nbsp;<br />
+<strong>Benef&iacute;cios</strong><br />
+&nbsp;<br />
+Por que usar MVC? Porque &eacute; um verdadeiro padr&atilde;o de projeto (design pattern) e torna f&aacute;cil a manuten&ccedil;&atilde;o da sua aplica&ccedil;&atilde;o, com pacotes modulares de r&aacute;pido desenvolvimento. Elaborar tarefas divididas entre models, views e controllers faz com que sua aplica&ccedil;&atilde;o fique leve e independente. Novas funcionalidades s&atilde;o facilmente adicionadas e pode-se dar nova cara nas caracter&iacute;sticas antigas num piscar de olhos. O design modular e separado tamb&eacute;m permite aos desenvolvedores e designers trabalharem simultaneamente, incluindo a habilidade de se construir um r&aacute;pido prot&oacute;tipo. A separa&ccedil;&atilde;o tamb&eacute;m permite que os desenvolvedores alterem uma parte da aplica&ccedil;&atilde;o sem afetar outras.<br />
+&nbsp;<br />
+Se voc&ecirc; nunca desenvolveu uma aplica&ccedil;&atilde;o neste sentido, isso vai lhe agradar muito, mas estamos confiantes que depois de construir sua primeira aplica&ccedil;&atilde;o em CakePHP, voc&ecirc; n&atilde;o vai querer voltar atr&aacute;s.</p>
+

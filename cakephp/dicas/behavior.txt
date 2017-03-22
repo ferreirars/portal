@@ -1,0 +1,19 @@
+Dicas sobre Behaviors no Cake
+
+Model behaviors são uma forma de organizar algumas das funcionalidades definidas em model no CakePHP. Eles nos permitem separar e reutilizar a lógica que cria um tipo de comportamento/behavior, e eles fazem isso sem a necessidade de herança. Por exemplo, a criação de estruturas de árvore/tree. Ao fornecer uma maneira simples, mas poderosa para melhorar os models, behaviors nos permitem anexar funcionalidades aos models, definindo uma variável de classe simples. Isso é como os behaviors permitissem aos models se livrar de todo o peso extra que pode não ser parte do modelo de negócio que estão modelando ou que também é necessária em diferentes modelos e podem ser extrapolados.
+
+Como exemplo, considere um model que nos dá acesso a uma tabela de banco de dados que armazena informações estruturais sobre uma árvore. Remover, adicionar e migrar nós na árvore não é tão simples como apagar, inserir e editar registros na tabela. Muitos registros podem precisar ser atualizados conforme as coisas se movem ao redor. Ao invés de criar os métodos de manipulação de árvore em uma base por modelo (para cada modelo que precisa da funcionalidade), nós poderíamos simplesmente dizer o nosso modelo para usar o TreeBehavior, ou em termos mais formais, dizemos ao nosso model para se comportar como uma árvore. Isto é conhecido como fixação de um behavior para um model. Com apenas uma linha de código, o nosso modelo CakePHP assume um novo conjunto de métodos que permitem interagir com a estrutura do behavior.
+
+CakePHP já inclui behaviors para estruturas de árvore, conteúdo traduzido, ACL, para não mencionar os behaviors da comunidade já disponíveis no CakePHP Bakery (http://bakery.cakephp.org).
+
+Em essência, os comportamentos são Mixins com retornos de chamada.
+
+ACL
+Containable
+Translate
+Tree
+
+
+http://book.cakephp.org/2.0/en/models/behaviors.html
+http://book.cakephp.org/2.0/en/core-libraries/toc-behaviors.html
+

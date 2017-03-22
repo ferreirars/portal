@@ -1,0 +1,32 @@
+O Firebug pode fazer com que o Gmail fique lento
+
+Para obter o melhor desempenho do Gmail, sugerimos desativar o Firebug para o www.google.com.
+
+Usuários do Windows ou Linux
+
+Para desativar o Firebug:
+
+   1. Abra o painel do Firebug na guia do Gmail clicando no ícone do Firebug.
+   2. Clique na seta para baixo ao lado da guia Net (Rede) e selecione Disable monitor for mail.google.com (Desativar monitoramento para mail.google.com)
+   3. Repita a Etapa 2 nas guias Console e Script.
+
+Se desejar manter o Firebug executando, aprimore o desempenho do Gmail seguindo estas etapas:
+
+   1. Clique no ícone verde ou vermelho no canto inferior direito da janela do navegador para abrir o Firebug.
+   2. Clique na guia Console.
+   3. Selecione Options (Opções).
+   4. Desmarque Show XMLHttpRequests (Exibir XMLHttpRequests).
+   5. Clique na guia Net (Rede).
+   6. Selecione Options (Opções).
+   7. Marque Disable Network Monitoring (Desativar monitoramento de rede).
+
+Usuário de Mac
+
+Para desativar o Firebug:
+
+   1. Clique no ícone verde ou vermelho no canto inferior direito da janela do navegador para abrir o Firebug.
+   2. Clique no ícone de bug na parte superior esquerda do Firebug e selecione 'Disable Firebug for mail.google.com' (Desativar o Firebug para mail.google.com).
+
+Caso a desativação do Firebug para Gmail não melhore os resultados do desempenho, você terá que desativar o Firebug por completo.
+
+

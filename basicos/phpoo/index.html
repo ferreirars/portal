@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - PHPOO</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">PHPOO</h2>
+<h3 style="text-align: center;">Introdução ao PHP Orientado a Objetos</h3>
+
+<p><strong>Programa&ccedil;&atilde;o Orientada a Objetos com PHP</strong></p>
+
+<p>Programa&ccedil;&atilde;o orientada a objetos &eacute; um estilo de programa&ccedil;&atilde;o que permite os desenvolvedores agruparem tarefas semelhantes em <strong>classes</strong>. Isso ajuda a mantermo-nos dentro do princ&iacute;pio <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">&quot;don&#39;t repeat yourself&quot; (DRY)</a> (em portugu&ecirc;s, <em>n&atilde;o se repita</em>), al&eacute;m de facilitar a manuten&ccedil;&atilde;o do c&oacute;digo.</p>
+
+<p><strong>Classes e Objetos</strong></p>
+
+<p>Classes s&atilde;o as matrizes dos objetos. O programador cria a classe uma &uacute;nica vez e depois trabalha somente com os objetos, que s&atilde;o a inst&acirc;ncia das classes.</p>
+
+<p>O paradigma de orienta&ccedil;&atilde;o a objetos &eacute; muito popular atualmente, sendo implementado por praticamente todas as linguagens atuais. Como ele diz, &eacute; orientado a objetos, simulando o mundo real com seus objetos.</p>
+
+<p>Vamos tomar como exemplo um carro, que todos conhecemos e vamos model&aacute;-lo, criando algumas propriedades e m&eacute;todos para ele. As propriedades s&atilde;o caracter&iacute;sticas, como cor, j&aacute; os m&eacute;todos s&atilde;o funcionalidades como correr, frear, etc (verbos).</p>
+
+<p><strong>Criando uma Classe</strong></p>
+
+<p>&lt;?php</p>
+
+<p>class Carro{</p>
+
+<p>// Aqui fica o c&oacute;digo da classe</p>
+
+<p>}</p>
+
+<p>?&gt;</p>
+
+<p><strong>Instanciando a Classe</strong></p>
+
+<p>Instanciar a classe &eacute; armazen&aacute;-la em uma vari&aacute;vel objeto para ent&atilde;o usar seus recursos.</p>
+
+<p>$obj = new Carro(); // Tamb&eacute;m podemos usar assim: $obj = new Carro;</p>
+
+<p>Nossa classe n&atilde;o tem conte&uacute;do mas para visualiz&aacute;-la podemos usar var_dump();</p>
+
+<p>var_dump($obj);</p>
+
+<p>Com isso aparece: object(Carro)#1 (0) { }</p>
+
+<p>As classes s&atilde;o compostas de propriedades e m&eacute;todos. Propriedades s&atilde;o similares &agrave;s vari&aacute;veis da linguagem procedural. M&eacute;todos s&atilde;o similares &agrave;s fun&ccedil;&otilde;es. A grande diferen&ccedil;a &eacute; que propriedades e m&eacute;todos ficam dentro da classe e todo c&oacute;digo OO fica dentro de classes.</p>
+
+<p><strong>Propriedades</strong></p>
+
+<p>&lt;?php<br />
+class Carro{<br />
+public $cor = &lsquo;Verde&rsquo;;<br />
+}</p>
+
+<p>$obj = new Carro();<br />
+print &#39;A cor do carro &eacute; &#39; . $obj-&gt;cor;</p>
+
+<p><br />
+<strong>Modificadores de Acesso </strong><strong>ou de </strong><strong>Visibilidade</strong></p>
+
+<p>Em orienta&ccedil;&atilde;o a objetos existe um bom recurso para controlar a visibilidade dos m&eacute;todos e propriedades (realizar um encapsulamento), ou seja, uma forma de controlar o acesso &agrave; classe.</p>
+
+<p>public &ndash; este modificador permite que qualquer um possa acessar propriedades e m&eacute;todos</p>
+
+<p>private &ndash; este define que somente pode ser acessada dentro da classe que a criou.</p>
+
+<p>protected &ndash; este diz que somente dentro da classe onde foi criado ou nas classes filhas.</p>
+
+<p>Experimente no exemplo anterior mudar public para private ou protected.</p>
+
+<p>Ou seja, se queremos que um membro da classe seja visto por todos o tornamos public, caso contr&aacute;rio escolhemos private ou protected.</p>
+
+<p><br />
+<strong>M&eacute;todos</strong></p>
+
+<p>Os m&eacute;todos executam trechos de c&oacute;digo em uma classe e retornam ou n&atilde;o algo e de algum tipo.</p>
+
+<p>&lt;?php<br />
+class Carro{<br />
+public $cor = &quot;Verde&quot;;<br />
+<br />
+public function frear(){<br />
+return &quot;M&eacute;todo frear&quot;;<br />
+}<br />
+}</p>
+
+<p>$obj = new Carro();<br />
+print $obj-&gt;frear();</p>
+
+<p><strong>Outro Exemplo</strong><br />
+&lt;?php<br />
+class Carro{<br />
+public $cor = &quot;Verde&quot;;</p>
+
+<p>public function getCor(){<br />
+return $this-&gt;cor;<br />
+}</p>
+
+<p>public function setCor($novaCor){<br />
+$this-&gt;cor=$novaCor;<br />
+}<br />
+}</p>
+
+<p>$obj = new Carro();<br />
+print &#39;Cor original &#39;.$obj-&gt;getCor();</p>
+
+<p>$obj-&gt;setCor(&#39;Vermelho&#39;);<br />
+print &#39;&lt;br&gt;Cor alterada, atual: &#39;.$obj-&gt;getCor();<br />
+&nbsp;</p>
+
+<p><strong>Acessando M&eacute;todos e Propriedades</strong></p>
+
+<p>Obs.: Veja que para acessar propriedades e m&eacute;todos de uma classe precisamos criar primeiro um objeto do tipo da classe, para depois, atrav&eacute;s da inst&acirc;ncia acessar m&eacute;todos e propriedades p&uacute;blicos.</p>
+
+<p>Usando a palavra reservada $this podemos referenciar m&eacute;todos e propriedades de uma classe, mas somente estando dentro da classe. Usamos $this dentro da classe da mesma forma que usamos o nome do m&eacute;todo ou propriedade fora da classe.</p>
+
+<p>Podemos criar v&aacute;rias inst&acirc;ncias de uma classe. Seguindo o exemplo anterior:</p>
+
+<p>&lt;?php<br />
+class Carro{<br />
+public $cor = &quot;Verde&quot;;</p>
+
+<p>public function getCor(){<br />
+return $this-&gt;cor;<br />
+}</p>
+
+<p>public function setCor($novaCor){<br />
+$this-&gt;cor=$novaCor;<br />
+}<br />
+}<br />
+&nbsp;</p>
+
+<p>$obj = new Carro();<br />
+print &#39;Cor original &#39;.$obj-&gt;getCor();<br />
+$obj-&gt;setCor(&#39;Vermelho&#39;);<br />
+print &#39;&lt;br&gt;Cor alterada: &#39;.$obj-&gt;getCor();</p>
+
+<p>$obj2 = new Carro();<br />
+$obj2-&gt;setCor(&#39;Azul&#39;);<br />
+print &#39;&lt;br&gt;Cor alterada, atual: &#39;.$obj2-&gt;getCor();<br />
+&nbsp;</p>
+
+<p><strong>M&eacute;todos M&aacute;gicos</strong></p>
+
+<p>S&atilde;o m&eacute;todos do PHP que s&atilde;o m&eacute;todos especiais executados automaticamente sempre que alguma a&ccedil;&atilde;o ocorre com objetos: __construct(), __destruct(), __toString(), etc. Ver outros: <a href="http://php.net/manual/pt_BR/language.oop5.magic.php">http://php.net/manual/pt_BR/language.oop5.magic.php</a></p>
+
+<p>__construct() - executa todo o c&oacute;digo em seu interior sempre que uma classe &eacute; instanciada.</p>
+
+<p>__destruct() - ser&aacute; chamado assim que todas as refer&ecirc;ncias a um objeto particular forem removidas ou quando o objeto for explicitamente destru&iacute;do ou qualquer ordem na sequ&ecirc;ncia de encerramento.</p>
+
+<p>__toString() - converte o valor de um objeto em string.</p>
+
+<p>Usemos estes m&eacute;todos em um exemplo:</p>
+
+<p>&lt;?php<br />
+class Carro{<br />
+public $cor = &quot;Verde&quot;;</p>
+
+<p>public function __construct(){<br />
+echo &#39;A classe &#39;. __CLASS__ . &#39; foi instanciada.&lt;br&gt;&#39;;<br />
+}</p>
+
+<p>public function __destruct(){<br />
+echo &#39;&lt;br&gt;Todas as refer&ecirc;ncias desta classe &#39;. __CLASS__ . &#39; foram encessadas!&lt;br&gt;&#39;;<br />
+}</p>
+
+<p>public function __toString(){<br />
+print &#39;Usando o m&eacute;todo m&aacute;gico toString: &#39;;<br />
+return $this-&gt;getCor();<br />
+}</p>
+
+<p>public function getCor(){<br />
+return $this-&gt;cor;<br />
+}</p>
+
+<p>&nbsp;</p>
+
+<p>public function setCor($novaCor){<br />
+$this-&gt;cor=$novaCor;<br />
+}<br />
+}</p>
+
+<p>$obj = new Carro();<br />
+echo $obj; // Permitido pela __toString();<br />
+print &#39;&lt;br&gt;Cor original &#39;.$obj-&gt;getCor();<br />
+$obj-&gt;setCor(&#39;Vermelho&#39;);<br />
+print &#39;&lt;br&gt;Cor alterada: &#39;.$obj-&gt;getCor();<br />
+<br />
+<strong>Heran&ccedil;a de Classes</strong></p>
+
+<p>Assim como existe heran&ccedil;a para o ser humano, em orienta&ccedil;&atilde;o a objetos tamb&eacute;m existe uma implementa&ccedil;&atilde;o que se inspira na dos seres humanos.</p>
+
+<p>Para herdar m&eacute;todos e propriedades de outra classe usamos a palavra-chave extends.</p>
+
+<p>class Onibus extends Carro{<br />
+// C&oacute;digo da classe Onibus<br />
+}</p>
+
+<p>Assim, a classe Onibus herda todos os m&eacute;todos e propriedades da classe Carro e tamb&eacute;m pode ainda definir seus pr&oacute;prios m&eacute;todos e propriedades e ainda por cima pode sobrescrever os m&eacute;todos e propriedades da classe Carro, que no caso &eacute; chamada de classe <strong>pai</strong>.</p>
+
+<p>Exemplo:</p>
+
+<p>&lt;?php<br />
+class Carro{<br />
+private $cor = &quot;Verde&quot;;<br />
+public function __construct(){<br />
+echo &#39;A classe &#39;. __CLASS__ . &#39; foi instanciada.&lt;br&gt;&#39;;<br />
+}<br />
+public function getCor(){<br />
+return $this&rarr;cor;<br />
+}<br />
+public function setCor($novaCor){<br />
+$this&rarr;cor=$novaCor;<br />
+}<br />
+}</p>
+
+<p>class Onibus extends Carro{<br />
+public $pneus=6;<br />
+public $combustivel=&quot;Diesel&quot;;<br />
+}<br />
+&nbsp;</p>
+
+<p>$objeto = new Onibus();<br />
+print $objeto-&gt;getCor();<br />
+print &quot;&lt;br&gt;&quot;;<br />
+print $objeto-&gt;combustivel;<br />
+&nbsp;</p>
+
+<p><strong>Observa&ccedil;&otilde;es importantes:</strong></p>
+
+<p>- Veja que o m&eacute;todo __construct() foi executado automaticamente, sem nenhuma chamada a ele;<br />
+- Observe que o m&eacute;todo getCor() tem () ao final mas a propriedade n&atilde;o tem, combustivel.</p>
+
+<p>&nbsp;</p>
+
+<p><strong>Sobrescrevendo M&eacute;todos e Propriedades</strong></p>
+
+<p>Quando uma classe herda de outra ela chama-se classe filha e a outra chama-se classe pai. A filha herda tudo da classe pai, todos os m&eacute;todos e todas as propriedades, mas ela tamb&eacute;m pode sobrescrever qualquer um destes, bastando apenas que ela, a filha, declare novamente o que deseja sobrescrever. Se ela declarar um m&eacute;todo ou propriedade que exista na classe pai, valer&aacute; o que a filha declarou, assim sobrescrevendo o da classe pai.</p>
+
+<p>Veja:</p>
+
+<p>&lt;?php<br />
+class Carro{<br />
+private $cor = &quot;Verde&quot;;<br />
+public function __construct(){<br />
+echo &#39;A classe &#39;. __CLASS__ . &#39; foi instanciada.&lt;br&gt;&#39;;<br />
+}<br />
+public function getCor(){<br />
+return $this-&gt;cor;<br />
+}<br />
+public function setCor($novaCor){<br />
+$this-&gt;cor=$novaCor;<br />
+}<br />
+}</p>
+
+<p>class Onibus extends Carro{<br />
+public $pneus=6;<br />
+public $combustivel=&quot;Diesel&quot;;</p>
+
+<p>public function __construct(){<br />
+echo &#39;A classe &#39;. __CLASS__ . &#39; foi instanciada.&lt;br&gt;&#39;;<br />
+}<br />
+}</p>
+
+<p>$obj = new Onibus();</p>
+
+<p>Veja que ser&aacute; executado o construtor da classe filha, Onibus e n&atilde;o o de Carro.</p>
+
+<p>Heran&ccedil;a &eacute; algo pr&aacute;tico e n&atilde;o &eacute; engessado.</p>
+
+<p><strong>Usando parent::</strong></p>
+
+<p>Sobrescrevendo um m&eacute;todo e preservando seu conte&uacute;do original.</p>
+
+<p>Para adicionar uma nova funcionalidade a um m&eacute;todo e ao mesmo tempo manter todas as funcionalidades originais intactas, use &ldquo;parent::&rdquo;. :: &eacute; o operador de resolu&ccedil;&atilde;o de escopo e parent &eacute; pai, principal.</p>
+
+<p>Veja:</p>
+
+<p>&lt;?php<br />
+class Carro{<br />
+private $cor = &quot;Verde&quot;;<br />
+public function __construct(){<br />
+echo &#39;A classe &#39;. __CLASS__ . &#39; foi instanciada.&lt;br&gt;&#39;;<br />
+}<br />
+public function getCor(){<br />
+return $this-&gt;cor;<br />
+}<br />
+public function setCor($novaCor){<br />
+$this-&gt;cor=$novaCor;<br />
+}<br />
+}</p>
+
+<p>class Onibus extends Carro{<br />
+public $pneus=6;<br />
+public $combustivel=&quot;Diesel&quot;;</p>
+
+<p>public function __construct(){<br />
+parent::__construct(); // Invoca o construtor da classe pai<br />
+echo &#39;A classe &#39;. __CLASS__ . &#39; foi instanciada.&lt;br&gt;&#39;;<br />
+}<br />
+}</p>
+
+<p>$obj = new Onibus();</p>
+
+<p><strong>Veja o que mostra agora:</strong></p>
+
+<p>A classe Carro foi instanciada.<br />
+A classe Onibus foi instanciada.</p>
+
+<p>Primeiro o construtor da classe pai e depois o da filha.</p>
+
+<p>&nbsp;</p>
+
+<p><strong>M&eacute;todos e propriedades est&aacute;ticas</strong></p>
+
+<p>&Eacute; o tipo de m&eacute;todo ou propriedade que &eacute; meio que global e ainda mais f&aacute;cil de ser acessada, pois podem ser acessados sem mesmo instanciar a classe. Classes tamb&eacute;m podem ser static.</p>
+
+<p>Exemplo de uso:</p>
+
+<p>&lt;?php</p>
+
+<p>class Estatica{</p>
+
+<p>public static $nome = &quot;Jo&atilde;o&quot;;</p>
+
+<p>public static $count = 0;</p>
+
+<p>&nbsp;</p>
+
+<p>public static function maisUm(){</p>
+
+<p>return &quot;O valor &eacute; &quot;. ++self::$count.&quot;&lt;br /&gt;&quot;;</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>print Estatica::$nome;</p>
+
+<p>print &#39;&lt;br&gt;&#39;;</p>
+
+<p>print Estatica::maisUm();</p>
+
+<p>&nbsp;</p>
+
+<p>Existe muito mais recursos sobre Programa&ccedil;&atilde;o orientada a objetos no PHP, que voc&ecirc; encontra em bons sites, livros e v&iacute;deo aulas, mas como o objetivo deste tutorial &eacute; de apenas mostrar o b&aacute;sico e de forma bem simplificada ficaremos por aqui. Se tiver se interessado pelo assunto fa&ccedil;a uma boa busca sobre o assunto e procure bons recursos.</p>
+
+<p>&nbsp;</p>
+
+
+</div>
+<!-- Final de conteudo -->
+
+<!-- Rodapé-->
+<footer id="rodape">
+	<div align="center">
+		<p><a href="http://ribafs.org">RibaFS</a>. All rights reserved. Design: <a href="http://templated.co">TEMPLATED</a></p>
+	</div>
+</footer>	
+</body>
+</html>

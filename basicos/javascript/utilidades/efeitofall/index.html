@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Fall 1.7a example</title>
+</head>
+<body>
+<script language="JavaScript" src="fall.js"></script>
+	<table border="0" cellpadding="3" cellspacing="0" style="border-collapse: collapse" width="760">
+		<tr><td width="100%">Fall v1.7a<p>
+          Fall is a small script to allow you to have falling objects on your web page.&nbsp; A seasonal idea would be of course, Snow!!!</p>
+			<p>Setting it up is easy:</p>
+			<ol>
+              <li>Download this file (right click, save as) (<b><a href="fall.zip">fall.zip</a></b>)</li>
+              <li>In the zip file you will find: <b><a href="fall.js">fall.js</a> </b>
+              , <b><a href="snowflake.gif">snowflake.gif </a></b>, <b>
+              <a href="snowflake2.gif">snowflake2.gif</a>,
+              <a href="snowflake3.gif">snowflake3.gif</a></b></li>
+              <li>Put this line within the &lt;body&gt; tags on your page: <font face="Tahoma"><pre>&lt;script language="JavaScript" src="http://yourdomain.com/fall.js">&lt;/script></pre></font></li>
+              </ol>
+              <p>That should be it...<p>
+              If you 
+			want to change the variables in Fall they are as follows:<ul>
+                <li><b>no=13</b> 
+                -&gt; number of objects</li>
+                <li><b>speed=30</b> 
+                -&gt; delay speed (milliseconds)</li>
+                <li><b>slider=30</b> 
+                -&gt; how far to waft side to side (pixels)</li>
+                <li><b>fallmax=8</b> 
+                -&gt; maximum fall speed (pixels)</li>
+                <li><b>wind=0</b> 
+                -&gt; prevailing wind (1=right, -1=left, 0=off)</li>
+                </ul>
+                <p>In this version, the images are 
+                set up as follows:</p>
+          <ul>
+            <li>fallg[<b>x</b>]=new Array(&quot;<b>filename.gif</b>&quot;,<b>width</b>,<b>height</b>,<b>3d</b>)</li>
+          </ul>
+          <p>where 3d is 1=on or 0=off,&nbsp; e.g.:</p>
+          <ul>
+            <li>fallg[1]=new Array(&quot;snowflake.gif&quot;,25,28,1)</li>
+          </ul>
+          <p>when adding multiple images you must 
+          make sure that the <b>x</b> is replaced with the next number in the 
+          sequence, with the sequence starting with <b>0</b>.</p>
+          <p><a href="JavaScript:togFall();">Toggle Fall</a><br>
+          A few e-mails arrived asking for a toggle switch for 
+          fall to turn it off and on (Fall can be processor intensive for low 
+          spec machines) This is the addition to 1.7a. The toggle can be made 
+          from a link on any object/text to the toggle function:</p>
+          <blockquote>
+          <pre>&lt;a href="JavaScript:togFall();">Toggle Fall&lt;/a></pre>
+          </blockquote>
+          <p><font size="2">Thanks to Kage for the idea for the toggle.&nbsp; 
+          Check out his site here (<a href="http://ss.dbmxl.com">http://ss.dbmxl.com</a>)</font></p>
+          </td></tr>
+		</table>
+	</body>
+</html>

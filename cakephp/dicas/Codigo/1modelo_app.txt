@@ -1,0 +1,49 @@
+Aplicativo Modelo em CakePHP
+
+Pegar CakePHP 2.4.0 e adicionar:
+
+- Adicionar AccessControl à pasta Component e adicionar configurações ao AppController.php
+- Juntar configurações da seção de administração
+- Adicionar suporte para vários aplicativos e um único core
+- Adicionar plugin cakept-br e configurar
+- Adicionar menutopo.ctp e menutopo2.ctp ao Elements e configurar o Layout/default.ctp
+- Criar novo css e adicionar ao webroot/css
+- Adicionar Captcha e configurar
+- Adicionar TinyMCE e configurar
+- Adicionar Validação do CPF e configurar
+- Adicionar busca 
+- Usar menus com uso de permissão por usuário. Só aparece o que o usuário tem acesso
+
+- Criar documento mostrando vários recursos do Cake:
+	- ACL
+	- Auth
+	- Bake
+	- CallBacks
+	- Componentes
+	- Controller
+	- Datetime
+	- DB
+	- Elements
+	- Email
+	- Erros e mensagens
+	- Schemas
+	- método find()
+	- formatação
+	- formhelper
+	- helpers
+	- htmlhelper
+	- includes
+	- layout
+	- máscaras
+	- menus
+	- models e validações
+	- plugins
+	- redirect
+	- relacionamentos
+	- request
+	- routes
+	- views, blocos e extendendo views
+
+Ao final usar este pacote como modelo para criar novos aplicativos.
+
+

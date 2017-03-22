@@ -1,0 +1,401 @@
+<html><head><!-- 
+Programador por: Fábio Berbert de Paula
+E-mail: fabio@vivaolinux.com.br
+Web Site: www.vivaolinux.com.br
+
+Tema: Harmonia Celeste
+-->
+<title>Introdução a manipulação de erros em PHP [Artigo]</title>
+  <Link Rel="Add Icon" Href="/favicon.ico">
+  <Link Rel="Shortcut Icon" Href="/favicon.ico">
+  <link rel="Icon" href="/favicon.ico" type="image/ico">
+<link rel="stylesheet" href="/linux003.css" type="text/css">
+</head>
+
+<body bgcolor="#ffffff" marginwidth="0" marginheight="0" leftmargin='0' topmargin='0'>
+
+<table border=0 cellpadding=3 cellspacing=3 width="100%">
+<tr>
+  <td><img src="/imagens/verde/logo_impressao.gif" width="118" height="68"></td>
+  <td class="direita"><img src="/imagens/verde/impressao_slogan.gif" width="249" height="24"></td>
+</tr>
+<tr>
+  <td colspan="2"><hr size="1" noshade></td>
+</tr>
+<tr><td colspan="2">
+<h3>Introdução a manipulação de erros em PHP</h3>
+Autor: Lorran Luiz &lt;lorranluiz at click21.com.br&gt;<br>
+Data: 22/01/2009
+<br><br>
+</td></tr>
+
+<tr><td colspan=2>
+<b>Introdução</b>
+<br><br>
+<div>
+Na história humana muitos conquistaram grandes coisas. Tiveram problemas é claro, mas em suas decisões não erraram ou erraram pouco (pois é, com os erros que aprendemos). Os erros enfim tiveram um papel relativamente importante para o sucesso dessas pessoas. Foi com eles (os erros) que as soluções apareceram, pois não existe solução se não há um erro para ser consertado.
+<br/><br/>
+É claro que erros nos decepcionam, mas eles só refletem a realidade - de que ainda não estamos completamente qualificados a fazer tal ato com êxito completo. Os erros mostram que não somos perfeitos.
+<br/><br/>
+A fato de não sermos perfeitos esbarra no que fazemos. Enfim, os programadores erram, os usuários podem errar ou até mesmo alguma parte do programa que está a ser executado pode falhar de alguma maneira.
+<br/><br/>
+São nesses erros que envolvem o aplicativo e/ou os atores envolvidos no sistema que grandes desastres começam a se formar. Verdadeiras bolas de neve vão crescendo a medida que um programador digita seu código sem preocupar-se com a menor possibilidade de algo dar errado.
+<br/><br/>
+Depois que um sistema está completamente construído, sem base alguma para o tratamento correto de erros, o "problema quase que irresolvível" estará montado! A cada passo na vida desse sistema a possibilidade da ocorrência de erros "não identificáveis" aumentará, e a cada erro, mais e mais do seu tempo se consumirá para se chegar a resolução do mesmo. O sistema enfim se torna insustentável e todas aquelas horas de trabalho foram desperdiçadas!
+<br/><br/>
+Situações como estas poderiam ser evitadas se medidas simples como a construção de um código "supervisionado" com cláusulas e blocos que garantem a manipulação correta e segura de erros fossem implementadas logo nas primeiras linhas.
+<br/><br/>
+</div>
+
+
+<br>
+</td></tr>
+<tr><td colspan=2>
+<b>Situações de possíveis erros</b>
+<br><br>
+<div>
+Veremos a partir de então o básico quando o assunto é manipulação de erros. Com tal conhecimento o programador se capacitará a avançar no estudo de tratamento de erros e posteriormente aprender técnicas para tal.
+<br/><br/>
+
+<h1>Algumas situações</h1>
+
+Suspeite de qualquer situação em que seu código fará algo decisivo para o funcionamento do seu sistema. Coisas como conectar a um banco de dados, abrir algum arquivo que contenha parâmetros importantes, carregar uma classe (ou uma biblioteca) essencial na aplicação ou armazenar alguma informação numa tabela de banco de dados, entre muitas outras situações requerem uma execução sem falhas e por isso deve haver uma preocupação maior com os erros que acontecerem.
+<br/><br/>
+Podemos dizer que em certas partes de seu código necessitaremos de "vigilantes" atentos a possíveis situações anormais. Veremos então quem são os vigilantes da programação no PHP.
+<br/><br/>
+
+<h1>Os "vigilantes"</h1>
+
+Podemos rodear determinadas áreas de seu script com "vigilantes", que esperam que algo dê errado para passar o controle da situação aos seus "superiores".
+<br/><br/>
+Usamos a palavra-chave <em>try</em> para representar esses vigias virtuais no seu código fonte.
+<br/><br/>
+O try é seguido de um bloco de códigos no qual ele estará responsável por capturar eventuais erros. Os erros são denominados exceções, ou seja, situações que saem do esperado.
+<br/><br/>
+Sintaxe:
+<br/><br/>
+<div class="codigo">
+try {<br/>
+<span class="comentario">//Código suspeito</span><br/>
+}
+</div>
+<br/>
+
+<h1>Exceções</h1>
+
+Em orientação a objeto, no PHP, exceções representam um objeto. Esse objeto necessita de um "molde" para ser construído, esse molde é denominado <em>Classe</em> e a classe usada para "modelar" uma exceção é a classe <em>Exception</em>.
+<br/><br/>
+Abaixo vemos a classe Exception:
+<br/><br/>
+<div class="codigo">
+&lt;?php<br/>
+class Exception {<br/>
+<br/>
+&nbsp;&nbsp;protected $message = 'Unknown exception'; <span class="comentario">// Mensagem da exceção</span><br/>
+&nbsp;&nbsp;protected $code = 0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">// Código da exceção definido pelo usuário</span><br/>
+&nbsp;&nbsp;protected $file;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">// Arquivo gerador da exceção</span><br/>
+&nbsp;&nbsp;protected $line;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">// Linha geradora da exceção</span><br/>
+<br/>
+&nbsp;&nbsp;function __construct(string $message=NULL, int code=0);<br/>
+<br/>
+&nbsp;&nbsp;final function getMessage();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">// Mensagem da exceção</span><br/>
+&nbsp;&nbsp;final function getCode();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="comentario">// Código da exceção</span><br/>
+&nbsp;&nbsp;final function getFile();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="comentario">// Arquivo gerador</span><br/>
+&nbsp;&nbsp;final function getTrace();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">// um array com o backtrace()</span><br/>
+&nbsp;&nbsp;final function getTraceAsString();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">// String formatada do trace</span><br/>
+<br/>
+&nbsp;&nbsp;<span class="comentario">/* Sobrecarregável */</span><br/>
+&nbsp;&nbsp;function _toString();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="comentario">// String formatada para ser mostrada</span><br/>
+<br/>
+}<br/>
+?&gt;
+</div><br/>
+
+A classe Exception não precisa ser inserida em seu código, ela é uma classe nativa do PHP introduzida no Zend 2.
+<br/><br/>
+
+<h1>Os "superiores"</h1>
+
+Os "superiores" são aqueles que tem competência para fazer algo, devem resolver um problema ou passar essa responsabilidade para quem resolva. No PHP usamos a palavra-chave <em>catch</em> para representar esse superior. 
+<br/><br/>
+O "catch" é responsável pela identificação do erro, ou seja, ele "sabe" qual o tipo de exceção ocorreu, de acordo com a classe, derivada de Exception, que "modelou" o objeto de exceção passado para ele.
+<br/><br/>
+O "catch" necessita de um parâmetro, o nome da classe Exception ou derivada seguida da variável que conterá o objeto da exceção e um bloco de código.
+<br/><br/>
+Sintaxe:
+<br/><br/>
+<div class="codigo">
+catch (Exception $variavel) {<br/>
+<span class="comentario">//Código que manipulará tal exceção</span><br/>
+}
+</div><br/>
+
+A palavra-chave catch deve ser posicionada logo após o bloco de código rodeado pela cláusula try. Ficando então assim:
+<br/><br/>
+Sintaxe:
+<br/><br/>
+<div class="codigo">
+try {
+<span class="comentario">//Código suspeito</span>
+   } catch (Exception $variavel) {
+<span class="comentario">//Código que manipulará tal exceção</span>
+}
+</div><br/>
+</div>
+
+
+<br>
+</td></tr>
+<tr><td colspan=2>
+<b>Preparando seu código para as exceções</b>
+<br><br>
+<div>
+Já vimos como cercar uma parte do código para manipular os erros que nela ocorrerem. Veremos a partir de então como "delatar" os erros e alertar o sistema quanto a eles.
+
+<h1>Construindo uma exceção</h1>
+
+O método construtor da classe Exception requer 2 parâmetros, sendo 1 opcional:
+<br/><br/>
+<div class="codigo">
+public Exception::__construct  ([ string $message=NULL  [, int $code  ]] )
+</div><br/>
+O primeiro parâmetro é a mensagem do erro e o segundo o código do erro (opcional).
+<br/><br/>
+
+<h1>Disparando o alarme</h1>
+
+Em PHP usamos a palavra-chave <em>throw</em> para alertar o sistema da ocorrência de um erro, uma exceção. Throw é seguido de um código que solicita a construção de um novo objeto de exceção.
+<br/><br/>
+Para instanciar uma classe no PHP usamos a palavra-chave <em>new</em> seguida do nome da classe. Então a sintaxe ficará assim:
+<br/><br/>
+<div class="codigo">
+throw new Exception("Mensagem", 1);
+</div><br/>
+
+<h1>Como usar "throw"</h1>
+
+Podemos usar a condicional <i>if</i> para decidirmos quando disparar uma exceção.
+<br/><br/>
+Veja o exemplo abaixo:
+<br/><br/>
+<div class="codigo">
+if (!@mysql_connect ("localhost", "usuário", "senha")) throw new Exception("Não foi possível conectar ao banco de dados");
+</div>
+<br/>
+Obs.: Podemos usar o operador de supressão (@) de erros para evitar que sejam exibidas as mensagens de erro padrão do PHP.
+<br/><br/>
+</div>
+
+
+<br>
+</td></tr>
+<tr><td colspan=2>
+<b>Estendendo e especificando exceções</b>
+<br><br>
+<div>
+Podemos tornar nossas exceções mais específicas e por consequência saber com mais precisão que tipo de erro ocorreu, manipulando-o assim da melhor maneira possível.
+<br/><br/>
+Usamos a palavra-chave <em>extends</em> para estender uma classe, ou seja, criar uma classe derivada (ou classe filha). Quando uma classe estende outra, ela herda da última atributos e métodos dependendo do nível de acesso de cada elemento que constitui o corpo da classe. A classe filha pode sobrecarregar métodos (redefiní-los).
+<br/><br/>
+Exception é uma classe que pode ser herdada, sendo assim podemos definir classes que derivem e aumentem sua funcionalidade, passando de uma simples exceção genérica para exceções mais precisas.
+<br/><br/>
+
+<h1>Exceções derivadas</h1>
+
+Definamos algumas classes derivadas de Exception:
+<br/><br/>
+<div class="codigo">
+class DBException extends Exception {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $variavel; <span class="comentario">//Uma variavel qualquer</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public function __construct($exceptionMessage, $errorCode = 0) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($exceptionMessage, $errorCode);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">//Aqui vemos alguns métodos característicos da classe derivada de Exception</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public function getVariavel() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;variavel_qualquer;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public function setVariavel($valor = NULL) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;variavel = $valor;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
+<br/>
+class FopenException extends Exception {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $arquivo; //Variável contendo o nome de um arquivo<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public function __construct($nomeDoArquivo, $exceptionMessage, $errorCode = 0) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($exceptionMessage, $errorCode);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;arquivo = $nomeDoArquivo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;//Métodos característicos dessa classe<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public function getNomeDoArquivo() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;arquivo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public function exibirNomeDoArquivo() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Nome do arquivo: {$this-&gt;arquivo}";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+}
+</div><br/>
+</div>
+
+
+<br>
+</td></tr>
+<tr><td colspan=2>
+<b>Um código básico com tratamento de erros</b>
+<br><br>
+<div>
+Veremos e entenderemos como funcionaria então um código básico completo que trataria de uma maneira certa os possíveis erros que ocorressem durante sua execução.
+<br/><br/>
+
+<h1>O código</h1>
+
+O código que se seguirá é meramente explicativo e por isso talvez não possua utilidade numa situação real.
+<ul>
+<li> Criaremos um código onde será criado um manipulador de arquivos;
+<li> O conteúdo do arquivo será lido;
+<li> Efetuaremos uma conexão com o servidor de banco de dados;
+<li> Esse conteúdo será inserido numa célula de uma tabela de um banco de dados;
+<li> E se tudo ocorrer bem, será exibida a mensagem: Operação efetuada com sucesso;
+<li> Caso ocorra um erro será exibida uma mensagem de erro que será reportada ao programador.
+</ul><br/>
+Veja abaixo:
+<br/><br/>
+<div class="codigo">
+<span class="comentario">//A CLASSE:</span><br/>
+<br/>
+class ArmazenadorDeArquivoEmDB {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $db_obj;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $db_usuario;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $db_senha;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $db_dsn;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $nomeDoArquivo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $manipuladorDoArquivo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $conteudoDoArquivo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $db_tabela;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;protected $db_dbName;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public function __construct($usuario, $senha, $tabela, $db, $servidor) { <span class="comentario">//Construir objeto</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;db_usuario = $usuario;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;db_senha = $senha;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;db_tabela = $tabela;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;db_dbName = $db;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;db_dsn = $servidor;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public function conectar() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!($this-&gt;db_obj = @mysql_connect($this-&gt;db_dsn, $this-&gt;db_usuario, $this-&gt;db_senha))) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new DBException("Não foi possível conectar ao banco de dados", 281); <span class="comentario">//Lembrando que o código de erro não é um parâmetro obrigatório</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public function armazenarArquivoNoDB($nomeDoArquivo) { <span class="comentario">//O parâmetro requer endereço completo do arquivo</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;nomeDoArquivo = $nomeDoArquivo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (empty($this-&gt;db_obj)) { <span class="comentario">//Se não existir uma conexão aberta com o DB</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;conectar();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch&nbsp;&nbsp;( DBException $e ) { <span class="comentario">//Caso haja algum erro durante a tentativa de conexão...</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw $e;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">// ...o "alarme" irá disparar</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">//Iremos abrir o arquivo:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!file_exists($nomeDoArquivo)) throw new FopenException($nomeDoArquivo, "O arquivo especificado não existe.", 282);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!($this-&gt;manipuladorDoArquivo = @fopen($nomeDoArquivo, "r"))) throw new FopenException($nomeDoArquivo, "Não foi possível abrir um manipulador para este arquivo.", 283);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!($this-&gt;conteudoDoArquivo = @fread($this-&gt;manipuladorDoArquivo, intval(sprintf("%u", filesize($nomeDoArquivo)))))) throw new FopenException($nomeDoArquivo, "Não foi possível abrir o conteúdo deste arquivo.", 284); <span class="comentario">//O 2º parâmetro de fread() possibilita a leitura de arquivos maiores que 2GB</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">//Armazenaremos agora o conteúdo do arquivo no DB</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sql = 'INSERT INTO `' . $this-&gt;db_dbName . '`.`' . $this-&gt;db_tabela . '` (`nome`, `conteudo`) VALUES (&#92;'' . $this-&gt;nomeDoArquivo . '&#92;', &#92;''. $this-&gt;conteudoDoArquivo . '&#92;');';<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!($insert = @mysql_query($sql))) throw new DBException("Não foi possível inserir o arquivo no banco de dados.", 285);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else echo '&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body onload="alert(&#92;'O arquivo foi armazenado com sucesso no banco de dados&#92;')"&gt;&lt;/body&gt;&lt;/html&gt;';<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
+<br/>
+<span class="comentario">//O OBJETO EM AÇÃO:</span><br/>
+<br/>
+$armazenadorDeArquivoEmDB = new ArmazenadorDeArquivoEmDB("usuario", "senha", "tabela", "banco_de_dados", "sevidor"); <span class="comentario">//Criamos um objeto que armazena um arquivo num banco de dados</span><br/>
+<br/>
+try { <span class="comentario">//Tentiva de conexão</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;$armazenadorDeArquivoEmDB-&gt;armazenarArquivoNoDB("Ergue-te Marcos.txt"); <span class="comentario">//Aqui entra o nome do arquivo a ser armazenado no DB</span><br/>
+} catch ( DBException $e ) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">//Houve um erro relativo ao banco de dados</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;echo nl2br("&lt;b&gt;{$e-&gt;getMessage()}&lt;/b&gt;&#92;n&lt;br /&gt;Detalhes:&#92;n{$e-&gt;__toString()}"); <span class="comentario">//Exibir string contendo informações sobre a exceção</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;$gossipy-&gt;reportar($e); <span class="comentario">//A nível exemplificativo, temos este objeto fictício, imaginário, que envia por email informações sobre o erro ao programador</span><br/>
+} catch ( FopenException $e ) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comentario">//Houve um erro referente ao arquivo, e podemos dar um tratamento específico a este tipo de exceção!</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;echo nl2br("&lt;b&gt;{$e-&gt;getMessage()}&lt;/b&gt;&#92;n&lt;br /&gt;Detalhes:&#92;n{$e-&gt;__toString()}"); <span class="comentario">//Exibir string contendo informações sobre a exceção</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;$gossipy-&gt;reportar($e); <span class="comentario">//A nível exemplificativo, temos este objeto fictício, imaginário, que envia por email informações sobre o erro ao programador</span><br/>
+}
+</div><br/>
+
+Poderíamos ter explorado mais desta fantástica linguagem que é o PHP e ter feito um tratamento de erros mais proveitoso no código acima, mas acho que para fins meramente explicativos e didáticos não é necessário tanta complexidade.
+<br/><br/>
+Vocês podem ver que poderíamos ter criado no código acima subclasses de Exception bem mais específicas, a idéia é a mesma de quando criamos as classes "FopenException" e "DBException". Classes mais específicas para a manipulação de exceções relativas ao banco de dados poderiam ser definidas apenas estendendo a classe "DBException", veja:
+<br/><br/>
+<div class="codigo">
+SQLException extends DBException { }
+</div><br/>
+
+E cada vez podemos ir tornando as exceções mais específicas (e a manipulação mais precisa).
+<br/><br/>
+</div>
+
+
+<br>
+</td></tr>
+<tr><td colspan=2>
+<b>Resumindo</b>
+<br><br>
+<div>
+Faremos então uma compilação de tudo o que aprendemos:
+<ul>
+<li>  Neste artigo revisamos conceitos básicos do poderoso recurso que é a orientação a objetos do PHP 5;
+<li>  Vimos algumas situações de risco que podem surgir durante a execução de seu código;
+<li>  Vimos também que podemos aprender com as situações frustradoras se tratarmos melhor as informações relativas a aquele problema;
+<li>  Vimos que o PHP 5 conta com excelentes ferramentas para tratarmos da maneira certa as exceções que ocorrerem;
+<li>  Estudamos as principais palavras-chave quando o assunto é tratamento de erros em PHP 5: try, catch e throw;
+<li>  Estudamos superficialmente a classe Exception;
+<li>  Aprendemos a disparar o "sinal de alerta" aproveitando a condicional "if" e usando-a em conjunto com throw.
+</ul><br/>
+Aprendemos o funcionamento básico do "sistema" de manipulação dos erros no PHP 5:
+<br/><br/>
+Quando um erro (exceção) ocorre, este é "percebido" (com por exemplo a condicional "if"), instancia-se então a classe Exception (com "throw new Exception('msg', 01)") ou uma derivada, o controle é passado para o bloco "catch" correspondente, que por vez pode usar as informações que recebeu a respeito do erro na sua manipulação, como melhor convir. 
+<br/><br/>
+Depois que todo o código do bloco catch que manipulou o erro é executado, o controle do código volta ao escopo mais geral (exceto se uma função exit() ou similar for executada dentro do bloco catch, o que terminaria a execução do código neste instante).
+<br/><br/>
+
+<h1>Encerrando</h1>
+
+Espero sinceramente ter sido claro, e mesmo sem aprofundar muito neste estudo, ter passado o máximo de conhecimento a respeito dos fundamentos do tratamento de erro com exceções em PHP.
+<br/><br/>
+Continuemos a estudar e talvez um dia melhorar nosso país com o conhecimento!
+<br/><br/>
+Um abraço para todos da comunidade VOL!
+<br/><br/>
+L. Luiz
+<br/><br/>
+</div>
+
+
+<br>
+</td></tr>
+
+
+<tr>
+  <td colspan="2"><hr size="1" noshade></td>
+</tr>
+<tr><td colspan="2" class="centro">
+<u>http://www.vivaolinux.com.br/artigo/Introducao-a-manipulacao-de-erros-em-PHP</u>
+<br><br>
+<a href="/artigo/Introducao-a-manipulacao-de-erros-em-PHP">Voltar para o site</a>
+<br><br>
+</td></tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+#!/bin/bash
+#set -x
+user=`whoami`;
+CLEAR=`which clear`;
+MENU=/usr/local/bin/menu;
+
+_Menu ()
+{
+        $CLEAR;
+        echo " "
+        echo "        ============================================================"
+        echo "                      ADMINISTRAÇÃO DE SERVIDORES LINUX             "
+        echo "        ====CADASTRAR COMPUTADOR NA REDE============================"
+        echo "           1. Cadastrar Computador no dhcpd.conf       "
+        echo "           2. Cadastrar Computador no maclist          "
+        echo "           3. Restartar dhcpd	         "
+        echo "           4. Restartar shorewall          "
+	echo "	      ==== LIBERAR IP ====================" 
+        echo "           5. Cadastrar Super usuário          "
+        echo "           6. Restartar squid              "
+        echo "           0. Sair              "
+        echo "        ============================================================"
+        echo "                    Digite um número do Menu     "ou"           "
+        echo "                    Digite  H# para Help  "ou"           "
+        echo "                        -- 0 -  para sair --                         "
+        echo "        ============================================================"
+        echo -n "Enter Menu Option ======> "
+        read option;
+
+        case "$option" in
+                1)
+                        _adddhcpd;
+                ;;
+                2)
+                        _addshorewall;
+                ;;
+                3)
+                        _redhcpd;
+                ;;
+                4)
+                        _reshorewall;
+                ;;
+		5)
+			_addsuper;
+		;;
+                6)
+                        _resquid;
+                ;;
+		0)	
+			_sair;
+		;;
+                *)
+                        $CLEAR;
+                        echo -e "You chose an invalid response. Please try again.\n Press any key to continue.";
+                        read junk;
+                        $MENU
+                ;;
+                esac
+}
+
+_adddhcpd ()
+{
+        $CLEAR;
+        #echo -n "Enter IP address of device and press Return: ";
+        #read host;
+        sudo nano /etc/dhcp3/dhcpd.conf;
+	$MENU;
+}
+_addshorewall ()
+{
+        $CLEAR;
+        #echo -n "Enter IP address of deivce and press return: ";
+        #read host;
+        sudo nano /etc/shorewall/maclist;
+	$MENU;
+}
+
+_redhcpd ()
+{
+	sudo /etc/init.d/dhcp3-server restart;
+        $MENU;
+}
+
+_reshorewall ()
+{
+	sudo /etc/init.d/shorewall restart;
+	$MENU;
+}
+
+_addsuper ()
+{
+	sudo nano /etc/squid/acl/super_usuarios;
+	$MENU;
+}
+
+_resquid ()
+{
+	sudo /etc/init.d/squid reload;
+	$MENU;
+}
+
+_sair ()
+{
+	exit;
+}
+_Menu

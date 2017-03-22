@@ -1,0 +1,14 @@
+http://www.phpactiverecord.org/download
+
+Minimum requirements
+
+    * PHP 5.3+
+    * PDO drivers for the database you are using
+
+Supported Databases:
+
+    * MySQL
+    * SQLite
+    * Postgres
+    * Oracle
+

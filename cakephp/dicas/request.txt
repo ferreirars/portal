@@ -1,0 +1,50 @@
+Dicas sobre Requisições
+
+
+Request via POST
+
+$nome = $this->request->data['Cliente']['nome'];
+
+$nome = $this->request->data['Cliente'.'nome'];
+
+$this->request->data('Post.title', 'New post')->data('Comment.1.author', 'Mark');
+
+echo $this->requestAction(
+    array('controller' => 'articles', 'action' => 'featured'),
+    array('return')
+);
+
+    echo $this->requestAction('/articles/featured/limit:3');
+    echo $this->requestAction('/articles/view/5');
+
+echo $this->requestAction(
+    array('controller' => 'articles', 'action' => 'view'),
+    array('pass' => array(5))
+);
+
+
+http://book.cakephp.org/2.0/en/core-libraries/components/request-handling.html
+http://book.cakephp.org/2.0/en/getting-started/a-typical-cakephp-request.html
+http://book.cakephp.org/2.0/en/controllers/request-response.html
+
+
+
+RequestHandlerComponent
+
+Many of RequestHandlerComponent’s methods are just proxies for CakeRequest methods. The following methods have been deprecated and will be removed in future versions:
+
+    isSsl()
+    isAjax()
+    isPost()
+    isPut()
+    isFlash()
+    isDelete()
+    getReferer()
+    getClientIp()
+    accepts(), prefers(), requestedWith() All deal in mapped content types now. They no longer work with mime-types. You can use RequestHandler::setContent() to create new content types.
+    RequestHandler::setContent() no longer accepts an array as a single argument, you must supply both arguments.
+
+
+http://book.cakephp.org/2.0/en/appendices/2-0-migration-guide.html
+
+

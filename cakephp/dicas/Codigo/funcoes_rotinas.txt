@@ -1,0 +1,104 @@
+Funções e Rotinas úteis
+
+// Devolve nomes de todos os controllers
+pr(App::objects('Controller'));
+
+Retornar todos os controllers para uma view
+public function controllers(){
+	$controllers = App::objects('Controller');
+
+	// Evitar AppController e PagesController
+	$value = 'AppController';
+	$key = array_search($value, $controllers);
+	unset($controllers[$key]);
+	$value = 'PagesController';
+	$key = array_search($value, $controllers);
+	unset($controllers[$key]);
+
+	$this->set('controllers',$controllers);
+
+}
+
+// Devolve os nomes de todos os models
+pr(App::objects('Model'));
+
+Para receber os actions de um controller:
+	public function actions($controller){
+        $parentClassMethods = get_class_methods(get_parent_class(Inflector::camelize($controller).'Controller'));
+        $subClassMethods    = get_class_methods(Inflector::camelize($controller).'Controller');
+        $classMethods       = array_diff($subClassMethods,$parentClassMethods);
+
+        foreach($classMethods as $method) {
+            if($method{0} <> "_") {
+                $classMethodsCleaned[] = $method;
+            }
+        }
+		return $classMethodsCleaned;
+	}
+
+	public function controles(){
+		$this->Privilege = ClassRegistry::init('Privilege');
+		$controllers = App::objects('Controller');
+
+		$act = $this->ControllerList->getList();
+
+		foreach($controllers as $controller){
+			if($controller != 'AppController' && $controller !='PagesController'){
+				$actions = $act[$controller]['actions'];
+				foreach($actions as $action){
+
+					$controller = strtolower(substr($controller,0,-10));
+					$act2 = $this->Privilege->find('first', array(
+						'conditions'=>array('Privilege.controller'=>$controller,'Privilege.action'=>$action),
+						'fields'=>array('Privilege.action','Privilege.controller')
+					));
+
+					if(isset($act2['Privilege']['action'])){
+						$act2 = $act2['Privilege']['controller'].'-'.$act2['Privilege']['action'];
+						print $act2;
+					}else{
+						$act3 = $this->Privilege->query("select action,controller from privileges where action='$action'");
+					}
+					if(isset($act3['Privilege']['action'])){
+						$act3 = $act3['Privilege']['action'].'-'.$act3['Privilege']['action'];
+						print $act3;
+					}else{
+						return false;
+					}
+				}
+			}
+		}
+
+	}
+
+
+No appcontroller
+$this->AccessControl->controles();
+
+
+// Devolve nomes de todas as tabelas
+// Adicionar ao AppController
+public function tabelas($banco, $model){
+	$tabelas = $this->{$model}->query('SHOW TABLES');// Cliente pode ser qq Model do aplicativo
+	$tab = array();
+	$bd="Tables_in_{$banco}";
+	for($x=0;$x<count($tabelas);$x++){
+		$tab[] = $tabelas[$x]['TABLE_NAMES'][$bd];
+	}
+	pr($tab);
+}
+// Chamar no beforeFilter em um Controller:
+	public function beforeFilter() {   
+		 parent::beforeFilter();
+		$this->tabelas('cake_admin', 'Cliente');
+		 // Outros códigos que precisar ficam aqui
+	}
+
+		// Controlando a action inicial de cada grupo
+		if($this->Auth->user('group_id') == 1){
+			 $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'index');
+		}else{
+			 $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'index');
+		}
+
+

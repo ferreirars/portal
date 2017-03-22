@@ -1,0 +1,75 @@
+<html><head><!-- 
+Programador por: Fábio Berbert de Paula
+E-mail: fabio@vivaolinux.com.br
+Web Site: www.vivaolinux.com.br
+
+Tema: Harmonia Celeste
+-->
+<title>Linux: Código-fonte do script - Validação de formulário</title>
+  <Link Rel="Add Icon" Href="/favicon.ico">
+  <Link Rel="Shortcut Icon" Href="/favicon.ico">
+  <link rel="Icon" href="/favicon.ico" type="image/ico">
+<link rel="stylesheet" href="/linux003.css" type="text/css">
+</head>
+
+<body bgcolor="#ffffff" marginwidth="0" marginheight="0" leftmargin='0' topmargin='0'>
+
+<table border=0 cellpadding=3 cellspacing=3 width="100%">
+<tr><td>
+<h2>Validação de formulário</h2>
+Autor: adrianosalles &lt;adrianorsalles@hotmail.com&gt;<br>
+Data: 01/03/2009
+<br><br>
+</td></tr>
+
+<tr><td>
+<b>Validação de formulário - código-fonte</b>
+</td></tr>
+
+<tr><td class="codigo">
+&lt;html&gt;<br>
+&lt;head&gt;<br>
+&lt;script&nbsp;language=&quot;javascript&quot;&nbsp;type=&quot;text/javascript&quot;&gt;<br>
+function&nbsp;valida()<br>
+{<br>
+&nbsp;var&nbsp;n,&nbsp;e;<br>
+n&nbsp;=&nbsp;document.form1.nome.value;<br>
+e&nbsp;=&nbsp;document.form1.email.value;<br>
+if(n==&quot;&quot;&nbsp;&amp;&amp;&nbsp;e==&quot;&quot;)<br>
+{<br>
+alert(&quot;preencha&nbsp;os&nbsp;campos&quot;);<br>
+document.form1.nome.focus();<br>
+}<br>
+else<br>
+{<br>
+alert(&quot;formulario&nbsp;enviado&nbsp;com&nbsp;sucesso&quot;);<br>
+}<br>
+}<br>
+<br>
+&lt;/script&gt;<br>
+&lt;title&gt;pagina&lt;/title&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&lt;form&nbsp;name=&quot;form1&quot;&nbsp;action=&quot;pagina_.html&quot;&nbsp;method=&quot;post&quot;&gt;<br>
+digite&nbsp;seu&nbsp;nome:&lt;br&gt;<br>
+&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;nome&quot;&gt;&lt;br&gt;&lt;br&gt;<br>
+digite&nbsp;seu&nbsp;e-mail:&lt;br&gt;<br>
+&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;email&quot;&gt;&lt;br&gt;&lt;br&gt;<br>
+&lt;input&nbsp;type=&quot;button&quot;&nbsp;value=&quot;enviar&quot;&nbsp;onClick=&quot;valida()&quot;&gt;<br>
+&lt;/form&gt;<br>
+<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+</td></tr>
+
+<tr><td>
+<br>
+<u>http://www.vivaolinux.com.br/scripts/verFonte.php?codigo=3866</u>
+<br><br>
+<a href="verFonte.php?codigo=3866">Voltar para o site</a>
+<br><br>
+</td></tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+Anexo II: Mais rotinas Javascript
+11. Aumenta ou diminui um valor
+
+ 
+
+<script language="javascript">
+
+function validaQuantidade(form)
+
+{
+
+    if(form.quantidade.value < 1)
+    {
+    form.quantidade.value = 1;
+    alert("Não pode comprar menos de 1 produto");
+    }
+   
+
+    if(form.quantidade.value > 10)
+    {
+    form.quantidade.value = 10;
+    alert("A quantidade máxima de produtos a comprar é de 100 produtos");
+    }
+}
+
+</script>
+
+ 
+
+<form name="exemplo15" method="POST" action="pagina.htm" target="_blank">
+
+Produto selecionado: <b>COD. 7548-65 CD-R IPC</b> Quantidade:
+
+<input type="text" name="quantidade" value="1" size="2" ReadOnly>
+<input type="button" value="aumentar" onClick="exemplo15.quantidade.value++; validaQuantidade(this.form)">
+<input type="button" value="diminuir" onClick="exemplo15.quantidade.value--;" validaQuantidade(this.form)>
+</form>
+
+ 
+
+Produto selecionado: COD. 7548-65 CD-R IPC Quantidade:
+
+ 
+
+12. Conta a quantidade de palavras introduzidas em um textarea
+
+ 
+
+<script language="javascript">
+
+function contarPalavras(form)
+
+{
+texto = form.mensagem.value
+texto = texto.split(" ")
+form.quantidade.value=texto.length
+}
+</script>
+
+ 
+
+<form name="exemplo16" method="POST" action="pagina.htm" target="_blank">
+
+<b>Por favor, escreva aqui a sua mensagem</b> Palavras escritas:
+
+<input type="text" name="quantidade" value="0" size="2"><br>
+
+<textarea rows="4" cols="35" name="mensagem" onKeyPress="contarPalavras(this.form); if (event.keycode1 == 13) form.mensagem.value +=' ';"></textarea><br>
+
+<input type="submit" value="Enviar">
+
+</form>
+
+ 
+
+Por favor, escreva aqui a sua mensagem Palavras escritas:
+
+ 
+
+13. Mostra ou esconde o botão "submit"
+
+Esconde o botão submit se os campos estiverem vazios
+
+ 
+
+<script language="javascript">
+function esconde(form)
+{
+    if ((form.nome.value != "") && (form.sobrenome.value != ""))
+    { form.enviar.style.visibility = "visible"; }
+
+    else {
+    form.enviar.style.visibility = "hidden"; }
+}
+</script>
+
+
+<form name="ejemplo17" method="POST" action="pagina.htm" target="_blank">
+Nome: <input type="text" name="nome" size="20" onKeyUp="esconde(this.form)"><br>
+Sobrenome: <input type="text" name="sobrenome" size="20" onKeyUp="esconde(this.form)"><br>
+<input type="submit" name="enviar" value="Enviar" style="visibility: hidden">
+</form>
+
+ 
+
+Nome:
+Sobrenome:
+
+
+14. Habilita ou desabilita o botão "submit"
+
+Desabilita o botão submit se os campos estiverem vazios
+
+ 
+
+<script language="javascript">
+function desabilita(form)
+{
+    if ((form.nome.value != "") && (form.sobrenome.value != ""))
+    { form.enviar.disabled = false; }
+
+    else {
+    form.enviar.disabled = true; }
+}
+</script>
+
+
+<form name="exemplo18" method="POST" action="pagina.htm" target="_blank">
+Nome: <input type="text" name="nome" size="20" onKeyUp="desabilita(this.form)"><br>
+Sobrenome: <input type="text" name="sobrenome" size="20" onKeyUp="desabilita(this.form)"><br>
+<input type="submit" name="enviar" value="Enviar" disabled>
+</form>
+
+ 
+
+Nome:
+Sobrenome:
+
+ 
+
+15. Mensagem de confirmação ao apagar um formulário
+
+ 
+
+<script language="javascript">
+function ConfirmarApagado(form)
+{
+apagar = window.confirm('Apagarão todo os dados do formulário');
+(apagar)?form.reset():'return false';
+}
+</script>
+ 
+
+<form name="exemplo19" method="POST" action="pagina.htm" target="_blank">
+
+Nome: <input type="text" name="nome" size="20"><br>
+Sobrenome: <input type="text" name="sobrenome" size="20"><br>
+<input type="button" value="Apagar" onClick="ConfirmarApagado(this.form)">
+
+</form>
+
+ 
+
+Nome:
+Sobrenome:
+
+ 
+
+16. Mensagem de confirmação ao enviar um formulário
+
+ 
+
+<script language="javascript">
+function ConfirmarEnvio(form)
+{
+enviar = window.confirm('Enviarão todos os dados do formulário');
+(enviar)?form.submit():'return false';
+}
+</script>
+ 
+
+<form name="exemplo20" method="POST" action="pagina.htm" target="_blank">
+
+Nome: <input type="text" name="nome" size="20"><br>
+Sobrenome: <input type="text" name="sobrenome" size="20"><br>
+<input type="button" value="Enviar" onClick="ConfirmarEnvio(this.form)">
+
+</form>
+
+ 
+
+Nome:
+Sobrenome: 
+
+Fonte: http://www.criarweb.com/artigos/mais-rotinas-javascript.html

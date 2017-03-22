@@ -1,0 +1,88 @@
+Dicas sobre Views
+
+
+Renderização
+$this->render();// Renderiza a view atual
+$this->render('custom_file');
+
+
+Elements
+
+echo $this->element('helpbox');
+
+Passando variáveis em elementos:
+echo $this->element('helpbox', array(
+    "helptext" => "Oh, this text is very helpful."
+));
+
+// inside helpbox.ctp
+echo $helptext;
+
+Título da página
+From Controller
+
+$this->set('title_for_layout', 'View Active Users');
+
+From View:
+
+$this->set('title_for_layout', $titleContent);
+
+
+CakePHP View properties and methods
+
+CakePHP View properties
+
+$action = null
+$autoLayout = true
+$autoRender = true
+$base = null
+$controller = null
+$ext = '.thtml'
+$hasRendered = null
+$helpers = array('Html')
+$here = null
+$layout = 'default'
+$loaded = array()
+$models = array()
+$name = null
+$pageTitle = false
+$params
+$parent = null
+$plugin = null
+$subDir = null
+$themeWeb = null
+$uses = false
+$viewPath
+        
+
+CakePHP View methods
+
+element ($name)
+error ($code, $name, $message)
+pluginView ($action, $layout)
+render ($action = null, $layout = null, $file = null)
+renderCache ($filename, $timeStart)
+renderElement ($name, $params = array())
+renderLayout ($content_for_layout)
+setLayout ($layout)
+        
+
+- Alterando o título das colunas da listagem (index.ctp)
+
+O Cake tem muitos recursos prontos, mas impressiona como os criadores se preocuparam em deixá-lo flexível.
+Algo prático ao criar o código pelo Bake é que ele já nomeia todos os campos automaticamente, mas isso apenas com o nome do campo, sem acentos ou algo do gênero. Mas após a geração do código podemos alterar o label de todos os campos, se precisarmos. Edite a view desejada (Ex.: Clientes/index.ctp). Vamos alterar email, data_nasc e cpf.
+
+<th><?php echo $this->Paginator->sort('email'); ?></th>
+<th><?php echo $this->Paginator->sort('data_nasc'); ?></th>
+<th><?php echo $this->Paginator->sort('cpf'); ?></th>
+
+Altere para
+<th><?php echo $this->Paginator->sort('email','E-mail'); ?></th>
+<th><?php echo $this->Paginator->sort('data_nasc','Nascimento'); ?></th>
+<th><?php echo $this->Paginator->sort('cpf','CPF'); ?></th>
+
+
+http://book.cakephp.org/2.0/en/views.html
+http://book.cakephp.org/2.0/en/views/media-view.html
+http://book.cakephp.org/2.0/en/cakephp-overview/understanding-model-view-controller.html
+

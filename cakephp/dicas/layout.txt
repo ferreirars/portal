@@ -1,0 +1,41 @@
+Layouts no CakePHP
+
+
+- Criando um novo Layout
+
+Siga os passos:
+
+- Copie o arquivo do layout atual: app/View/Layout/default.ctp para admin.ctp no mesmo path.
+- Copie o arquivo de CSS app/webroot/css/cake.generic.css para cake.admin.css dentro da pasta css.
+- Edite o arquivo app/View/Layout/admin.ctp e altere o seu CSS mudando a linha:
+		echo $this->Html->css('cake.generic'); 
+para
+		echo $this->Html->css('cake.admin');		
+O ideal agora é que um designer ou alguém com experiência em CSS edite o arquivo:
+		app/webroot/css/cake.admin.css e também o generic.
+para alterar o layout do aplicativo adequadamente.
+
+Apenas iremos alterar a cor do background na seção body do CSS para identificar facilmente os dois layouts e também é interessante alterar algum texto e imagem no arquivo admin.ctp.
+
+Aplicando o novo Layout:
+
+Como nossos controllers terão alguns actions liberados para uns usuários e outros para outros, aplicaremos por action. Vejamos dois exemplos:
+
+Clientes/index e view
+	public function index() {
+		$this->layout = 'default';
+		$this->Cliente->recursive = 0;
+		$this->set('clientes', $this->paginate());
+	}
+
+
+Clientes/add e edit
+	public function add() {
+		$this->layout = 'admin';
+
+Ou seja, os que dão acesso ao usuário "usuario" deixei o layout default.
+Os de acesso administrativo mudei para o layout admin.
+Caso queira melhorar crie um layout diferente para cada usuário ou grupo.
+
+http://book.cakephp.org/2.0/en/views.html
+

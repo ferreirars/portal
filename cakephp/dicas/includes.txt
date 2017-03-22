@@ -1,0 +1,50 @@
+Includes de arquivos no CakePHP 
+
+Atualizar para a versão 3
+
+Componente 
+
+public $components = array('Acl'); 
+public $components = array('Auth'); 
+ou
+public $components = array('Auth','Acl'); 
+   
+
+Helper 
+public $helpers = array('Html', 'Form', 'Session'); 
+public $helpers = array('Form','Html','Session','Js'=> array('Jquery'), 'Text', 'Time');
+
+Plugin 
+
+CakePlugin::loadAll(); // Loads all plugins at once 
+CakePlugin::load('ContactManager'); //Loads a single plugin 
+
+
+Element 
+echo $this->element('espacos'); 
+
+CSS 
+<?php echo($this->Html->css('style', array(), array('media'=>'screen'))); ?> 
+
+JavaScript 
+<?php echo($this->Html->script('meuscript')); ?> 
+
+jQuery 
+<?php echo($this->Html->script('jquery')); ?> 
+
+Imagens 
+<?php echo($this->Html->imagecho('img01.jpg', array('width'=>'667', 'height'=>'118', 'alt'=>''))); ?> 
+
+// Incluir models em controllers:
+public $uses = array('Recipe', 'User');
+public $helpers = array('Js');
+public $components = array('RequestHandler');
+
+Chamar javascript em webroot/js:
+echo $this->Html->script('scripts');
+
+Chamar CSS em webroot/css:
+echo $this->Html->css('forms');
+
+
+

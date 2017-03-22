@@ -1,0 +1,530 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt" dir="ltr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta name="generator" content="MediaWiki 1.16alpha-wmf" />
+		<meta name="keywords" content="Aplicativos em PHP/Trabalhando em PHP com/Imagens e Gráficos" />
+		<link rel="alternate" type="application/x-wiki" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos&amp;action=edit" />
+		<link rel="edit" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos&amp;action=edit" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikilivros (pt)" />
+		<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/" />
+		<link rel="alternate" type="application/rss+xml" title="Feed RSS Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=rss" />
+		<link rel="alternate" type="application/atom+xml" title="Feed Atom Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=atom" />
+		<title>Aplicativos em PHP/Trabalhando em PHP com/Imagens e Gráficos - Wikilivros</title>
+		<link rel="stylesheet" href="/skins-1.5/common/shared.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/common/commonPrint.css?233xz" type="text/css" media="print" />
+		<link rel="stylesheet" href="/skins-1.5/monobook/main.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/chick/main.css?233xz" type="text/css" media="handheld" />
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE50Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE55Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/skins-1.5/monobook/IE60Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/skins-1.5/monobook/IE70Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="print" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Handheld.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="handheld" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=-&amp;action=raw&amp;maxage=2678400&amp;smaxage=0&amp;ts=20090810192510&amp;gen=css" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.css&amp;action=raw&amp;ctype=text/css" type="text/css" />
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins-1.5/common/IEFixes.js?233xz"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/skins-1.5";
+		var wgArticlePath = "/wiki/$1";
+		var wgScriptPath = "/w";
+		var wgScript = "/w/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://pt.wikibooks.org";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gráficos";
+		var wgTitle = "Aplicativos em PHP/Trabalhando em PHP com/Imagens e Gráficos";
+		var wgAction = "view";
+		var wgArticleId = "14503";
+		var wgIsArticle = true;
+		var wgUserName = "Ribafs";
+		var wgUserGroups = ["*", "user", "autoconfirmed"];
+		var wgUserLanguage = "pt-br";
+		var wgContentLanguage = "pt";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = 110839;
+		var wgVersion = "1.16alpha-wmf";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = [",	.", " 	,"];
+		var wgDigitTransformTable = ["", ""];
+		var wgMainPageTitle = "Página principal";
+		var wgMWSuggestTemplate = "http://pt.wikibooks.org/w/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest";
+		var wgDBname = "ptwikibooks";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["com sugestões", "sem sugestões"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		var wgAjaxWatch = {"watchMsg": "Vigiar", "unwatchMsg": "Desinteressar-se", "watchingMsg": "Vigiando...", "unwatchingMsg": "Deixando de vigiar..."};
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="/skins-1.5/common/wikibits.js?233xz"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="/skins-1.5/common/ajax.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/ajaxwatch.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/mwsuggest.js?233xz"></script>
+		<script type="text/javascript">/*<![CDATA[*/
+		var wgNotice='';var wgNoticeLocal='';
+		/*]]>*/</script>
+		<script type="text/javascript" src="http://upload.wikimedia.org/centralnotice/wikibooks/pt-br/centralnotice.js?233xz"></script>
+
+		<script type="text/javascript" src="/w/index.php?title=-&amp;action=raw&amp;smaxage=0&amp;gen=js&amp;useskin=monobook"><!-- site js --></script>
+		<script type="text/javascript" src="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.js&amp;action=raw&amp;ctype=text/javascript"></script>
+	</head>
+<body class="mediawiki ltr ns-0 ns-subject page-Aplicativos_em_PHP_Trabalhando_em_PHP_com_Imagens_e_Gráficos skin-monobook">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+		<div id="siteNotice"><script type='text/javascript'>if (wgNotice != '') document.writeln(wgNotice);</script></div>		<h1 id="firstHeading" class="firstHeading">Aplicativos em PHP/Trabalhando em PHP com/Imagens e Gráficos</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">De Wikilivros</h3>
+			<div id="contentSub"><span class="subpages">&lt; <a href="/wiki/Aplicativos_em_PHP" title="Aplicativos em PHP">Aplicativos em PHP</a> | <a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com" title="Aplicativos em PHP/Trabalhando em PHP com">Trabalhando em PHP com</a></span></div>
+									<div id="jump-to-nav">Ir para: <a href="#column-one">navegação</a>, <a href="#searchInput">pesquisa</a></div>			<!-- start content -->
+			<table id="toc" class="toc" summary="Tabela de conteúdo">
+<tr>
+<td>
+<div id="toctitle">
+<h2>Tabela de conteúdo</h2>
+</div>
+<ul>
+<li class="toclevel-1"><a href="#Trabalhando_com_a_biblioteca_gr.C3.A1fica_GD"><span class="tocnumber">1</span> <span class="toctext">Trabalhando com a biblioteca gráfica GD</span></a></li>
+<li class="toclevel-1"><a href="#Gerando_Thumbnails_com_GD"><span class="tocnumber">2</span> <span class="toctext">Gerando Thumbnails com GD</span></a></li>
+<li class="toclevel-1"><a href="#Gerando_Imagens_Dinamicamente"><span class="tocnumber">3</span> <span class="toctext">Gerando Imagens Dinamicamente</span></a></li>
+<li class="toclevel-1"><a href="#Desenhando_ret.C3.A2ngulos"><span class="tocnumber">4</span> <span class="toctext">Desenhando retângulos</span></a></li>
+<li class="toclevel-1"><a href="#Desenhando_pol.C3.ADgonos"><span class="tocnumber">5</span> <span class="toctext">Desenhando polígonos</span></a></li>
+<li class="toclevel-1"><a href="#Desenhando_arcos"><span class="tocnumber">6</span> <span class="toctext">Desenhando arcos</span></a></li>
+<li class="toclevel-1"><a href="#Gerando_Gr.C3.A1ficos_em_PHP_com_a_Biblioteca_JPGraph"><span class="tocnumber">7</span> <span class="toctext">Gerando Gráficos em PHP com a Biblioteca JPGraph</span></a>
+<ul>
+<li class="toclevel-2"><a href="#O_que_.C3.A9_a_JpGrapf.3F"><span class="tocnumber">7.1</span> <span class="toctext">O que é a JpGrapf?</span></a></li>
+<li class="toclevel-2"><a href="#Requisitos"><span class="tocnumber">7.2</span> <span class="toctext">Requisitos</span></a></li>
+<li class="toclevel-2"><a href="#Par.C3.A2metros_de_Compila.C3.A7.C3.A3o"><span class="tocnumber">7.3</span> <span class="toctext">Parâmetros de Compilação</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Refer.C3.AAncia"><span class="tocnumber">8</span> <span class="toctext">Referência</span></a></li>
+</ul>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+//<![CDATA[
+ if (window.showTocToggle) { var tocShowText = "mostrar"; var tocHideText = "esconder"; showTocToggle(); } 
+//]]>
+</script>
+<p><a name="Trabalhando_com_a_biblioteca_gr.C3.A1fica_GD" id="Trabalhando_com_a_biblioteca_gr.C3.A1fica_GD"></a></p>
+<h2><span class="editsection">[<a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos&amp;action=edit&amp;section=1" title="Editar seção: Trabalhando com a biblioteca gráfica GD">editar</a>]</span> <span class="mw-headline">Trabalhando com a biblioteca gráfica GD</span></h2>
+<p>(Se no Windows remover o ponto-e-vírgula ";" da linha "extension=php_gd.dll" do php.ini)</p>
+<p><br /></p>
+<p><a name="Gerando_Thumbnails_com_GD" id="Gerando_Thumbnails_com_GD"></a></p>
+<h2><span class="mw-headline">Gerando Thumbnails com GD</span></h2>
+<p>Artigo do BOZO no PHPBrasil:</p>
+<p><a href="http://phpbrasil.com/articles/article.php/id/1350" class="external free" title="http://phpbrasil.com/articles/article.php/id/1350" rel="nofollow">http://phpbrasil.com/articles/article.php/id/1350</a></p>
+<p><br /></p>
+<p><a name="Gerando_Imagens_Dinamicamente" id="Gerando_Imagens_Dinamicamente"></a></p>
+<h2><span class="mw-headline">Gerando Imagens Dinamicamente</span></h2>
+<p>por Luiz Ribeiro</p>
+<p>O PHP oferece uma interface ao módulo GD de Thomas Boutell. Usando tal módulo, você pode criar e editar imagens nos formatos JPEG e PNG. O formato GIF já foi aceito, mas como o algoritmo de compressão do GIF (LZW) contém uma patente de posse da Unisys, os desenvolvedores do módulo foram obrigados à retirar o suporte a esse formato nas versões mais recentes.</p>
+<p><br />
+Bom, para iniciar vou explicar o procedimento para criar uma imagem usando o módulo GD em PHP. Se você não tem esse módulo, você pode fazer o download dele em <a href="http://www.boutell.com/gd/" class="external free" title="http://www.boutell.com/gd/" rel="nofollow">http://www.boutell.com/gd/</a>. Normalmente a GD acompanha uma instalação completa do PHP.</p>
+<p>Para se criar a imagem, será usada a função ImageCreate(), então serão realizadas as alterações na imagem, então será finalizada a imagem usando ImageJpeg(), ImagePng() ou até ImageGif() se a versão do módulo GD for inferior à 1.4.</p>
+<p>Bom, vamos ao que interessa. Primeiramente vamos criar uma pequena imagem com o seguinte texto: PHPBrasil. O código ficará da seguinte forma:</p>
+<pre>
+&lt;?php
+header("Content-type: image/gif"); //Informa ao browser que o arquivo é uma imagem no formato GIF
+
+$imagem = ImageCreate(150,40); //Cria uma imagem com as dimensões 100x20
+
+$vermelho = ImageColorAllocate($imagem, 255, 0, 0); //Cria o segundo plano da imagem e o configura para vermelho
+$branco = ImageColorAllocate($imagem, 255, 255, 255); //Cria a cor de primeiro plano da imagem e configura-a para branco
+
+ImageString($imagem, 3, 3, 3, "PHPBrasil", $branco); 
+//Imprime na imagem o texto PHPBrasil na cor branca que está na variável $branco
+
+ImageGif($imagem); //Converte a imagem para um GIF e a envia para o browser
+
+ImageDestroy($imagem); //Destrói a memória alocada para a construção da imagem GIF.
+?&gt;
+</pre>
+<p>Bom, o script está todo comentado e acho que você entendeu. Se alguma dúvida ficar martelando aí, manda um comentário. =D</p>
+<p>Bom, neste exemplo usamos a função ImageGif() para converter a imagem, $imagem, e depoisa enviamos ao navegador. Mas poderíamos ter salvo esta imagem em um arquivo, ao invés de mostrar ela no navegador. Veja o exemplo:</p>
+<pre>
+&lt;?php
+$arquivo = "imagem1.gif";
+
+$imagem = ImageCreate(150,40);
+
+$vermelho = ImageColorAllocate($imagem, 255, 0, 0);
+$branco = ImageColorAllocate($imagem, 255, 255, 255);
+
+ImageString($imagem, 3, 3, 3, "PHPBrasil", $branco);
+ImageGif($imagem, $arquivo);
+
+ImageDestroy($imagem);
+
+echo "A imagem foi salva no arquivo $arquivo.";
+?&gt;
+</pre>
+<p>Como você deve ter notado, apenas retiramos aquele header() (que informava ao browser que o arquivo era uma imagem), afinal este exemplo não irá mostrar a imagem no navegador e sim gravar ela em $arquivo, e também mudamos os parâmetros da função ImageGif() para salvar a imagem no arquivo.</p>
+<p>Nesta parte do artigo, irei explicar como desenhar retângulos, polígonos e arcos.</p>
+<p><br /></p>
+<p><a name="Desenhando_ret.C3.A2ngulos" id="Desenhando_ret.C3.A2ngulos"></a></p>
+<h2><span class="mw-headline">Desenhando retângulos</span></h2>
+<p>Vamos ao primeiro exemplo, que irá desenhar um simples retângulo preenchido usando GD (o formato da imagem a seguir é PNG).</p>
+<pre>
+&lt;?php
+header("Content-type: image/png");
+$imagem = ImageCreate(100, 20);
+$branco = ImageColorAllocate($imagem, 255, 255, 255);
+$azul = ImageColorAllocate($imagem, 20, 93, 233);
+ImageFilledRectangle($imagem, 5, 10, 60, 14, $azul);
+ImagePng($imagem);
+ImageDestroy($imagem);
+?&gt;
+</pre>
+<p>Bom, neste exemplo só há uma função nova, a função ImageFilledRectangle() que como seu próprio nome diz é uma função que cria um retângulo com as dimensões e posição informadas, e na cor azul, que foi definida na variável $azul.</p>
+<p>Já para criar um retângulo sem preenchimento você simplesmente irá trocar a função ImageFilledRectangle() por ImageRectangle(). O exemplo ficará da seguinte forma:</p>
+<pre>
+&lt;?php
+header("Content-type: image/png");
+$imagem = ImageCreate(100, 20);
+$branco = ImageColorAllocate($imagem, 255, 255, 255);
+$azul = ImageColorAllocate($imagem, 20, 93, 233);
+ImageRectangle($imagem, 5, 10, 60, 14, $azul);
+ImagePng($imagem);
+ImageDestroy($imagem);
+?&gt;
+</pre>
+<p>Como foi dito, este exemplo irá criar uma imagem com um retângulo sem preenchimento, mas sua borda terá a cor $azul.</p>
+<p><a name="Desenhando_pol.C3.ADgonos" id="Desenhando_pol.C3.ADgonos"></a></p>
+<h2><span class="mw-headline">Desenhando polígonos</span></h2>
+<p>Para desenhar polígonos, vamos usar a função ImagePolygon(), que irá criar um polígono sem preenchimento, e a função ImageFilledPolygon() que irá desenhar um polígono com preenchimento.</p>
+<p>Em nosso primeiro exemplo, vamos desenhar um polígono com vértices de (12, 10), (15, 20), (50, 17) e (70, 10) com uma borda de azul-claro:</p>
+<pre>
+&lt;?php
+header("Content-type: image/png");
+$imagem = ImageCreate(100, 20);
+$branco = ImageColorAllocate($imagem, 255, 255, 255);
+$azul = ImageColorAllocate($imagem, 20, 93, 233);
+$pontos = array(12, 10, 15, 20, 50, 17, 70, 10);
+ImagePolygon($imagem, $pontos, 4, $azul);
+ImagePng($imagem);
+ImageDestroy($imagem);
+?&gt;
+</pre>
+<p>Bom, agora vamos criar um polígono preenchido, você já deve ter pensado que o código será o mesmo, mas ao invés de ImagePolygon() usaremos ImageFilledPolygon(), se você énsou isso, acertou em cheio. Vamos ver como ficaria nossa imagem com um retângulo preenchido:</p>
+<pre>
+&lt;?php
+header("Content-type: image/png");
+$imagem = ImageCreate(100, 20);
+$branco = ImageColorAllocate($imagem, 255, 255, 255);
+$azul = ImageColorAllocate($imagem, 20, 93, 233);
+$pontos = array(12, 10, 15, 20, 50, 17, 70, 10);
+ImageFilledPolygon($imagem, $pontos, 4, $azul);
+ImagePng($imagem);
+ImageDestroy($imagem);
+?&gt;
+</pre>
+<p><a name="Desenhando_arcos" id="Desenhando_arcos"></a></p>
+<h2><span class="mw-headline">Desenhando arcos</span></h2>
+<p>Bom, agora vamos desenhar alguns arcos em nossas imagens, para isso vamos usar a função ImageArc(). Antes de começarmos, vou passar a sintaxe da função:</p>
+<p><br />
+int ImageArc(int im, int cx, int cy, int w, int h, int s, int e, int co1);</p>
+<p><br />
+Esta função desenha um arco em uma imagem, im, com uma posição inicial de X de cx e uma posição inicial Y de cy. O arco é de largura w e altura h, com um ângulo inicial de s e um ângulo final de e, tudo na cor co1.</p>
+<p>Agora que já entendemos a função ImageArc() vamos ao nosso primeiro exemplo que irá desenhar uma elipse:</p>
+<pre>
+&lt;?php
+header("Content-type: image/gif");
+$imagem = ImageCreate(500, 100);
+$branco = ImageColorAllocate($imagem, 255, 255, 255);
+ImageColorTransparent($imagem, $branco);
+$vermelho = ImageColorAllocate($imagem, 20, 93, 233);
+ImageArc($imagem, 40, 50, 50, 40, 0, 360, $vermelho);
+ImageGif($imagem);
+ImageDestroy($imagem);
+?&gt;
+</pre>
+<p>O código acima funciona, pois para ter uma elipse, você precisa de uma diferença de 360 graus entre a posição inicial e a posição final. Aplicando esse conhecimento, também podemos desenhar um círculo preenchido usando a função ImageFillToBorder(). (Note que isso é um círculo, não uma elipse, porque os parâmetros de largura e altura têm o mesmo valor.)</p>
+<pre>
+&lt;?php
+header("Content-type: image/gif");
+$imagem = ImageCreate(500, 100);
+$branco = ImageColorAllocate($imagem, 255, 255, 255);
+ImageColorTransparent($imagem, $branco);
+$vermelho = ImageColorAllocate($imagem, 20, 93, 233);
+ImageArc($imagem, 40, 50, 50, 50, 0, 360, $vermelho);
+ImageFillToBorder($imagem, 50, 40, $vermelho);
+ImageGif($imagem);
+ImageDestroy($imagem);
+?&gt;
+</pre>
+<p>Observação: os exemplos acima foram retirados do livro PHP: Guia do Desenvolvedor que está na lista de livros recomendados da PHPBrasil. Nos exemplos só foram alterados os nomes de algumas variáveis para facilitar a compreensão.</p>
+<p>Bom, esse é o básico do módulo GD. Você com certeza tem muito a explorar ainda, em breve vou trazer mais alguns artigos sobre o assunto, para os que se interessaram, ou não entenderam alguma função podem ver no manual do PHP todas as funções de imagem: <a href="http://br.php.net/manual/pt_BR/ref.image.php" class="external free" title="http://br.php.net/manual/pt_BR/ref.image.php" rel="nofollow">http://br.php.net/manual/pt_BR/ref.image.php</a></p>
+<p><br /></p>
+<p><a name="Gerando_Gr.C3.A1ficos_em_PHP_com_a_Biblioteca_JPGraph" id="Gerando_Gr.C3.A1ficos_em_PHP_com_a_Biblioteca_JPGraph"></a></p>
+<h2><span class="mw-headline">Gerando Gráficos em PHP com a Biblioteca JPGraph</span></h2>
+<p><a name="O_que_.C3.A9_a_JpGrapf.3F" id="O_que_.C3.A9_a_JpGrapf.3F"></a></p>
+<h3><span class="mw-headline">O que é a JpGrapf?</span></h3>
+<p>A JpGraph é uma biblioteca orientada a objetos de criação de gráficos, inteiramente escrita em PHP, que tem como base a extensão GD2 ou GD1 que acompanha o PHP.</p>
+<p>Pode ser utilizada para criar diversos tipos de gráficos, de maneira fácil e escrevendo um mínimo de código. Quando aliada a bancos de dados torna os gráficos ainda mais interessantes.</p>
+<p><a name="Requisitos" id="Requisitos"></a></p>
+<h3><span class="mw-headline">Requisitos</span></h3>
+<p>Apache (<a href="http://httpd.apache.org" class="external free" title="http://httpd.apache.org" rel="nofollow">http://httpd.apache.org</a> )</p>
+<p>PHP (www.php.net )</p>
+<p>JpGraph (<a href="http://www.aditus.nu/jpgraph/" class="external free" title="http://www.aditus.nu/jpgraph/" rel="nofollow">http://www.aditus.nu/jpgraph/</a> )</p>
+<p><a name="Par.C3.A2metros_de_Compila.C3.A7.C3.A3o" id="Par.C3.A2metros_de_Compila.C3.A7.C3.A3o"></a></p>
+<h3><span class="mw-headline">Parâmetros de Compilação</span></h3>
+<p>- Compilar o PHP com suporte a GD e às fontes TTF (Linux):</p>
+<p>Sugestão da documentação oficial da JpGrapf:</p>
+<pre>
+./configure --prefix=/usr/share \
+--datadir=/usr/share/php \
+--with-apxs=/usr/sbin/apxs \
+--libdir=/usr/share \
+--includedir=/usr/include \
+--bindir=/usr/bin \
+--with-config-file-path=/etc \
+--enable-mbstring --enable-mbregex \
+--with-pdflib=/usr \
+--with-mysql  \
+--with-ttf-dir=/usr/lib \
+--with-freetype-dir=/usr/lib \
+--with-gd --enable-gd-imgstrttf --enable-gd-native-ttf \
+--with-zlib-dir=/usr/lib \
+--with-png-dir=/usr/lib --with-jpeg-dir=/usr/lib --with-xpm-dir=/usr/X11R6 \
+--with-tiff-dir=/usr/lib \
+--enable-ftp \
+--enable-memory-limit --enable-safe-mode \
+--bindir=/usr/bin \
+--enable-bcmath -enable-calendar \
+--enable-ctype --with-ftp \
+--enable-magic-quotes \
+--enable-inline-optimization \
+--with-bz2 \
+--with-iconv
+</pre>
+<p>- No Windows basta descomentar no php.ini o suporte à GD2.</p>
+<p>Obs.: No código de um gráfico não pode haver nenhuma saída em HTML ou texto.</p>
+<p><br />
+<a href="/wiki/Ficheiro:Jp1.png" class="image" title="Imagem:jp1.png"><img alt="Imagem:jp1.png" src="http://upload.wikimedia.org/wikibooks/pt/a/a3/Jp1.png" width="422" height="93" /></a></p>
+<p>Captura do site oficial.</p>
+<p>Versões</p>
+<p>Para PHP4 é indicada a versão 1.19 da JpGrapf e para a versão 5 do PHP é indicada a versão 2.0 beta.</p>
+<p>Download das Fontes TTF (Linux)</p>
+<p><a href="http://corefonts.sourceforge.net/" class="external free" title="http://corefonts.sourceforge.net/" rel="nofollow">http://corefonts.sourceforge.net/</a></p>
+<p><a href="http://www.gnome.org/fonts/" class="external free" title="http://www.gnome.org/fonts/" rel="nofollow">http://www.gnome.org/fonts/</a></p>
+<p>Como saber se o PHP já tem o suporte à JpGrapf?</p>
+<p><br />
+Executar a função phpinfo(), que deve retornar:</p>
+<p>- GD support	- enabled</p>
+<p>- FreeTypeSupport – enabled</p>
+<p>- JPG support – enabled</p>
+<p>- PNG support – enabled</p>
+<p>- WBMP support – enabled</p>
+<p>Exemplos que podem ser encontrados no site official em</p>
+<p><a href="http://www.aditus.nu/jpgraph/pdf/jpgraphddda.pdf" class="external free" title="http://www.aditus.nu/jpgraph/pdf/jpgraphddda.pdf" rel="nofollow">http://www.aditus.nu/jpgraph/pdf/jpgraphddda.pdf</a></p>
+<p><br />
+<a href="/wiki/Ficheiro:Jp2.png" class="image" title="Imagem:jp2.png"><img alt="Imagem:jp2.png" src="http://upload.wikimedia.org/wikibooks/pt/3/33/Jp2.png" width="589" height="695" /></a></p>
+<p>Exemplos de Gráficos</p>
+<p>Gráfico dos Poços perfurados pelo DNOCS de 1900 a 1999, por estado:</p>
+<p><br />
+<a href="/wiki/Ficheiro:Jp3.png" class="image" title="Imagem:jp3.png"><img alt="Imagem:jp3.png" src="http://upload.wikimedia.org/wikibooks/pt/c/c5/Jp3.png" width="600" height="323" /></a></p>
+<p><br />
+Este gráfico acessa um banco PostgreSQL. Num pequeno form alguém informa um ano entre 1900 e 1999 e recebe o gráfico correspondente. Caso não informe o ano retornará o gráfico de todos os anos.</p>
+<p>Código abaixo:</p>
+<pre>
+//Pequneo form de consulta
+&lt;h2 align=center&gt;Consulta de Poços - DNOCS&lt;/h2&gt;
+&lt;form name=frmPocos action="barras_pocos.php" method="post"&gt;
+&lt;center&gt;Que ano que deseja Consultar? (Todos = vazio)&lt;input name="ano" size=10&gt;
+&lt;input type=submit value=Consultar&gt;&lt;/center&gt;
+&lt;/form&gt;
+
+//Arquivo barras_pocos.php
+&lt;?php 
+// Inclusão da biblioteca
+include ("jpgraph.php");    
+include ("jpgraph_bar.php"); 
+// Conexão ao banco PostgreSQL e consulta
+$db = pg_connect("host=10.0.0.100 dbname=banco port=5432 user=user password=pass") or die(pg_last_error()); 
+$ano=$_POST['ano'];
+// Se não for informado o ano da pesquisa no form anterior, exibirá todos os poços, caso contrário mostra
+// somente os poços do ano solicitado
+if ($ano == "")
+$sql=pg_query($db,"SELECT estado, count(poco) as quant from recursos_hidricos.pocos group by estado");
+else
+$sql=pg_query($db,"SELECT estado, count(poco) as quant from recursos_hidricos.pocos where 
+recursos_hidricos.pocos.ano = $ano group by estado");
+
+while($row = pg_fetch_array($sql)) { 
+$quant[] = $row[1]; 	//Este array ($quant[]) sera usado em um dos eixos
+$estado[] = $row[0];   // Este em outro eixo
+} 
+// Construção da base do gráfico
+$graph = new Graph(650,350,"auto"); 
+$graph-&gt;SetScale("textint"); //Exibir as escalas 
+$graph-&gt;img-&gt;SetMargin(50,50,70,50);  //Margens dos 4 lados
+$graph-&gt;title-&gt;Set('DNOCS - Poços X Estado do ano de '.$ano); // Título do gráfico
+$graph-&gt;title-&gt;SetFont(FF_VERDANA, FS_BOLD, 16);//Fonte do título
+$graph-&gt;AdjBackgroundImage(0.4,0.7,-1); //Tipo de background
+$graph-&gt;xaxis-&gt;title-&gt;Set('Estados'); //Título do eixo X
+$graph-&gt;xaxis-&gt;SetLabelAngle(30); //Ângulo dos labels do eixo X
+$graph-&gt;xaxis-&gt;SetTickLabels('Estados'); 
+$graph-&gt;xaxis-&gt;SetFont(FF_VERDANA, FS_BOLD);//Fonte para o título do eixo X
+$graph-&gt;xaxis-&gt;SetTickLabels($estado);  // Recebe o array dos estados do banco
+$graph-&gt;yaxis-&gt;title-&gt;Set('Poços'); 
+$graph-&gt;yaxis-&gt;SetFont(FF_FONT1, FS_BOLD);
+$graph-&gt;yaxis-&gt;title-&gt;SetFont(FF_FONT1, FS_BOLD);
+$graph-&gt;SetShadow(); //Adicionar sombra ao gráfico
+
+//Adicionar um tipo de gráfico (barras)
+$bplot = new BarPlot($quant);  //Recebe o outro array do banco
+$bplot-&gt;SetFillColor("lightgreen"); // Cor do gráfico 
+$bplot-&gt;value-&gt;Show(); 
+$bplot-&gt;value-&gt;SetFont(FF_ARIAL,FS_BOLD); //Fonte
+$bplot-&gt;value-&gt;SetAngle(45); //Ângulo
+$bplot-&gt;value-&gt;SetColor("black","navy"); //Cores
+
+$graph-&gt;Add($bplot); //Adicionar o gráfico à base
+$graph-&gt;Stroke(); 
+?&gt; 
+</pre>
+<p>Ao baixar a JpGraph e descompactar no diretório web, veja a documentação, que exibe inúmeros tipos de gráficos com seus respectivos códigos ao lado, como também o subdiretório samples que tem 337 exemplos de gráficos.</p>
+<p><br /></p>
+<p><a name="Refer.C3.AAncia" id="Refer.C3.AAncia"></a></p>
+<h2><span class="mw-headline">Referência</span></h2>
+<p><a href="http://www.phpbrasil.com/articles/print.php/id/164" class="external free" title="http://www.phpbrasil.com/articles/print.php/id/164" rel="nofollow">http://www.phpbrasil.com/articles/print.php/id/164</a></p>
+<p><a href="http://www.zend.com/zend/tut/tutsweat3.php" class="external free" title="http://www.zend.com/zend/tut/tutsweat3.php" rel="nofollow">http://www.zend.com/zend/tut/tutsweat3.php</a> (ótimo tutorial, em inglês)</p>
+<p><a href="http://phpbrasil.com/articles/print.php/id/315" class="external free" title="http://phpbrasil.com/articles/print.php/id/315" rel="nofollow">http://phpbrasil.com/articles/print.php/id/315</a> (outro muito bom e em português)</p>
+<p><a href="http://www.phpfreaks.com/print.php?cmd=tutorial&amp;tut_id=115" class="external free" title="http://www.phpfreaks.com/print.php?cmd=tutorial&amp;tut_id=115" rel="nofollow">http://www.phpfreaks.com/print.php?cmd=tutorial&amp;tut_id=115</a> (este abordando uso do MySQL)</p>
+
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 33/1000000
+Post-expand include size: 19/2048000 bytes
+Template argument size: 0/2048000 bytes
+Expensive parser function count: 0/500
+-->
+
+<!-- Saved in parser cache with key ptwikibooks:pcache:idhash:14503-0!1!0!!pt-br!2 and timestamp 20090810192838 -->
+<div class="printfooter">
+Obtido em "<a href="http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos">http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos</a>"</div>
+			<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="/wiki/Especial:Categorias" title="Especial:Categorias">Categoria</a>: <span dir='ltr'><a href="/wiki/Categoria:Aplicativos_em_PHP" title="Categoria:Aplicativos em PHP">Aplicativos em PHP</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Acessos</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+	
+				 <li id="ca-nstab-main" class="selected"><a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos" title="Ver a página de conteúdo [c]" accesskey="c">módulo</a></li>
+				 <li id="ca-talk" class="new"><a href="/w/index.php?title=Discuss%C3%A3o:Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos&amp;action=edit&amp;redlink=1" title="Discussão sobre o conteúdo da página [t]" accesskey="t">Discussão</a></li>
+				 <li id="ca-edit"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos&amp;action=edit" title="Você pode editar esta página. Por favor, utilize o botão Mostrar Previsão antes de salvar. [e]" accesskey="e">Editar</a></li>
+				 <li id="ca-history"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos&amp;action=history" title="Edições anteriores desta página. [h]" accesskey="h">História</a></li>
+				 <li id="ca-move"><a href="/wiki/Especial:Mover/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos" title="Mover esta página [m]" accesskey="m">Mover</a></li>
+				 <li id="ca-watch"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos&amp;action=watch" title="Adicionar esta página aos artigos vigiados [w]" accesskey="w">Vigiar</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Ferramentas pessoais</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+				<li id="pt-acaibeta"><a href="http://pt.wikibooks.org/w/index.php?title=Especial:UsabilityInitiativeOptIn&amp;from=Aplicativos_em_PHP%2FTrabalhando_em_PHP_com%2FImagens_e_Gr%C3%A1ficos" class="no-text-transform">Experimente o Beta</a></li>
+				<li id="pt-userpage"><a href="/wiki/Usu%C3%A1rio:Ribafs" title="Sua página de utilizador [.]" accesskey=".">Ribafs</a></li>
+				<li id="pt-mytalk"><a href="/wiki/Usu%C3%A1rio_Discuss%C3%A3o:Ribafs" title="Sua página de discussão [n]" accesskey="n">Minha discussão</a></li>
+				<li id="pt-preferences"><a href="/wiki/Especial:Prefer%C3%AAncias" title="Minhas preferências">Minhas preferências</a></li>
+				<li id="pt-watchlist"><a href="/wiki/Especial:P%C3%A1ginas_vigiadas" title="Lista de artigos vigiados. [l]" accesskey="l">Páginas vigiadas</a></li>
+				<li id="pt-mycontris"><a href="/wiki/Especial:Contribui%C3%A7%C3%B5es/Ribafs" title="Lista das suas contribuições [y]" accesskey="y">Minhas contribuições</a></li>
+				<li id="pt-logout"><a href="/w/index.php?title=Especial:Sair&amp;returnto=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos" title="Sair">Sair</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(http://upload.wikimedia.org/wikibooks/pt/b/bc/Wiki.png);" href="/wiki/P%C3%A1gina_principal" title="Página principal [z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div id="p-search" class="portlet">
+		<h5 lang="pt-br" xml:lang="pt-br"><label for="searchInput">Pesquisa</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/w/index.php" id="searchform"><div>
+				<input type='hidden' name="title" value="Especial:Busca"/>
+				<input id="searchInput" name="search" type="text" title="Pesquisar nesta wiki [f]" accesskey="f" value="" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Ir" title="Ir a uma página com este exato nome, caso exista" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Pesquisa" title="Procurar por páginas contendo este texto" />
+			</div></form>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5 lang="pt-br" xml:lang="pt-br">Navegação</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/wiki/P%C3%A1gina_principal">Página principal</a></li>
+				<li id="n-Library"><a href="/wiki/Wikilivros:Biblioteca">Biblioteca</a></li>
+				<li id="n-recentchanges"><a href="/wiki/Especial:Mudan%C3%A7as_recentes" title="A lista de mudanças recentes nesta wiki. [r]" accesskey="r">Mudanças recentes</a></li>
+				<li id="n-randompage"><a href="/wiki/Especial:Aleat%C3%B3ria" title="Carregar página aleatória [x]" accesskey="x">Página aleatória</a></li>
+				<li id="n-help"><a href="/wiki/Ajuda:Conte%C3%BAdos" title="Um local reservado para auxílio.">Ajuda</a></li>
+				<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Donate/pt" title="Ajude-nos">Doações</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-Project'>
+		<h5 lang="pt-br" xml:lang="pt-br">projeto</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-about"><a href="/wiki/Wikilivros:Sobre">Sobre</a></li>
+				<li id="n-portal"><a href="/wiki/Wikilivros:Portal_comunit%C3%A1rio" title="Sobre o projeto e coisas que você poder fazer aqui.">Portal comunitário</a></li>
+				<li id="n-Staff-lounge"><a href="/wiki/Wikilivros:Staff_lounge">Esplanada</a></li>
+				<li id="n-Wikijunior"><a href="/wiki/Wikij%C3%BAnior">Wikijúnior</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-coll-create_a_book'>
+		<h5 lang="pt-br" xml:lang="pt-br">Criar uma coleção</h5>
+		<div class='pBody'>
+<ul id="collectionPortletList"><li id="coll-add_page"><a href="/w/index.php?title=Especial:Livro/add_article/&amp;arttitle=Aplicativos+em+PHP%2FTrabalhando+em+PHP+com%2FImagens+e+Gr%C3%A1ficos&amp;oldid=0" title="Adicionar a página wiki atual ao seu livro" onclick="collectionCall(&#039;AddArticle&#039;, [&#039;removepage&#039;, wgNamespaceNumber, wgTitle, 0]); return false;" rel="nofollow">Adicionar página ao livro</a></li><li id="coll-help_collections"><a href="/wiki/Ajuda:Livros" title="Mostrar ajuda sobre a ferramenta de livros">Ajuda sobre livros</a></li></ul><script type="text/javascript">/*<![CDATA[*/
+		var wgCollectionAddRemoveSate = "addpage";
+		/*]]>*/</script>
+<script type="text/javascript" src="/w/extensions/Collection/collection/portlet.js?2"></script>		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5 lang="pt-br" xml:lang="pt-br">Ferramentas</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/wiki/Especial:P%C3%A1ginas_afluentes/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos" title="Lista de todas as páginas que ligam-se a esta [j]" accesskey="j">Páginas afluentes</a></li>
+				<li id="t-recentchangeslinked"><a href="/wiki/Especial:Novidades_relacionadas/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos" title="Mudanças recentes em páginas relacionadas a esta [k]" accesskey="k">Alterações relacionadas</a></li>
+<li id="t-upload"><a href="/wiki/Especial:Carregar_imagem" title="Carregar arquivos [u]" accesskey="u">Carregar arquivo</a></li>
+<li id="t-specialpages"><a href="/wiki/Especial:P%C3%A1ginas_especiais" title="Lista de páginas especiais [q]" accesskey="q">Páginas especiais</a></li>
+				<li id="t-print"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos&amp;printable=yes" rel="alternate" title="Versão para impressão desta página [p]" accesskey="p">Versão para impressão</a></li>				<li id="t-permalink"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Imagens_e_Gr%C3%A1ficos&amp;oldid=110839" title="Link permanente para esta versão desta página">Link permanente</a></li><li id="t-download-as-pdf"><a href="/w/index.php?title=Especial:Livro/render_article/&amp;arttitle=Aplicativos+em+PHP/Trabalhando+em+PHP+com/Imagens+e+Gr%C3%A1ficos&amp;oldid=110839&amp;writer=rl" rel="nofollow">Versão em PDF</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/skins-1.5/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></div>
+				<div id="f-copyrightico"><a href="http://wikimediafoundation.org/"><img src="/images/wikimedia-button.png" alt="Wikimedia Foundation"/></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> Esta página foi modificada pela última vez às 17h17min, 5 de dezembro de 2008.</li>
+					<li id="copyright">O texto está disponível sob a licença <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>; condições adicionais podem-se aplicar. Veja <a href="http://wikimediafoundation.org/wiki/Terms_of_Use">Condições de Uso</a> para detalhes.</li>
+					<li id="privacy"><a href="/wiki/Wikilivros:Pol%C3%ADtica_de_privacidade" title="Wikilivros:Política de privacidade">Política de privacidade</a></li>
+					<li id="about"><a href="/wiki/Wikilivros:Sobre" title="Wikilivros:Sobre">Sobre</a></li>
+					<li id="disclaimer"><a href="/wiki/Wikilivros:Aviso_geral" title="Wikilivros:Aviso geral">Alerta de Conteúdo</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served by srv136 in 0.240 secs. --></body></html>

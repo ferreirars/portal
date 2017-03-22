@@ -1,0 +1,51 @@
+Dicas de envio de  e-mail no Cake
+
+
+Carregar a classe
+App::uses('CakeEmail', 'Network/Email');
+
+Exemplo de envio:
+
+$Email = new CakeEmail();
+$Email->from(array('me@example.com' => 'My Site'))
+    ->to('you@example.com')
+    ->subject('About')
+    ->send('My message');
+
+Configuração
+
+class EmailConfig {
+    public $gmail = array(
+        'host' => 'ssl://smtp.gmail.com',
+        'port' => 465,
+        'username' => 'my@gmail.com',
+        'password' => 'secret',
+        'transport' => 'Smtp'
+    );
+}
+
+
+
+Escolhendo o rementente
+
+$Email = new CakeEmail();
+$Email->sender('app@example.com', 'MyApp emailer');
+
+Configuração
+
+$Email = new CakeEmail();
+$Email->config('default');
+
+Anexos
+
+$Email->attachments(array(
+    'photo.png' => array(
+        'file' => '/full/some_hash.png',
+        'mimetype' => 'image/png',
+        'contentId' => 'my-unique-id'
+    )
+));
+
+
+http://book.cakephp.org/2.0/en/core-utility-libraries/email.html
+

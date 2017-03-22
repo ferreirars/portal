@@ -1,0 +1,226 @@
+FormHelper Dicas
+
+Criar form:
+echo $this->Form->create('Receitas');
+
+Criando form com method get
+echo $this->Form->create('User', array('type' => 'get'));
+
+Action no form:
+echo $this->Form->create('User', array('action' => 'login'));
+echo $this->Form->create(null, array(
+    'url' => array('controller' => 'recipes', 'action' => 'add')
+));
+echo $this->Form->create(null, array(
+    'url' => 'http://www.google.com/search',
+    'type' => 'get'
+));
+
+Fechando o form:
+<?php echo $this->Form->end(); ?>
+<?php echo $this->Form->end('Submit'); ?>
+
+- Alterando o label de campos de formulários
+Alterar as linnhas:
+	echo $this->Form->input('email');
+	echo $this->Form->input('data_nasc');
+	echo $this->Form->input('cpf');
+
+Para:
+	echo $this->Form->input('email', array('label'=>'E-mail'));
+	echo $this->Form->input('data_nasc', array('label'=>'Nascimento'));
+	echo $this->Form->input('cpf', array('label'=>'CPF'));
+
+- Texto default que se oculta sob foco em campos de form (placeholder)
+echo $this->Form->input('cpf', array('label' => 'CPF','placeholder' => 'Digite sem ponto nem traço'));
+
+- Adicionar valor default em campo de form
+	echo $this->Form->input('nome',array('default'=>'João de Brito'));
+
+- Alterar campo para Select em form
+Suponha que criou um campo grupo e não foi prevista a combo para o mesmo, podemos adicionar mudando ou adicionando o campo abaixo. Adicionatei no Clientes/add somente para teste:
+
+$options = array(''=>'Selecione','cag' => 'CAGECE', 'con' => 'Condomínio');
+echo $this->Form->input('tipo', array('type'=>'select','label' => 'Tipo Despesa','options' => $options,'default'=>'0'));
+
+echo $this->Form->input('grupo', array( 
+    'options' => array('admin' => 'Admin', 'autor' => 'Autor') 
+)); 
+
+$options = array(''=>'Selecione','pais' => 'Julieta e José','aparecida'=>'Aparecida','antonio'=>'Antônio', 'rita' => 'Rita','gracas'=>'Graças','teonia'=>'Teônia','ribamar'=>'Ribamar','antonieta'=>'Antonieta');
+echo $this->Form->input('proprietario', array('type'=>'select','label' => 'Proprietário','options' => $options,'default'=>'0'));
+
+- Alterar campo de formulário para requerido, pelo model ou pelo formulário
+Caso o CPF não apareça como requerido, podemos alterar assim:
+		echo $this->Form->input('cpf',array('div' => 'required','required'=>true, 'label'=>'CPF','id'=>'cpf'));
+
+Melhor é adicionar uma validação para o campo no model.
+Caso o CPF não apareça como requerido, podemos alterar assim:
+
+Alterar campo obs em add.ctp para isto:
+		echo $this->Tinymce->input('Cliente.obs', array( 
+		    'label' => 'Observação',
+			'div' => 'required',//Aqui
+			'required'=>true, //E aqui
+		    ),array( 
+		        'language'=>'en' 
+		    ), 
+		    'bbcode' 
+		); 
+
+
+Tipos de campos:
+
+echo $this->Form->input('username', array('label' => 'Login')); // has a label element
+echo $this->Form->input('username');   //text
+echo $this->Form->input('password');   //password
+echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
+echo $this->Form->input('quote');      //textarea
+echo $this->Form->input('email', array('type' => 'email')); // e-mail
+
+Controlando as combos de um campo do tipo data:
+echo $this->Form->input('nascimento', array(
+    'label' => 'Data de Nascimento',
+    'dateFormat' => 'DMY',
+    'minYear' => date('Y') - 70,
+    'maxYear' => date('Y') - 18,
+));
+
+echo $this->Form->year('purchased', 2000, date('Y'));
+echo $this->Form->month('mob');
+echo $this->Form->month('mob', null, array('monthNames' => false));
+echo $this->Form->day('created');
+
+Campo para model:
+echo $this->Form->input('Despesa.descricao');
+
+Array para vários campos com mesmo nome:
+
+echo $this->Form->input('Cliente.0.sexo');
+echo $this->Form->input('Cliente.1.sexo');
+
+Desabilitar mensagens de erro:
+$this->Form->input('Model.field', array('error' => false));
+
+Valor default em campo:
+$tamanhos = array('p' => 'Pequeno', 'm' => 'Médio', 'g' => 'Grande');
+echo $this->Form->input('tamanho', array('options' => $tamanhos, 'default' => 'm'));
+
+CheckBox
+	$options = array(''=>'Selecione',0,1);
+	echo $this->Form->input('pago', array('type'=>'checkbox', 'label'=>'Pago?', 		'checked'=>'','options'=>$options));
+
+	echo $this->Form->input('pago', array('type'=>'checkbox', 'label'=>'Pago?', 'checked'=>1));
+
+Checkbox // Para checado por default, onde '' usar 'checked'
+echo $this->Form->input('pago', array('type'=>'checkbox', 'label'=>'Pago?', 'checked'=>''));
+
+echo $this->Form->checkbox('published', array('hiddenField' => false));
+echo $this->Form->checkbox('done');
+echo $this->Form->checkbox('done', array('value' => 555));
+echo $this->Form->checkbox('published', array(
+    'value' => 'Y',
+    'hiddenField' => 'N',
+));
+
+echo $this->Form->textarea('notes');
+echo $this->Form->input('notes', array('type' => 'textarea', 'escape' => false);
+echo $this->Form->textarea('textarea', array('rows' => '5', 'cols' => '5'));
+
+$options = array('M' => 'Male', 'F' => 'Female');
+$attributes = array('legend' => false);
+echo $this->Form->radio('gender', $options, $attributes);
+
+Select
+$options = array('M' => 'Male', 'F' => 'Female');
+echo $this->Form->select('gender', $options);
+
+$options = array('M' => 'Male', 'F' => 'Female');
+echo $this->Form->select('gender', $options, array('escape' => false));
+
+echo $this->Form->select('field', array(1,2,3,4,5));
+echo $this->Form->select('field', array(
+    'Value 1' => 'Label 1',
+    'Value 2' => 'Label 2',
+    'Value 3' => 'Label 3'
+));
+
+$options = array(
+   'Group 1' => array(
+      'Value 1' => 'Label 1',
+      'Value 2' => 'Label 2'
+   ),
+   'Group 2' => array(
+      'Value 3' => 'Label 3'
+   )
+);
+echo $this->Form->select('field', $options);
+
+$options = array(
+    'Value 1' => 'Label 1',
+    'Value 2' => 'Label 2'
+);
+echo $this->Form->select('Model.field', $options, array(
+    'multiple' => 'checkbox',
+    'disabled' => array('Value 1')
+));
+
+File
+echo $this->Form->file('Document.submittedfile');
+
+echo $this->Form->create('User', array('type' => 'file'));
+
+$this->request->data['Document']['submittedfile'] = array(
+    'name' => 'conference_schedule.pdf',
+    'type' => 'application/pdf',
+    'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
+    'error' => 0,
+    'size' => 41737,
+);
+
+public function isUploadedFile($params) {
+    $val = array_shift($params);
+    if ((isset($val['error']) && $val['error'] == 0) ||
+        (!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')
+    ) {
+        return is_uploaded_file($val['tmp_name']);
+    }
+    return false;
+}
+
+// Imagem em botão
+echo $this->Form->submit('ok.png');
+
+echo $this->Form->button('A Button');
+echo $this->Form->button('Another Button', array('type' => 'button'));
+echo $this->Form->button('Reset the Form', array('type' => 'reset'));
+echo $this->Form->button('Submit Form', array('type' => 'submit'));
+
+button ($params, $type= 'button', $options=array())
+create ($model=null, $options=array())
+dateTime ($tagName, $dateFormat= 'DMY', $timeFormat= '12', $selected=null, $attributes=array(), $showEmpty=true)
+day ($fieldName, $selected=null, $attributes=array(), $showEmpty=true)
+end ($options=null)
+error ($field, $text=null, $options=array())
+file ($fieldName, $options=array())
+hidden ($fieldName, $options=array())
+hour ($tagName, $format24Hours=false, $selected=null, $attributes=array(), $showEmpty=true)
+input ($tagName, $options=array())
+inputs ($fields=null, $blacklist=null)
+isFieldError ($field)
+label ($tagName=null, $text=null, $attributes=array())
+meridian ($tagName, $selected=null, $attributes=array(), $showEmpty=true)
+minute ($tagName, $selected=null, $attributes=array(), $showEmpty=true)
+month ($tagName, $selected=null, $attributes=array(), $showEmpty=true)
+password ($fieldName, $options=array())
+secure ($fields)
+select ($fieldName, $options=array(), $selected=null, $attributes=array(), $showEmpty= '')
+submit ($caption= 'Submit', $options=array())
+submitImage ($path, $options=array())
+text ($fieldName, $options=array())
+textarea ($fieldName, $options=array())
+year ($fieldName, $minYear=null, $maxYear=null, $selected=null, $attributes=array(), $showEmpty=true)
+        
+
+http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html
+

@@ -1,0 +1,18 @@
+Dicas de CakePHP/Postgresql
+
+Cuidado ao usar campos de senha no PostgreSQL
+
+No MySQL um campo tipo
+password char(255)
+reservará na tabela somente os digitos digitados, mas no PostgreSQL serão reservados
+todos os 255.
+
+Uma senha no MySQL assim:
+$2y$10$GJrox7HEUNcOLFOEUzwCLu3Omd2HQEzNY7RgFCNGyS0UnEyufrDY6Final(só o resultado)
+
+No PostgreSQL
+$2y$10$GJrox7HEUNcOLFOEUzwCLu3Omd2HQEzNY7RgFCNGyS0UnEyufrDY6                                       Final(255)
+
+Portanto para campos de senha não use char() no PostgreSQL, mas somente varchar().
+
+

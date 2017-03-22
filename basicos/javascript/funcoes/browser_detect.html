@@ -1,0 +1,528 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"><head>
+
+
+<title>JavaScript - Browser detect</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+var BrowserDetect = {
+	init: function () {
+		this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+		this.version = this.searchVersion(navigator.userAgent)
+			|| this.searchVersion(navigator.appVersion)
+			|| "an unknown version";
+		this.OS = this.searchString(this.dataOS) || "an unknown OS";
+	},
+	searchString: function (data) {
+		for (var i=0;i<data.length;i++)	{
+			var dataString = data[i].string;
+			var dataProp = data[i].prop;
+			this.versionSearchString = data[i].versionSearch || data[i].identity;
+			if (dataString) {
+				if (dataString.indexOf(data[i].subString) != -1)
+					return data[i].identity;
+			}
+			else if (dataProp)
+				return data[i].identity;
+		}
+	},
+	searchVersion: function (dataString) {
+		var index = dataString.indexOf(this.versionSearchString);
+		if (index == -1) return;
+		return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
+	},
+	dataBrowser: [
+		{
+			string: navigator.userAgent,
+			subString: "Chrome",
+			identity: "Chrome"
+		},
+		{ 	string: navigator.userAgent,
+			subString: "OmniWeb",
+			versionSearch: "OmniWeb/",
+			identity: "OmniWeb"
+		},
+		{
+			string: navigator.vendor,
+			subString: "Apple",
+			identity: "Safari",
+			versionSearch: "Version"
+		},
+		{
+			prop: window.opera,
+			identity: "Opera"
+		},
+		{
+			string: navigator.vendor,
+			subString: "iCab",
+			identity: "iCab"
+		},
+		{
+			string: navigator.vendor,
+			subString: "KDE",
+			identity: "Konqueror"
+		},
+		{
+			string: navigator.userAgent,
+			subString: "Firefox",
+			identity: "Firefox"
+		},
+		{
+			string: navigator.vendor,
+			subString: "Camino",
+			identity: "Camino"
+		},
+		{		// for newer Netscapes (6+)
+			string: navigator.userAgent,
+			subString: "Netscape",
+			identity: "Netscape"
+		},
+		{
+			string: navigator.userAgent,
+			subString: "MSIE",
+			identity: "Explorer",
+			versionSearch: "MSIE"
+		},
+		{
+			string: navigator.userAgent,
+			subString: "Gecko",
+			identity: "Mozilla",
+			versionSearch: "rv"
+		},
+		{ 		// for older Netscapes (4-)
+			string: navigator.userAgent,
+			subString: "Mozilla",
+			identity: "Netscape",
+			versionSearch: "Mozilla"
+		}
+	],
+	dataOS : [
+		{
+			string: navigator.platform,
+			subString: "Win",
+			identity: "Windows"
+		},
+		{
+			string: navigator.platform,
+			subString: "Mac",
+			identity: "Mac"
+		},
+		{
+			   string: navigator.userAgent,
+			   subString: "iPhone",
+			   identity: "iPhone/iPod"
+	    },
+		{
+			string: navigator.platform,
+			subString: "Linux",
+			identity: "Linux"
+		}
+	]
+
+};
+BrowserDetect.init();
+
+// -->
+</script>
+<link rel="stylesheet" href="browser_detect_arquivos/quirksmode.css">
+<link rel="up" href="http://www.quirksmode.org/js/contents.html">
+<link rel="intro" href="http://www.quirksmode.org/js/intro.html">
+<script type="text/javascript" src="browser_detect_arquivos/quirksmode.js"></script><style>body {padding-top: 161px;}</style>
+</head><body><p id="lastModPar">Page last changed <span id="lastMod">5 months ago</span></p><div class="pageHeader"><img src="browser_detect_arquivos/header_swoosh.gif" alt="">
+
+<div class="specialMessage">
+	<!-- a href="/about/conferences.html" title="An overview of the conferences and meet-ups I'll visit">See me speak</a -->
+	<a href="http://fronteers.nl/congres/2009/information">Fronteers 2009 conference 5 &amp; 6 Nov Amsterdam</a>
+</div>
+
+<div class="mainNav">
+	<a href="http://www.quirksmode.org/compatibility.html">Compatibility</a>
+	<a href="http://www.quirksmode.org/blog/">QuirksBlog</a>
+	<a href="http://www.quirksmode.org/about/">About</a>
+</div>
+
+<a class="logoQuirksmode" href="http://www.quirksmode.org/" title="Home"><img src="browser_detect_arquivos/logo_quirksmode.gif" alt="QuirksMode"></a>
+
+
+<div class="extraInfo">
+	<img class="logoPPK" src="browser_detect_arquivos/logo_ppk.gif" alt="PPK">
+	<a href="http://www.quirksmode.org/sitemap.html">sitemap</a><a href="http://www.quirksmode.org/contact.html" class="rightExtraLink">contact</a>
+	<form action="http://www.google.com/search" method="get" title="Uses Google" id="mainSearch">
+		<input name="q" id="searchTop" value="Search QuirksMode.org">
+		<input id="searchSubmit" value="Search" type="submit">
+	</form>
+</div>
+
+<!--[if lte IE 6]>
+  <p class="ie6"><strong>IE6?</strong> Really? Isn&#8217;t it time to <a href="/upgrade.html">upgrade to a better browser</a>? 
+  (Unless you&#8217;re here for testing purposes, of course.)</p>
+<![endif]-->
+</div>
+
+<h2 id="top">Browser detect</h2>
+
+<div style="top: 10px; left: 0px;" id="header"><div id="TOC"><div id="innertoc"><span id="contentheader">show page contents</span><div><a href="#top" class="page">Top</a><a href="#link1" class="page">Example</a><a href="#link2" class="page">The script</a><a href="#link3" class="page">Browser detection</a><a href="#link4" class="page indent">Properties</a><a href="#link5" class="page indent">Example: Safari</a><a href="#link6" class="page indent">Example: Opera</a><a href="#link7" class="page indent"><code>userAgent</code> and <code>vendor</code></a><a href="#link8" class="page indent">Detection order</a><a href="#link9" class="page">Version number</a><a href="#link10" class="page indent">versionSearch</a><a href="#link11" class="page indent"><code>userAgent</code> and <code>appVersion</code></a><a href="#link12" class="page">Operating system</a><a href="#link13" class="page">navigator</a></div></div></div>
+<div id="siteNav">
+	<span id="menuLink">show site navigation</span>
+	<p id="waitMessageNav">Loading site navigation; please wait...</p>
+</div></div>
+
+<div class="floater">
+<p>See section 3D of <a href="http://www.quirksmode.org/book/">the book</a>.</p>
+<p>The version detect doesn't work in Safari and OmniWeb because these browsers don't include comprehensible
+version information in their identity string.</p>
+<p>This page has been translated into <a href="http://wiki.ceviz.net/index.php/Quirksmode.org/Taray%C4%B1c%C4%B1_tespiti" class="external">Turkish</a>.</p>
+</div>
+
+<p class="intro">A useful but often overrated JavaScript function is the browser detect. Sometimes you want to
+give specific instructions or load a new page in case the viewer uses, for instance, Safari.</p>
+
+<p>If you're new to JavaScript, <b>don't</b> use this script.
+Please read the <a href="http://www.quirksmode.org/js/support.html">object detection</a> page first.</p>
+
+<h3 id="link1">Example</h3>
+
+<p>Let's detect your browser:</p>
+
+<script type="text/javascript">
+<!--
+document.write('<p class="accent">You\'re using ' + BrowserDetect.browser + ' ' + BrowserDetect.version + ' on ' + BrowserDetect.OS + '!</p>');
+// -->
+</script><p class="accent">You're using Firefox 3 on Linux!</p>
+
+<h3 id="link2">The script</h3>
+
+<p>Copy this script into your JavaScript files. It works immediately, and you can query three properties of
+the <code>BrowserDetect</code> object:</p>
+
+<ul>
+	<li class="">Browser name: <code>BrowserDetect.browser</code></li>
+	<li class="odd">Browser version: <code>BrowserDetect.version</code></li>
+	<li class="">OS name: <code>BrowserDetect.OS</code></li>
+</ul>
+
+
+<pre style="margin-right: -583px;">var BrowserDetect = {
+	init: function () {
+		this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+		this.version = this.searchVersion(navigator.userAgent)
+			|| this.searchVersion(navigator.appVersion)
+			|| "an unknown version";
+		this.OS = this.searchString(this.dataOS) || "an unknown OS";
+	},
+	searchString: function (data) {
+		for (var i=0;i&lt;data.length;i++)	{
+			var dataString = data[i].string;
+			var dataProp = data[i].prop;
+			this.versionSearchString = data[i].versionSearch || data[i].identity;
+			if (dataString) {
+				if (dataString.indexOf(data[i].subString) != -1)
+					return data[i].identity;
+			}
+			else if (dataProp)
+				return data[i].identity;
+		}
+	},
+	searchVersion: function (dataString) {
+		var index = dataString.indexOf(this.versionSearchString);
+		if (index == -1) return;
+		return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
+	},
+	dataBrowser: [
+		{
+			string: navigator.userAgent,
+			subString: "Chrome",
+			identity: "Chrome"
+		},
+		{ 	string: navigator.userAgent,
+			subString: "OmniWeb",
+			versionSearch: "OmniWeb/",
+			identity: "OmniWeb"
+		},
+		{
+			string: navigator.vendor,
+			subString: "Apple",
+			identity: "Safari",
+			versionSearch: "Version"
+		},
+		{
+			prop: window.opera,
+			identity: "Opera"
+		},
+		{
+			string: navigator.vendor,
+			subString: "iCab",
+			identity: "iCab"
+		},
+		{
+			string: navigator.vendor,
+			subString: "KDE",
+			identity: "Konqueror"
+		},
+		{
+			string: navigator.userAgent,
+			subString: "Firefox",
+			identity: "Firefox"
+		},
+		{
+			string: navigator.vendor,
+			subString: "Camino",
+			identity: "Camino"
+		},
+		{		// for newer Netscapes (6+)
+			string: navigator.userAgent,
+			subString: "Netscape",
+			identity: "Netscape"
+		},
+		{
+			string: navigator.userAgent,
+			subString: "MSIE",
+			identity: "Explorer",
+			versionSearch: "MSIE"
+		},
+		{
+			string: navigator.userAgent,
+			subString: "Gecko",
+			identity: "Mozilla",
+			versionSearch: "rv"
+		},
+		{ 		// for older Netscapes (4-)
+			string: navigator.userAgent,
+			subString: "Mozilla",
+			identity: "Netscape",
+			versionSearch: "Mozilla"
+		}
+	],
+	dataOS : [
+		{
+			string: navigator.platform,
+			subString: "Win",
+			identity: "Windows"
+		},
+		{
+			string: navigator.platform,
+			subString: "Mac",
+			identity: "Mac"
+		},
+		{
+			   string: navigator.userAgent,
+			   subString: "iPhone",
+			   identity: "iPhone/iPod"
+	    },
+		{
+			string: navigator.platform,
+			subString: "Linux",
+			identity: "Linux"
+		}
+	]
+
+};
+BrowserDetect.init();
+</pre>
+
+<p>This script will only continue to work if you regularly check whether newer browsers still follow the rules set forth
+in the <code>dataBrowser</code> and <code>dataOS</code> arrays.</p>
+
+<h3 id="link3">Browser detection</h3>
+
+<p>The <code>dataBrowser</code> array is filled with objects that contain the properties that help the script
+detect your users' browser. Note its general syntax:</p>
+
+<pre style="margin-right: -583px;">dataBrowser: [
+	{
+		prop: window.opera,
+		identity: "Opera" // note: no comma
+	},
+	{
+		string: navigator.userAgent,
+		subString: "MSIE",
+		identity: "Explorer",
+		versionSearch: "MSIE" // note: no comma
+	} // note: no comma
+];
+</pre>
+
+<p>The <code>[]</code> define an array literal, and all of its elements are object literals. Each object literal
+is enclosed in curly braces <code>{}</code> and contains a few properties (<code>name: value,</code>). Note that
+a comma between the objects and between the properties is required, but that the last comma is always forbidden.</p>
+
+<h4 id="link4">Properties</h4>
+
+<p>Every object in the <code>dataBrowser</code> array can contain the following properties:</p>
+
+<ol>
+	<li class=""><code>string</code> and <code>subString</code> properties. These say: "search for <code>subString</code>
+	in <code>string</code>". If the subString is found, the browser is identified.</li>
+	<li class="odd">a <code>prop</code> property. It says "see if <code>prop</code> is supported". If it is, the browser
+	is identified.</li>
+	<li class="">an <code>identity</code> string. This string becomes the value of <code>BrowserDetect.browser</code>.</li>
+	<li class="odd">a <code>versionSearch</code> string. This is for searching for the version number (see below). If this
+	property is absent, the <code>identity</code> string is used instead.</li>
+</ol>
+
+<p>Every object must contain either 1 or 2 (never both!), must contain 3 and may contain 4.</p>
+
+<h4 id="link5">Example: Safari</h4>
+
+<p>As an example, here's the Safari object:</p>
+
+<pre style="margin-right: -583px;">{
+	string: navigator.vendor,
+	subString: "Apple",
+	identity: "Safari"
+},
+</pre>
+
+<p>The script takes the value of <code>navigator.vendor</code> and sees if it contains the string "Apple". If it does,
+<code>BrowserDetect.browser</code> is set to "Safari" and the browser detection quits. If it doesn't, the script
+moves on to the next object.</p>
+
+<h4 id="link6">Example: Opera</h4>
+
+<p>The next object is Opera:</p>
+
+<pre style="margin-right: -583px;">{
+	prop: window.opera,
+	identity: "Opera"
+},
+</pre>
+
+<p>Here the script checks if the property <code>window.opera</code> exists. If it does, <code>BrowserDetect.browser</code>
+is set to "Opera" and the browser detection quits. If it doesn't, the script moves on to the next object.</p>
+
+<h4 id="link7"><code>userAgent</code> and <code>vendor</code></h4>
+
+<p>The trick of browser detection is knowing where to look for the information you need.
+Traditionally we use <code>navigator.userAgent</code>. However, precisely
+because this check is traditional many minor browsers change their <code>navigator.userAgent</code> string
+so that bad detects written by amateur web developers are fooled into identifying it as Explorer. Section 3D of
+<a href="http://www.quirksmode.org/book/">the book</a> discusses this problem, as well as some gory details of <code>navigator.userAgent</code>.</p>
+
+<p>More recently, new browsers have started to support the <code>navigator.vendor</code> property, which contains
+information about the vendor. In general I prefer to use this string for my detection, since it's less contaminated
+by obfuscation.</p>
+
+<p>Of course, as soon as amateurs start using my detection script to detect Safari, Opera, Konqueror or other
+browsers, the browser vendors will be forced to change the value of <code>navigator.vendor</code>
+and my detect will not work any more.</p>
+
+<h4 id="link8">Detection order</h4>
+
+<p>The objects in <code>dataBrowser</code> are used in the order they appear; that's why <code>dataBrowser</code>
+is an array. As soon as a positive identification is made the script ends, and it doesn't check the remaining objects.</p>
+
+<p>Detection order is very important. The general rule is that you check for the minor browsers first. The
+reason is that many minor browsers give their users the opportunity to change identity in order to work around
+browser detects.</p>
+
+<p>For instance, the Opera <code>navigator.userAgent</code> may contain "MSIE". If we'd check
+for Explorer first, we'd find the "MSIE" and would incorrectly conclude that the browser is Explorer. In order to avoid
+this false detection, we should check for Safari first. If the browser is Opera, the script never proceeds
+to the "MSIE" check.</p>
+
+<p>Safari's <code>navigator.userAgent</code> also contains "Gecko". This causes the same problem: a check for
+Mozilla would reveal "Gecko", and Safari would be identified as Mozilla. Therefore the Mozilla check only takes place
+if the browser is not Safari.</p>
+
+<p>If you add a new object to detect a new browser, always add it before the Explorer/Mozilla objects at the end
+of the array.</p>
+
+<h3 id="link9">Version number</h3>
+
+<p>In general, the version number of a browser can be found directly after its name in <code>navigator.userAgent</code>.
+The script searches for this name and takes the number that appears after it. For instance, this is Konqueror's
+<code>navigator.userAgent</code>:</p>
+
+<pre style="margin-right: -583px;">Mozilla/5.0 (compatible; Konqueror/3; Linux)
+</pre>
+
+<p>The script searches for the string "Konqueror", skips the next character, and takes the number after that.
+This is the version number. The script uses <code>parseFloat</code>, so that decimal places
+in the version number also become part of <code>BrowserDetect.version</code>.</p>
+
+<p>Unfortunately Safari's string never contains its official version; only its internal Apple version number
+(ie. not 1.3.2 but 312.6). Therefore the version number detect doesn't work in Safari. Since this is clearly
+Apple's fault (it doesn't follow established conventions), I don't care.</p>
+
+<h4 id="link10">versionSearch</h4>
+
+<p>In general, the browser name as it appears in <code>navigator.userAgent</code> is the same as the identification
+string. If the browser is "iCab", the script searches for "iCab".</p>
+
+<p>However, Explorer needs "MSIE", Mozilla needs "rv", and older Netscape versions need "Mozilla". In order
+to accomodate these problems you may add a <code>versionSearch</code> property to the browser object. If
+it's there it's used for the version detect; if it's not there the <code>identity</code> string is used instead.</p>
+
+<p>Take the Firefox and Explorer objects:</p>
+
+<pre style="margin-right: -583px;">{
+	string: navigator.userAgent,
+	subString: "Firefox",
+	identity: "Firefox"
+},
+{
+	string: navigator.userAgent,
+	subString: "MSIE",
+	identity: "Explorer",
+	versionSearch: "MSIE"
+},
+</pre>
+
+<p>If the browser is Firefox, the script should look for the "Firefox" string. Since this is also the browser
+identity string, a special <code>versionSearch</code> is not necessary.</p>
+
+<p>Explorer, however, puts its version number after the string "MSIE". Since I use "Explorer" as identity string,
+I have to define the <code>versionSearch</code> property as "MSIE".</p>
+
+<h4 id="link11"><code>userAgent</code> and <code>appVersion</code></h4>
+
+<p>The version detect script searches for the browser name in both <code>navigator.userAgent</code> and
+<code>navigator.appVersion</code>. The reason is iCab: this browser's <code>navigator.userAgent</code> may
+not contain the string "iCab", but <code>navigator.appVersion</code> always does.</p>
+
+<h3 id="link12">Operating system</h3>
+
+<p>The OS detect works the same as the browser detect. Currently all my OS detects use <code>navigator.platform</code>,
+since this property appears to always contain the correct information.</p>
+
+<h3 id="link13">navigator</h3>
+
+<p>Below you see the objects contained by the object <code>navigator</code>. These variables
+can be read out and give information about the browser and computer of your users. Use this information
+to add new objects to the browser detect.</p>
+
+<pre style="margin-right: -583px;"><script type="text/javascript">
+<!--
+
+for (i in navigator)
+{
+	document.write('<br />navigator.' + i + ' = ' + navigator[i]);
+}
+
+// -->
+</script><br>navigator.userAgent = Mozilla/5.0 (X11; U; Linux i686; pt-BR; rv:1.9.0.12) Gecko/2009070812 Ubuntu/8.04 (hardy) Firefox/3.0.12<br>navigator.vendor = Ubuntu<br>navigator.platform = Linux i686<br>navigator.appCodeName = Mozilla<br>navigator.appName = Netscape<br>navigator.appVersion = 5.0 (X11; pt-BR)<br>navigator.language = pt-BR<br>navigator.mimeTypes = [object MimeTypeArray]<br>navigator.oscpu = Linux i686<br>navigator.vendorSub = 8.04<br>navigator.product = Gecko<br>navigator.productSub = 2009070812<br>navigator.plugins = [object PluginArray]<br>navigator.securityPolicy = <br>navigator.cookieEnabled = true<br>navigator.onLine = true<br>navigator.buildID = 2009060309<br>navigator.javaEnabled = function javaEnabled() {
+    [native code]
+}<br>navigator.taintEnabled = function taintEnabled() {
+    [native code]
+}<br>navigator.preference = function preference() {
+    [native code]
+}<br>navigator.registerContentHandler = function registerContentHandler() {
+    [native code]
+}<br>navigator.registerProtocolHandler = function registerProtocolHandler() {
+    [native code]
+}<br>navigator.mozIsLocallyAvailable = function mozIsLocallyAvailable() {
+    [native code]
+}</pre>
+
+<div id="footer">
+<a href="http://www.quirksmode.org/index.html">Home</a>
+<a href="http://www.quirksmode.org/sitemap.html">Sitemap</a>
+<a href="http://www.quirksmode.org/contact.html">Contact</a>
+<a href="http://www.quirksmode.org/about/copyright.html">Copyright</a><br>
+<a href="http://www.quirksmode.org/book/">Buy my book</a>
+<a href="http://www.quirksmode.org/vacatures.html" title="lang='nl'">Webontwikkelaars gezocht</a>
+
+<p class="conference">
+</p><p class="smaller" id="validation">Valid XHTML 1.0</p></div>
+</body></html>

@@ -1,0 +1,409 @@
+<html>
+<head>
+		<title>
+ONLamp.com: Working with Files in PHP, Part 3</title>
+        <script language="javascript" src="/common.js"></script>
+<meta name="GOOGLEBOT" content="NOARCHIVE">
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+</head>
+<body  bgcolor="#ffffff" text="#000000">
+
+
+<a href="http://www.onlamp.com/">
+
+<img src="http://onlamp.com/images/onlamp/onlamp-logo.gif" alt="ONLamp.com" width="240" height="88" align="left" border="0" /></a>
+
+<dummy>&nbsp;&nbsp;&nbsp;</dummy>
+
+<br clear="all" />
+
+&nbsp;<font face="verdana,arial,helvetica" size="1">Published on <b>
+
+<a href="http://www.onlamp.com/">ONLamp.com</a></b> (<a href="http://www.onlamp.com/">http://www.onlamp.com/</a>)<br />
+
+ <!-- ---------- End of PERL --------------------- -->
+
+
+&nbsp;<a href='http://www.onlamp.com/pub/a/php/2003/01/09/php_foundations.html'>http://www.onlamp.com/pub/a/php/2003/01/09/php_foundations.html</a><br />
+&nbsp;<a href="/pub/a/general/print_code.html">See this</a> if you're having trouble printing code examples</font><br /><br clear="all" />
+
+<!-- ISI_LISTEN_START -->
+<span class=ISI_MESSAGE>
+<!--  
+This article is brought to you by Oreilly Net, your source for all
+PHP 
+ news.  -->
+</span>    
+
+<!--CS_PAGE_BREAK-->
+<h2>
+<!-- begin graphic_link.view --><a href="/pub/ct/29"><img src="/images/php/111-php_foundations.jpg" height="91" width="111" alt="PHP Foundations" border="0" align="left" hspace="10" vspace="0"></a><!-- end ct/graphic_link.view -->
+
+
+
+
+
+
+
+
+
+
+Working with Files in PHP, Part 3</h2>
+by <a href="/pub/au/135">John Coggeshall</a><br />
+01/09/2003<br clear="all">
+<!-- sidebar begins -->
+<!-- don't move sidebars -->
+<!-- sidebar ends -->
+
+<p> Welcome back. In my last article I introduced <a href="/pub/a/php/2002/12/12/php_foundations.html">how to use PHP to read and write binary files</a>. This week, I'll introduce the
+concept of working with directories in PHP, including creating new directories,
+changing directories, and getting a file list for a given directory using PHP's
+pseudo directory object. We'll be starting from reading directories from a
+list, and then we'll discuss creating new directories or changing the current
+directory using PHP's directory manipulation functions. Let's get started.
+</p>
+
+<p style="margin: 0px; margin-bottom: 0px; margin-left: 0px; 
+margin-right: 0px; margin-top: 0px; padding: 0px; padding-bottom: 0px; 
+padding-left: 0px; padding-right: 0px; padding-top: 0px; font-size: 
+1px;"></p>
+
+<h3>The Directory Object</h3>
+
+<p> Working with directories in PHP is done through the use of a pre-defined
+pseudo object built internally into PHP called <code>dir</code>. This object
+has two member variables, <code>$handle</code> and <code>$path</code>, which
+represent the handle to the directory (for use in other functions) and the
+actual path of the directory (as a string). Along with these two variables, the
+<code>dir</code> object also has three member functions, <code>read()</code>,
+<code>rewind()</code>, and <code>close()</code>.  </p>
+
+<h4>Creating the Directory Object</h4>
+
+<p> Before we get into the specific member functions and their purposes, let's
+first take a look at how to create a directory object. Like any other object in
+PHP, instances are created with the <code>new</code> statement. In this case,
+when creating <code>dir</code>, it also needs a single parameter, which
+represents the directory being examined: </p>
+
+
+
+<!-- sidebar begins -->
+<table width="140" border="1" cellspacing="2" cellpadding="10" align="right" style="border: 1px solid #333333; margin: 8px;"><tr>
+<td width="140" valign="top" bgcolor="#ffffff" style="border: none;">
+<p class="headline">Related Reading</p>
+
+<a href="http://www.oreilly.com/catalog/9781565926813/index.html?CMP=ILL-4GV796923290">
+
+<img src="/catalog/covers/1565926811_cat.gif" alt="PHP Cookbook" border="0" />
+
+</a>
+<p class="medlist"><span class="title"><a href="http://www.oreilly.com/catalog/9781565926813/index.html?CMP=ILL-4GV796923290">PHP Cookbook</a></span><strong><br />
+
+By <a href="http://www.oreillynet.com/pub/au/985">David Sklar</a>, <a href="http://www.oreillynet.com/pub/au/986">Adam Trachtenberg</a></strong>
+</p>
+<div class="secondary">
+<!-- builds links to list in sidebar -->
+ <a href="http://www.oreilly.com/catalog/9781565926813/toc.html?CMP=ILL-4GV796923290">Table of Contents</a><br /> 
+  <a href="http://www.oreilly.com/catalog/9781565926813/inx.html?CMP=ILL-4GV796923290">Index</a><br /> 
+  <a href="http://www.oreilly.com/catalog/9781565926813/chapter/index.html?CMP=ILL-4GV796923290">Sample Chapter</a><br /> 
+ 
+
+
+
+<br /><b><a href="http://safari.oreilly.com/?cid=orm-cat-readnow-">Read Online--Safari</a></b>
+<span class="tiny">Search this book on Safari:</span>
+<form action="http://safari.oreilly.com/JVXSL.asp" method="post">
+<input type="hidden" name="s" value="1" /><input type="hidden" name="b" value="1" />
+<input type="hidden" name="t" value="1" /><input type="hidden" name="f" value="1" />
+<input type="hidden" name="c" value="1" /><input type="hidden" name="l" value="1" />
+<input type="hidden" name="view" value="section" />
+<input tabindex="1" name="se_text" type="text" value="" size="15" />&nbsp;<input name="go" type="image" title="Execute the search" src="http://www.oreillynet.com/images/safari_btn_go.gif" width="23" height="17" border="0" align="absmiddle"  alt="Go" /><br />
+<select name="se_isbn">
+<option value="1-56592-681-1">Only This Book</option>
+<option value="">All of Safari</option>
+</select><br />
+<input type="checkbox" name="code" value="1" /><span class="tiny">Code Fragments only</span>
+</form>						  
+
+</div>
+</td>
+</tr></table>
+<!-- sidebar ends -->
+
+
+<pre><code>&lt;?php
+   $mydir = dir('/path/to/mydir');
+?&gt;</code></pre>
+
+<p> Now that our directory class is created, the instance (<code>$mydir</code>)
+can be used in the same fashion as any other object. Our primary goal, of course,
+is to list all the files in the provided directory, so we'll start there.  </p>
+
+<h4>Reading Files from the Directory Object</h4>
+
+<p> With the dir object created, let's take a look at its primary method:
+<code>read()</code>. This function reads one entry from the given directory at
+every call and returns it as a string, or the boolean value false if there are
+no more files to read. To use this function to read every file within a
+directory, simply use it within a while loop as follows. (We assume
+<code>$mydir</code> still exists.) </p>
+
+<pre><code>&lt;?php
+   while(($file = $mydir-&gt;read()) !== false) {
+      echo "Filename: $file&lt;BR&gt;";
+   }
+?&gt;</code></pre>
+
+<p> The above code fragment might look a bit strange, especially to the
+beginner developer and warrants a little extra explanation. Within the while
+statement above, a number of things are happening. First, we assign the result
+of the <code>read()</code> method call to the variable <code>$file</code>.
+Since that statement is enclosed within parenthesis, the value stored in
+<code>$file</code> is then used in the comparison for the while statement.
+Another oddity in the above fragment is the use of the <code>!==</code>
+operator (not equals, except with an additional equal sign). It's not a typo.
+This operator ensures that not only is a given value equal to (or in this case,
+not equal to) another value, but that they are also of the same variable type.
+Without this type of comparison, the while loop would end prematurely if a
+directory (or filename) existed with the name of false. In plain English, we
+read the current filename into <code>$file</code>, dropping out of the loop if
+there are no more files to read.  </p>
+
+<p> With all of the files in the given directory now displayed, the directory
+reference must be closed using the <code>close()</code> method. The entire
+example is shown below: </p>
+
+<pre><code>&lt;?php
+   $mydir = new dir('/path/to/mydir');
+   while(($file = $mydir-&gt;read()) !== false) {
+      echo "Filename: $file&lt;BR&gt;";
+   }
+   $mydir-&gt;close();
+?&gt;</code></pre>
+
+<p> You may have noticed that thus far we have not discussed any way of
+re-reading the contents of a directory without creating a new instance of the
+dir object. Thankfully, creating a new instance of the <code>dir</code> class is unnecessary.
+That's what the <code>rewind()</code> method is for. When this method is
+executed, the placeholder used to determine the next file in the directory
+listing is reset to the beginning, allowing you to re-access the file list as
+shown: </p>
+
+<pre><code>&lt;?php
+   $mydir = new dir('/path/to/mydir');
+   while(($file = $mydir-&gt;read()) !== false) {
+      echo "Filename: $file&lt;BR&gt;";
+   }
+   $mydir-&gt;rewind();
+   echo "Displaying the directory list again...&lt;BR&gt;";
+   while(($file = $mydir-&gt;read()) !== false) {
+      echo "Filename: $file&lt;BR&gt;";
+   }
+   $mydir-&gt;close();
+
+?&gt;</code></pre>
+
+<!-- sidebar begins -->
+<table width="200" border="0" cellspacing="12" cellpadding="6" align="right"><tr><td width="170" valign="top" bgcolor="#efefef">
+<p class="headline">Also in PHP Foundations:</p>
+<p class="smalltext"><a href="/pub/a/php/2004/03/18/php_foundations.html">Using MySQL from PHP, Part 2</a></p><p class="smalltext"><a href="/pub/a/php/2004/02/19/php_foundations.html">Using MySQL from PHP</a></p><p class="smalltext"><a href="/pub/a/php/2004/01/29/php_foundations.html">MySQL Crash Course, Part 3</a></p><p class="smalltext"><a href="/pub/a/php/2004/01/09/php_foundations.html">MySQL Crash Course, Part 2</a></p><p class="smalltext"><a href="/pub/a/php/2003/12/23/php_foundations.html">MySQL Crash Course</a></p>
+</td></tr></table>
+<!-- sidebar ends -->
+
+<h3>More Fun with Directories</h3>
+
+<p> Now that you know how to access the files within already existing
+directories, let's take a look at how to create new directories, change into
+existing ones, or determine if a given filename is a directory.  </p>
+
+<h4>Determining If an Entry Is a Directory</h4>
+
+<p> In the examples I've shown you thus far, each entry returned from our
+example <code>$mydir</code> object was labeled as Filename in the output.
+Although acceptable for a simple demonstration, it is very likely (if not
+certain) that some of the entries are subdirectories, not files.  To
+differentiate between the two, use the simple but useful function
+<code>is_dir()</code>.  This function takes a single parameter (an absolute or
+relative pathname) and returns <code>true</code> if the path refers to a directory and <code>false</code>
+if it refers to a file.  </p>
+
+<p> Note: In case you are unsure what the difference between an "absolute" and
+"relative" pathname is, let me clarify. An absolute pathname is the complete
+path to the desired directory or file starting from the root of the filesystem.
+In UNIX-like systems, this would be something like
+<code>/complete/path/to/file</code>.  Conversely, a relative pathname starts
+from the current directory (usually the same directory as the script being
+executed) and would be something like <code>../path/to/file</code>.  </p>
+
+<p> Here's our previous example, modified to distinguish between entries
+returned: </p>
+
+<pre><code>&lt;?php
+   $mydir = new dir('/path/to/mydir');
+   while(($file = $mydir-&gt;read()) !== false) {
+      if(is_dir($mydir-&gt;path.$file)) {
+         echo "Directory: $file&lt;BR&gt;";
+      } else {
+         echo "Filename: $file&lt;BR&gt;";
+      }
+   }
+   $mydir-&gt;close();
+?&gt;</code></pre>
+
+<p> Notice that the complete path of the entry that we would like to check was
+provided to the <code>is_dir()</code> function. Without this, none of the
+entries would be processed properly since <code>is_dir()</code> would be
+looking only in the current directory, not necessarily the directory being read
+by <code>$mydir</code> object.  </p>
+
+<h4>Changing the Current Directory</h4>
+
+<p> Of course, there are times when it would be useful to change the current
+directory in order to perform file manipulations, etc. In order to accomplish
+this, we'll use the PHP function <code>chdir()</code>. <code>chdir()</code>
+function takes a single parameter, the directory to change to, and returns
+either true or false indicating if PHP successfully changed into the desired
+directory.  </p>
+
+<h4>Creating and Removing Directories</h4>
+
+<p> The last thing we'll discuss today is the creation and removal of
+directories from within PHP scripts. Both of these functions will only work
+properly on UNIX-like systems in directories that have write access granted for
+the user executing the PHP script (usually the Web server, i.e.
+<em>nobody</em>).  Next time, I'll discuss file permissions in detail.  For
+now just be aware of the limitation.  </p>
+
+<p> Creating a directory in PHP is done with the <code>mkdir()</code> function.
+This function takes two parameters as shown below: </p>
+
+<pre><code>mkdir($dir_to_create, $permission_mask);</code></pre>
+
+<p> <code>$dir_to_create</code> represents the absolute or relative path of the
+directory to create, and <code>$permission_mask</code> represents the
+permissions to give that directory. Since permissions won't be covered in
+detail until our next issue, we'll use <code>0777</code> (world-access) for our
+permission level and will create our directory in <code>/tmp</code>/, which is always available to everyone.  Beware that this means that anyone with access to the system can both read and write to the files and directories we create.</p>
+
+<pre><code>&lt;?php
+   $result = mkdir('/tmp/mynewdir', 0777);
+   if(!$result) {
+      echo "Error: Couldn't create the directory!&lt;BR&gt;";
+
+   } 
+?&gt;</code></pre>
+
+<p> Note: Regardless of the operating system PHP is running on, a permission
+mask is required in order for the function to work. Hence, if you are on a
+system where the permissions do not apply (such as Windows), simply use
+<code>0777</code> as your permission mask.  </p>
+
+<p> Likewise, directories can be removed using the PHP <code>rmdir()</code>
+function. This function takes a single parameter, the directory to remove, and
+returns a boolean value indicating if the function call succeeded: </p>
+
+<pre><code>&lt;?php
+   $result = rmdir('/tmp/mynewdir');
+   if(!$result) {
+      echo "Error: Couldn't remove the directory!&lt;BR&gt;";
+   }
+?&gt;</code></pre>
+		
+<h3>Stay Tuned</h3>
+
+<p> That's it for today. Although I have touched on a few topics, which you may
+still be in the dark on (especially file permissions), don't worry. In my next
+article, I'll discuss permissions in detail that should clear up any problems
+that you might be having with them. Thanks for reading. See you next time.
+</p>
+
+<p><i>
+<a href="/pub/au/135">John Coggeshall</a> 
+is a a PHP consultant and author who started losing sleep over PHP around five years ago.
+
+</i></p>
+
+<hr size="1" noshade />
+
+<p><i>Read more <a href="/pub/ct/29"><b>PHP Foundations</a></b> columns</i>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<p>Return to the <a href="/php/">PHP DevCenter</a>.</p><br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><font face="verdana,arial,helvetica" size="1">Copyright &copy; 2007 O'Reilly Media, Inc.</font></p>
+
+<!-- ISI_LISTEN_STOP -->  
+
+ <!--WEBSIDESTORY CODE HBX1.0 (Universal)-->
+    <!--COPYRIGHT 1997-2004 WEBSIDESTORY,INC. ALL RIGHTS RESERVED. U.S.PATENT No. 6,393,479B1. MORE INFO:http://websidestory.com / privacy-->
+    <script language="javascript" type="text/javascript">
+    var _hbEC=0,_hbE=new Array;function _hbEvent(a,b){b=_hbE[_hbEC++]=new Object();b._N=a;b._C=0;return b;}
+    var hbx=_hbEvent("pv");hbx.vpc="HBX0100u";hbx.gn="ehg-oreilly.hitbox.com";
+
+    //"BCB: onlamp.com,/a/3081, DM550308O2RV";
+
+    hbx.acct="DM550308O2RV;DM520404M4ZR"; //ACCOUNT NUMBER(S)
+    hbx.pn="Working+with+Files+in+PHP,+Part+3"; //PAGE NAME(S)
+    hbx.mlc="/lpt/a/;/onlamp.com/lpt/a/"; //MULTI-LEVEL CONTENT CATEGORY
+    hbx.pndef="title"; //DEFAULT PAGE NAME
+    hbx.ctdef="full"; //DEFAULT CONTENT CATEGORY
+
+    hbx.lt="auto"; //LINK TRACKING 
+    hbx.dlf="n"; //DOWNLOAD FILTER
+    hbx.dft="n"; //DOWNLOAD FILE NAMING
+    hbx.elf="n"; //EXIT LINK FILTER
+
+    //SEGMENTS AND FUNNELS
+    hbx.seg=""; //VISITOR SEGMENTATION
+    hbx.fnl=""; //FUNNELS
+
+    //CAMPAIGNS
+    hbx.cmp=""; //CAMPAIGN ID
+    hbx.cmpn="CMP"; //CAMPAIGN ID IN QUERY
+    hbx.hra=""; //RESPONSE ATTRIBUTE
+    hbx.hqsr=""; //RESPONSE ATTRIBUTE IN REFERRAL QUERY
+    hbx.hqsp="ATT"; //RESPONSE ATTRIBUTE IN QUERY
+    hbx.hlt=""; //LEAD TRACKING
+    hbx.hla=""; //LEAD ATTRIBUTE
+    hbx.gp=""; //CAMPAIGN GOAL
+    hbx.gpn=""; //CAMPAIGN GOAL IN QUERY
+    hbx.hcn=""; //CONVERSION ATTRIBUTE
+    hbx.hcv=""; //CONVERSION VALUE
+    hbx.cp="null"; //LEGACY CAMPAIGN
+    hbx.cpd=""; //CAMPAIGN DOMAIN
+
+    //CUSTOM VARIABLES
+    hbx.ci="";//CUSTOMER ID
+    hbx.hc1="";//CUSTOM 1
+    hbx.hc2="";//CUSTOM 2
+    hbx.hc3="";//CUSTOM 3
+    hbx.hc4="";//CUSTOM 4 
+    hbx.pec="";//ERROR CODES
+    </script><script language="javascript1.1" defer="defer"  src="http://www.oreillynet.com/hbx.js" type="text/javascript"></script><!--//-->  
+    <!-- END WEBSIDESTORY CODE  -->
+ </body>
+
+
+</html>

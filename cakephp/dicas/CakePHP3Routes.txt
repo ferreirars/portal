@@ -1,0 +1,89 @@
+Routes no CakePHP3
+
+Rota para a pasta raiz do aplicativo
+
+    $routes->connect('/', ['controller' => 'Clientes', 'index']);
+    
+Criando um Controllers    
+
+Criar um controller vazio, sem actions:
+
+	bin/cake bake controller users --no-actions
+	
+Assim ele cria uma classe vazia:
+
+namespace App\Controller;
+
+use App\Controller\AppController;
+
+class UsersController extends AppController
+{
+}
+
+Criando um router para users:
+
+Editar o config/routes.php
+
+Ao final adicionar:
+
+...
+    $routes->fallbacks(DashedRoute::class);
+});
+
+// Adidionar aqui abaixo:
+Router::connect('/users/index', ['controller'=>'Users', 'action' => 'index']);
+
+/**
+ * Load all plugin routes.  See the Plugin documentation on
+ * how to customize the loading of plugin routes.
+ */
+Plugin::routes();
+
+Criar o action index no controller Users:
+
+class UsersController extends AppController
+{
+	public function index()
+	{
+		echo "<h1>Lista de usuários</h1>";
+		exit(); // Sem esta linha ele reclama da view respectiva
+	}	
+}
+
+Chamar pela url:
+
+pocake/users/index
+
+Veremos 
+Lista de usuários
+
+
+Criar rotas usando o método scope, com uma rota principal e outras secundárias:
+
+Router::scope('/users', function($routes){
+	$routes->connect('index', ['controller'=>'Users', 'action' => 'index']);
+	$routes->connect('view', ['controller'=>'Users', 'action' => 'view']);
+	$routes->connect('add', ['controller'=>'Users', 'action' => 'add']);	
+});
+
+Passando parâmetros para as rotas:
+
+Na rota
+	$routes->connect('view/*', ['controller'=>'Users', 'action' => 'view']);
+	
+no Action
+	public function view($nome)
+	{
+		echo "Detalhe de usuário ".$nome;
+		exit(); // Sem esta linha ele reclama da view respectiva
+	}	
+
+Pela URL
+users/view/ribafs
+
+Rotas customizadas
+	$routes->connect('lista', ['controller'=>'Users', 'action' => 'index']);
+
+Detalhes:
+http://book.cakephp.org/3.0/en/development/routing.html
+

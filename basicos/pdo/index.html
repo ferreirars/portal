@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - PDO</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">PDO</h2>
+<h3 style="text-align: center;">Introdução ao PDO</h3>
+
+<p><strong>PDO &ndash; PHP Data Objects</strong></p>
+
+<p>O PDO &eacute; uma camada de acesso a bancos de dados nativo do PHP e orientado a objetos. Me parece a melhor das alternativas nativas do PHP de acesso a m&uacute;ltiplos bancos de dados. Atualmente s&oacute; temos duas alernativas, o PDO e o MySQLi. O MySQLi tamb&eacute;m pode ser orientado a objetos mas acessa somente o MySQL.</p>
+
+<p>Veja esta classe que implementa outras fun&ccedil;&otilde;es no PDO:</p>
+
+<p><a href="https://github.com/ribafs/pdolib">https://github.com/ribafs/pdolib</a></p>
+
+<p>Veja quais SGBDs s&atilde;o suportados atualmente pelo PDO:</p>
+
+<p><a href="http://php.net/manual/pt_BR/pdo.drivers.php">PDO Drivers</a></p>
+
+<ul>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-cubrid.php">CUBRID (PDO)</a> &mdash; CUBRID Functions (PDO_CUBRID)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-dblib.php">MS SQL Server (PDO)</a> &mdash; Microsoft SQL Server and Sybase Functions (PDO_DBLIB)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-firebird.php">Firebird (PDO)</a> &mdash; Firebird Functions (PDO_FIREBIRD)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-ibm.php">IBM (PDO)</a> &mdash; IBM Functions (PDO_IBM)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-informix.php">Informix (PDO)</a> &mdash; Informix Functions (PDO_INFORMIX)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-mysql.php">MySQL (PDO)</a> &mdash; MySQL Functions (PDO_MYSQL)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-sqlsrv.php">MS SQL Server (PDO)</a> &mdash; Microsoft SQL Server Functions (PDO_SQLSRV)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-oci.php">Oracle (PDO)</a> &mdash; Oracle Functions (PDO_OCI)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-odbc.php">ODBC and DB2 (PDO)</a> &mdash; ODBC and DB2 Functions (PDO_ODBC)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-pgsql.php">PostgreSQL (PDO)</a> &mdash; PostgreSQL Functions (PDO_PGSQL)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-sqlite.php">SQLite (PDO)</a> &mdash; SQLite Functions (PDO_SQLITE)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-4d.php">4D (PDO)</a> &mdash; 4D Functions (PDO_4D)</p>
+	</li>
+</ul>
+
+<p>Nem todos estes drivers acima podem estar presentes em seu computador ou em seu servidor, pois precisa ter os drivers instalados e habilitados. Para saber que drivers est&atilde;o dispon&iacute;veis execute:</p>
+
+<p>print_r(PDO::getAvailableDrivers());</p>
+
+<p>Ou</p>
+
+<p>foreach(PDO::getAvailableDrivers() as $driver)<br />
+{<br />
+echo $driver.&#39;&lt;br /&gt;&#39;;<br />
+}</p>
+
+
+</div>
+<!-- Final de conteudo -->
+
+<!-- Rodapé-->
+<footer id="rodape">
+	<div align="center">
+		<p><a href="http://ribafs.org">RibaFS</a>. All rights reserved. Design: <a href="http://templated.co">TEMPLATED</a></p>
+	</div>
+</footer>	
+</body>
+</html>

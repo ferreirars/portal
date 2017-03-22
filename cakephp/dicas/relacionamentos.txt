@@ -1,0 +1,68 @@
+Dicas Sobre Relacionamentos
+
+
+Ao implementar o relacionamento entre duas tabelas seguindo as convenções do Cake recebemos vários recursos bem úteis:
+
+- O respectivo código para o relacionamento já será criado no model pelo bake
+- Campo da tabela relacionada é transformado em uma combo na view. Se seguirmos outra convenção para os nomes dos campos nas tabelas, o campo tabela_id se transforma em title ou name da tabela relacionada.
+
+Exemplo: temos 
+groups (id, name) e 
+users (id, username, password, group_id). 
+Criando o código dos CRUDs para as duas tabelas pelo bake, ao listar users, onde tem group_id aparecerá o name de groups.
+
+Relations/Relacionamentos
+
+Has One/ Tem um
+
+public $hasOne = array(
+    'Profile' => array(
+        'className'    => 'Profile',
+        'conditions'   => array('Profile.published' => '1'),
+        'dependent'    => true
+    )
+);
+
+BelongsTo Relation/ Pertence a
+
+public $belongsTo = array(
+    'User' => array(
+        'className'    => 'User',
+        'foreignKey'   => 'user_id'
+    )
+);
+
+Has Many/ Tem muitos
+
+public $hasMany = array(
+    'Comment' => array(
+        'className'     => 'Comment',
+        'foreignKey'    => 'user_id',
+        'conditions'    => array('Comment.status' => '1'),
+        'order'         => 'Comment.created DESC',
+        'limit'         => '5',
+        'dependent'     => true
+    )
+);
+
+Mas Many and Belongs to
+
+public $hasAndBelongsToMany = array(
+'Ingredient' =>
+    array(
+        'className'              => 'Ingredient',
+        'joinTable'              => 'ingredients_recipes',
+        'foreignKey'             => 'recipe_id',
+        'associationForeignKey'  => 'ingredient_id',
+        'unique'                 => true
+    )
+);
+
+Limitar os resultados do hasMany:
+Limits the maximum number of results for the child hasMany model
+
+$this->ModelName->hasMany['ChildModelName']['limit'] = 10;
+
+http://book.cakephp.org/2.0/en/models/associations-linking-models-together.html
+http://book.cakephp.org/2.0/en/models.html
+

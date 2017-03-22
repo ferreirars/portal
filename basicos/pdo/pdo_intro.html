@@ -1,0 +1,1032 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - PDO &ndash; PHP Data Objects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">PDO &ndash; PHP Data Objects</h2>
+
+
+<p>O PDO &eacute; uma camada de acesso a bancos de dados nativo do PHP e orientado a objetos. Me parece a melhor das alternativas nativas do PHP de acesso a m&uacute;ltiplos bancos de dados. Atualmente s&oacute; temos duas alernativas, o PDO e o MySQLi. O MySQLi tamb&eacute;m pode ser orientado a objetos mas acessa somente o MySQL.</p>
+
+<p>Veja esta classe que implementa outras fun&ccedil;&otilde;es no PDO:</p>
+
+<p><a href="https://github.com/ribafs/pdolib">https://github.com/ribafs/pdolib</a></p>
+
+<p>Veja quais SGBDs s&atilde;o suportados atualmente pelo PDO:</p>
+
+<p><a href="http://php.net/manual/pt_BR/pdo.drivers.php">PDO Drivers</a></p>
+
+<ul>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-cubrid.php">CUBRID (PDO)</a> &mdash; CUBRID Functions (PDO_CUBRID)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-dblib.php">MS SQL Server (PDO)</a> &mdash; Microsoft SQL Server and Sybase Functions (PDO_DBLIB)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-firebird.php">Firebird (PDO)</a> &mdash; Firebird Functions (PDO_FIREBIRD)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-ibm.php">IBM (PDO)</a> &mdash; IBM Functions (PDO_IBM)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-informix.php">Informix (PDO)</a> &mdash; Informix Functions (PDO_INFORMIX)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-mysql.php">MySQL (PDO)</a> &mdash; MySQL Functions (PDO_MYSQL)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-sqlsrv.php">MS SQL Server (PDO)</a> &mdash; Microsoft SQL Server Functions (PDO_SQLSRV)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-oci.php">Oracle (PDO)</a> &mdash; Oracle Functions (PDO_OCI)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-odbc.php">ODBC and DB2 (PDO)</a> &mdash; ODBC and DB2 Functions (PDO_ODBC)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-pgsql.php">PostgreSQL (PDO)</a> &mdash; PostgreSQL Functions (PDO_PGSQL)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-sqlite.php">SQLite (PDO)</a> &mdash; SQLite Functions (PDO_SQLITE)</p>
+	</li>
+	<li>
+	<p><a href="http://php.net/manual/pt_BR/ref.pdo-4d.php">4D (PDO)</a> &mdash; 4D Functions (PDO_4D)</p>
+	</li>
+</ul>
+
+<p>Nem todos estes drivers acima podem estar presentes em seu computador ou em seu servidor, pois precisa ter os drivers instalados e habilitados. Para saber que drivers est&atilde;o dispon&iacute;veis execute:</p>
+
+<p>print_r(PDO::getAvailableDrivers());</p>
+
+<p>Ou</p>
+
+<p>foreach(PDO::getAvailableDrivers() as $driver)<br />
+{<br />
+echo $driver.&#39;&lt;br /&gt;&#39;;<br />
+}</p>
+
+<p><strong>Conex&atilde;o com o SGBD</strong></p>
+
+<p>$host=&#39;localhost&#39;;</p>
+
+<p>$dbname=&#39;cliente&#39;;</p>
+
+<p>$user=&#39;root&#39;;</p>
+
+<p>$pass=&#39;&#39;;</p>
+
+<p>$DBH = new PDO(&quot;mysql:host=$host,dbname=$dbname&quot;,$user,$pass);</p>
+
+<p>Melhor &eacute; assim (devemos sempre efetuar a conex&atilde;o dentro de um try/catch):</p>
+
+<p>Tr&ecirc;s exemplos de conex&atilde;o:</p>
+
+<pre>
+try {
+  # MS SQL Server and Sybase with PDO_DBLIB
+  $DBH = new PDO(&quot;sybase:host=$host;dbname=$dbname, $user, $pass&quot;);
+
+  # MySQL with PDO_MYSQL
+  $DBH = new PDO(&quot;mysql:host=$host;dbname=$dbname&quot;, $user, $pass);
+
+  # SQLite Database
+  $DBH = new PDO(&quot;sqlite:my/database/path/database.db&quot;);
+}
+catch(PDOException $e) {
+    echo &#39;Erro: &#39;.$e-&gt;getMessage();
+}</pre>
+
+<p>Podemos fechar a conex&atilde;o com o banco assim:</p>
+
+<p>$DBH = null;</p>
+
+<p>Detalhes em:</p>
+
+<p><a href="http://php.net/manual/pt_BR/pdo.drivers.php">http://php.net/manual/pt_BR/pdo.drivers.php</a></p>
+
+<p><strong>For&ccedil;ando Erros</strong></p>
+
+<p>Voc&ecirc; pode for&ccedil;ar o PDO a usar um dos tr&ecirc;s modos de erro logo ap&oacute;s a conex&atilde;o. Aqui a syntaxe:</p>
+
+<pre>
+$DBH-&gt;setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT ); // Default
+$DBH-&gt;setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING ); // erros padr&otilde;es
+$DBH-&gt;setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); // exce&ccedil;&otilde;es</pre>
+
+<p>Um exemplo que tira vantagem de exce&ccedil;&otilde;es:</p>
+
+<pre>
+try {
+  $DBH = new PDO(&quot;mysql:host=$host;dbname=$dbname&quot;, $user, $pass);
+  $DBH-&gt;setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+  # UH-OH! Digite DELECT ao inv&eacute;s de SELECT para lan&ccedil;ar a exception!
+  $DBH-&gt;prepare(&#39;DELECT name FROM people&#39;);
+}
+catch(PDOException $e) {
+    echo &quot;I&#39;m sorry, Dave. I&#39;m afraid I can&#39;t do that.&quot;;
+    file_put_contents(&#39;PDOErrors.txt&#39;, $e-&gt;getMessage(), FILE_APPEND);
+}</pre>
+
+<p>A exception envia os detalhes do erro para o arquivo de log e mostra uma mensagem amig&aacute;vel ou n&atilde;o para o usu&aacute;rio.</p>
+
+<p><strong>Insert e Update</strong></p>
+
+<p>Com PDO isso &eacute; um processo em dois passos semelhante para insert e update.</p>
+
+<p>prepare &rarr; vincule &rarr; execute</p>
+
+<p><strong>Exemplo B&aacute;sico de Insert</strong></p>
+
+<p>$STH = $DBH-&gt;prepare(&quot;INSERT INTO clientes (nome) VALUES (&#39;Ribamar&#39;)&quot;);</p>
+
+<p>$STH-&gt;execute();</p>
+
+<p><strong>Instru&ccedil;&otilde;es Preparadas</strong></p>
+
+<p>Usando instru&ccedil;&otilde;es prepared ajuda a proteger os dados de SQL Injection.</p>
+
+<p>N&oacute;s usamos instru&ccedil;&otilde;es prepared incluindo espa&ccedil;os reservados no SQL<br />
+Vejamos tr&ecirc;s exemplos: um sem lugares reservados, um espa&ccedil;os reservados e n&atilde;o nomeados (?) e um com espa&ccedil;os reservados e com nomes (:nome):</p>
+
+<pre>
+# no placeholders - ripe for SQL Injection!
+$STH = $DBH-&gt;(&quot;INSERT INTO clientes (name, addr, city) values ($name, $addr, $city)&quot;);
+
+# unnamed placeholders
+$STH = $DBH-&gt;(&quot;INSERT INTO clientes (name, addr, city) values (?, ?, ?);
+
+# named placeholders
+$STH = $DBH-&gt;(&quot;INSERT INTO clientes (name, addr, city) value (:name, :addr, :city)&quot;);</pre>
+
+<p>Devemos evitar o primeiro exemplo. Parece que o &uacute;ltimo (nomeado) &eacute; uma melhor pr&aacute;tica, visto que mais f&aacute;cil de identificar.</p>
+
+<p><strong>Espa&ccedil;os Reservados N&atilde;o Nomeados</strong></p>
+
+<pre>
+# assign variables to each place holder, indexed 1-3
+$STH-&gt;bindParam(1, $name);
+$STH-&gt;bindParam(2, $addr);
+$STH-&gt;bindParam(3, $city);
+
+# insert one row
+$name = &quot;Daniel&quot;
+$addr = &quot;1 Wicked Way&quot;;
+$city = &quot;Arlington Heights&quot;;
+$STH-&gt;execute();
+
+# insert another row with different values
+$name = &quot;Steve&quot;
+$addr = &quot;5 Circle Drive&quot;;
+$city = &quot;Schaumburg&quot;;</pre>
+
+<p>$STH-&gt;execute();<br />
+Existem dois passos aqui: primeiro atribuimos os espa&ccedil;os para as vari&aacute;veis, ent&atilde;o n&oacute;s atribuimos valores para esses espa&ccedil;os e executamos as instru&ccedil;&otilde;es. Para adicionar mais um registro (3 campos) basta trocar os valores das vari&aacute;veis e executar a instru&ccedil;&atilde;o novamente.</p>
+
+<p><strong>Dados em Arrays</strong></p>
+
+<pre>
+# Dados para o insert
+$data = array(&#39;Cathy&#39;, &#39;9 Dark and Twisty Road&#39;, &#39;Cardiff&#39;);
+
+$STH = $DBH-&gt;(&quot;INSERT INTO clientes (name, addr, city) values (?, ?, ?);
+$STH-&gt;execute($data);</pre>
+
+<p>Fica f&aacute;cil.</p>
+
+<p>Os dados $data s&atilde;o aplicados para os espa&ccedil;os em ordem, $data[0] para o primeiro espa&ccedil;o, $data[1] para o segundo e $data[2] para o terceiro.</p>
+
+<p><strong>Espa&ccedil;os Nomeados</strong></p>
+
+<pre>
+# the first argument is the named placeholder name - notice named placeholders 
+# always start with a colon.
+$STH-&gt;bindParam(&#39;:name&#39;, $name);</pre>
+
+<p>Com arrays associativos:</p>
+
+<pre>
+# the data we want to insert
+$data = array( &#39;name&#39; =&gt; &#39;Cathy&#39;, &#39;addr&#39; =&gt; &#39;9 Dark and Twisty&#39;, &#39;city&#39; =&gt; &#39;Cardiff&#39; );
+
+# the shortcut!
+$STH = $DBH-&gt;(&quot;INSERT INTO folks (name, addr, city) value (:name, :addr, :city)&quot;);
+$STH-&gt;execute($data);</pre>
+
+<p><strong>Consultando Dados &ndash; select</strong></p>
+
+<p>Objetos &larr; PDO/PHP &rarr; Arrays</p>
+
+<p>Os dados s&atilde;o obtidos com o m&eacute;todo -&gt;fetch(). Antes de executar o m&eacute;todo fetch() devemos dizer ao PDO como queremos que ele traga os dados. Existem as op&ccedil;&otilde;es:</p>
+
+<p>&nbsp;</p>
+
+<p><code>fetch_style</code></p>
+
+<p>Controls how the next row will be returned to the caller. This value must be one of the <em>PDO::FETCH_*</em> constants, defaulting to value of <em>PDO::ATTR_DEFAULT_FETCH_MODE</em> (which defaults to <em>PDO::FETCH_BOTH</em>).</p>
+
+<ul>
+	<li>
+	<p><em>PDO::FETCH_ASSOC</em>: returns an array indexed by column name as returned in your result set</p>
+	</li>
+	<li>
+	<p><em>PDO::FETCH_BOTH</em> (default): returns an array indexed by both column name and 0-indexed column number as returned in your result set</p>
+	</li>
+	<li>
+	<p><em>PDO::FETCH_BOUND</em>: returns <code>TRUE</code> and assigns the values of the columns in your result set to the PHP variables to which they were bound with the <a href="http://php.net/manual/en/pdostatement.bindcolumn.php">PDOStatement::bindColumn()</a> method</p>
+	</li>
+	<li>
+	<p><em>PDO::FETCH_CLASS</em>: returns a new instance of the requested class, mapping the columns of the result set to named properties in the class. If <code>fetch_style</code> includes PDO::FETCH_CLASSTYPE (e.g. <em>PDO::FETCH_CLASS | PDO::FETCH_CLASSTYPE</em>) then the name of the class is determined from a value of the first column.</p>
+	</li>
+	<li>
+	<p><em>PDO::FETCH_INTO</em>: updates an existing instance of the requested class, mapping the columns of the result set to named properties in the class</p>
+	</li>
+	<li>
+	<p><em>PDO::FETCH_LAZY</em>: combines <em>PDO::FETCH_BOTH</em> and <em>PDO::FETCH_OBJ</em>, creating the object variable names as they are accessed</p>
+	</li>
+	<li>
+	<p><em>PDO::FETCH_NAMED</em>: returns an array with the same form as <em>PDO::FETCH_ASSOC</em>, except that if there are multiple columns with the same name, the value referred to by that key will be an array of all the values in the row that had that column name</p>
+	</li>
+	<li>
+	<p><em>PDO::FETCH_NUM</em>: returns an array indexed by column number as returned in your result set, starting at column 0</p>
+	</li>
+	<li>
+	<p><em>PDO::FETCH_OBJ</em>: returns an anonymous object with property names that correspond to the column names returned in your result set</p>
+	</li>
+</ul>
+
+<p>Tr&ecirc;s destes cobrem a maioria das situa&ccedil;&otilde;es:</p>
+
+<p>FETCH_ASSOC, FETCH_CLASS e FETCH_OBJ.</p>
+
+<p>Usa-se a seguinte sintaxe:</p>
+
+<pre>
+$STH-&gt;setFetchMode(PDO::FETCH_ASSOC);</pre>
+
+<p>Tamb&eacute;m podemos setar diretamente o tipo com a chamada do m&eacute;todo fetch().</p>
+
+<p><strong>FETCH_ASSOC</strong></p>
+
+<p>Este tipo de fetch cria um array associativo, indexado pelo nome da coluna.</p>
+
+<p>Exemplo de select com este m&eacute;todo:</p>
+
+<pre>
+# using the shortcut -&gt;query() method here since there are no variable
+# values in the select statement.
+$STH = $DBH-&gt;query(&#39;SELECT name, addr, city FROM folks&#39;);
+
+# setting the fetch mode
+$STH-&gt;setFetchMode(PDO::FETCH_ASSOC);
+
+while($row = $STH-&gt;fetch()) {
+    echo $row[&#39;name&#39;] . &quot;&lt;br&gt;&quot;;
+    echo $row[&#39;addr&#39;] . &quot;&lt;br&gt;&quot;;
+    echo $row[&#39;city&#39;] . &quot;&lt;br&gt;&quot;;
+}</pre>
+
+<p><strong>FETCH_OBJ</strong></p>
+
+<p>Este tipo de fetch cria um objeto da classe std para cada registro recebido. Um exemplo:</p>
+
+<pre>
+# creating the statement
+$STH = $DBH-&gt;query(&#39;SELECT name, addr, city from folks&#39;);
+
+# setting the fetch mode
+$STH-&gt;setFetchMode(PDO::FETCH_OBJ);
+
+# showing the results
+while($row = $STH-&gt;fetch()) {
+    echo $row-&gt;name . &quot;&lt;br&gt;&quot;;
+    echo $row-&gt;addr . &quot;&lt;br&gt;&quot;;
+    echo $row-&gt;city . &quot;&lt;br&gt;&quot;;
+}</pre>
+
+<p><strong>FETCH_CLASS</strong></p>
+
+<p>As propriedades dos objetos s&atilde;o configuradas antes do construtor ser chamado. Isso &eacute; importante.</p>
+
+<p>Este m&eacute;todo permite trazer dados diretamente em uma classe da sua escolha. Quando usamos FETCH_CLASS as propriedades do objeto s&atilde;o configuradas antes do construtor ser chamado. Se n&atilde;o existem propriedades que correspondem aos nomes de coluna, essas propriedades ser&atilde;o criados (como public) para voc&ecirc;.<br />
+&nbsp;</p>
+
+<p>Isto significa que se os seus dados precisam de alguma transforma&ccedil;&atilde;o depois que eles saem do banco de dados, isto pode ser feito automaticamente pelo seu objeto ou por cada objeto criado.<br />
+Como exemplo, imagine uma situa&ccedil;&atilde;o onde o endere&ccedil;o precisa ser parcialmente obscurecido para cada registro. N&oacute;s poder&iacute;amos fazer isso operando nessa propriedade no construtor. Aqui est&aacute; um exemplo:</p>
+
+<pre>
+class secret_person {
+    public $name;
+    public $addr;
+    public $city;
+    public $other_data;
+
+    function __construct($other = &#39;&#39;) {
+        $this-&gt;address = preg_replace(&#39;/[a-z]/&#39;, &#39;x&#39;, $this-&gt;address);
+        $this-&gt;other_data = $other;
+    }
+}</pre>
+
+<p>Todos os dados s&atilde;o buscados na classe e o endere&ccedil;o tem todas as letras min&uacute;sculas de a-z sobrescritas pela letra z.</p>
+
+<p><strong>Comparando Fun&ccedil;&otilde;es MySQL com PDO</strong></p>
+
+<p>MySQL</p>
+
+<pre style="text-align:left">
+$link = mysql_connect(&#39;localhost&#39;, &#39;user&#39;, &#39;pass&#39;);
+mysql_select_db(&#39;testdb&#39;, $link);
+mysql_set_charset(&#39;UTF-8&#39;, $link);</pre>
+
+<p>PDO</p>
+
+<pre style="text-align:left">
+$db = new PDO(&#39;mysql:host=localhost;dbname=testdb;charset=utf8&#39;, &#39;username&#39;, &#39;password&#39;);</pre>
+
+<p>db = new PDO(&#39;mysql:host=localhost;dbname=testdb;charset=utf8&#39;, &#39;username&#39;, &#39;password&#39;, array(PDO::ATTR_EMULATE_PREPARES =&gt; false, PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION));</p>
+
+<p>&nbsp;</p>
+
+<pre style="text-align:left">
+$db = new PDO(&#39;mysql:host=localhost;dbname=testdb;charset=utf8&#39;, &#39;username&#39;, &#39;password&#39;);
+$db-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db-&gt;setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+MySQL
+result = mysql_query(&quot;SELECT * FROM table&quot;, $link) or die(mysql_error($link));</pre>
+
+<p>PDO</p>
+
+<p>try {</p>
+
+<pre style="text-align:left">
+    //connect as appropriate as above
+    $db-&gt;query(&#39;hi&#39;); //invalid query!
+} catch(PDOException $ex) {
+    echo &quot;An Error occured!&quot;; //user friendly message
+    some_logging_function($ex-&gt;getMessage());
+}
+function getData($db) {
+   $stmt = $db-&gt;query(&quot;SELECT * FROM table&quot;);
+   return $stmt-&gt;fetchAll(PDO::FETCH_ASSOC);
+}
+ 
+//then much later
+try {
+   getData($db);
+} catch(PDOException $ex) {
+   //handle me.
+}
+$result = mysql_query(&#39;SELECT * from table&#39;) or die(mysql_error());
+ 
+$num_rows = mysql_num_rows($result);
+ 
+while($row = mysql_fetch_assoc($result)) {
+   echo $row[&#39;field1&#39;].&#39; &#39;.$row[&#39;field2&#39;]; //etc...
+}</pre>
+
+<p>PDO</p>
+
+<pre style="text-align:left">
+&lt;?php
+foreach($db-&gt;query(&#39;SELECT * FROM table&#39;) as $row) {
+    echo $row[&#39;field1&#39;].&#39; &#39;.$row[&#39;field2&#39;]; //etc...
+}
+$stmt = $db-&gt;query(&#39;SELECT * FROM table&#39;);
+ 
+while($row = $stmt-&gt;fetch(PDO::FETCH_ASSOC)) {
+    echo $row[&#39;field1&#39;].&#39; &#39;.$row[&#39;field2&#39;]; //etc...
+}</pre>
+
+<p>ou</p>
+
+<pre style="text-align:left">
+&lt;?php
+$stmt = $db-&gt;query(&#39;SELECT * FROM table&#39;);
+$results = $stmt-&gt;fetchAll(PDO::FETCH_ASSOC);
+//use $results</pre>
+
+<p>stmt = $db-&gt;query(&#39;SELECT * FROM table&#39;);</p>
+
+<pre style="text-align:left">
+$row_count = $stmt-&gt;rowCount();
+echo $row_count.&#39; rows selected&#39;;
+$result = mysql_query(&quot;INSERT INTO table(firstname, lastname) VALUES(&#39;John&#39;, &#39;Doe&#39;)&quot;) or die(&quot;Insert Failed &quot;.mysql_error());
+$insert_id = mysql_insert_id();
+
+PDO
+$result = $db-&gt;exec(&quot;INSERT INTO table(firstname, lastname) VAULES(&#39;John&#39;, &#39;Doe&#39;)&quot;);
+$insertId = $db-&gt;lastInsertId();
+$results = mysql_query(&quot;UPDATE table SET field=&#39;value&#39;&quot;) or die(mysql_error());
+$affected_rows = mysql_affected_rows($result);
+echo $affected_rows.&#39; were affected&#39;;</pre>
+
+<p>PDO</p>
+
+<pre style="text-align:left">
+&lt;?php
+$affected_rows = $db-&gt;exec(&quot;UPDATE table SET field=&#39;value&#39;&quot;);
+echo $affected_rows.&#39; were affected&#39;;
+$results = mysql_query(sprintf(&quot;SELECT * FROM table WHERE id=&#39;%s&#39; AND name=&#39;%s&#39;&quot;, mysql_real_escape_string($id), mysql_real_escape_string($name))) or die(mysql_error());
+$rows = array();
+while($row = mysql_fetch_assoc($results)){
+    $rows[] = $row;
+}</pre>
+
+<p>PDO:</p>
+
+<pre style="text-align:left">
+$stmt = $db-&gt;prepare(&quot;SELECT * FROM table WHERE id=? AND name=?&quot;);
+$stmt-&gt;execute(array($id, $name));
+$rows = $stmt&rarr;fetchAll(PDO::FETCH_ASSOC);</pre>
+
+<p>stmt = $db-&gt;prepare(&quot;INSERT INTO table(field1,field2,field3,field4,field5) VALUES(:field1,:field2,:field3,:field4,:field5)&quot;);</p>
+
+<pre style="text-align:left">
+$stmt-&gt;execute(array(&#39;:field1&#39; =&gt; $field1, &#39;:field2&#39; =&gt; $field2, &#39;:field3&#39; =&gt; $field3, &#39;:field4&#39; =&gt; $field4, &#39;:field5&#39; =&gt; $field5));
+$affected_rows = $stmt-&gt;rowCount();
+$stmt = $db-&gt;prepare(&quot;DELETE FROM table WHERE id=:id&quot;);
+$stmt-&gt;bindValue(&#39;:id&#39;, $id, PDO::PARAM_STR);
+$stmt-&gt;execute();
+$affected_rows = $stmt-&gt;rowCount();
+$stmt = $db-&gt;prepare(&quot;UPDATE table SET name=? WHERE id=?&quot;);
+$stmt-&gt;execute(array($name, $id));
+$affected_rows = $stmt-&gt;rowCount();
+
+//THIS WILL NOT WORK!
+$time = &#39;NOW()&#39;;
+$name = &#39;BOB&#39;;
+$stmt = $db-&gt;prepare(&quot;INSERT INTO table(`time`, `name`) VALUES(?, ?)&quot;);
+$stmt-&gt;execute(array($time, $name));</pre>
+
+<p>This does not work, you need to put the function in the query as normal:</p>
+
+<pre style="text-align:left">
+$name = &#39;BOB&#39;;
+$stmt = $db-&gt;prepare(&quot;INSERT INTO table(`time`, `name`) VALUES(NOW(), ?)&quot;);
+$stmt-&gt;execute(array($name));</pre>
+
+<p>You can bind arguments into SQL functions however:</p>
+
+<pre style="text-align:left">
+$name = &#39;BOB&#39;;
+$password = &#39;badpass&#39;;
+$stmt = $db-&gt;prepare(&quot;INSERT INTO table(`hexvalue`, `password`) VALUES(HEX(?), PASSWORD(?))&quot;);
+$stmt-&gt;execute(array($name, $password));</pre>
+
+<p>N&atilde;o funciona com LIKE:</p>
+
+<pre style="text-align:left">
+//THIS DOES NOT WORK
+$stmt = $db-&gt;prepare(&quot;SELECT field FROM table WHERE field LIKE %?%&quot;);
+$stmt-&gt;bindParam(1, $search, PDO::PARAM_STR);
+$stmt-&gt;execute();
+Use isso ao inv&eacute;s:
+$stmt = $db-&gt;prepare(&quot;SELECT field FROM table WHERE field LIKE ?&quot;);
+$stmt-&gt;bindValue(1, &quot;%$search%&quot;, PDO::PARAM_STR);
+$stmt-&gt;execute();
+Usando arrays:
+$values = array(&#39;bob&#39;, &#39;alice&#39;, &#39;lisa&#39;, &#39;john&#39;);
+$name = &#39;&#39;;
+$stmt = $db-&gt;prepare(&quot;INSERT INTO table(`name`) VALUES(:name)&quot;);
+$stmt-&gt;bindParam(&#39;:name&#39;, $name, PDO::PARAM_STR);
+foreach($values as $name) {
+   $stmt-&gt;execute();
+}
+Transa&ccedil;&otilde;es
+try {
+    $db-&gt;beginTransaction();
+ 
+    $db-&gt;exec(&quot;SOME QUERY&quot;);
+ 
+    $stmt = $db-&gt;prepare(&quot;SOME OTHER QUERY?&quot;);
+    $stmt-&gt;execute(array($value));
+ 
+    $stmt = $db-&gt;prepare(&quot;YET ANOTHER QUERY??&quot;);
+    $stmt-&gt;execute(array($value2, $value3));
+ 
+    $db-&gt;commit();
+} catch(PDOException $ex) {
+    //Something went wrong rollback!
+    $db-&gt;rollBack();
+    echo $ex-&gt;getMessage();
+}
+
+</pre>
+
+<p>Anotar os exemplos do pdo_crud_ribafs.</p>
+
+<p>Classe de Exemplo:</p>
+
+<p>class pdoCrud{</p>
+
+<p>private $host=&quot;localhost&quot;;</p>
+
+<p>private $user=&quot;root&quot;;</p>
+
+<p>private $db=&quot;estoque&quot;;</p>
+
+<p>private $pass=&quot;&quot;;</p>
+
+<p>private $conn;</p>
+
+<p>public function __construct(){</p>
+
+<p>$this-&gt;conn = new PDO(&quot;mysql:host=&quot;.$this-&gt;host.&quot;;dbname=&quot;.$this-&gt;db,$this-&gt;user,$this-&gt;pass);</p>
+
+<p>}</p>
+
+<p>public function select($table){</p>
+
+<p>$sql=&quot;SELECT * FROM $table&quot;;</p>
+
+<p>$q = $this-&gt;conn-&gt;query($sql) or die(&quot;failed!&quot;);</p>
+
+<p>while($r = $q-&gt;fetch(PDO::FETCH_ASSOC)){</p>
+
+<p>$data[]=$r;</p>
+
+<p>}</p>
+
+<p>return $data;</p>
+
+<p>}</p>
+
+<p>public function selectOne($id,$table){</p>
+
+<p>$sql=&quot;SELECT * FROM $table WHERE id = :id&quot;;</p>
+
+<p>$q = $this-&gt;conn-&gt;prepare($sql);</p>
+
+<p>$q-&gt;execute(array(&#39;:id&#39;=&gt;$id));</p>
+
+<p>$data = $q-&gt;fetch(PDO::FETCH_ASSOC);</p>
+
+<p>return $data;</p>
+
+<p>}</p>
+
+<p>public function update($update,$execute){</p>
+
+<p>$q = $this-&gt;conn-&gt;prepare($update);</p>
+
+<p>$q-&gt;execute($execute);</p>
+
+<p>return true;</p>
+
+<p>}</p>
+
+<p>public function insert($insert,$execute){</p>
+
+<p>$q = $this-&gt;conn-&gt;prepare($insert);</p>
+
+<p>$q-&gt;execute($execute);</p>
+
+<p>return true;</p>
+
+<p>}</p>
+
+<p>public function delete($id,$table){</p>
+
+<p>$sql=&quot;DELETE FROM $table WHERE id=:id&quot;;</p>
+
+<p>$q = $this-&gt;conn-&gt;prepare($sql);</p>
+
+<p>$q-&gt;execute(array(&#39;:id&#39;=&gt;$id));</p>
+
+<p>return true;</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>// Cr&eacute;dito</p>
+
+<p>// http://www.w3programmers.com/crud-with-pdo-and-oop-php/</p>
+
+<p>// Ver tamb&eacute;m: http://www.w3programmers.com/php-data-object-pdo-basic/</p>
+
+<p>?&gt;</p>
+
+<p>Usando a Classe</p>
+
+<p>Banco - estoque</p>
+
+<p>Tabela &ndash; clientes</p>
+
+<p><strong>index.php</strong></p>
+
+<p>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</p>
+
+<p>&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</p>
+
+<p>&lt;head&gt;</p>
+
+<p>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</p>
+
+<p>&lt;title&gt;Lista de Clientes - PDO&lt;/title&gt;</p>
+
+<p>&lt;/head&gt;</p>
+
+<p>&lt;?php</p>
+
+<p>function __autoload($class){</p>
+
+<p>include_once(&#39;../&#39;.$class.&quot;.php&quot;);</p>
+
+<p>}</p>
+
+<p>//include_once(&quot;pdoCrud.php&quot;);</p>
+
+<p>$obj=new pdoCrud;</p>
+
+<p>if(isset($_REQUEST[&#39;status&#39;])){</p>
+
+<p>echo&quot;Atualiza&ccedil;&atilde;o bem sucedida&quot;;</p>
+
+<p>}</p>
+
+<p>if(isset($_REQUEST[&#39;status_insert&#39;])){</p>
+
+<p>echo&quot;Cadastro bem sucedido&quot;;</p>
+
+<p>}</p>
+
+<p>if(isset($_REQUEST[&#39;del_id&#39;])){</p>
+
+<p>if($obj-&gt;delete($_REQUEST[&#39;del_id&#39;],&quot;clientes&quot;)){</p>
+
+<p>echo&quot;Registro exclu&iacute;do com sucesso&quot;;</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>?&gt;</p>
+
+<p>&lt;a href=&quot;../index.html&quot;&gt;Menu&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;index.php&quot;&gt;In&iacute;cio&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;insert.php&quot;&gt;Inserir&lt;/a&gt;</p>
+
+<p>&lt;h3 &gt;Todos os Registros&lt;/h3&gt;</p>
+
+<p>&lt;table width=&quot;750&quot; border=&quot;1&quot;&gt;</p>
+
+<p>&lt;tr class=&quot;success&quot;&gt;</p>
+
+<p>&lt;th scope=&quot;col&quot;&gt;ID&lt;/th&gt;</p>
+
+<p>&lt;th scope=&quot;col&quot;&gt;CPF&lt;/th&gt;</p>
+
+<p>&lt;th scope=&quot;col&quot;&gt;Nome&lt;/th&gt;</p>
+
+<p>&lt;th scope=&quot;col&quot;&gt;Cr&eacute;dito&lt;/th&gt;</p>
+
+<p>&lt;th scope=&quot;col&quot;&gt;Nascimento&lt;/th&gt;</p>
+
+<p>&lt;th scope=&quot;col&quot;&gt;E-mail&lt;/th&gt;</p>
+
+<p>&lt;th scope=&quot;col&quot;&gt;A&ccedil;&atilde;o&lt;/th&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;?php</p>
+
+<p>foreach($obj-&gt;select(&quot;clientes&quot;) as $value){</p>
+
+<p>extract($value);</p>
+
+<p>echo &lt;&lt;&lt;show</p>
+
+<p>&lt;tr class=&quot;success&quot;&gt;</p>
+
+<p>&lt;td&gt;$id&lt;/td&gt;</p>
+
+<p>&lt;td&gt;$cpf&lt;/td&gt;</p>
+
+<p>&lt;td&gt;&lt;a href=&quot;update.php?id=$id&quot;&gt;$nome&lt;/a&gt;&lt;/td&gt;</p>
+
+<p>&lt;td&gt;$credito_liberado&lt;/td&gt;</p>
+
+<p>&lt;td&gt;$data_nasc&lt;/td&gt;</p>
+
+<p>&lt;td&gt;$email&lt;/td&gt;</p>
+
+<p>&lt;td&gt;&lt;a href=&quot;update.php?id=$id&quot;&gt;Editar&lt;/a&gt;&amp;nbsp;&amp;nbsp;</p>
+
+<p>&lt;a href=&quot;index.php?del_id=$id&quot;&gt;Excluir&lt;/a&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>show;</p>
+
+<p>}</p>
+
+<p>?&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;tr class=&quot;success&quot;&gt;</p>
+
+<p>&lt;th scope=&quot;col&quot; colspan=&quot;5&quot; align=&quot;right&quot;&gt;</p>
+
+<p>&lt;div class=&quot;btn-group&quot;&gt;&lt;a href=&quot;insert.php&quot;&gt;Adicionar Cliente&lt;/a&gt;&lt;/div&gt;</p>
+
+<p>&lt;/th&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;/table&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;body&gt;</p>
+
+<p>&lt;/body&gt;</p>
+
+<p>&lt;/html&gt;</p>
+
+<p><strong>insert.php</strong></p>
+
+<p>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</p>
+
+<p>&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</p>
+
+<p>&lt;head&gt;</p>
+
+<p>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</p>
+
+<p>&lt;title&gt;Inserir Clientes - PDO&lt;/title&gt;</p>
+
+<p>&lt;/head&gt;</p>
+
+<p>&lt;body&gt;</p>
+
+<p>&lt;?php</p>
+
+<p>function __autoload($class){</p>
+
+<p>include_once(&#39;../&#39;.$class.&quot;.php&quot;);</p>
+
+<p>}</p>
+
+<p>$obj=new pdoCrud;</p>
+
+<p>if(isset($_REQUEST[&#39;insert&#39;])){</p>
+
+<p>extract($_REQUEST);</p>
+
+<p>$insert=&quot;INSERT INTO clientes SET cpf=:cpf, nome=:nome,credito_liberado=:credito_liberado,data_nasc=:data_nasc,email=:email&quot;;</p>
+
+<p>$execute=array(&#39;:cpf&#39;=&gt;$cpf,&#39;:nome&#39;=&gt;$nome,&#39;:credito_liberado&#39;=&gt;$credito_liberado,&#39;:data_nasc&#39;=&gt;$data_nasc,&#39;:email&#39;=&gt;$email);</p>
+
+<p>if($obj-&gt;insert($insert,$execute)){</p>
+
+<p>header(&quot;location:index.php?status_insert=success&quot;);</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>echo @&lt;&lt;&lt;show</p>
+
+<p>&lt;a href=&quot;index.php&quot;&gt;In&iacute;cio&lt;/a&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;h3&gt;Inserir Seus Dados&lt;/h3&gt;</p>
+
+<p>&lt;form action=&quot;insert.php&quot; method=&quot;post&quot;&gt;</p>
+
+<p>&lt;table width=&quot;400&quot; class=&quot;table-borderd&quot;&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;Id&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;id&quot; value=&quot;$id&quot; readonly=&quot;readonly&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;CPF&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;cpf&quot; value=&quot;$cpf&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;Nome&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;nome&quot; value=&quot;$nome&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;Cr&eacute;dito&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;credito_liberado&quot; value=&quot;$credito_liberado&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;Nascimento&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;data_nasc&quot; value=$data_nasc&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;E-mail&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;$email&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;&amp;nbsp;&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;submit&quot; name=&quot;insert&quot; value=&quot;Inserir&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;/table&gt;</p>
+
+<p>&lt;/form&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>show;</p>
+
+<p>?&gt;</p>
+
+<p>&lt;/body&gt;</p>
+
+<p>&lt;/html&gt;</p>
+
+<p><strong>update.php</strong></p>
+
+<p>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</p>
+
+<p>&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</p>
+
+<p>&lt;head&gt;</p>
+
+<p>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</p>
+
+<p>&lt;title&gt;Edit Data - PDO&lt;/title&gt;</p>
+
+<p>&lt;/head&gt;</p>
+
+<p>&lt;body&gt;</p>
+
+<p>&lt;?php</p>
+
+<p>function __autoload($class){</p>
+
+<p>include_once(&#39;../&#39;.$class.&quot;.php&quot;);</p>
+
+<p>}</p>
+
+<p>$obj=new pdoCrud;</p>
+
+<p>if(isset($_REQUEST[&#39;update&#39;])){</p>
+
+<p>extract($_REQUEST);</p>
+
+<p>$update=&quot;UPDATE clientes SET cpf=:cpf, nome=:nome, credito_liberado=:credito_liberado,data_nasc=:data_nasc, email=:email WHERE id=:id&quot;;</p>
+
+<p>$execute=array(&#39;:id&#39;=&gt;$id,&#39;:cpf&#39;=&gt;$cpf,&#39;:nome&#39;=&gt;$nome,&#39;:credito_liberado&#39;=&gt;$credito_liberado,&#39;:data_nasc&#39;=&gt;$data_nasc,&#39;:email&#39;=&gt;$email);</p>
+
+<p>if($obj-&gt;update($update,$execute)){</p>
+
+<p>header(&quot;location:index.php?status=success&quot;);</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>extract($obj-&gt;selectOne($_REQUEST[&#39;id&#39;],&quot;clientes&quot;));</p>
+
+<p>echo &lt;&lt;&lt;show</p>
+
+<p>&lt;a href=&quot;index.php&quot;&gt;In&iacute;cio&lt;/a&gt;</p>
+
+<p>&lt;h3&gt;Edite Seus Dados&lt;/h3&gt;</p>
+
+<p>&lt;form action=&quot;update.php&quot; method=&quot;post&quot;&gt;</p>
+
+<p>&lt;table width=&quot;500&quot; border=&quot;1&quot;&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;Id&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;id&quot; value=&quot;$id&quot; readonly=&quot;readonly&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;CPF&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;cpf&quot; value=$cpf&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;Nome&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;nome&quot; value=&quot;$nome&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;Cr&eacute;dito&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;credito_liberado&quot; value=&quot;$credito_liberado&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;Nascimento&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;data_nasc&quot; value=$data_nasc&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;E-mail&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;$email&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;&amp;nbsp;&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;submit&quot; name=&quot;update&quot; value=&quot;Atualizar&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;/table&gt;</p>
+
+<p>&lt;/form&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>show;</p>
+
+<p>?&gt;</p>
+
+<p>&lt;/body&gt;</p>
+
+<p>&lt;/html&gt;</p>
+

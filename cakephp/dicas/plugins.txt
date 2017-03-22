@@ -1,0 +1,37 @@
+Criação de Plugins no CakePHP
+
+Eles ficam na pasta:
+
+app/Plugin
+
+Pode também ficar em aplicativo/plugin
+
+Criação de um plugin bem simples:
+
+app/Plugin/Ola
+
+app/Plugin/Ola/Controller
+app/Plugin/Ola/Model
+app/Plugin/Ola/View
+
+Para acessar o controller 'teste' do plugin Ola usamos:
+
+http://localhost/clientes/ola/teste
+
+Criando o plugin pela console com:
+
+./cake bake plugin Ola
+
+Ele criará toda a estrutura, mas vazia. 
+Vamos adicionar conteúdo apenas para mostrar como funciona.
+
+Habilitando o Plugin
+
+Editar o app/Config/bootstrap.php e adicionar ao final:
+
+CakePlugin::load('Ola');
+
+Agora chame com:
+http://localhost/clientes/ola/teste
+
+

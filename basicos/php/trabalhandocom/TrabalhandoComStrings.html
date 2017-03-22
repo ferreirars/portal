@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt" dir="ltr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta name="generator" content="MediaWiki 1.16alpha-wmf" />
+		<meta name="keywords" content="Aplicativos em PHP/Trabalhando em PHP com/Strings" />
+		<link rel="alternate" type="application/x-wiki" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings&amp;action=edit" />
+		<link rel="edit" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings&amp;action=edit" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikilivros (pt)" />
+		<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/" />
+		<link rel="alternate" type="application/rss+xml" title="Feed RSS Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=rss" />
+		<link rel="alternate" type="application/atom+xml" title="Feed Atom Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=atom" />
+		<title>Aplicativos em PHP/Trabalhando em PHP com/Strings - Wikilivros</title>
+		<link rel="stylesheet" href="/skins-1.5/common/shared.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/common/commonPrint.css?233xz" type="text/css" media="print" />
+		<link rel="stylesheet" href="/skins-1.5/monobook/main.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/chick/main.css?233xz" type="text/css" media="handheld" />
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE50Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE55Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/skins-1.5/monobook/IE60Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/skins-1.5/monobook/IE70Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="print" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Handheld.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="handheld" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=-&amp;action=raw&amp;maxage=2678400&amp;smaxage=0&amp;ts=20090810192510&amp;gen=css" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.css&amp;action=raw&amp;ctype=text/css" type="text/css" />
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins-1.5/common/IEFixes.js?233xz"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/skins-1.5";
+		var wgArticlePath = "/wiki/$1";
+		var wgScriptPath = "/w";
+		var wgScript = "/w/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://pt.wikibooks.org";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings";
+		var wgTitle = "Aplicativos em PHP/Trabalhando em PHP com/Strings";
+		var wgAction = "view";
+		var wgArticleId = "14508";
+		var wgIsArticle = true;
+		var wgUserName = "Ribafs";
+		var wgUserGroups = ["*", "user", "autoconfirmed"];
+		var wgUserLanguage = "pt-br";
+		var wgContentLanguage = "pt";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = 110858;
+		var wgVersion = "1.16alpha-wmf";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = [",	.", " 	,"];
+		var wgDigitTransformTable = ["", ""];
+		var wgMainPageTitle = "Página principal";
+		var wgMWSuggestTemplate = "http://pt.wikibooks.org/w/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest";
+		var wgDBname = "ptwikibooks";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["com sugestões", "sem sugestões"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		var wgAjaxWatch = {"watchMsg": "Vigiar", "unwatchMsg": "Desinteressar-se", "watchingMsg": "Vigiando...", "unwatchingMsg": "Deixando de vigiar..."};
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="/skins-1.5/common/wikibits.js?233xz"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="/skins-1.5/common/ajax.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/ajaxwatch.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/mwsuggest.js?233xz"></script>
+		<script type="text/javascript">/*<![CDATA[*/
+		var wgNotice='';var wgNoticeLocal='';
+		/*]]>*/</script>
+		<script type="text/javascript" src="http://upload.wikimedia.org/centralnotice/wikibooks/pt-br/centralnotice.js?233xz"></script>
+
+		<script type="text/javascript" src="/w/index.php?title=-&amp;action=raw&amp;smaxage=0&amp;gen=js&amp;useskin=monobook"><!-- site js --></script>
+		<script type="text/javascript" src="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.js&amp;action=raw&amp;ctype=text/javascript"></script>
+	</head>
+<body class="mediawiki ltr ns-0 ns-subject page-Aplicativos_em_PHP_Trabalhando_em_PHP_com_Strings skin-monobook">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+		<div id="siteNotice"><script type='text/javascript'>if (wgNotice != '') document.writeln(wgNotice);</script></div>		<h1 id="firstHeading" class="firstHeading">Aplicativos em PHP/Trabalhando em PHP com/Strings</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">De Wikilivros</h3>
+			<div id="contentSub"><span class="subpages">&lt; <a href="/wiki/Aplicativos_em_PHP" title="Aplicativos em PHP">Aplicativos em PHP</a> | <a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com" title="Aplicativos em PHP/Trabalhando em PHP com">Trabalhando em PHP com</a></span></div>
+									<div id="jump-to-nav">Ir para: <a href="#column-one">navegação</a>, <a href="#searchInput">pesquisa</a></div>			<!-- start content -->
+			<table id="toc" class="toc" summary="Tabela de conteúdo">
+<tr>
+<td>
+<div id="toctitle">
+<h2>Tabela de conteúdo</h2>
+</div>
+<ul>
+<li class="toclevel-1"><a href="#substr_--_Retorna_uma_parte_de_uma_string"><span class="tocnumber">1</span> <span class="toctext">substr -- Retorna uma parte de uma string</span></a></li>
+<li class="toclevel-1"><a href="#substr_replace"><span class="tocnumber">2</span> <span class="toctext">substr_replace</span></a></li>
+<li class="toclevel-1"><a href="#Encontrar_Posi.C3.A7.C3.A3o_de_caractere_em_String"><span class="tocnumber">3</span> <span class="toctext">Encontrar Posição de caractere em String</span></a></li>
+<li class="toclevel-1"><a href="#Contando_Ocorr.C3.AAncias_de_Substring_em_String"><span class="tocnumber">4</span> <span class="toctext">Contando Ocorrências de Substring em String</span></a></li>
+<li class="toclevel-1"><a href="#Trocando_Ponto_por_V.C3.ADrgula_e_vice-versa"><span class="tocnumber">5</span> <span class="toctext">Trocando Ponto por Vírgula e vice-versa</span></a></li>
+<li class="toclevel-1"><a href="#Convers.C3.A3o_de_Strings"><span class="tocnumber">6</span> <span class="toctext">Conversão de Strings</span></a></li>
+<li class="toclevel-1"><a href="#Trabalhando_com_os_Caracteres_de_Strings"><span class="tocnumber">7</span> <span class="toctext">Trabalhando com os Caracteres de Strings</span></a></li>
+<li class="toclevel-1"><a href="#Valida.C3.A7.C3.A3o_de_Caracteres"><span class="tocnumber">8</span> <span class="toctext">Validação de Caracteres</span></a></li>
+<li class="toclevel-1"><a href="#ctype_alnum_-_Checa_por_caracteres_alfanum.C3.A9ricos"><span class="tocnumber">9</span> <span class="toctext">ctype_alnum - Checa por caracteres alfanuméricos</span></a></li>
+<li class="toclevel-1"><a href="#ctype_alpha_-_Checa_por_caracteres_alfab.C3.A9ticos"><span class="tocnumber">10</span> <span class="toctext">ctype_alpha - Checa por caracteres alfabéticos</span></a></li>
+<li class="toclevel-1"><a href="#ctype_digit_-_Checa_por_caracteres_num.C3.A9ricos"><span class="tocnumber">11</span> <span class="toctext">ctype_digit - Checa por caracteres numéricos</span></a></li>
+<li class="toclevel-1"><a href="#ctype_lower_-_Checa_por_caracteres_min.C3.BAsculos"><span class="tocnumber">12</span> <span class="toctext">ctype_lower - Checa por caracteres minúsculos</span></a></li>
+<li class="toclevel-1"><a href="#ctype_punct_-_Checa_por_Caracteres_que_n.C3.A3o_sejam_espa.C3.A7o_em_branco_nem_alfanum.C3.A9ricos"><span class="tocnumber">13</span> <span class="toctext">ctype_punct - Checa por Caracteres que não sejam espaço em branco nem alfanuméricos</span></a></li>
+<li class="toclevel-1"><a href="#ctype_space_-_Checa_por_espa.C3.A7os_em_branco"><span class="tocnumber">14</span> <span class="toctext">ctype_space - Checa por espaços em branco</span></a></li>
+<li class="toclevel-1"><a href="#Valida.C3.A7.C3.A3o_de_Tipos"><span class="tocnumber">15</span> <span class="toctext">Validação de Tipos</span></a></li>
+<li class="toclevel-1"><a href="#Cases"><span class="tocnumber">16</span> <span class="toctext">Cases</span></a></li>
+<li class="toclevel-1"><a href="#.C3.8Dndices_com_Str_Pad"><span class="tocnumber">17</span> <span class="toctext">Índices com Str_Pad</span></a></li>
+<li class="toclevel-1"><a href="#String_para_TimeStamp"><span class="tocnumber">18</span> <span class="toctext">String para TimeStamp</span></a></li>
+</ul>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+//<![CDATA[
+ if (window.showTocToggle) { var tocShowText = "mostrar"; var tocHideText = "esconder"; showTocToggle(); } 
+//]]>
+</script>
+<p><a name="substr_--_Retorna_uma_parte_de_uma_string" id="substr_--_Retorna_uma_parte_de_uma_string"></a></p>
+<h2><span class="mw-headline">substr -- Retorna uma parte de uma string</span></h2>
+<p>string substr ( string string, int start [, int length] )</p>
+<p><b>Exemplo 1. Uso básico de substr()</b></p>
+<pre>
+&lt;?php
+$rest = substr("abcdef", 1);    // retorna "bcdef"
+$rest = substr("abcdef", 1, 3); // retorna "bcd"
+$rest = substr("abcdef", 0, 4); // retorna "abcd"
+$rest = substr("abcdef", 0, 8); // retorna "abcdef"
+
+// Outra opção é acessar atravéz de chaves
+$string = 'abcdef';
+echo $string{0};                // retorna a
+echo $string{3};                // retorna d
+?&gt; 
+</pre>
+<p><br />
+Se start for negativo, a string retornada irá começar no caractere start a partir do fim de string.</p>
+<p><b>Exemplo 2. Usando um inicio negativo</b></p>
+<pre>
+&lt;?php
+$rest = substr("abcdef", -1);    // retorna "f"
+$rest = substr("abcdef", -2);    // retorna "ef"
+$rest = substr("abcdef", -3, 1); // retorna "d"
+?&gt; 
+</pre>
+<p><br />
+<b>Exemplo 3. Usando um length negativo</b></p>
+<pre>
+&lt;?php
+$rest = substr("abcdef", 0, -1);  // retorna "abcde"
+$rest = substr("abcdef", 2, -1);  // retorna "cde"
+$rest = substr("abcdef", 4, -4);  // retorna ""
+$rest = substr("abcdef", -3, -1); // retorna "de"
+?&gt; 
+
+&lt;h2&gt;Sobrescrevendo Strings&lt;/h2&gt;
+
+str_replace
+
+str_replace --  Substitui todas as ocorrências da string de procura com a string de substituição 
+
+mixed str_replace ( mixed pesquisa, mixed substitui, mixed assunto [, int &amp;count] )
+
+&lt;pre&gt;
+&lt;?php
+// Fornece: &lt;body text='black'&gt;
+$bodytag = str_replace("%body%", "black", "&lt;body text='%body%'&gt;");
+
+// Fornece: Hll Wrld f PHP
+$vowels = array("a", "e", "i", "o", "u", "A", "E", "I", "O", "U");
+$onlyconsonants = str_replace($vowels, "", "Hello World of PHP");
+
+// Fornece: você comeria pizza, cerveja e sorvete todos os dias
+$frase  = "você comeria frutas, vegetais, e fibra todos os dias.";
+$saudavel = array("frutas", "vegetais", "fibra");
+$saboroso  = array("pizza", "cerveja", "sorvete");
+
+$novafrase = str_replace($saudavel, $saboroso, $frase);
+
+// Uso do parâmetro count está disponível no PHP 5.0.0
+$str = str_replace("ll", "", "good golly miss molly!", $count);
+echo $count; // 2
+?&gt; 
+</pre>
+<p><a name="substr_replace" id="substr_replace"></a></p>
+<h2><span class="mw-headline">substr_replace</span></h2>
+<p>substr_replace -- Substitui o texto dentro de uma parte de uma string</p>
+<p>string substr_replace ( string string, string replacement, int start [, int length] )</p>
+<pre>
+&lt;?php
+$var = 'ABCDEFGH:/MNRPQR/';
+echo "Original: $var&lt;hr&gt;\n";
+
+/* Estes dois exemplos substituem tudo de $var com 'bob'. */
+echo substr_replace($var, 'bob', 0) . "&lt;br&gt;\n";
+echo substr_replace($var, 'bob', 0, strlen($var)) . "&lt;br&gt;\n";
+
+/* Insere 'bob' direto no começo de $var. */
+echo substr_replace($var, 'bob', 0, 0) . "&lt;br&gt;\n";
+
+/* Estes dois exemplos substituem 'MNRPQR' em $var com 'bob'. */
+echo substr_replace($var, 'bob', 10, -1) . "&lt;br&gt;\n";
+echo substr_replace($var, 'bob', -7, -1) . "&lt;br&gt;\n";
+
+/* Deleta 'MNRPQR' de $var. */
+echo substr_replace($var, '', 10, -1) . "&lt;br&gt;\n";
+?&gt; 
+</pre>
+<p><br /></p>
+<p><a name="Encontrar_Posi.C3.A7.C3.A3o_de_caractere_em_String" id="Encontrar_Posi.C3.A7.C3.A3o_de_caractere_em_String"></a></p>
+<h2><span class="mw-headline">Encontrar Posição de caractere em String</span></h2>
+<p>strpos</p>
+<p>strpos -- Encontra a posição da primeira ocorrência de uma string</p>
+<p>int strpos ( string str, string procurar [, int offset] )</p>
+<p>Exemplos strpos()</p>
+<pre>
+&lt;?php
+//$str = 'abc';
+$str = 'cba';
+$procurar  = 'a';
+$posicao = strpos($str, $procurar);
+
+// Note o uso de ===.  Simples == não funcionaria como esperado
+// por causa da posição de 'a' é 0 (primeiro) caractere.
+if ($pos === false) {
+   echo "A string '$procurar' não foi encontrada na string '$str'";
+} else {
+   echo "A string '$procurar' foi encontrada na string '$str'";
+   echo " e está na posição $posicao";
+}
+
+?&gt; 
+
+&lt;?php
+
+//$email = 'ribafs@gmail.com.br';
+$email = 'ribafs@gmail.com';
+$usuario = substr ($email, 0, strpos ($email, '@'));
+// Lembrando: substr ( string string, int start [, int length] )
+$dominio = substr ($email, strpos ($email, '@')+1);
+echo "Usuário '$usuario' e Domínio '$dominio'"; // o comprimento default é até o final
+?&gt;
+</pre>
+<p><br /></p>
+<p><a name="Contando_Ocorr.C3.AAncias_de_Substring_em_String" id="Contando_Ocorr.C3.AAncias_de_Substring_em_String"></a></p>
+<h2><span class="mw-headline">Contando Ocorrências de Substring em String</span></h2>
+<p>substr_count -- Conta o número de ocorrências de uma substring</p>
+<p>int substr_count ( string str, string conte_me )</p>
+<p>substr_count() retorna o número de vezes que a substring conte_me ocorre na string str.</p>
+<pre>
+&lt;?php
+  $str = "Olá mundo do PHP";
+
+  if (substr_count($str, "do") == 0)
+   echo "nenhum";
+
+  // same as:
+
+  if (strpos($str, "do") === false)
+   echo "nenhum";
+?&gt;
+</pre>
+<p><b>Exemplo 1. Exemplo substr_count()</b></p>
+<pre>
+&lt;?php
+print substr_count("This is a test", "is"); // mostra 2
+?&gt; 
+</pre>
+<p><br /></p>
+<p><a name="Trocando_Ponto_por_V.C3.ADrgula_e_vice-versa" id="Trocando_Ponto_por_V.C3.ADrgula_e_vice-versa"></a></p>
+<h2><span class="mw-headline">Trocando Ponto por Vírgula e vice-versa</span></h2>
+<p>Se temos campos tipo moeda, devemos exibir com vírgula e gravar no banco com ponto.</p>
+<p>Para isso uma boa saída é usar a dupla de funções implode e explode.</p>
+<p>Antes de exibir na tela (em consultas):</p>
+<p>$f_custo_produtivo=explode(".",$f_custo_produtivo);</p>
+<p>$f_custo_produtivo=implode(",",$f_custo_produtivo);</p>
+<p>Antes de gravar no banco (inclusão e atualização):</p>
+<p>$f_custo_produtivo=explode(",",$f_custo_produtivo);</p>
+<p>$f_custo_produtivo=implode(".",$f_custo_produtivo);</p>
+<p><br /></p>
+<p><a name="Convers.C3.A3o_de_Strings" id="Convers.C3.A3o_de_Strings"></a></p>
+<h2><span class="mw-headline">Conversão de Strings</span></h2>
+<pre>
+$foo = 1 + "10.5";echo $foo."&lt;br&gt;";             // $foo é float (11.5)
+$foo = 1 + "-1.3e3";echo $foo."&lt;br&gt;";              // $foo é float (-1299)
+$foo = 1 + "bob-1.3e3";echo $foo."&lt;br&gt;";          // $foo é integer (1)
+$foo = 1 + "bob3";echo $foo."&lt;br&gt;";                // $foo é integer (1)
+$foo = 1 + "10 Small Pigs";echo $foo."&lt;br&gt;";      // $foo é integer (11)
+$foo = 4 + "10.2 Little Piggies";echo $foo."&lt;br&gt;"; // $foo é float (14.2)
+$foo = "10.0 pigs " + 1;echo $foo."&lt;br&gt;";          // $foo é float (11)
+$foo = "10.0 pigs " + 1.0;echo $foo."&lt;br&gt;";        // $foo é float (11)
+</pre>
+<p><br /></p>
+<p><a name="Trabalhando_com_os_Caracteres_de_Strings" id="Trabalhando_com_os_Caracteres_de_Strings"></a></p>
+<h2><span class="mw-headline">Trabalhando com os Caracteres de Strings</span></h2>
+<pre>
+// Pega o primeiro caracter da string
+$str = 'Isto é um teste.';
+$first = $str{0};
+echo $first."&lt;br&gt;";
+// Pega o terceiro caracter da string
+$third = $str{2};
+echo $third."&lt;br&gt;";
+// Pega o último caracter da string
+$str = 'Isto ainda é um teste.';
+$last = $str{strlen($str)-1};
+echo $last."&lt;br&gt;";
+// Modifica o ultimo caracter da string
+$str = 'Olhe o mal';
+echo $str{strlen($str)-1} = 'r';
+</pre>
+<p><a name="Valida.C3.A7.C3.A3o_de_Caracteres" id="Valida.C3.A7.C3.A3o_de_Caracteres"></a></p>
+<h2><span class="mw-headline">Validação de Caracteres</span></h2>
+<pre>
+ctype_alnum
+ctype_alpha
+ctype_cntrl
+ctype_digit
+ctype_graph
+ctype_lower
+ctype_print
+ctype_punct
+ctype_space
+ctype_upper
+ctype_xdigit
+</pre>
+<p><a name="ctype_alnum_-_Checa_por_caracteres_alfanum.C3.A9ricos" id="ctype_alnum_-_Checa_por_caracteres_alfanum.C3.A9ricos"></a></p>
+<h2><span class="mw-headline">ctype_alnum - Checa por caracteres alfanuméricos</span></h2>
+<pre>
+$strings = array('AbCd1zyZ9', 'foo!#$bar');
+
+foreach ($strings as $testcase) {
+   if (ctype_alnum($testcase)) {
+       echo "The string $testcase consists of all letters or digits.\n";
+   } else {
+       echo "The string $testcase does not consist of all letters or digits.\n";
+   }
+}
+</pre>
+<p><a name="ctype_alpha_-_Checa_por_caracteres_alfab.C3.A9ticos" id="ctype_alpha_-_Checa_por_caracteres_alfab.C3.A9ticos"></a></p>
+<h2><span class="mw-headline">ctype_alpha - Checa por caracteres alfabéticos</span></h2>
+<pre>
+$strings = array('KjgWZC', 'arf12');
+foreach ($strings as $testcase) {
+   if (ctype_alpha($testcase)) {
+       echo "The string $testcase consists of all letters.\n";
+   } else {
+       echo "The string $testcase does not consist of all letters.\n";
+   }
+}
+</pre>
+<p><a name="ctype_digit_-_Checa_por_caracteres_num.C3.A9ricos" id="ctype_digit_-_Checa_por_caracteres_num.C3.A9ricos"></a></p>
+<h2><span class="mw-headline">ctype_digit - Checa por caracteres numéricos</span></h2>
+<pre>
+$strings = array('1820.20', '10002', 'wsl!12');
+foreach ($strings as $testcase) {
+   if (ctype_digit($testcase)) {
+       echo "The string $testcase consists of all digits.\n";
+   } else {
+       echo "The string $testcase does not consist of all digits.\n";
+   }
+}
+// Alerta: Ao executar veja que somente é válido quando todos são dígitos
+// Não é indicado para testar valores decimais, com ponto ou vírgula
+</pre>
+<p><a name="ctype_lower_-_Checa_por_caracteres_min.C3.BAsculos" id="ctype_lower_-_Checa_por_caracteres_min.C3.BAsculos"></a></p>
+<h2><span class="mw-headline">ctype_lower - Checa por caracteres minúsculos</span></h2>
+<pre>
+$strings = array('aac123', 'qiutoas', 'QASsdks');
+foreach ($strings as $testcase) {
+   if (ctype_lower($testcase)) {
+       echo "The string $testcase consists of all lowercase letters.\n";
+   } else {
+       echo "The string $testcase does not consist of all lowercase letters.\n";
+   }
+}
+</pre>
+<p><br /></p>
+<p><a name="ctype_punct_-_Checa_por_Caracteres_que_n.C3.A3o_sejam_espa.C3.A7o_em_branco_nem_alfanum.C3.A9ricos" id="ctype_punct_-_Checa_por_Caracteres_que_n.C3.A3o_sejam_espa.C3.A7o_em_branco_nem_alfanum.C3.A9ricos"></a></p>
+<h2><span class="mw-headline">ctype_punct - Checa por Caracteres que não sejam espaço em branco nem alfanuméricos</span></h2>
+<pre>
+$strings = array('ABasdk!@!$#', '!@ # $', '*&amp;$()');
+foreach ($strings as $testcase) {
+   if (ctype_punct($testcase)) {
+       echo "The string $testcase consists of all punctuation.\n";
+   } else {
+       echo "The string $testcase does not consist of all punctuation.\n";
+   }
+}
+</pre>
+<p><br /></p>
+<p><a name="ctype_space_-_Checa_por_espa.C3.A7os_em_branco" id="ctype_space_-_Checa_por_espa.C3.A7os_em_branco"></a></p>
+<h2><span class="mw-headline">ctype_space - Checa por espaços em branco</span></h2>
+<p><br /></p>
+<p><a name="Valida.C3.A7.C3.A3o_de_Tipos" id="Valida.C3.A7.C3.A3o_de_Tipos"></a></p>
+<h2><span class="mw-headline">Validação de Tipos</span></h2>
+<pre>
+ intval
+ is_array
+ is_bool
+ is_callable
+ is_double
+ is_float
+ is_int
+ is_integer
+ is_long
+ is_null
+ is_numeric
+ is_object
+ is_real
+ is_resource
+ is_scalar
+ is_string
+ isset
+ print_r
+ serialize
+ settype
+ strval
+ unserialize
+ unset
+</pre>
+<p><a name="Cases" id="Cases"></a></p>
+<h2><span class="mw-headline">Cases</span></h2>
+<pre>
+strtoupper($str) - tudo maiúsculo
+strtolower($str) - tudo minúsculo
+ucfirst($str) - Converte para maiúscula o primeiro caractere de uma STRING
+ucwords($STR) - Converte para maiúsculas o primeiro caractere de cada PALAVRA
+</pre>
+<p><br /></p>
+<p><a name=".C3.8Dndices_com_Str_Pad" id=".C3.8Dndices_com_Str_Pad"></a></p>
+<h2><span class="mw-headline">Índices com Str_Pad</span></h2>
+<p>str_pad -- Preenche uma string para um certo tamanho com outra string</p>
+<p>string str_pad ( string input, int pad_length [, string pad_string [, int pad_type]] )</p>
+<p>Exemplo:</p>
+<p>$players =</p>
+<pre>
+  array("DUNCAN, king of Scotland"=&gt;"Larry",
+        "MALCOLM, son of the king"=&gt;"Curly",
+        "MACBETH"=&gt;"Moe",
+        "MACDUFF"=&gt;"Rafael");
+</pre>
+<p>echo "</p>
+<pre>
+";
+
+// Print a heading
+echo str_pad("Dramatis Personae", 50, " ", STR_PAD_BOTH) . "\n";
+
+// Print an index line for each entry
+foreach($players as $role=&gt;$actor)
+  echo str_pad($role, 30, ".")
+      . str_pad($actor, 20, ".", STR_PAD_LEFT) . "\n";
+
+echo "
+</pre>
+<p>";</p>
+<p>Resultado:</p>
+<pre>
+	            Dramatis Personae                 
+DUNCAN, king of Scotland.....................Larry
+MALCOLM, son of the king.....................Curly
+MACBETH........................................Moe
+MACDUFF.....................................Rafael
+</pre>
+<p><br /></p>
+<p><a name="String_para_TimeStamp" id="String_para_TimeStamp"></a></p>
+<h2><span class="mw-headline">String para TimeStamp</span></h2>
+<pre>
+// Absolute dates and times
+$var = strtotime("25 December 2002");
+$var = strtotime("14/5/1955");
+$var = strtotime("Fr1, 7 Sep 2001 10:28:07 -1000");
+
+// The current time: equivalent to time(  )
+$var = strtotime("now");
+
+// Relative times
+echo strtotime("+1 day");
+echo strtotime("-2 weeks");
+echo strtotime("+2 hours 2 seconds");
+
+//Care should be taken when using strtotime( ) with user-supplied dates. It's better to limit the use of strtotime( ) to cases when 
+//the string to be parsed is under the control of the script, for example, checking a minimum age using a relative date: 
+// date of birth: timestamp for 16 August, 1983
+$dob = mktime(0, 0, 0, 16, 8, 1982);
+
+// Now check that the individual is over 18
+if ((float)$dob &lt; (float)strtotime("-18 years"))
+  echo "Legal to drive in the state of Victoria";
+</pre>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 62/1000000
+Post-expand include size: 7/2048000 bytes
+Template argument size: 0/2048000 bytes
+Expensive parser function count: 0/500
+-->
+
+<!-- Saved in parser cache with key ptwikibooks:pcache:idhash:14508-0!1!0!!pt-br!2 and timestamp 20090810192904 -->
+<div class="printfooter">
+Obtido em "<a href="http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings">http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings</a>"</div>
+			<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="/wiki/Especial:Categorias" title="Especial:Categorias">Categoria</a>: <span dir='ltr'><a href="/wiki/Categoria:Aplicativos_em_PHP" title="Categoria:Aplicativos em PHP">Aplicativos em PHP</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Acessos</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+	
+				 <li id="ca-nstab-main" class="selected"><a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings" title="Ver a página de conteúdo [c]" accesskey="c">módulo</a></li>
+				 <li id="ca-talk" class="new"><a href="/w/index.php?title=Discuss%C3%A3o:Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings&amp;action=edit&amp;redlink=1" title="Discussão sobre o conteúdo da página [t]" accesskey="t">Discussão</a></li>
+				 <li id="ca-edit"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings&amp;action=edit" title="Você pode editar esta página. Por favor, utilize o botão Mostrar Previsão antes de salvar. [e]" accesskey="e">Editar</a></li>
+				 <li id="ca-history"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings&amp;action=history" title="Edições anteriores desta página. [h]" accesskey="h">História</a></li>
+				 <li id="ca-move"><a href="/wiki/Especial:Mover/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings" title="Mover esta página [m]" accesskey="m">Mover</a></li>
+				 <li id="ca-watch"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings&amp;action=watch" title="Adicionar esta página aos artigos vigiados [w]" accesskey="w">Vigiar</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Ferramentas pessoais</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+				<li id="pt-acaibeta"><a href="http://pt.wikibooks.org/w/index.php?title=Especial:UsabilityInitiativeOptIn&amp;from=Aplicativos_em_PHP%2FTrabalhando_em_PHP_com%2FStrings" class="no-text-transform">Experimente o Beta</a></li>
+				<li id="pt-userpage"><a href="/wiki/Usu%C3%A1rio:Ribafs" title="Sua página de utilizador [.]" accesskey=".">Ribafs</a></li>
+				<li id="pt-mytalk"><a href="/wiki/Usu%C3%A1rio_Discuss%C3%A3o:Ribafs" title="Sua página de discussão [n]" accesskey="n">Minha discussão</a></li>
+				<li id="pt-preferences"><a href="/wiki/Especial:Prefer%C3%AAncias" title="Minhas preferências">Minhas preferências</a></li>
+				<li id="pt-watchlist"><a href="/wiki/Especial:P%C3%A1ginas_vigiadas" title="Lista de artigos vigiados. [l]" accesskey="l">Páginas vigiadas</a></li>
+				<li id="pt-mycontris"><a href="/wiki/Especial:Contribui%C3%A7%C3%B5es/Ribafs" title="Lista das suas contribuições [y]" accesskey="y">Minhas contribuições</a></li>
+				<li id="pt-logout"><a href="/w/index.php?title=Especial:Sair&amp;returnto=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings" title="Sair">Sair</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(http://upload.wikimedia.org/wikibooks/pt/b/bc/Wiki.png);" href="/wiki/P%C3%A1gina_principal" title="Página principal [z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div id="p-search" class="portlet">
+		<h5 lang="pt-br" xml:lang="pt-br"><label for="searchInput">Pesquisa</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/w/index.php" id="searchform"><div>
+				<input type='hidden' name="title" value="Especial:Busca"/>
+				<input id="searchInput" name="search" type="text" title="Pesquisar nesta wiki [f]" accesskey="f" value="" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Ir" title="Ir a uma página com este exato nome, caso exista" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Pesquisa" title="Procurar por páginas contendo este texto" />
+			</div></form>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5 lang="pt-br" xml:lang="pt-br">Navegação</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/wiki/P%C3%A1gina_principal">Página principal</a></li>
+				<li id="n-Library"><a href="/wiki/Wikilivros:Biblioteca">Biblioteca</a></li>
+				<li id="n-recentchanges"><a href="/wiki/Especial:Mudan%C3%A7as_recentes" title="A lista de mudanças recentes nesta wiki. [r]" accesskey="r">Mudanças recentes</a></li>
+				<li id="n-randompage"><a href="/wiki/Especial:Aleat%C3%B3ria" title="Carregar página aleatória [x]" accesskey="x">Página aleatória</a></li>
+				<li id="n-help"><a href="/wiki/Ajuda:Conte%C3%BAdos" title="Um local reservado para auxílio.">Ajuda</a></li>
+				<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Donate/pt" title="Ajude-nos">Doações</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-Project'>
+		<h5 lang="pt-br" xml:lang="pt-br">projeto</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-about"><a href="/wiki/Wikilivros:Sobre">Sobre</a></li>
+				<li id="n-portal"><a href="/wiki/Wikilivros:Portal_comunit%C3%A1rio" title="Sobre o projeto e coisas que você poder fazer aqui.">Portal comunitário</a></li>
+				<li id="n-Staff-lounge"><a href="/wiki/Wikilivros:Staff_lounge">Esplanada</a></li>
+				<li id="n-Wikijunior"><a href="/wiki/Wikij%C3%BAnior">Wikijúnior</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-coll-create_a_book'>
+		<h5 lang="pt-br" xml:lang="pt-br">Criar uma coleção</h5>
+		<div class='pBody'>
+<ul id="collectionPortletList"><li id="coll-add_page"><a href="/w/index.php?title=Especial:Livro/add_article/&amp;arttitle=Aplicativos+em+PHP%2FTrabalhando+em+PHP+com%2FStrings&amp;oldid=0" title="Adicionar a página wiki atual ao seu livro" onclick="collectionCall(&#039;AddArticle&#039;, [&#039;removepage&#039;, wgNamespaceNumber, wgTitle, 0]); return false;" rel="nofollow">Adicionar página ao livro</a></li><li id="coll-help_collections"><a href="/wiki/Ajuda:Livros" title="Mostrar ajuda sobre a ferramenta de livros">Ajuda sobre livros</a></li></ul><script type="text/javascript">/*<![CDATA[*/
+		var wgCollectionAddRemoveSate = "addpage";
+		/*]]>*/</script>
+<script type="text/javascript" src="/w/extensions/Collection/collection/portlet.js?2"></script>		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5 lang="pt-br" xml:lang="pt-br">Ferramentas</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/wiki/Especial:P%C3%A1ginas_afluentes/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings" title="Lista de todas as páginas que ligam-se a esta [j]" accesskey="j">Páginas afluentes</a></li>
+				<li id="t-recentchangeslinked"><a href="/wiki/Especial:Novidades_relacionadas/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings" title="Mudanças recentes em páginas relacionadas a esta [k]" accesskey="k">Alterações relacionadas</a></li>
+<li id="t-upload"><a href="/wiki/Especial:Carregar_imagem" title="Carregar arquivos [u]" accesskey="u">Carregar arquivo</a></li>
+<li id="t-specialpages"><a href="/wiki/Especial:P%C3%A1ginas_especiais" title="Lista de páginas especiais [q]" accesskey="q">Páginas especiais</a></li>
+				<li id="t-print"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings&amp;printable=yes" rel="alternate" title="Versão para impressão desta página [p]" accesskey="p">Versão para impressão</a></li>				<li id="t-permalink"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Strings&amp;oldid=110858" title="Link permanente para esta versão desta página">Link permanente</a></li><li id="t-download-as-pdf"><a href="/w/index.php?title=Especial:Livro/render_article/&amp;arttitle=Aplicativos+em+PHP/Trabalhando+em+PHP+com/Strings&amp;oldid=110858&amp;writer=rl" rel="nofollow">Versão em PDF</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/skins-1.5/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></div>
+				<div id="f-copyrightico"><a href="http://wikimediafoundation.org/"><img src="/images/wikimedia-button.png" alt="Wikimedia Foundation"/></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> Esta página foi modificada pela última vez às 17h20min, 5 de dezembro de 2008.</li>
+					<li id="copyright">O texto está disponível sob a licença <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>; condições adicionais podem-se aplicar. Veja <a href="http://wikimediafoundation.org/wiki/Terms_of_Use">Condições de Uso</a> para detalhes.</li>
+					<li id="privacy"><a href="/wiki/Wikilivros:Pol%C3%ADtica_de_privacidade" title="Wikilivros:Política de privacidade">Política de privacidade</a></li>
+					<li id="about"><a href="/wiki/Wikilivros:Sobre" title="Wikilivros:Sobre">Sobre</a></li>
+					<li id="disclaimer"><a href="/wiki/Wikilivros:Aviso_geral" title="Wikilivros:Aviso geral">Alerta de Conteúdo</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served by srv157 in 0.232 secs. --></body></html>

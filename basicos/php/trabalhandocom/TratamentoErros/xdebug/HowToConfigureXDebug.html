@@ -1,0 +1,771 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <title>NetBeans Wiki: HowToConfigureXDebug</title>
+  
+
+
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="screen, projection, print" type="text/css" href="HowToConfigureXDebug_arquivos/jspwiki.css">
+  <!-- INCLUDERESOURCES (stylesheet) -->
+
+  <!-- INCLUDERESOURCES (inlinecss) -->
+
+  <script src="HowToConfigureXDebug_arquivos/jspwiki-common.js" type="text/javascript"></script>
+  <!-- INCLUDERESOURCES (script) -->
+
+  <link rel="search" href="http://wiki.netbeans.org/FindPage" title="Search NetBeans Wiki">
+  <link rel="help" href="http://wiki.netbeans.org/TextFormattingRules" title="Help">
+  <link rel="start" href="http://wiki.netbeans.org/Main" title="Front page">
+  <link rel="alternate" type="application/rss+xml" title="RSS wiki feed for the entire site." href="http://wiki.netbeans.org/rss.rdf">
+<link rel="alternate" type="application/rss+xml" title="RSS wiki feed for page NetBeans Wiki: HowToConfigureXDebug." href="http://wiki.netbeans.org/rss.jsp?page=HowToConfigureXDebug&amp;mode=wiki">
+
+
+
+
+
+
+
+<script type="text/javascript">Wiki.loadBrowserSpecificCSS("http://wiki.netbeans.org/","nbwiki","HowToConfigureXDebug");</script>
+
+
+<script type="text/javascript">
+function runOnLoad()
+{ 
+  TabbedSection.onPageLoad();
+  SearchBox.onPageLoad();
+  Wiki.onPageLoad();
+  Sortable.onPageLoad();
+  ZebraTable.onPageLoad();
+  HighlightWord.onPageLoad();
+  Collapsable.onPageLoad();
+  GraphBar.onPageLoad();
+  /* INCLUDERESOURCES (jsfunction) */
+
+}
+
+window.onload = runOnLoad;
+</script>
+
+  
+</head><body class="view" bgcolor="#ffffff">
+<a name="Top"></a>
+
+<div id="wikibody">
+  
+
+<div id="header">
+
+  <div class="pagename">HowToConfigureXDebug</div>
+
+  <div class="searchbox">
+
+
+<form action="http://wiki.netbeans.org/Search.jsp" onsubmit="SearchBox.submit( this.query.value )" onmouseover="document.getElementById('searchboxMenu').style.visibility='visible'" onmouseout="document.getElementById('searchboxMenu').style.visibility='hidden'" name="searchForm" id="searchForm" accept-charset="UTF-8">
+  <div>
+  
+  <input onblur="if( this.value == '' ) { this.value = 'Search'}; " onfocus="if( this.value == 'Search' ) { this.value = ''}; " value="Search" name="query" size="20" accesskey="f" type="text">
+  </div>  
+  <div id="searchboxMenu" style="visibility: hidden;">
+    <div>
+      <a href="javascript://nop/" onclick="SearchBox.navigation( 'http://wiki.netbeans.org/__PAGEHERE__','HowToConfigureXDebug' );return false;" title="View the selected page">view</a> 
+      | 
+      <a href="javascript://nop/" onclick="SearchBox.navigation( 'http://wiki.netbeans.org/Edit.jsp?page=__PAGEHERE__','HowToConfigureXDebug' );return false;" title="Edit the selected page">edit</a> 
+      | 
+      <a href="javascript://nop/" onclick="SearchBox.navigation( 'http://wiki.netbeans.org/Search.jsp?query=__PAGEHERE__','HowToConfigureXDebug' );return false;" title="Advanced Search">find</a> 
+      [ f ]
+    </div>
+    <div id="recentSearches"> </div>
+  </div>
+
+</form></div>
+
+  <div class="breadcrumbs">Your trail: </div>
+
+  <div id="actionsTop">
+
+
+
+<div class="pageactions">
+    
+  
+    
+      
+
+    
+
+    
+      
+        
+          
+        
+      
+      <span>
+        
+          <a class="pageinfo" href="http://wiki.netbeans.org/PageInfo.jsp?page=HowToConfigureXDebug" accesskey="" title="">Page Info</a>
+        
+      </span>
+    
+
+    
+      <span>
+        
+        <a href="http://wiki.netbeans.org/PlainView.jsp?page=HowToConfigureXDebug" title="Plain View">Plain View</a>
+      </span>
+    
+
+    
+      
+        <span>
+          <a class="wikipage" href="http://wiki.netbeans.org/UserPreferences" accesskey="" title="">My Prefs</a>
+        </span>
+      
+    
+   
+ 
+    
+      
+        <span>
+          <a href="http://wiki.netbeans.org/Login.jsp?redirect=HowToConfigureXDebug">Log in</a>
+        </span>
+      
+    
+    
+    
+  
+    
+      <div class="pageInfo">
+        
+           This page (revision-69) last changed on
+           <a href="http://wiki.netbeans.org/Diff.jsp?page=HowToConfigureXDebug&amp;r1=69&amp;r2=68">
+             13:33 14-Jul-2009
+           </a>
+           by Filip Zamboj.
+        
+  
+        
+  
+        
+  
+      </div>
+    
+</div>
+</div>
+
+  <div style="clear: both; height: 0pt;"> </div>
+
+</div>
+
+  <div id="favorites">
+
+
+  
+
+<a href="http://www.netbeans.org/" title="Front page">
+    <img src="HowToConfigureXDebug_arquivos/logo.gif" id="companylogo" alt="NetBeans Wiki">
+</a>
+
+<!--<div class="block">-->
+<div>
+  
+  <div class="leftmenu">
+     
+<p>
+</p><p><a class="wikipage" href="http://wiki.netbeans.org/FrontPage">Front Page</a><br>
+</p>
+<hr>
+<a class="wikipage" href="http://wiki.netbeans.org/NetBeansUserFAQ">User FAQ </a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/NetBeansDeveloperFAQ">Developer FAQ </a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/CommunityDocs">Community Docs</a><br>
+<hr>
+<a class="wikipage" href="http://wiki.netbeans.org/Development">Development</a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/Quality">Quality</a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/NetBeansDreamTeam">Dream Team</a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/PopularProjects">Popular Projects</a><br>
+<hr>
+<a class="external" href="http://quality.netbeans.org/dashboard">Bug DashBoard</a><br>
+<a class="external" href="http://deadlock.netbeans.org/hudson/">Hudson</a><br>
+<a class="external" href="http://hg.netbeans.org/main/">Sources</a><br>
+<a class="external" href="http://bits.netbeans.org/download/trunk/nightly/latest/">Nightly</a><br>
+<hr>
+<a class="wikipage" href="http://wiki.netbeans.org/WikiEtiquette">Wiki Etiquette</a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/TextFormattingRules">Formatting Rules</a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/TermsOfUse">Terms Of Use</a><br>
+<hr>
+<a class="wikipage" href="http://wiki.netbeans.org/UnusedPages">Unlinked Pages</a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/UndefinedPages">Undefined Pages</a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/PageIndex">Page Index</a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/RecentChanges">Recent Changes</a><br>
+<a class="wikipage" href="http://wiki.netbeans.org/FindPage">Find Page</a><br>
+
+    
+  </div>
+
+  <div class="username">
+    
+  </div>
+  
+  
+  <div class="leftmenufooter">
+    <p>
+    
+  </p></div>
+<hr>
+  <div class="rssfeed"><a href="http://wiki.netbeans.org/rss.rdf"><img src="HowToConfigureXDebug_arquivos/xml.png" alt="[RSS]" title="Aggregate the RSS feed of the entire wiki" border="0"></a></div>
+
+</div>
+</div>
+  <div id="page">
+
+
+
+<div id="pagecontent">
+  
+
+  
+
+  
+
+  <h2 id="section-HowToConfigureXDebug-HowToConfigureXDebug"> How to configure XDebug</h2>
+<div class="toc">
+<div class="collapsebox">
+<h4>Table of Contents<div title="Click to collapse" id="clps.1.0" class="collapseOpen">»</div></h4><div style="display: block;" class="collapsebody">
+<ul>
+<li class="toclevel-1"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-HowToConfigureXDebug">How to configure XDebug</a></li>
+<li class="toclevel-2"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-Overview">Overview</a></li>
+<li class="toclevel-2"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-OtherUsefulDocuments">Other Useful Documents</a></li>
+<li class="toclevel-2"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-GeneralInformation">General Information</a></li>
+<li class="toclevel-2"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-HowToOnLinux">How to on Linux</a></li>
+<li class="toclevel-2"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-NotesOnWindowsConfiguration">Notes on Windows Configuration</a></li>
+<li class="toclevel-2"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-HowToConfigureXdebugOnWAMP">How to configure xdebug on WAMP</a></li>
+<li class="toclevel-3"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-Prerequisities">Prerequisities</a></li>
+<li class="toclevel-3"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-Steps">Steps</a></li>
+<li class="toclevel-3"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-Troubleshooting">Troubleshooting</a></li>
+<li class="toclevel-3"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-EnableXdebugLogging">Enable Xdebug logging</a></li>
+<li class="toclevel-3"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-EnableNetBeansPHPDebuggerLogging">Enable NetBeans PHP debugger logging</a></li>
+<li class="toclevel-2"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-RemoteDebuging">Remote Debuging</a></li>
+<li class="toclevel-2"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-WhereToAsk">Where to ask?</a></li>
+<li class="toclevel-2"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-OtherUsefulResources">Other useful resources:</a></li>
+<li class="toclevel-2"><a class="wikipage" href="http://wiki.netbeans.org/HowToConfigureXDebug#section-HowToConfigureXDebug-FAQ">FAQ</a></li>
+</ul>
+</div></div>
+</div>
+ 
+<h3 id="section-HowToConfigureXDebug-Overview"> Overview </h3>
+<ul><li> These document describes the installation of xdebug. There are
+separate sections for Linux and Windows users. However, the information
+in <b>How to on Linux</b> may be interesting for Windows users as
+well. Please send your comments to users@php.netbeans.org if you have
+any comments or questions. </li></ul><h3 id="section-HowToConfigureXDebug-OtherUsefulDocuments"> Other Useful Documents </h3>
+<ul><li> see installation, configuration instructions:  
+<ul><li> <a class="external" href="http://xdebug.org/docs/install">xdebug site</a>
+</li><li> <a class="external" href="http://www.netbeans.org/kb/trails/php.html">PHP Learning Trail</a>
+</li><li><a class="external" href="http://devzone.zend.com/article/2803-Introducing-xdebug">Introduction to Xdebug by ZEND</a>
+</li><li> <a class="external" href="http://uk.php.net/features.commandline">Command-line PHP interpreter</a> and how to <a class="external" href="http://www.netbeans.org/kb/docs/php/project-setup.html#scriptCommandLine">specify it in Netbeans</a>
+</li></ul></li></ul><h3 id="section-HowToConfigureXDebug-GeneralInformation"> General Information</h3>
+<ul><li> Edit <a class="external" href="http://uk.php.net/manual/en/configuration.file.php">PHP Configuration</a> - name of configuration file is <b>php.ini</b>
+</li><li> The location of php.ini differs between operating systems,
+Linux distributions, types of installation (from packages or sources),
+and/or Windows-based solution stacks (WAMP, XAMP)
+</li><li> Typically,  <b>more than one php.ini file</b> exists 
+</li><li> Xdebug configuration is either <b>inside php.ini or in another ini file often called xdebug.ini</b> - this ini file is then shared between both configurations (Script and Local Web Server)
+</li><li> <b>Xdebug is incompatible</b> with the <b>Zend Optimizer and Zend Studio Debugger extensions</b>. These extensions should be commented out. See <a class="external" href="http://blogs.sun.com/netbeansphp/entry/screancast_about_netbeans_php_ide#comment-1219391647000">user's comment</a>:
+</li></ul><pre>[Zend]
+;zend_extension_ts = "C:\xampp\php\zendOptimizer\lib\ZendExtensionManager.dll"
+;zend_extension_manager.optimizer_ts = "C:\xampp\php\zendOptimizer\lib\Optimizer"
+;zend_optimizer.enable_loader = 0
+;zend_optimizer.optimization_level=15
+;zend_optimizer.license_path =; Local Variables:
+; tab-width: 4
+
+; Local Variables:
+; tab-width: 4
+; End:
+</pre>
+<ul><li> <b>NOTICE: From PHP 5.3 onwards, you need to use zend_extension and not zend_extension_ts.</b> 
+</li></ul><h3 id="section-HowToConfigureXDebug-HowToOnLinux"> How to on Linux</h3>
+<ul><li> e.g. Ubuntu files layout (xdebug configuration is in both php.ini files):
+</li></ul><pre>/etc/php5/
+|-- apache2
+|   |-- conf.d -&gt; ../conf.d
+|   |-- php.ini
+|   `-- php.ini.ucf-dist
+|-- cli
+|   |-- conf.d -&gt; ../conf.d
+|   |-- php.ini
+|   `-- php.ini.ucf-dist
+`-- conf.d
+    |-- mysql.ini
+    |-- mysqli.ini
+
+</pre> 
+<ul><li> alternative Ubuntu files layout (xdebug configuration is in xdebug.ini shared between both configurations. See article <a class="external" href="http://blogs.sun.com/netbeansphp/entry/ubuntu_php_netbeans_part_iii">Xdebug On Ubuntu</a>):
+</li></ul><pre>/etc/php5/
+|-- apache2
+|   |-- conf.d -&gt; ../conf.d
+|   |-- php.ini
+|   `-- php.ini.ucf-dist
+|-- cli
+|   |-- conf.d -&gt; ../conf.d
+|   |-- php.ini
+|   `-- php.ini.ucf-dist
+`-- conf.d
+    |-- mysql.ini
+    |-- mysqli.ini
+    |-- xdebug.ini
+</pre> 
+<ul><li> php.ini should contain at least following settings (see <a class="external" href="http://www.xdebug.org/docs/all_settings">all settings</a>).
+</li></ul><pre>zend_extension=/path/to/xdebug.so
+xdebug.remote_enable=1
+xdebug.remote_handler=dbgp
+xdebug.remote_mode=req
+xdebug.remote_host=127.0.0.1
+xdebug.remote_port=9000
+</pre>
+<ul><li> <b>NOTICE: From PHP 5.3 onwards, you need to use zend_extension and not zend_extension_ts.</b> 
+</li></ul><ul><li> /path/to/xdebug.so is just example. <b>Check</b> that the <b>file really exists</b> on given path. 
+</li><li> For Script verify that Xdebug appears in the Zend module lists after: <b>php -m</b> 
+</li><li> For Local Web Server verify that Xdebug appears in the <b>Zend modules</b> (not PHP Modules)  after: : php -mf path_to_ini_file/php.ini
+</li></ul><pre>[PHP Modules]
+bcmath
+bz2
+calendar
+...
+
+[Zend Modules]
+Xdebug
+</pre>
+<ul><li> For Local Web Server you can alternatively <b>create a phpinfo.php file</b> containing the line '&lt;?php phpinfo(); ?&gt;', run and watch whether information about Xdebug will be displayed
+</li></ul><img class="inline" src="HowToConfigureXDebug_arquivos/xdebug.png" alt="xdebug.png">
+<ul><li> Optionally enable Xdebug logging by adding into php.ini also: xdebug.remote_log=/log_path/xdebug.log
+</li><li> Optionally enable NetBeans PHP debugger logging by starting
+NetBeans with -J-Dorg.netbeans.modules.php.dbgp.level=400 or by editing
+netbeans.conf </li></ul><pre>netbeans/etc/
+|-- netbeans.clusters
+
+|-- netbeans.conf
+`-- netbeans.import
+</pre>
+<ul><li> whenever php.ini is modified don't forget <b>restart web server</b> (not needed for Script)
+</li><li> see <a class="external" href="http://blogs.sun.com/netbeansphp/entry/howto_check_xdebug_installation">Howto check xdebug installation</a>, <a class="external" href="http://blogs.sun.com/netbeansphp/entry/ubuntu_php_netbeans_part_iii">XDebug on Ubuntu</a>
+</li></ul><h3 id="section-HowToConfigureXDebug-NotesOnWindowsConfiguration"> Notes on Windows Configuration</h3>
+<ul><li> php.ini location hint for Local Web Server for XAMP on Windows: c:\xamp\apache\bin\php.ini 
+</li><li> php.ini location hints for Script(CGI/CLI) for XAMP on Windows: c:\xampp\php\php.ini
+</li><li> for <b>Windows</b> use <b>zend_extension_ts</b> instead of zend_extension (e.g. zend_extension_ts=c:\path\to\php_xdebug.dll). Again c:\path\to\php_xdebug.dll must exist.
+</li><li> <b>NOTICE: From PHP 5.3 onwards, you need to use zend_extension and not zend_extension_ts.</b> 
+</li></ul><h3 id="section-HowToConfigureXDebug-HowToConfigureXdebugOnWAMP"> How to configure xdebug on WAMP</h3>
+<ul><li> installing xdebug on WAMP is a bit diferrent and requires
+another steps to sucesfully load module. I focus on the easiest use
+case, installation using precompiled .dll. </li></ul><h4 id="section-HowToConfigureXDebug-Prerequisities"> Prerequisities</h4>
+<ul><li> I assume these prerequisities: 
+<ul><li> you have latest version of WAMP installed. That's WAMP 2.0 when writing this tutorial (Apr 15, 2009). These includes: 
+<ul><li> Apache 2.2.11 
+</li><li> PHP 5.2.9-1  
+</li><li> I don't care about MySQL at this moment .., 
+</li></ul></li></ul></li></ul><h4 id="section-HowToConfigureXDebug-Steps"> Steps</h4>
+<ul><li> if you didn't customize your installation paths then you should find php in &lt;wamp_folder&gt;\bin
+</li></ul><pre>C:.
+├───apache
+│   &lt;some folders&gt;
+├───mysql
+│   &lt;some folders&gt;
+└───php
+    └───php5.2.9-1
+        ├───dev
+        ├───ext
+        ├───extras
+        │   ├───mibs
+        │   ├───openssl
+        │   └───pdf-related
+        └───PEAR
+</pre>
+<ul><li> folder ext is used for extension and we used it to copy xdebug's dll there. However, you can use whatever folder you want.   
+</li><li> download xdebug from http://www.xdebug.org/download.php. <b>Carefully choose version you download!</b>
+There is a description you should read on download page! I downloaded
+php_xdebug-2.0.4-5.2.8.dll for WAMP2 with prerequisities above. Consult
+our FAQ at the end of this page if you need more help on choosing a
+version. </li><li> open your php.ini that is easily accesible from tray. Wamp tray icon -&gt; PHP -&gt; php.ini 
+</li><li> add following lines to your php.ini. Use full path! (change your .dll name to match your version, of course)
+</li></ul><pre>zend_extension_ts="C:/wamp/bin/php/php5.2.9-1/ext/php_xdebug-2.0.4-5.2.8.dll"
+xdebug.remote_enable=on
+xdebug.remote_handler=dbgp
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+</pre>
+<ul><li> <b>NOTICE: From PHP 5.3 onwards, you need to use zend_extension and not zend_extension_ts.</b> 
+</li><li> note that you always use zend_extension<b>_ts</b> unless you intentionally installed non thread safe apache version
+</li><li> restart WAMP services (restart Apache is enough)
+</li><li> open localhost (or WAMP server default page) and check if xdebug is between <b>Loaded Extensions</b> 
+</li><li> click on phpinfo() on default WAMP page or create file
+containing &lt;? phpinfo() ?&gt;. You should see the same as for Linux
+tutorial above: </li></ul><img class="inline" src="HowToConfigureXDebug_arquivos/xdebug.png" alt="xdebug.png">
+<ul><li> You can check your configuration using simple script written by Radek Matous and posted on <a class="external" href="http://blogs.sun.com/netbeansphp/entry/howto_check_xdebug_installation">blog.sun.com </a>.
+If you are using WAMP then you don't have php on path, most probably.
+All you have to do is to copy this code to php file and then call it
+from browser with $_GET variable in url
+?XDEBUG_SESSION_START=mysession. Let's say your file i called
+dbgtest.php and it's in web directory. All you have to do is type
+http://localhost/dbgtest.php?XDEBUG_SESSION_START=mysession. </li><li> If xdebug is properly installed then script started in step
+1. should print message like "connection established: Resource id #5".
+If no message is printed and the script is still running, then xdebug
+isn't installed properly or uses different port or whatever else. So,
+kill the running process and investigate where the problem is, but this
+is the other story. </li></ul><pre>&lt;?php
+$address = '127.0.0.1';
+$port = 9000;
+$sock = socket_create(AF_INET, SOCK_STREAM, 0);
+socket_bind($sock, $address, $port) or die('Unable to bind');
+socket_listen($sock);
+$client = socket_accept($sock);
+echo "connection established: $client";
+socket_close($client);
+socket_close($sock);
+?&gt;
+</pre>
+<p>
+</p><h4 id="section-HowToConfigureXDebug-Troubleshooting"> Troubleshooting</h4>
+<ul><li> if something goes wrong then check your <b>PHP Error Log</b> that you can find after invoking WAMP context menu from system tray
+<ul><li> e,g,: WAMP icon -&gt; PHP -&gt; Error Log 
+</li></ul></li><li> Probably typo or file was not found if you see this:
+</li></ul><pre>PHP Warning:  PHP Startup: Unable to load dynamic library 'c:/wamp/bin/php/php5.2.9-1/ext/php_xdebug-2.0.4-5.2.8.dl' 
+- The specified module could not be found.
+ in Unknown on line 0
+</pre>
+<ul><li> You downloaded wrong version of php.ini if you see following: 
+</li></ul><pre>PHP Warning:  PHP Startup: Unable to load dynamic library 'c:/wamp/bin/php/php5.2.9-1/ext/php_xdebug-2.0.4-5.3.0-vc9.dll' - 
+The application has failed to start because its side-by-side configuration is incorrect. 
+Please see the application event log for more detail. 
+in Unknown on line 0
+</pre>
+<ul><li> Do NOT use XAMPP 1.7.0. If you set up XDebug as described
+here, the Apache server crashes when you run or debug a file or
+project. The workaround prevents the IDE from stopping at breakpoints.
+XAMPP 1.7.1 is fine, with XDebug 2.0.4 VC 5.2 thread-safe.
+</li></ul><ul><li> try to check <b>Apache Error Log</b> as well. 
+</li></ul><h4 id="section-HowToConfigureXDebug-EnableXdebugLogging"> Enable Xdebug logging</h4>
+by adding into php.ini: xdebug.remote_log=/log_path/xdebug.log (see http://www.xdebug.org/docs/all_settings)
+the content of log is in /log_path/xdebug.log (this path is just an example, for Windows something like: C:\... &amp;&amp;
+xdebug must be writable )
+<h4 id="section-HowToConfigureXDebug-EnableNetBeansPHPDebuggerLogging"> Enable NetBeans PHP debugger logging</h4>
+helpful is to turn on the debugger-related logging and attach the log into Issuezilla as well. 
+<br><b>See following simple steps</b>:
+<ol><li> Running NetBeans with logging turned on. You can do this by:
+   <br>either
+adding the text:-J-Dorg.netbeans.modules.php.dbgp.level=400 to your
+$NB_BIN/etc/netbeans.conf, property netbeans_default_options <br>or running NetBeans directly with those parameters, like: $NB_BIN/bin/netbeans -J-Dorg.netbeans.modules.php.dbgp.level=400 
+</li><li> When NetBeans starts up, reproduce the bug, so it is logged into the log files.
+</li><li> Then file a new issue (click this link) and attach (or just send me directly):
+    <br>the content of IDE log file Menu -&gt; View -&gt; IDE Log File (or directly $YOUR_NB_USER_DIR/var/log/messages.log)
+    <br>the content of the Output Window 
+</li><li> Attach (or just send me directly) both log files xdebug.log and messages.log
+</li></ol><h3 id="section-HowToConfigureXDebug-RemoteDebuging"> Remote Debuging </h3>
+<ul><li> For Remote Web Server configuration Xdebug must be properly configured on remote server (not on local one)
+<ul><li> you need to have correctly configured property
+xdebug_remote.host on remote machine. The IP address of local machine
+has to be defined in this property. For example, you want to debug your
+source code on remote machine 192.168.0.1 using Netbeans installed on
+192.168.0.2. You need to change xdebug.remote_host on 192.168.0.1 to
+xdebug.remote_host=192.168.0.2. If doesn't work verify you have port
+configured in xdebug.remote_port open on both machines. </li></ul></li></ul><h3 id="section-HowToConfigureXDebug-WhereToAsk"> Where to ask? </h3>
+<ul><li> see <a class="external" href="http://forums.netbeans.org/php-users.html">PHP Users mailing list</a> 
+</li></ul><h3 id="section-HowToConfigureXDebug-OtherUsefulResources"> Other useful resources:</h3>
+<p><a class="external" href="http://www.xdebug.org/archives/xdebug-general/0163.html">How to configure xdebug to work only on one virtual server ? </a> - an online article on how to configure xdebug
+</p>
+<p><a class="external" href="http://doc.waterproof.fr/phpedit/debugging_profiling/configuration/debugger_with_xdebug">Tutorial on how to configure Xdebug to work with phpDesigner 2008  </a> - has screen shots perfect for those who are writing an <a class="external" href="http://www.rushessay.com/">essay </a> about it.
+</p>
+<p>
+</p><h3 id="section-HowToConfigureXDebug-FAQ"> FAQ</h3>
+<ul><li> what version of Xdebug should I download? 
+</li></ul>Xdebug has a simple rule for choosing a version of xdebug extension youneed to download: <b>"The
+Windows binaries generally work for every mini release for the
+mentioned PHP version, althoughthe extension is built against the most
+current PHP version at that time. The VCx marker tells with which
+compiler the extension was built, and Non-thread-safe whether ZTS was
+disabled. Those qualifiers need to match the PHP version you're using."</b>
+<p>You need to get answers on few simple questions, firstly
+1. whats your version of php? 
+there are more ways to find this out
+either
+</p>
+<pre>$ php -v 
+PHP 5.2.6-3ubuntu4.1 with Suhosin-Patch 0.9.6.2 (cli) (built: Apr 23 2009 14:37:14) 
+Copyright (c) 1997-2008 The PHP Group
+Zend Engine v2.2.0, Copyright (c) 1998-2008 Zend Technologies
+    with Xdebug v2.0.3, Copyright (c) 2002-2007, by Derick Rethans
+
+</pre>
+or create a file 
+<pre>&lt;? 
+phpinfo(); 
+?&gt;
+</pre> 
+you should get output like below after running it in browser
+<p><img class="inline" src="HowToConfigureXDebug_arquivos/phpinfo_phpversion.png" alt="phpinfo_phpversion.png">
+</p>
+<p>Clearly my version of php is 5.2.6-3
+</p>
+<p>2. Do I need Non Thread Safe or Thread Safe version? 
+non-threaded use of PHP" for example the CLI, CGI or Apache 1.3 module  
+threaded usage of PHP, for example the Apache 2 work MPM or the the ISAPI module
+</p>
+<p>either run on Linux
+</p>
+<pre> 
+$ apache2 -V
+Server version: Apache/2.2.11 (Ubuntu)
+Server built:   Jun 11 2009 03:24:38
+Server's Module Magic Number: 20051115:21
+Server loaded:  APR 1.2.12, APR-Util 1.2.12
+Compiled using: APR 1.2.12, APR-Util 1.2.12
+Architecture:   64-bit
+!!!Server MPM:   Prefork!!!
+!!!threaded:     no!!!
+!!!forked:     yes (variable process count)!!!
+Server compiled with....
+ -D APACHE_MPM_DIR="server/mpm/prefork"
+ -D APR_HAS_SENDFILE
+ -D APR_HAS_MMAP
+ -D APR_HAVE_IPV6 (IPv4-mapped addresses enabled)
+ -D APR_USE_SYSVSEM_SERIALIZE
+ -D APR_USE_PTHREAD_SERIALIZE
+ -D SINGLE_LISTEN_UNSERIALIZED_ACCEPT
+ -D APR_HAS_OTHER_CHILD
+ -D AP_HAVE_RELIABLE_PIPED_LOGS
+ -D DYNAMIC_MODULE_LIMIT=128
+ -D HTTPD_ROOT=""
+ -D SUEXEC_BIN="/usr/lib/apache2/suexec"
+ -D DEFAULT_PIDLOG="/var/run/apache2.pid"
+ -D DEFAULT_SCOREBOARD="logs/apache_runtime_status"
+ -D DEFAULT_LOCKFILE="/var/run/apache2/accept.lock"
+ -D DEFAULT_ERRORLOG="logs/error_log"
+ -D AP_TYPES_CONFIG_FILE="/etc/apache2/mime.types"
+ -D SERVER_CONFIG_FILE="/etc/apache2/apache2.conf"
+
+</pre>
+<p>or on Windows 
+</p>
+<pre>C:\wamp\bin\apache\Apache2.2.11\bin&gt;httpd
+Server version: Apache/2.2.11 (Win32)
+Server built:   Dec 10 2008 00:10:06
+Server's Module Magic Number: 20051115:21
+Server loaded:  APR 1.3.3, APR-Util 1.3.4
+Compiled using: APR 1.3.3, APR-Util 1.3.4
+Architecture:   32-bit
+!!!Server MPM:     WinNT!!!
+!!!threaded:     yes (fixed thread count)!!!
+!!!forked:     no !!!
+Server compiled with....
+ -D APACHE_MPM_DIR="server/mpm/winnt"
+ -D APR_HAS_SENDFILE
+ -D APR_HAS_MMAP
+ -D APR_HAS_OTHER_CHILD
+ -D AP_HAVE_RELIABLE_PIPED_LOGS
+ -D DYNAMIC_MODULE_LIMIT=128
+ -D HTTPD_ROOT="/apache"
+ -D SUEXEC_BIN="/apache/bin/suexec"
+ -D DEFAULT_SCOREBOARD="logs/apache_runti
+ -D DEFAULT_ERRORLOG="logs/error.log"
+ -D AP_TYPES_CONFIG_FILE="conf/mime.types
+ -D SERVER_CONFIG_FILE="conf/httpd.conf"
+</pre>
+<p>the other option is to have a look on phpinfo on 
+</p>
+<p><img class="inline" src="HowToConfigureXDebug_arquivos/phpinfo_thread_safety.png" alt="phpinfo_thread_safety.png">
+</p>
+<p>
+</p><p>or you can use command line 
+Linux: 
+</p>
+<pre>$ php -i | grep "Thread Safety" 
+Thread Safety =&gt; disabled
+</pre>
+Windows: 
+<pre>C:\wamp\bin\php\php5.2.9-2&gt;php.exe -i -w
+phpinfo()
+PHP Version =&gt; 5.2.9-2
+
+System =&gt; Windows NT FELIPEE-VISTA 6.0 build 6001
+Build Date =&gt; Apr  9 2009 08:22:37
+Configure Command =&gt; cscript /nologo configure.js  "--enable-snapshot-build" "--enable-debug-pack" "--with-snapshot-template=d:\php-sdk\snap_5_2
+vc6\x86\template" "--with-php-build=d:\php-sdk\snap_5_2\vc6\x86\php_build" "--with-pdo-oci=D:\php-sdk\oracle\instantclient10\sdk,shared" "--with
+oci8=D:\php-sdk\oracle\instantclient10\sdk,shared"
+Server API =&gt; Command Line Interface
+Virtual Directory Support =&gt; enabled
+Configuration File (php.ini) Path =&gt; C:\Windows
+Loaded Configuration File =&gt; C:\wamp\bin\php\php5.2.9-2\php.ini
+Scan this dir for additional .ini files =&gt; (none)
+additional .ini files parsed =&gt; (none)
+PHP API =&gt; 20041225
+PHP Extension =&gt; 20060613
+Zend Extension =&gt; 220060519
+Debug Build =&gt; no
+Thread Safety =&gt; enabled
+Zend Memory Manager =&gt; enabled
+IPv6 Support =&gt; enabled
+Registered PHP Streams =&gt; php, file, data, http, ftp, compress.zlib
+Registered Stream Socket Transports =&gt; tcp, udp
+Registered Stream Filters =&gt; convert.iconv.*, string.rot13, string.toupper, string.tolower, string.strip_tags, convert.*, consumed, zlib.*
+
+</pre>
+<p>My <b>Thread Safety</b> is apparently disabled so I don't need thread safe version. <b>If you use Windows you most probably need thread safe version</b> .
+</p>
+<p>
+</p><p>And that's it! Go to <a class="external" href="http://xdebug.org/download.php">Xdebug download page </a> and download appropriate file. I need veersion marked as 5.2. and NonThreadSafe. 
+</p>
+
+  
+
+</div>
+
+
+  <div id="attachments">
+    <h3>Attachments</h3>
+    <div class="zebra-table">
+      <table>
+        
+          <tbody><tr class="odd">
+            <td><a class="attachment" href="http://wiki.netbeans.org/attach/HowToConfigureXDebug/phpinfo_phpversion.png" accesskey="" title="">phpinfo_phpversion.png</a></td>
+            <td><a class="pageinfo" href="http://wiki.netbeans.org/PageInfo.jsp?page=HowToConfigureXDebug/phpinfo_phpversion.png" accesskey="" title=""><img src="HowToConfigureXDebug_arquivos/attachment_big.png" alt="Info on phpinfo_phpversion.png" border="0"></a></td>
+            <td>33196 bytes</td>
+          </tr>
+        
+          <tr>
+            <td><a class="attachment" href="http://wiki.netbeans.org/attach/HowToConfigureXDebug/phpinfo_thread_safety.png" accesskey="" title="">phpinfo_thread_safety.png</a></td>
+            <td><a class="pageinfo" href="http://wiki.netbeans.org/PageInfo.jsp?page=HowToConfigureXDebug/phpinfo_thread_safety.png" accesskey="" title=""><img src="HowToConfigureXDebug_arquivos/attachment_big.png" alt="Info on phpinfo_thread_safety.png" border="0"></a></td>
+            <td>12232 bytes</td>
+          </tr>
+        
+          <tr class="odd">
+            <td><a class="attachment" href="http://wiki.netbeans.org/attach/HowToConfigureXDebug/xdebug.png" accesskey="" title="">xdebug.png</a></td>
+            <td><a class="pageinfo" href="http://wiki.netbeans.org/PageInfo.jsp?page=HowToConfigureXDebug/xdebug.png" accesskey="" title=""><img src="HowToConfigureXDebug_arquivos/attachment_big.png" alt="Info on xdebug.png" border="0"></a></td>
+            <td>19057 bytes</td>
+          </tr>
+        
+      </tbody></table>
+    </div>
+  </div>
+
+
+</div>
+  
+
+<div id="footer">
+
+  <div id="actionsBottom">
+
+
+
+<div class="pageactions">
+    
+  
+    
+      
+
+    
+
+    
+      
+        
+          
+        
+      
+      <span>
+        
+          <a class="pageinfo" href="http://wiki.netbeans.org/PageInfo.jsp?page=HowToConfigureXDebug" accesskey="" title="">Page Info</a>
+        
+      </span>
+    
+
+    
+      <span>
+        
+        <a href="http://wiki.netbeans.org/PlainView.jsp?page=HowToConfigureXDebug" title="Plain View">Plain View</a>
+      </span>
+    
+
+    
+      
+        <span>
+          <a class="wikipage" href="http://wiki.netbeans.org/UserPreferences" accesskey="" title="">My Prefs</a>
+        </span>
+      
+    
+   
+ 
+    
+      
+        <span>
+          <a href="http://wiki.netbeans.org/Login.jsp?redirect=HowToConfigureXDebug">Log in</a>
+        </span>
+      
+    
+    
+    
+  
+    
+      <div class="pageInfo">
+        
+           This page (revision-69) last changed on
+           <a href="http://wiki.netbeans.org/Diff.jsp?page=HowToConfigureXDebug&amp;r1=69&amp;r2=68">
+             13:33 14-Jul-2009
+           </a>
+           by Filip Zamboj.
+        
+  
+        
+  
+        
+  
+      </div>
+    
+</div>
+</div>
+
+  <div class="copyright"></div>
+
+  <div class="wikiversion">
+  </div>
+
+  <div style="clear: both; height: 0px;"> </div>
+
+</div>
+
+  <div style="clear: both; height: 0px;"> </div>
+</div>
+<a name="Bottom"></a>
+
+<!-- Begin Google webtracking analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." :
+"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost +
+"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="HowToConfigureXDebug_arquivos/ga.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-2149007-1");
+pageTracker._setDomainName("netbeans.org");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<!-- End Google webtracking analytics-->
+
+<!-- Begin SiteCatalyst code -->
+<script language="JavaScript" src="HowToConfigureXDebug_arquivos/s_code_remote.js" type="text/javascript"></script><script type="text/javascript" src="HowToConfigureXDebug_arquivos/metrics_group1.js"></script>
+<!-- End SiteCatalyst code -->
+
+</body></html>

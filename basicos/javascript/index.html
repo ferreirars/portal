@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - JavaScript</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">JavaScript</h2>
+<h3 style="text-align: center;">Introdução ao JavaScript</h3>
+
+<p>JavaScript &eacute; uma linguagem de script que funciona no lado cliente, ou seja, &eacute; interpretada pelo &nbsp;pr&oacute;prio navegador. &Eacute; usada para tornar o site interativo, podendo disparar a&ccedil;&otilde;es em eventos, &nbsp;enviar mensagens, efetuar algumas a&ccedil;&otilde;es.<br />
+&nbsp;<br />
+Atualmente o JavaScript est&aacute; em alta, pois com a chegada do HTML5 e CSS3 ele ganhou muito destaque e for&ccedil;a. A cada dia aparecem novos frameworks para cria&ccedil;&atilde;o de jogos e aplicativos para celular usando JavaScript. Se fizer uma busca por frameworks em Javascript para a cria&ccedil;&atilde;o de jogos encontrar&aacute; uma enormidade.<br />
+&nbsp;<br />
+O foco do JavaScript &eacute; implementar o comportamento ou a intelig&ecirc;ncia das p&aacute;ginas.<br />
+&nbsp;<br />
+De forma semelhane ao CSS podemos usar o JavaScript com o HTML de 3 formas:<br />
+&nbsp;<br />
+- Inline - dentro das tags do HTML<br />
+- Internamente - como um trecho de c&oacute;digo da p&aacute;gina HTML, usando a tag &lt;script&gt;<br />
+- Externamente - criando um arquivo externo com c&oacute;digo JS e fazendo o include no arquivo HTML, sem a tag &lt;script&gt;<br />
+&nbsp;<br />
+A forma mais flex&iacute;vel &eacute; usando um arquivo externo, quando se fica mais a vontade e inclusive separa o HTML do JavaScript, organizando melhor o c&oacute;digo.<br />
+&nbsp;<br />
+Para incluir um arquivo externo entramos na tag &lt;head&gt; a linha:<br />
+&lt;script type=&quot;text/javascript&quot; src=&quot;script.js&quot;&gt;&lt;/script&gt;<br />
+&nbsp;<br />
+<strong>Coment&aacute;rios</strong><br />
+&nbsp;<br />
+// Coment&aacute;rio de uma &uacute;nica linha<br />
+&nbsp;<br />
+/* Coment&aacute;rio<br />
+&nbsp;* para<br />
+&nbsp;* v&aacute;rias<br />
+&nbsp;* linhas<br />
+&nbsp;*/<br />
+&nbsp;<br />
+&Eacute; uma linguagem completa, inclusive tem orienta&ccedil;&atilde;o a objetos.<br />
+Conta com as estruturas: if, for, while, switch, etc.<br />
+&nbsp;<br />
+<strong>Vari&aacute;veis</strong><br />
+&nbsp;<br />
+Escopo: local e global<br />
+&nbsp;<br />
+<strong>Fun&ccedil;&otilde;es</strong><br />
+&nbsp;<br />
+Pequeno exemplo de uso de objetos:<br />
+&nbsp;<br />
+var pessoa = new Object();<br />
+pessoa.nome = &quot;Ribamar&quot;;<br />
+pessoa.idade = 59;<br />
+pessoa.profissao = &quot;Programador&quot;;<br />
+&nbsp;<br />
+Outra forma:<br />
+&nbsp;<br />
+var pessoa = {<br />
+&nbsp;&nbsp; &nbsp;nome: &quot;Ribamar&quot;,<br />
+&nbsp;&nbsp; &nbsp;idade: 59,<br />
+&nbsp;&nbsp; &nbsp;profissao = &quot;Programador&quot;,<br />
+&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;digaNome: function(){<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;alert(this.nome);<br />
+&nbsp;&nbsp; &nbsp;}<br />
+};<br />
+&nbsp;<br />
+var formacaoJava = {<br />
+&nbsp;sigla : &quot; K10&quot;, nome : &quot; Forma&ccedil;&atilde;o Desenvolvedor Java &quot;,<br />
+&nbsp;cursos : [<br />
+&nbsp;{<br />
+&nbsp;&nbsp; &nbsp;sigla : &quot;K11 &quot;,<br />
+&nbsp;&nbsp; &nbsp;nome : &quot; Orienta&ccedil;&atilde;o a Objetos em Java &quot;<br />
+&nbsp;},<br />
+&nbsp;{<br />
+&nbsp;&nbsp; &nbsp;sigla : &quot;K12 &quot;,<br />
+&nbsp;&nbsp; &nbsp;nome : &quot; Desenvolvimento Web com JSF2 e JPA2 &quot;<br />
+&nbsp;},<br />
+&nbsp;]<br />
+};<br />
+&nbsp;<br />
+<strong>Manipula&ccedil;&atilde;o de Eventos</strong><br />
+&nbsp;<br />
+&lt;input type=&quot;button&quot; value=&quot;Click Me&quot; onclick=&quot;alert(&#39;Clicked&#39;)&quot; /&gt;<br />
+&nbsp;<br />
+&lt;input type=&quot;button&quot; value=&quot;Click Me&quot; onclick=&quot;alert(&amp;quot;Clicked&amp;quot;)&quot; /&gt;<br />
+&nbsp;<br />
+<strong>Eventos</strong><br />
+load<br />
+resize<br />
+scroll<br />
+focus<br />
+change<br />
+blur<br />
+select<br />
+submit<br />
+reset<br />
+mousedown<br />
+mouseup<br />
+click<br />
+dblclick<br />
+mousemove<br />
+mouseover<br />
+mouseout<br />
+keydown<br />
+keypress<br />
+keyup<br />
+&nbsp;<br />
+&nbsp;<br />
+<strong>Algumas Ferramentas</strong><br />
+- Firebug &eacute; uma &oacute;tima extens&atilde;o para o Firefox<br />
+- Netbeans para HTML5/JavaScript - <a href="http://netbeans.org/">http://netbeans.org</a><br />
+- Eclipse para JavaScript - <a href="http://www.eclipse.org/downloads/packages/eclipse-ide-javascript-web-developers/heliossr1">http://www.eclipse.org/downloads/packages/eclipse-ide-javascript-web-developers/heliossr1</a><br />
+&nbsp;<br />
+Apareceram v&aacute;rios frameworks sobre o JavaScript:<br />
+- AngularJS - <a href="https://angularjs.org/">https://angularjs.org/</a><br />
+- Backbone - <a href="http://backbonejs.org/">http://backbonejs.org/</a><br />
+- TypeScript - <a href="https://www.typescriptlang.org/">https://www.typescriptlang.org/</a><br />
+&nbsp;<br />
+Mais sobre JavaScript:<br />
+<a href="http://www.w3schools.com/JS/">http://www.w3schools.com/JS/</a></p>
+
+<p>&nbsp;</p>
+
+<p><strong>JavaScript Dicas</strong><br />
+<br />
+<strong>JavaScript PopUp Boxes</strong></p>
+
+<p>With JavaScript you can create three types of PopUp boxes: Alert, Confirm and Prompt. In javaScript you can also manipulate browsers to create popup windows, but that is covered in a later tutorial.</p>
+
+<p>&nbsp;<br />
+<strong>Alert</strong></p>
+
+<p>An alert box is often used if you want to make sure information comes through to the user or during testing. A developer can use alerts to see how code is being interpreted. When an alert box pops up, the user will have to click &quot;OK&quot; to proceed.</p>
+
+<p>&lt;script type=&quot;text/javascript&quot;&gt;<br />
+function disp_conf()<br />
+{<br />
+alert (&quot;I am an alert box!!&quot;);<br />
+}<br />
+&lt;/script&gt;</p>
+
+<p>&lt;input type=&quot;button&quot; onclick=&quot;disp_alert()&quot; value=&quot;Display Alert&quot; /&gt;</p>
+
+<p>&nbsp;<br />
+<strong>Confirm Box</strong></p>
+
+<p>A confirm box is often used if you want the user to verify or accept something.. When a confirm box pops up, the user will have to click either &quot;OK&quot; or &quot;Cancel&quot; to proceed. If the user clicks &quot;OK&quot;, the box returns true. If the user clicks &quot;Cancel&quot;, the box returns false.</p>
+
+<p>&lt;script type=&quot;text/javascript&quot;&gt;<br />
+function disp_confirm()<br />
+{<br />
+var x = confirm(&quot;Press a button&quot;);<br />
+if (x == true)<br />
+{<br />
+document.write(&quot;You pressed OK!&quot;);<br />
+}<br />
+else<br />
+{<br />
+document.write(&quot;You pressed Cancel!&quot;);<br />
+}<br />
+}<br />
+&lt;/script&gt;</p>
+
+<p>&lt;input type=&quot;button&quot; onclick=&quot;disp_confirm()&quot; value=&quot;Display Confirm&quot; /&gt;</p>
+
+<p>&nbsp;<br />
+<strong>Prompt Box</strong></p>
+
+<p>A prompt box is often used if you want the user to input a value before entering a page. When a prompt box pops up, the user will have to click either &quot;OK&quot; or &quot;Cancel&quot; to proceed after entering an input value. If the user clicks &quot;OK&quot; the box returns the input value. If the user clicks &quot;Cancel&quot; the box returns null.</p>
+
+<p>&lt;script type=&quot;text/javascript&quot;&gt;<br />
+function disp_prompt()<br />
+{<br />
+var name=prompt(&quot;Please enter your name&quot;,&quot;Tutorials Fan&quot;);<br />
+if (name!=null &amp;&amp; name != &quot;&quot;)<br />
+{<br />
+document.write(&quot;Hello &quot; + name + &quot;! How are you today?&quot;);<br />
+}<br />
+}<br />
+&lt;/script&gt;</p>
+
+<p>&lt;input type=&quot;button&quot; onclick=&quot;disp_promt()&quot; value=&quot;Display Prompt&quot; /&gt;<br />
+&nbsp;<br />
+<strong>Conclusion</strong></p>
+
+<p>PopUp boxes are simple to use, yet are an invaluable tool. As you start developing more complex code, you will see how wonderful an alert is to test if statements. Just remember there are three basic types of PopUp boxes: Alert, Confirm and Prompt. Think about using a prompt box as a way to ask for a password.</p>
+
+<p><a href="http://www.quackit.com/javascript/tutorial/javascript_popup_boxes.cfm">http://www.quackit.com/javascript/tutorial/javascript_popup_boxes.cfm</a></p>
+
+<p>&nbsp;</p>
+
+
+</div>
+<!-- Final de conteudo -->
+
+<!-- Rodapé-->
+<footer id="rodape">
+	<div align="center">
+		<p><a href="http://ribafs.org">RibaFS</a>. All rights reserved. Design: <a href="http://templated.co">TEMPLATED</a></p>
+	</div>
+</footer>	
+</body>
+</html>

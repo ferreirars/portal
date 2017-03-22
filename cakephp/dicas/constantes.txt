@@ -1,0 +1,36 @@
+Algumas Constantes do Cake
+
+The constants IMAGES_URL, JS_URL, CSS_URL have been deprecated and replaced with config variables App.imageBaseUrl, App.jsBaseUrl, App.cssBaseUrl respectively. Each of the deprecated constants will be removed in 3.0.
+The CAKEPHP_SHELL constant has been deprecated and will be removed in 3.0.
+
+APP - Path to the application’s directory.
+APPLIBS - Path to the application’s Lib directory.
+CAKE - path do diretório do Cake
+CAKE_CORE_INCLUDE_PATH - Path to the root lib directory.
+CORE_PATH - Path to the root directory with ending directory slash.
+CSS
+CSS_URL
+DS
+FULL_BASE_URL
+IMAGES
+IMAGES_URL
+JS
+JS_URL
+ROOT
+TMP
+VENDORS
+WEBROOT_DIR
+WWW_ROOT
+
+
+TIME_START  Unix timestamp in microseconds as a float from when the application started.
+
+SECOND
+MINUTE
+HOUR
+DAY
+WEEK
+MONTH
+YEAR
+
+

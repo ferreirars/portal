@@ -1,0 +1,34 @@
+cd /var/www/html
+
+git config --global user.email "ribafs@gmail.com"
+git config --global user.name "Ribamar FS"
+git init
+git add .
+git commit -m "Primeiro commit"
+git remote add origin git@github.com:ribafs/ribafs-portal.git
+git push -f origin master
+
+Para enviar novamente após alterações
+remover a pasta .git 
+e repetir os passos acima
+
+
+Adicionar a chave SSH de um micro
+
+Acessar GitHug
+
+Clicar no ícone - Settings - SSH e GPG keys
+New SSH key
+Entrar o nome em Title
+
+No Desktop
+
+ssh-keygen -t rsa -b 4096 -C "ribafs@gmail.com"
+
+Enter 3 vezes
+
+cat ~/.ssh/id_rsa.pub
+
+Copiar e colar em Key 
+
+Add SSH Key

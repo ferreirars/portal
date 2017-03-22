@@ -1,0 +1,86 @@
+Dicas sobre o uso da função printf
+
+
+printf — Mostra uma string formatada
+void printf ( string $format [, mixed $args ] )
+
+Exemplo:
+
+$bem ='bem';
+$mal ='mal';
+printf('Aqui está a diferença entre o %s e o %s', $bem, $mal); 
+
+$bom ='bom';
+$mau ='mau';
+printf('Aqui está a diferença entre o %s e o %s', $bom, $mau); 
+
+$bomemau =array('bom'=>'mau','bem'=>'mal');
+foreach($bomemau as $bom => $mau){
+	printf('<br>Aqui está a diferença entre o %s e o %s', $bom, $mau); 
+}
+
+
+sprintf — Retorna a string formatada
+string sprintf ( string $format [, mixed $args [, mixed $... ]] )
+
+ format
+
+    A string e formatação é composta de zero ou mais diretivas: caracteres normais (excluindo %) que são copiados diretamente para o resultado, e especificações de conversão, cada um dos quais resulta em obter o seu próprio parâmetro. Isto se aplica para sprintf() e printf().
+
+    Cada especificação de conversão consiste em um símbolo de porcento (%), seguido por um ou mais destes elementos em ordem:
+
+        Um opcional sinal especificador que indica (- ou +) pode ser usado no número. Por padrão, somente o sinal - é usado no número se ele é negativo. Este especificador força números positivos a ter o sinal +, foi adicionado no PHP 4.3.0.
+        Um especificador de prenchimento opcional que diz qual caractere será usado para prencher o resultado para o tamanho certo. Isto pode ser um espaço ou 0 (zero character). O padrão é prencher com espaços. Um caractere alternativo de prenchimento pode ser especificado colocando uma aspa simples (') antes. Veja os exemplos abaixo.
+        Um especificador de alinhamento opcional que diz se o resultado deve ser alinhado a esquerda ou a direita. O padrão é alinhar a direita; um caractere - fará com que seja alinhado a esquerda.
+        Um número opcional, um especificador de tamanho que diz quantos caracteres (mínimo) deve resultar desta conversão.
+        Um especificador de precisão opcional que diz quantos digitos decimais devem ser mostrados para números de ponto flutuante. Quando usando este especificador na string, ele age como um ponto delimitador, definindo o máximo de caracteres limit para a string.
+
+        Um especificador de tipo que diz que o argumento deve ser tratado como do tipo. Os tipos possivéis são:
+            % - Um caractere porcento. Não é requerido neenhum argumento.
+            b - O argumento é tratado com um inteiro, e mostrado como um binário.
+            c - O argumento é tratado como um inteiro, e mostrado como o caractere ASCII correspondente.
+            d - O argumento é tratado como um inteiro, e mostrado como um número decimal com sinal.
+            e - o argumento é tratado como notação científica (e.g. 1.2e+2). O especificador de precisão indica o número de dígitos depois do ponto decimal desde o PHP 5.2.1. Em versões anteriores, ele pegava o número de dígitos significantes (ou menos).
+            u - O argumento é tratado com um inteiro, e mostrado como um número decimal sem sinal.
+            f - O argumento é tratado como um float, e mostrado como um número de ponto flutuante (do locale).
+            F - o argumento é tratado como um float, e mostrado como um número de ponto flutuante (não usado o locale). Disponível desde o PHP 4.3.10 e PHP 5.0.3.
+            o - O argumento é tratado com um inteiro, e mostrado como un número octal.
+            s - O argumento é tratado e mostrado como uma string.
+            x - O argumento é tratado como um inteiro, e mostrado como um número hexadecimal (com as letras minúsculas).
+            X - O argumento é tratado como um inteiro, e mostrado como um número hexadecimal (com as letras maiúsculas).
+
+    A string de formato suporta argumentos com numeração/troca.
+
+Exemplos:
+$num = 3;
+$location = 'zoo';
+$format = 'There are %d monkeys in the %s';
+printf($format,$num,$location);
+
+$num = 3;
+$location = 'zoo';
+$format = 'The %2$s contains %1$d monkeys.
+           That\'s a nice %2$s full of %1$d monkeys.';
+printf($format, $num, $location);
+
+$n =  43951789;
+$u = -43951789;
+$c = 65; // ASCII 65 is 'A'
+
+// notice the double %%, this prints a literal '%' character
+printf("%%b = '%b'\n", $n); // binary representation
+printf("%%c = '%c'\n", $c); // print the ascii character, same as chr() function
+printf("%%d = '%d'\n", $n); // standard integer representation
+printf("%%e = '%e'\n", $n); // scientific notation
+printf("%%u = '%u'\n", $n); // unsigned integer representation of a positive integer
+printf("%%u = '%u'\n", $u); // unsigned integer representation of a negative integer
+printf("%%f = '%f'\n", $n); // floating point representation
+printf("%%o = '%o'\n", $n); // octal representation
+printf("%%s = '%s'\n", $n); // string representation
+printf("%%x = '%x'\n", $n); // hexadecimal representation (lower-case)
+printf("%%X = '%X'\n", $n); // hexadecimal representation (upper-case)
+
+printf("%%+d = '%+d'\n", $n); // sign specifier on a positive integer
+printf("%%+d = '%+d'\n", $u); // sign specifier on a negative integer
+
+

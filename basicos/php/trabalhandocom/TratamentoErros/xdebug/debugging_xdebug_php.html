@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+           
+ 
+ 
+ <script src="debugging_xdebug_php_arquivos/tigris.js" type="text/javascript"></script>
+ <script src="debugging_xdebug_php_arquivos/companion-projects.js" type="text/javascript"></script>
+ <link rel="stylesheet" type="text/css" href="debugging_xdebug_php_arquivos/netbeans.css">
+ 
+                                                  <title>
+        testwww:        Debugging  PHP Source Code in the NetBeans IDE for PHP Editor
+    </title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta http-equiv="Content-Style-Type" content="text/css">
+ <meta name="SourceCastVersion" content="3.5.1.19.11">
+ <link rel="shortcut icon" href="http://www.netbeans.org/favicon.ico" type="image/x-icon">
+
+
+
+<meta name="KEYWORDS" content="NETBEANS, PHP, editor">
+<meta name="DESCRIPTION" content="NetBeans, PHP editor, debugging">
+<link rel="stylesheet" type="text/css" href="debugging_xdebug_php_arquivos/netbeans_002.css" media="screen">
+<meta name="keywords" content="java IDE, java editor, java Platform, free, open source, java development, j2ee support, development enviroment, web development, NetBeans, IDE, java">
+
+
+ <script language="JavaScript" type="text/javascript">
+ <!--
+ var username="guest";
+ //-->
+ </script>
+</head><body class="composite">
+     
+ 
+  
+ 
+ 
+ 
+ <!-- begin TopTabs  -->
+
+<!-- end TopTabs -->
+<!-- Begin Content Area -->
+ 
+ 
+
+ 
+
+<!-- Servlet-Specific template -->
+
+
+
+ 
+ 
+ 
+
+        
+                 
+          
+  
+
+ 
+ 
+
+
+
+<h1>Debugging PHP Source Code in the NetBeans IDE </h1>
+<p><b>Contents</b></p><img src="debugging_xdebug_php_arquivos/netbeans-stamp65-67.gif" class="stamp" alt="Content on this page applies to NetBeans IDE 6.5" title="Content on this page applies to NetBeans IDE 6.5" width="114" height="114">
+<ul>
+  <li><a href="#gettingReady">Getting Ready</a></li>
+  <li><a href="#howDebuggerWorks">How PHP Debugging with XDebug Works</a></li>
+  <li><a href="#editorLayout">The Debugging Area Windows </a></li>
+  <li><a href="#debuggingSession">Debugging Session</a></li>
+  <li><a href="#sampleDebuggingSession">Sample Debugging Session</a>
+    <ul>
+      <li><a href="#usingAdditionalWatches">Using Additional Watches</a></li>
+    </ul>
+  </li>
+  <li><a href="#mixedPHPHTMLCases">Mixed PHP and HTML Cases</a></li>
+</ul>
+<p><b>To follow this tutorial, you need the following software and resources.</b></p>
+<table>
+  <tbody>
+    <tr>
+      <th class="tblheader" scope="col">Software or Resource</th>
+      <th class="tblheader" scope="col">Version Required</th>
+    </tr>
+    <tr>
+      <td class="tbltd1"><a href="http://www.netbeans.org/downloads/index.html">NetBeans IDE</a></td>
+      <td class="tbltd1">PHP download bundle</td>
+    </tr>
+    <tr>
+      <td class="tbltd1">A PHP engine</td>
+      <td class="tbltd1">Version 5
+    </td></tr>
+    <tr>
+      <td class="tbltd1">A web server</td>
+      <td><a href="http://httpd.apache.org/download.cgi">Apache HTTP Server 2.2</a> is recommended.<br></td>
+    </tr>
+    <tr>
+      <td class="tbltd1">A PHP debugger</td>
+      <td><a href="http://www.xdebug.org/">XDebug 2.0 or later</a></td>
+    </tr>
+  </tbody>
+</table>
+<h2><a name="gettingReady"></a>Getting Ready</h2>
+<p>To successfully debug PHP applications in the NetBeans IDE for PHP,
+you need to have the PHP engine, the Apache local web server, and the
+XDebug debugger <a href="http://testwww.netbeans.org/kb/trails/php.html#configuration">installed and configured for PHP development</a>. If you have difficulties getting XDebug to work, see the <a href="http://wiki.netbeans.org/HowToConfigureXDebug">NetBeans wiki on XDebug</a> and/or ask the community at users@php.netbeans.org.</p>
+<h2><a name="howDebuggerWorks"></a>How PHP Debugging with XDebug Works</h2>
+<p>When XDebug is enabled in the <tt>php.ini</tt> file, XDebug can
+pause and resume the PHP program execution at any time. When the
+program execution is paused, XDebug can retrieve information about the
+current program state, like reading the values of the program
+variables. Practically, this means the following workflow: </p>
+<ul>
+  <li>The user sets a breakpoint at the line where the PHP source code execution should be paused.</li>
+  <li>When
+this line is reached, the user executes the script one line after
+another by pressing F7 and F8 buttons and checks the values of the
+variables.</li>
+</ul>
+<p>NetBeans IDE provides a debugging toolbar that helps you step
+through your files. The debugging toolbar is shared with the JavaScript
+debugger. See <a href="http://testwww.netbeans.org/kb/docs/web/js-debugger-ug.html#work">Working with the Toolbar and Editor</a> in the JavaScript Debugger Users' Guide for a more complete description.</p>
+<h2><a name="editorLayout"></a>The Debugger Windows </h2>
+<p>When you start a debugging session, a set of Debugger windows opens
+below the main editor window. To add a new window, choose Window &gt;
+Debugging. The following windows are available: </p>
+<ul>
+  <li>Local Variables shows a list of initialized variables, their types, and values. </li>
+  <li>Watches shows a list of user defined expressions with their values. </li>
+  <li>Calls Stack shows a list of called functions in reverse order. The function called last is on the top of the list. </li>
+  <li>Breakpoints shows a list of files and numbers of the lines where breakpoints are set. </li>
+  <li>Sessions shows a list of currently active debugging sessions. </li>
+  <li>Threads</li>
+  <li>Sources</li>
+  <li>HTTP Client-Side Monitor </li>
+</ul>
+<p>These debugger windows are a shared feature with NetBeans IDE JavaScript and Java debuggers. See <a href="http://testwww.netbeans.org/kb/docs/web/js-debugger-ug.html#examine">Examining the Debugger Windows</a> in the JavaScript Debugger Users' Guide for a more complete description.</p>
+<h2><a name="debuggingSession"></a>Debugging Session </h2>
+<p>The following procedure is the workflow of a typical debugging session.</p>
+<strong>To run a debugging session:</strong>
+<ol>
+  <li>Start the ide, run the project, and open the file that contains the source code which you want to debug. </li>
+  <li>Place the cursor  at the line till which you want the PHP script to be executed automatically. </li>
+  <li>To set a breakpoint, press Ctrl-F8 or choose Debug &gt; Toggle Line Breakpoint. </li>
+  <li>In
+the Projects window, navigate to the current project node, click the
+right mouse button, and choose Debug from the popup menu. The IDE opens
+the Debugger windows and runs the project in the debugger until the
+breakpoint is reached. <br>
+    <strong>Note:</strong> If the current project is set as Main, you can choose Debug &nbsp;&gt; Debug Main Project, or press Ctrl-F5, or click <img src="debugging_xdebug_php_arquivos/debug-main-project-button.png" alt="Debug main project button">. </li>
+  <li>Switch
+to the Local&nbsp;Variables window. The window shows all the variables
+that have been initialized within the current function, their types,
+and values. </li>
+  <li>To view the value of a variable outside the
+function, bring the cursor on an occurrence of the variable. The
+tooltip shows the variable value. </li>
+  <li>To execute the program
+line by line including the lines within all the called functions, press
+F7 or choose Debug &gt; Step Into and watch the changes to the
+variables' values in the Local Variables window. </li>
+  <li>To check the logic of the program by watching the changes of expressions, define a new watch:
+    <ol type="a">
+      <li>To open the Watches window, choose Window &gt; Debugging &gt; Watches or press Ctrl-Shift-2. The Watches window opens.</li>
+      <li>Anywhere
+inside the Watches window, click the right mouse button and choose New
+Watch from the popup menu. The New Watch window opens.</li>
+      <li>Enter the watch expression and click OK. </li>
+      Now you can make an additional check during debugging.
+    </ol>
+  </li>
+  <li>To
+cancel the line by line execution of the code within a function and
+spring to the next line after the function call, press Ctrl-F7 or
+choose Debug &gt; Step Out.</li>
+  <li>To skip the line by line
+execution of the code in a function, get the value returned by the
+function, and spring to the next line after the function call, press F8
+or choose Debug &gt; Step Over.</li>
+  <li>To pause the debugging session, choose Debug &gt; Pause.</li>
+  <li>To continue the debugging session, choose Debug &gt; Continue or press <img src="debugging_xdebug_php_arquivos/continue-debugging-session.png" alt="Continue debugging session button">.</li>
+  <li>To cancel the debugging session, press <img src="debugging_xdebug_php_arquivos/stop-debugging-session.png" alt="Cancel debugging session button">. </li>
+  <li>
+    <p>When the program reaches the end, the debugger windows close. </p>
+  </li>
+</ol>
+<h2><a name="sampleDebuggingSession"></a>Sample Debugging Session</h2>
+The section illustrates a standard debugging session.
+<ol><li>Create a new PHP project with the following parameters:
+<ul>
+<li>Project type - PHP application</li>
+<li>Sources location - the default <tt>htdocs</tt> folder location</li>
+<li>Run configuration - Local Web Site</li>
+</ul>
+Find more details about setting up a PHP project in the document <a href="http://testwww.netbeans.org/kb/docs/php/project-setup.html">Setting Up a PHP Project</a>.
+</li><li>After the project creation is completed, position the cursor
+on the Source Files node, choose Properties from the popup menu, and
+open the Debug window. Select the Debug Server Side PHP checkbox. </li>
+<li>To enable the use of hotkeys during the session, position the
+cursor on the project node and choose Set as Main Project from the
+popup menu. </li>
+<li>In the <tt>index.php</tt> file, enter the following code:
+  <pre class="examplecode">  &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+  &lt;html&gt;
+  	&lt;head&gt;
+  		&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+  			&lt;title&gt;NetBeans PHP debugging sample&lt;/title&gt;
+		&lt;/head&gt;
+&lt;body&gt;
+	&lt;?php
+  	$m=5;
+  	$n=10;
+  	  $sum_of_factorials = calculate_sum_of_factorials ($m, $n);
+  	  echo "The sum of factorials of the entered integers is " . $sum_of_factorials;
+  	
+	    function calculate_sum_of_factorials ($argument1, $argument2) {
+  	 	$factorial1 = calculate_factorial ($argument1);
+  	 	$factorial2 = calculate_factorial ($argument2);
+  	 	$result = calculate_sum ($factorial1, $factorial2);
+  	 	return $result;
+  		}
+	
+	  function calculate_factorial ($argument) {
+  	  	$factorial_result = 1;
+  	 	for ($i=1; $i&lt;=$argument; $i++) {
+  	 		$factorial_result = $factorial_result*$i;
+  	 	}
+  			return $factorial_result;
+  		}
+	  
+	    function calculate_sum ($argument1, $argument2) {
+ 			return $argument1 + $argument2;
+     	}	
+?&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+  </pre>
+  The code contains three functions:
+  <ul>
+    <li>The <tt>calculate_factorial ()</tt> function</li>
+      <li>The <tt>calcualte_sum ()</tt> function</li>
+      <li> The <tt>calculate_sum_of_factorials ()</tt> function that calls the <tt>calculate_factorial</tt> function twice,  then calls the <tt>calcualte_sum ()</tt> function once, and returns the calculated sum of factorials.</li>
+    </ul>
+</li>
+<li>Set a breakpoint (Ctrl-F8) at the beginning of the PHP block:
+  <pre class="examplecode">&lt;?php</pre>
+</li>
+<li>To start debugging, click <img src="debugging_xdebug_php_arquivos/debug-main-project-button.png" alt="Debug main project button">. The debugger stops at the breakpoint.</li>
+<li>Press F7 three times. The debugger stops at the line where the function <tt>calculate_sum_of_factorials ()</tt> is called. The Local Variables window shows the variables <tt>$m</tt> and <tt>$n</tt> with their values:<br>
+<img class="margin-around" src="debugging_xdebug_php_arquivos/degugger-stopped-at-function-call.png" alt="Debugger stopped at function call"></li>
+<li>To step into the function <tt>calculate_sum_of_factorials()</tt>, press F7. The debugger starts to execute the code within the function <tt>calculate_sum_of_factorials ()</tt> and stops at the call of the function <tt>calculate_factorial()</tt>. <br>
+<img class="margin-around" src="debugging_xdebug_php_arquivos/call-of-embedded-function.png" alt="Debugger stopped at the call of the embedded function calculate_factorial()."> <br>
+The Local Variables window now shows the local variables <tt>$argument1</tt> and <tt>$argument2</tt> that are declared within the function <tt>calculate_sum_of_factorials ()</tt>. <br>
+<img class="margin-around" src="debugging_xdebug_php_arquivos/variables-inside-function-call-another-function.png" alt="The Local Variables window shows the variables of the current function before the call of an embedded function"></li>
+<li>Press F7. The debugger starts to execute the code with the function <tt>calculate_factorial()</tt>.
+The Call Stack window shows the stack of calls to the functions in the
+reverse order with the last called function at the top of the list: <br>
+<img class="margin-around" src="debugging_xdebug_php_arquivos/call-stack.png" alt="The Call Stack window with three function calls listed in reverse order."> </li>
+ <li>Press F7 to step into the loop. View the values of the variables in the Local Variables window. <br>
+ <img class="margin-around" src="debugging_xdebug_php_arquivos/local-variables-inside-loop.png" alt="The Local Variables window with the variables. Checking the loop for correctness."> </li>
+ <li>When
+you make sure that the code works correctly, press Ctrl-F7 to cancel
+the function execution. The program returns to the line next after the
+call of the function <tt>calculate_factorial()</tt>. <br>
+ <strong>Note:</strong> Alternatively, you can press F7 until the program completes execution of the function <tt>calculate_factorial()</tt>. You will also return to the line next after its call. <br>
+<img class="margin-around" src="debugging_xdebug_php_arquivos/call-of-embedded-function-second-time.png" alt="Debugger stopped at the second call of the embedded function calculate_factorial()."> </li>
+ <li>Because you have just checked the function <tt>calculate_factorial()</tt>
+and know that it works correctly, you can skip its execution ("step
+over"). To step over, press F8. The program stops at the call of the
+function <tt>calculate_sum()</tt>. <br>
+ <img class="margin-around" src="debugging_xdebug_php_arquivos/cal-of-embedded-function-calculate-sum.png" alt="Debugger stopped at the call of the embedded function calculate_sum()."> </li>
+ <li>To step into the function <tt>calculate_sum()</tt>, press F7.</li>
+ <li>To step over, press F8. In either case the debugger stops at the last line in the function <tt>calculate_sum_of_factorials()</tt>.<br>
+  <img class="margin-around" src="debugging_xdebug_php_arquivos/return-result.png" alt="Debugger stopped at the return $result statement in the calcualate_sum_of_factorials() function."></li>
+<li>Press F7. The debugger moves to the line with the <tt>echo</tt> statement.</li>
+<li>Press F7 till the debugger exits the program. The browser window opens and shows the result of program execution:<br>
+  <img class="margin-around" src="debugging_xdebug_php_arquivos/program-output.png" alt="Program execution output in the browser window.">
+ </li>
+</ol>
+<div class="indent">
+<h2><a name="usingAdditionalWatches"></a>Using Additional Watches</h2>
+You can define an additional watch expression to follow up your program execution. This may help you catch an error.
+<ol>
+<li>Update the code as follows (replace a plus with a minus):
+<pre class="examplecode">function calculate_sum ($argument1, $argument2) {
+ 			return $argument1 - argument2;
+     	}
+ </pre>
+Suppose that this resulted from misspelling but actually you need to calculate sum. </li>
+<li>Choose Debug &gt; New Watch or press Ctrl-shift-F7. The New Watch window opens.</li>
+<li>Enter the following expression and click OK.  
+<pre class="examplecode">$factorial1+$factorial2</pre>
+The new expression appears in the Watches window.
+</li>
+<li>Run the debugging session. When the debugger stops at the line 
+<pre class="examplecode">return $result;</pre>
+compare the value of the expression in the Watches window and the value
+of $result in the Local Variables window. They should be the same but
+they differ. <br>
+  <img class="margin-around" src="debugging_xdebug_php_arquivos/watches.png" alt="Catching errors using watches">
+</li>
+</ol>
+This example is very simple and is supposed to give some general notion of using watches.
+</div>
+ <h2><a name="mixedPHPHTMLCases"></a>Mixed PHP and HTML Cases</h2>
+You can debug code that contains both PHP and HTML blocks. In the example from the <a href="#sampleDebuggingSession">Sample Debugging Session</a> section the values are hardcoded. Expand the code with an HTML input form for entering values. 
+<ol>
+<li>Add the following HTML code above the &lt;?php ?&gt; block:
+<pre class="examplecode"> &lt;form action="index.php" method="POST"&gt;
+       Enter the first integer, please:<br>       &lt;input type="text" name="first_integer"/&gt;&lt;br/&gt;<br>       Enter the second integer, please:<br>       &lt;input type="text" name="second_integer"/&gt;&lt;br/&gt;<br>       &lt;input type="submit" name="enter" value="Enter"/&gt;<br>&lt;/form&gt;</pre>
+	   <p class="notes">Find more information about <a href="http://testwww.netbeans.org/kb/docs/php/wish-list-lesson2.html#htmlForm">HTML input forms</a>.</p>
+</li>
+<li>Replace the following lines at the top of the &lt;?php ?&gt; block:
+  <pre class="examplecode">$m=5;
+  	$n=10;
+  	  $sum_of_factorials = calculate_sum_of_factorials ($m, $n);
+  	  echo "The sum of factorials of the entered integers is " . $sum_of_factorials;
+</pre>
+ with the following code:
+<pre class="examplecode">if (array_key_exists ("first_integer", $_POST) &amp;&amp; array_key_exists ("second_integer", $_POST)) {<br>
+    $result = calculate_sum_of_factorials ($_POST["first_integer"], $_POST["second_integer"]);<br>
+    echo "Sum of factorials is " . $result;<br>
+}</pre></li>
+<li>Set a breakpoint at the beginning of the &lt;?php ?&gt; block and start the <a href="#debuggingSession">debugging session</a>. </li>
+<li>Press F7. The debugger steps into the program. The browser window
+opens but the input form is not displayed. This is correct behavior of
+the debugger because it has to pass through the entire source code of a
+web page before the page can be displayed. Practically, this means that
+the debugger passes through the code twice. First time the debugger
+processes the code to display the HTML input form. The second time the
+debugger executes PHP code step by step. </li>
+<li>Press F7 till the debugger reaches the end of the program and the input form opens. </li>
+<li>Fill in the form and click Enter. The debugging session continues as described in section <a href="#sampleDebuggingSession">Sample Debugging Session</a>. </li>
+</ol>
+	<br>
+  <div class="feedback-box"><a href="http://testwww.netbeans.org/about/contact_form.html?to=3&amp;subject=Feedback:%20Debugging%20PHP">Send Us Your Feedback</a></div>
+<br style="clear: both;">
+<p>To send comments and suggestions, get support, and keep informed on the latest
+  developments on the NetBeans IDE PHP development features, <a href="http://testwww.netbeans.org/community/lists/top.html">join
+  the users@php.netbeans.org mailing list</a>.</p>
+<a name="seeAlso"></a>
+        <h2>See Also</h2>
+
+        <p>For more information about debugging applications in NetBeans IDE<a href="http://netbeans.org/"></a>,
+            see the following resources:</p>
+        <ul>
+          <li><a href="http://testwww.netbeans.org/kb/docs/web/js-debugger-ug.html">JavaScript Debugger User's Guide</a></li>
+        </ul>
+<p><a href="http://testwww.netbeans.org/kb/trails/php.html">Back to the PHP Learning Trail</a> </p>
+<!-- /Servlet-Specific template -->
+<!-- end of right navigation -->
+
+<!-- servlets and anything not on www or testwww -->
+
+
+
+
+ 
+ 
+ 
+
+ 
+ 
+
+
+
+
+</body></html>

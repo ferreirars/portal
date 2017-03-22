@@ -1,0 +1,38 @@
+Rodando Testes no CakePHP
+
+
+Versões anteriors do Cake usavam como padrão o SimpleTest, que foi substituído pelo PHPUint.
+CakePHP vem com suporte de testes embutido. CakePHP vem com integração para PHPUnit. Além dos recursos oferecidos pelo PHPUnit, o CakePHP oferece alguns recursos adicionais para tornar o teste mais fácil. 
+
+Instalação do PHPUnit no Ubuntu
+sudo apt-get install phpunit
+
+Configurar
+Ver no core.php se Debug está pelo menos em 1
+
+Configurar banco em database.php a variável $test:
+
+public $test = array(
+    'datasource' => 'Database/Mysql',
+    'persistent' => false,
+    'host'       => 'localhost',
+    'login'      => 'root',
+    'password'   => '',
+    'database'   => 'test_banco'
+);
+
+Criar o banco de testes (diferente do de produção), chamado test_banco.
+Podemos copiar o banco de produção e adicionar um prefixo test_.
+Exemplo, o banco de produção é cakeauth, então o de teste será test_cakeauth.
+
+Após criar o banco acesse a URL:
+http://localhost/cakeauth/test.php
+
+Feito isso aparecerá uma página com vários links. Cada link destes mostrará informações sobre nosso código.
+
+Boas referências:
+http://book.cakephp.org/2.0/en/development/testing.html
+http://imasters.com.br/artigo/23116/cake-php/rodando-testes-no-cakephp-20--parte-01/
+http://www.f2sistemas.com.br/site/rodando-testes-no-cakephp-2-0-%E2%80%93-parte-02.html
+
+

@@ -1,0 +1,208 @@
+Dicas sobre Componentes
+
+Componentes (components) são pacotes com funções lógicas que são usadas para serem compartilhadas entre os controllers. Se você está querendo copiar e colar coisas entre seus controllers, talvez seja uma boa ideia considerar a possibilidade de empacotar estas funcionalidades em componentes. A idéia é não sobrecarregar o controller e usar componente para guardar código extra.
+
+Escopo:
+Um componente pode ser visto e usado por todos os controllers do aplicativo.
+
+O CakePHP também já vem com uma quantidade fantástica de componentes incluídos, que você pode usar para lhe ajudar com:
+
+    Segurança
+    Sessões
+    ACL - Lista de Controle de Acesso (do inglês: Access control lists)
+    Emails
+	Paginação
+    Cookies
+    Autenticação
+    Tratamento de Requisições
+
+
+Criação de um componente simples
+
+App::uses('Component', 'Controller');
+class MathComponent extends Component {
+    public function doComplexOperation($amount1, $amount2) {
+        return $amount1 + $amount2;
+    }
+}
+
+Incluir no início do controller:
+public $components = array('MathComponent'); 
+
+Chamar:
+$this->Math->doComplexOperation(1,2); // mostrará 3
+
+
+CakePHP Components
+
+== Componente Session
+
+check ($name)
+del ($name)
+delete ($name)
+destroy()
+error ()
+flash ($key)
+read ($name)
+renew ()
+setFlash ($flashMessage, $layout = 'default', $param = null, $key = 'flash')
+valid ()
+write($name, $value)
+        
+
+== Componente RequestHandler
+
+accepts ($type = null)
+addInputType($type, $handler)
+getAjaxVersion ()
+getClientIP ()
+getReferer ()
+isAjax ()
+isAtom ()
+isDelete ()
+isGet ()
+isMobile ():
+Mobile User Agent strings suportadas:
+    Android
+    AvantGo
+    BlackBerry
+    DoCoMo
+    Fennec
+    iPad
+    iPhone
+    iPod
+    J2ME
+    MIDP
+    NetFront
+    Nokia
+    Opera Mini
+    Opera Mobi
+    PalmOS
+    PalmSource
+    portalmmm
+    Plucker
+    ReqwirelessWeb
+    SonyEricsson
+    Symbian
+    UP.Browser
+    webOS
+    Windows CE
+    Windows Phone OS
+    Xiino
+
+isPost ()
+isPut ()
+isRss ()
+isWap ()
+Quando respondendo para requisições AJAX, você pode querer desabilitar o cache do browser, e mudar o nível de debug. Se quizer permitir cahe para requisições non-ajax, o código seguinte deve permitir isso:
+
+if ($this->request->is('ajax')) {// Desabilitará somente requisições ajax
+    $this->disableCache();
+}
+
+isXml ()
+prefers($type = null)
+renderAs($controller, $type)
+respondAs($type, $options)
+responseType()
+setContent ($name, $type=null)
+  Os mapeamentos padrões são:
+    javascript text/javascript
+    js text/javascript
+    json application/json
+    css text/css
+    html text/html, */*
+    text text/plain
+    txt text/plain
+    csv application/vnd.ms-excel, text/plain
+    form application/x-www-form-urlencoded
+    file multipart/form-data
+    xhtml application/xhtml+xml, application/xhtml, text/xhtml
+    xhtml-mobile application/vnd.wap.xhtml+xml
+    xml application/xml, text/xml
+    rss application/rss+xml
+    atom application/atom+xml
+    amf application/x-amf
+    wap text/vnd.wap.wml, text/vnd.wap.wmlscript, image/vnd.wap.wbmp
+    wml text/vnd.wap.wml
+    wmlscript text/vnd.wap.wmlscript
+    wbmp image/vnd.wap.wbmp
+    pdf application/pdf
+    zip application/x-zip
+    tar application/x-tar
+
+stripAll ($string)
+stripImages ($string)
+stripScripts ($string)
+viewClassMap($type, $viewClass)
+http://book.cakephp.org/2.0/en/core-libraries/components/request-handling.html
+        
+
+CakePHP Security Component
+
+requirePost ([$action1, $ action2, $action3, ...])
+requireAuth ([$action1, $ action2, $action3, ...])
+        
+
+CakePHP ACL Component
+
+check ($aro, $aco, $action="*")
+allow ($aro, $aco, $action="*")
+deny ($aro, $aco, $action="*")
+inherit ($aro, $aco, $action="*")
+grant ($aro, $aco, $action="*")
+revoke ($aro, $aco, $action="*")
+getAro ($id)
+getAco ($id)
+        
+Métodos do Componente Cookie
+
+O CookieComponent é um wrapper em do método nativo do PHP setcookie. Ele também inclui uma série de métodos e propriedades para tornar o uso de cookies em seus controladores muito convenientes. Antes de tentar usar o CookieComponent, você deve se certificar se 'Cookie' está listado no array $components de seus controladores.
+
+write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
+read(mixed $key = null)
+check($key)
+delete(mixed $key)
+destroy()
+type($type)
+
+
+Componente Security
+
+blackHole(object $controller, string $error)
+$blackHoleCallback
+
+O retorno deve esperar um parâmetro que indica o tipo de erro:
+
+public function beforeFilter() {
+    $this->Security->blackHoleCallback = 'blackhole';
+}
+
+public function blackhole($type) {
+    // handle errors.
+}
+
+The $type parameter can have the following values:
+
+    'auth' Indicates a form validation error, or a controller/action mismatch error.
+    'csrf' Indicates a CSRF error.
+    'get' Indicates an HTTP method restriction failure.
+    'post' Indicates an HTTP method restriction failure.
+    'put' Indicates an HTTP method restriction failure.
+    'delete' Indicates an HTTP method restriction failure.
+    'secure' Indicates an SSL method restriction failure.
+
+requirePost()
+requireGet()
+requirePut()
+requireDelete()
+requireSecure()
+requireAuth()
+$allowedControllers
+$allowedActions
+$unlockedFields
+$validatePost
+$csrfCheck
+$csrfExpires
+$csrfUseOnce
+

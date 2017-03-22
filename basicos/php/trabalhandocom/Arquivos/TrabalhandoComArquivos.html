@@ -1,0 +1,1169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt" dir="ltr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta name="generator" content="MediaWiki 1.16alpha-wmf" />
+		<meta name="keywords" content="Aplicativos em PHP/Trabalhando em PHP com/Arquivos" />
+		<link rel="alternate" type="application/x-wiki" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos&amp;action=edit" />
+		<link rel="edit" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos&amp;action=edit" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikilivros (pt)" />
+		<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/" />
+		<link rel="alternate" type="application/rss+xml" title="Feed RSS Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=rss" />
+		<link rel="alternate" type="application/atom+xml" title="Feed Atom Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=atom" />
+		<title>Aplicativos em PHP/Trabalhando em PHP com/Arquivos - Wikilivros</title>
+		<link rel="stylesheet" href="/skins-1.5/common/shared.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/common/commonPrint.css?233xz" type="text/css" media="print" />
+		<link rel="stylesheet" href="/skins-1.5/monobook/main.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/chick/main.css?233xz" type="text/css" media="handheld" />
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE50Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE55Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/skins-1.5/monobook/IE60Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/skins-1.5/monobook/IE70Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="print" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Handheld.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="handheld" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=-&amp;action=raw&amp;maxage=2678400&amp;smaxage=0&amp;ts=20090810192510&amp;gen=css" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.css&amp;action=raw&amp;ctype=text/css" type="text/css" />
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins-1.5/common/IEFixes.js?233xz"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/skins-1.5";
+		var wgArticlePath = "/wiki/$1";
+		var wgScriptPath = "/w";
+		var wgScript = "/w/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://pt.wikibooks.org";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos";
+		var wgTitle = "Aplicativos em PHP/Trabalhando em PHP com/Arquivos";
+		var wgAction = "view";
+		var wgArticleId = "14460";
+		var wgIsArticle = true;
+		var wgUserName = "Ribafs";
+		var wgUserGroups = ["*", "user", "autoconfirmed"];
+		var wgUserLanguage = "pt-br";
+		var wgContentLanguage = "pt";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = 111126;
+		var wgVersion = "1.16alpha-wmf";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = [",	.", " 	,"];
+		var wgDigitTransformTable = ["", ""];
+		var wgMainPageTitle = "Página principal";
+		var wgMWSuggestTemplate = "http://pt.wikibooks.org/w/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest";
+		var wgDBname = "ptwikibooks";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["com sugestões", "sem sugestões"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		var wgAjaxWatch = {"watchMsg": "Vigiar", "unwatchMsg": "Desinteressar-se", "watchingMsg": "Vigiando...", "unwatchingMsg": "Deixando de vigiar..."};
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="/skins-1.5/common/wikibits.js?233xz"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="/skins-1.5/common/ajax.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/ajaxwatch.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/mwsuggest.js?233xz"></script>
+		<script type="text/javascript">/*<![CDATA[*/
+		var wgNotice='';var wgNoticeLocal='';
+		/*]]>*/</script>
+		<script type="text/javascript" src="http://upload.wikimedia.org/centralnotice/wikibooks/pt-br/centralnotice.js?233xz"></script>
+
+		<script type="text/javascript" src="/w/index.php?title=-&amp;action=raw&amp;smaxage=0&amp;gen=js&amp;useskin=monobook"><!-- site js --></script>
+		<script type="text/javascript" src="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.js&amp;action=raw&amp;ctype=text/javascript"></script>
+	</head>
+<body class="mediawiki ltr ns-0 ns-subject page-Aplicativos_em_PHP_Trabalhando_em_PHP_com_Arquivos skin-monobook">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+		<div id="siteNotice"><script type='text/javascript'>if (wgNotice != '') document.writeln(wgNotice);</script></div>		<h1 id="firstHeading" class="firstHeading">Aplicativos em PHP/Trabalhando em PHP com/Arquivos</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">De Wikilivros</h3>
+			<div id="contentSub"><span class="subpages">&lt; <a href="/wiki/Aplicativos_em_PHP" title="Aplicativos em PHP">Aplicativos em PHP</a> | <a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com" title="Aplicativos em PHP/Trabalhando em PHP com">Trabalhando em PHP com</a></span></div>
+									<div id="jump-to-nav">Ir para: <a href="#column-one">navegação</a>, <a href="#searchInput">pesquisa</a></div>			<!-- start content -->
+			<table id="toc" class="toc" summary="Tabela de conteúdo">
+<tr>
+<td>
+<div id="toctitle">
+<h2>Tabela de conteúdo</h2>
+</div>
+<ul>
+<li class="toclevel-1"><a href="#Abrir_arquivo"><span class="tocnumber">1</span> <span class="toctext">Abrir arquivo</span></a></li>
+<li class="toclevel-1"><a href="#Gravar_em_Arquivo"><span class="tocnumber">2</span> <span class="toctext">Gravar em Arquivo</span></a></li>
+<li class="toclevel-1"><a href="#Ler_Arquivo"><span class="tocnumber">3</span> <span class="toctext">Ler Arquivo</span></a></li>
+<li class="toclevel-1"><a href="#fgets.28.29"><span class="tocnumber">4</span> <span class="toctext">fgets()</span></a></li>
+<li class="toclevel-1"><a href="#fgetc.28.29"><span class="tocnumber">5</span> <span class="toctext">fgetc()</span></a></li>
+<li class="toclevel-1"><a href="#Ler_Todo_um_Arquivo"><span class="tocnumber">6</span> <span class="toctext">Ler Todo um Arquivo</span></a></li>
+<li class="toclevel-1"><a href="#file.28.29"><span class="tocnumber">7</span> <span class="toctext">file()</span></a></li>
+<li class="toclevel-1"><a href="#Ler_Arquivo_Via_URL"><span class="tocnumber">8</span> <span class="toctext">Ler Arquivo Via URL</span></a></li>
+<li class="toclevel-1"><a href="#feof.28handle.29"><span class="tocnumber">9</span> <span class="toctext">feof(handle)</span></a></li>
+<li class="toclevel-1"><a href="#Contando_o_N.C3.BAmero_de_Linhas_de_um_arquivo"><span class="tocnumber">10</span> <span class="toctext">Contando o Número de Linhas de um arquivo</span></a></li>
+<li class="toclevel-1"><a href="#Contar_palavras_de_um_arquivo_mostrando_duplicadas"><span class="tocnumber">11</span> <span class="toctext">Contar palavras de um arquivo mostrando duplicadas</span></a></li>
+<li class="toclevel-1"><a href="#Ler_de_forma_inversa_um_arquivo.2C_linha_a_linha"><span class="tocnumber">12</span> <span class="toctext">Ler de forma inversa um arquivo, linha a linha</span></a></li>
+<li class="toclevel-1"><a href="#Ler_aleatoriamente_linha_de_arquivo"><span class="tocnumber">13</span> <span class="toctext">Ler aleatoriamente linha de arquivo</span></a></li>
+<li class="toclevel-1"><a href="#Ler_linha_espec.C3.ADfica_de_arquivo"><span class="tocnumber">14</span> <span class="toctext">Ler linha específica de arquivo</span></a></li>
+<li class="toclevel-1"><a href="#Opera.C3.A7.C3.B5es_com_Diret.C3.B3rios"><span class="tocnumber">15</span> <span class="toctext">Operações com Diretórios</span></a></li>
+<li class="toclevel-1"><a href="#Mostrando_conte.C3.BAdo_de_diret.C3.B3rio"><span class="tocnumber">16</span> <span class="toctext">Mostrando conteúdo de diretório</span></a></li>
+<li class="toclevel-1"><a href="#Excluindo_arquivos_do_SO"><span class="tocnumber">17</span> <span class="toctext">Excluindo arquivos do SO</span></a></li>
+<li class="toclevel-1"><a href="#Copiando_arquivos"><span class="tocnumber">18</span> <span class="toctext">Copiando arquivos</span></a></li>
+<li class="toclevel-1"><a href="#Processando_todos_os_arquivos_de_um_diret.C3.B3rio"><span class="tocnumber">19</span> <span class="toctext">Processando todos os arquivos de um diretório</span></a></li>
+<li class="toclevel-1"><a href="#Teste_se_Arquivo_pode_ser_lido"><span class="tocnumber">20</span> <span class="toctext">Teste se Arquivo pode ser lido</span></a></li>
+<li class="toclevel-1"><a href="#Testar_se_Arquivo_Permite_Escrita"><span class="tocnumber">21</span> <span class="toctext">Testar se Arquivo Permite Escrita</span></a></li>
+<li class="toclevel-1"><a href="#Testar_se_Arquivo_Existe"><span class="tocnumber">22</span> <span class="toctext">Testar se Arquivo Existe</span></a></li>
+<li class="toclevel-1"><a href="#Testar_se_.C3.A9_Arquivo_ou_Diret.C3.B3rio"><span class="tocnumber">23</span> <span class="toctext">Testar se é Arquivo ou Diretório</span></a></li>
+<li class="toclevel-1"><a href="#Outras_Fun.C3.A7.C3.B5es"><span class="tocnumber">24</span> <span class="toctext">Outras Funções</span></a></li>
+<li class="toclevel-1"><a href="#Espa.C3.A7o_Total_no_Disco"><span class="tocnumber">25</span> <span class="toctext">Espaço Total no Disco</span></a></li>
+<li class="toclevel-1"><a href="#Espa.C3.A7o_Livre_no_Disco"><span class="tocnumber">26</span> <span class="toctext">Espaço Livre no Disco</span></a></li>
+<li class="toclevel-1"><a href="#Tamanho_de_Diret.C3.B3rio.2C_n.C3.BAmero_de_arquivos_e_sub-diret.C3.B3rios"><span class="tocnumber">27</span> <span class="toctext">Tamanho de Diretório, número de arquivos e sub-diretórios</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Detalhes_:_.24path"><span class="tocnumber">27.1</span> <span class="toctext">Detalhes&#160;: $path</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Tamanho_de_diret.C3.B3rio"><span class="tocnumber">28</span> <span class="toctext">Tamanho de diretório</span></a></li>
+<li class="toclevel-1"><a href="#Trechos_do_Tutorial_-_The_right_way_to_read_files_with_PHP_da_IBM"><span class="tocnumber">29</span> <span class="toctext">Trechos do Tutorial - The right way to read files with PHP da IBM</span></a></li>
+<li class="toclevel-1"><a href="#L.C3.AA_e_imprime_todo_o_conte.C3.BAdo_de_um_arquivo_CSV"><span class="tocnumber">30</span> <span class="toctext">Lê e imprime todo o conteúdo de um arquivo CSV</span></a></li>
+<li class="toclevel-1"><a href="#rmdir_--_Remove_um_diret.C3.B3rio"><span class="tocnumber">31</span> <span class="toctext">rmdir -- Remove um diretório</span></a></li>
+<li class="toclevel-1"><a href="#rename_--_Renomear_um_arquivo_.28.24antigo.2C_.24novo.29"><span class="tocnumber">32</span> <span class="toctext">rename -- Renomear um arquivo ($antigo, $novo)</span></a></li>
+<li class="toclevel-1"><a href="#unlink_--_Apaga_um_arquivo"><span class="tocnumber">33</span> <span class="toctext">unlink -- Apaga um arquivo</span></a></li>
+<li class="toclevel-1"><a href="#mkdir_--_Criar_um_diret.C3.B3rio"><span class="tocnumber">34</span> <span class="toctext">mkdir -- Criar um diretório</span></a></li>
+<li class="toclevel-1"><a href="#file_exists_--_Checa_se_um_arquivo_ou_diret.C3.B3rio_existe"><span class="tocnumber">35</span> <span class="toctext">file_exists -- Checa se um arquivo ou diretório existe</span></a></li>
+<li class="toclevel-1"><a href="#disk_free_space_--_Retorna_o_espa.C3.A7o_disponivel_no_diret.C3.B3rio"><span class="tocnumber">36</span> <span class="toctext">disk_free_space -- Retorna o espaço disponivel no diretório</span></a></li>
+<li class="toclevel-1"><a href="#Receber_Conte.C3.BAdo_de_URL"><span class="tocnumber">37</span> <span class="toctext">Receber Conteúdo de URL</span></a></li>
+<li class="toclevel-1"><a href="#Recursively_find_files_by_filename_pattern"><span class="tocnumber">38</span> <span class="toctext">Recursively find files by filename pattern</span></a></li>
+<li class="toclevel-1"><a href="#Refer.C3.AAncia"><span class="tocnumber">39</span> <span class="toctext">Referência</span></a></li>
+</ul>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+//<![CDATA[
+ if (window.showTocToggle) { var tocShowText = "mostrar"; var tocHideText = "esconder"; showTocToggle(); } 
+//]]>
+</script>
+<p><a name="Abrir_arquivo" id="Abrir_arquivo"></a></p>
+<h2><span class="mw-headline">Abrir arquivo</span></h2>
+<p>fopen(filename, mode, [use_include_path]);</p>
+<p>filename: pode ser simplesmente um nome, ou um caminho completo.</p>
+<p>Exemplos: "arquivo.txt", "./arquivo.dat", "/data/data.txt".</p>
+<p>mode: especifica o modo de abertura, ou seja, se o arquivo deve ser aberto para leitura, escrita, etc. Modos de abertura:</p>
+<pre>
+- r: abre o arquivo no modo somente leitura e posiciona o ponteiro no início do arquivo; 
+	o arquivo já deve existir;
+- r+: abre o arquivo para leitura/escrita, posiciona o ponteiro no início do arquivo;
+- w: abre o arquivo no modo somente escrita; se o arquivo já existir, será sobrescrito; 
+	senão, será criado um novo;
+- w+: abre o arquivo para escrita/leitura; se o arquivo já existir, será sobrescrito; 
+	senão, será criado um novo;
+- a: abre o arquivo para anexar dados, posiciona o ponteiro no final do arquivo; 
+	se o arquivo não existir, será criado um novo;
+- a+: abre o arquivo para anexo/leitura, posiciona o ponteiro no final do arquivo; 
+	se o arquivo não existir, será criado um novo;
+
+&lt;?php
+	$fp = fopen("./arquivo.dat", "r"); // $fp conterá o handle do arquivo que abrimos
+?&gt;
+&lt;pre&gt;
+
+
+&lt;h2&gt;Fechar Arquivo&lt;/h2&gt;
+
+&lt;pre&gt;
+fclose(handle_arquivo);
+
+&lt;?php
+fclose($fp);
+?&gt;
+</pre>
+<p><br /></p>
+<p><a name="Gravar_em_Arquivo" id="Gravar_em_Arquivo"></a></p>
+<h2><span class="mw-headline">Gravar em Arquivo</span></h2>
+<pre>
+&lt;?php
+$fp = fopen("./dados.txt", "w");
+fwrite($fp, "Olá mundo do PHP!"); // grava a string no arquivo. Se o arquivo não existir ele será criado
+fclose($fp);
+?&gt;
+</pre>
+<p><a name="Ler_Arquivo" id="Ler_Arquivo"></a></p>
+<h2><span class="mw-headline">Ler Arquivo</span></h2>
+<pre>
+&lt;?php
+
+$fp = fopen("./dados.txt", "r");
+$texto = fread($fp, 20); // lê 20 bytes do arquivo e armazena em $texto
+fclose($fp);
+echo $texto;
+?&gt;
+</pre>
+<p><a name="fgets.28.29" id="fgets.28.29"></a></p>
+<h2><span class="mw-headline">fgets()</span></h2>
+<p>Esta função é usada na leitura de strings de um arquivo. fgets() lê "length - 1" bytes do arquivo. Por default lê 1024 bytes para o comprimento da linha. Se for encontrado o final da linha e o número de bytes especificados não tiver sido atingido, fgets() terminará a leitura no final da linha (ou no final do arquivo, se for o caso). Eis a sua sintaxe:</p>
+<p>fgets(handle, length);</p>
+<p>- handle: handle do arquivo de onde os dados serão lidos;</p>
+<p>- length: tamanho em bytes do buffer de leitura;</p>
+<p><br />
+Exemplo:</p>
+<pre>
+&lt;?php
+$fp = fopen("./dados.txt", "r");
+$texto = fgets($fp, 3);
+fclose($fp);
+echo $texto;
+?&gt;
+</pre>
+<p><a name="fgetc.28.29" id="fgetc.28.29"></a></p>
+<h2><span class="mw-headline">fgetc()</span></h2>
+<p>Esta função permite ler caractere por caractere de um arquivo. Seguem a sintaxe e um exemplo de utilização:</p>
+<p>fgetc(handle);</p>
+<p>- handle: manipulador do arquivo de onde os dados serão lidos;</p>
+<p><a name="Ler_Todo_um_Arquivo" id="Ler_Todo_um_Arquivo"></a></p>
+<h2><span class="mw-headline">Ler Todo um Arquivo</span></h2>
+<pre>
+&lt;?php
+$fp = fopen("./dados.txt", "r");
+while (!feof($fp)){
+    $char .= fgetc($fp);
+} 
+fclose($fp);
+echo $char."&lt;br&gt;&lt;br&gt;";
+?&gt;
+</pre>
+<p><a name="file.28.29" id="file.28.29"></a></p>
+<h2><span class="mw-headline">file()</span></h2>
+<p>Esta função lê um arquivo completo, e armazena cada linha do arquivo como um elemento de um array. Depois de ler todo o conteúdo do arquivo, file() o fecha automaticamente, não sendo necessária uma chamada a fclose(); Vejamos a sintaxe:</p>
+<p><br /></p>
+<p><a name="Ler_Arquivo_Via_URL" id="Ler_Arquivo_Via_URL"></a></p>
+<h2><span class="mw-headline">Ler Arquivo Via URL</span></h2>
+<p>$fh = fopen("<a href="http://127.0.0.1/" class="external free" title="http://127.0.0.1/" rel="nofollow">http://127.0.0.1/</a>", "r");</p>
+<p>file(filename);</p>
+<p>- filename: nome ou caminho completo de um arquivo.</p>
+<p>Exemplo:</p>
+<pre>
+&lt;?php
+// file() lê todo o arquivo
+$file_lines = file("./dados.txt");
+echo "Primeira linha: " . $file_lines[0]."&lt;br&gt;";
+echo "Segunda linha: " . $file_lines[1]."&lt;br&gt;";
+echo "Terceira linha: " . $file_lines[2];
+?&gt;
+</pre>
+<p>Além dessas funções para leitura e escrita, existe ainda uma função bastante útil, que testa se o final do arquivo foi atingido. É a função feof(), que tem a seguinte sintaxe:</p>
+<p><br /></p>
+<p><a name="feof.28handle.29" id="feof.28handle.29"></a></p>
+<h2><span class="mw-headline">feof(handle)</span></h2>
+<p>- handle: handle do arquivo;</p>
+<p>Exemplo:</p>
+<pre>
+&lt;?php
+$fp = fopen("./dados.txt", "r");
+while(!feof($fp)) {
+    $char .= fgetc($fp);
+}
+fclose($fp);
+echo $char;
+?&gt;
+</pre>
+<p><a name="Contando_o_N.C3.BAmero_de_Linhas_de_um_arquivo" id="Contando_o_N.C3.BAmero_de_Linhas_de_um_arquivo"></a></p>
+<h2><span class="mw-headline">Contando o Número de Linhas de um arquivo</span></h2>
+<pre>
+&lt;?php
+// Contar o número de linhas de um arquivo, iniciando com 1
+$fp = "./dados.txt";
+$line_count = count (file ($fp));
+echo $line_count;
+?&gt;
+</pre>
+<p><a name="Contar_palavras_de_um_arquivo_mostrando_duplicadas" id="Contar_palavras_de_um_arquivo_mostrando_duplicadas"></a></p>
+<h2><span class="mw-headline">Contar palavras de um arquivo mostrando duplicadas</span></h2>
+<pre>
+/*
+// Contar palavras repetidas em um arquivo
+$fn = "./dados.txt";
+$f_contents = preg_split ("/[\s+/", implode ("", file ($fn)));
+foreach ($f_content as $palavra) {
+	$ar[$palavra]++;
+}
+print "A seguinte palavra tem duplicatas&lt;br&gt;";
+foreach ($ar as $palavra =&gt; $conta_palavra) {
+	if (conta_palavra &gt; 1) {
+		print "Palavra: $palavra&lt;br&gt;Número de ocorrências: $conta_palavra&lt;br&gt;&lt;br&gt;";
+	}
+}
+*/
+</pre>
+<p><a name="Ler_de_forma_inversa_um_arquivo.2C_linha_a_linha" id="Ler_de_forma_inversa_um_arquivo.2C_linha_a_linha"></a></p>
+<h2><span class="mw-headline">Ler de forma inversa um arquivo, linha a linha</span></h2>
+<pre>
+&lt;?php
+$fn = "./dados.txt";
+$f_contents = array_reverse (file ($fn));
+foreach ($f_contents as $linha_inversa) {
+	print $linha_inversa;
+}
+?&gt;
+</pre>
+<p><a name="Ler_aleatoriamente_linha_de_arquivo" id="Ler_aleatoriamente_linha_de_arquivo"></a></p>
+<h2><span class="mw-headline">Ler aleatoriamente linha de arquivo</span></h2>
+<pre>
+&lt;?php
+$fn = "./pensamentos.txt";
+$f_contents = file ($fn);
+srand ((double)microtime()*1000000);
+$linha_aleatoria = $f_contents[ rand (0, (count ($f_contents) - 1)) ];
+print $linha_aleatoria;
+?&gt;
+</pre>
+<p><a name="Ler_linha_espec.C3.ADfica_de_arquivo" id="Ler_linha_espec.C3.ADfica_de_arquivo"></a></p>
+<h2><span class="mw-headline">Ler linha específica de arquivo</span></h2>
+<pre>
+&lt;?php
+$fn = "./dados.txt";
+$nr_linha = 38;
+$f_contents = file ($fn);
+$sua_linha = $f_contents [$nr_linha];
+print $sua_linha;
+?&gt;
+</pre>
+<p><a name="Opera.C3.A7.C3.B5es_com_Diret.C3.B3rios" id="Opera.C3.A7.C3.B5es_com_Diret.C3.B3rios"></a></p>
+<h2><span class="mw-headline">Operações com Diretórios</span></h2>
+<p><a name="Mostrando_conte.C3.BAdo_de_diret.C3.B3rio" id="Mostrando_conte.C3.BAdo_de_diret.C3.B3rio"></a></p>
+<h2><span class="mw-headline">Mostrando conteúdo de diretório</span></h2>
+<pre>
+&lt;?php
+$dn = opendir ("/home/1www/");
+while ($file = readdir ($dn)) {
+	print "$file&lt;br&gt;";
+}
+closedir($dn);
+?&gt;
+</pre>
+<p><a name="Excluindo_arquivos_do_SO" id="Excluindo_arquivos_do_SO"></a></p>
+<h2><span class="mw-headline">Excluindo arquivos do SO</span></h2>
+<pre>
+&lt;?php
+$fn = "./dados0.txt";
+// Excluindo arquivo
+$ret = unlink ($fn);
+if ($ret){
+	 die ("Arquivo excluído!");
+}else{
+	die ("Erro ao excluir arquivo");
+}
+?&gt;
+</pre>
+<p><a name="Copiando_arquivos" id="Copiando_arquivos"></a></p>
+<h2><span class="mw-headline">Copiando arquivos</span></h2>
+<pre>
+&lt;?php
+$fn = "./dados.txt";
+
+if (copy ($fn, "dados0.txt")){
+	 die ("Arquivo '$fn' copiado para dados0.txt ");
+}else{
+	die ("Erro ao copiar arquivo");
+}
+?&gt;
+</pre>
+<p><a name="Processando_todos_os_arquivos_de_um_diret.C3.B3rio" id="Processando_todos_os_arquivos_de_um_diret.C3.B3rio"></a></p>
+<h2><span class="mw-headline">Processando todos os arquivos de um diretório</span></h2>
+<pre>
+&lt;?php
+$dh = dir ("/home/1www/");
+while ($entrada = $dh-&gt;read()) {
+	print $entrada . "&lt;br&gt;";
+}
+$dh-&gt;close();
+?&gt;
+</pre>
+<p><br /></p>
+<p><a name="Teste_se_Arquivo_pode_ser_lido" id="Teste_se_Arquivo_pode_ser_lido"></a></p>
+<h2><span class="mw-headline">Teste se Arquivo pode ser lido</span></h2>
+<pre>
+&lt;?php
+if (is_readable('http://127.0.0.1/index.html')) {
+   header('Location: http://127.0.0.1/index.html');
+}else{
+	echo "Este arquivo não pode ser lido!";
+}
+
+?&gt;
+
+
+&lt;?php
+// TESTAR SE ARQUIVO PERMITE LEITURA
+
+print '&lt;br&gt;';
+$filename = 'teste2.php';
+if (is_readable($filename)) {
+   echo 'O arquivo permite leitura';
+} else {
+   echo 'O arquivo não permite leitura';
+}
+print '&lt;br&gt;';
+</pre>
+<p><br />
+//Outro</p>
+<p>&lt;?php if (is_readable('<a href="http://127.0.0.1/index.html'" class="external free" title="http://127.0.0.1/index.html'" rel="nofollow">http://127.0.0.1/index.html'</a>)) {</p>
+<pre>
+  header('Location: <a href="http://127.0.0.1/index.html'" class="external free" title="http://127.0.0.1/index.html'" rel="nofollow">http://127.0.0.1/index.html'</a>);
+</pre>
+<p>}else{ 	echo "Este arquivo não pode ser lido!"; }</p>
+<p>?&gt;</p>
+<p><br /></p>
+<p><a name="Testar_se_Arquivo_Permite_Escrita" id="Testar_se_Arquivo_Permite_Escrita"></a></p>
+<h2><span class="mw-headline">Testar se Arquivo Permite Escrita</span></h2>
+<pre>
+if (is_writable($filename)) {
+   echo 'O arquivo permite escrita';
+} else {
+   echo 'O arquivo não permite escrita';
+}
+
+?&gt; 
+</pre>
+<p><a name="Testar_se_Arquivo_Existe" id="Testar_se_Arquivo_Existe"></a></p>
+<h2><span class="mw-headline">Testar se Arquivo Existe</span></h2>
+<pre>
+&lt;?php
+print '&lt;br&gt;';
+// TESTAR SE ARQUIVO EXISTE
+$filename = 'teste2.php';
+
+if (file_exists($filename)) {
+   echo "O arquivo $filename existe";
+} else {
+   echo "O arquivo $filename não existe";
+}
+?&gt; 
+</pre>
+<p><a name="Testar_se_.C3.A9_Arquivo_ou_Diret.C3.B3rio" id="Testar_se_.C3.A9_Arquivo_ou_Diret.C3.B3rio"></a></p>
+<h2><span class="mw-headline">Testar se é Arquivo ou Diretório</span></h2>
+<pre>
+&lt;?php
+print '&lt;br&gt;';
+// TESTAR SE ARQUIVO É UM ARQUIVO COMUN OU SE É DIRETÓRIO
+$filename = 'teste2.php';
+
+$filename2 = 'c:\windows';
+
+if (is_file($filename)) {
+   echo "O arquivo $filename é comun";
+}else{
+  echo "O arquivo $filename não é um arquivo comun";
+}
+print '&lt;br&gt;';
+
+if (is_file($filename2)){
+   echo "O arquivo $filename2 é comun";
+}else{
+  echo "O arquivo $filename2 não é um arquivo comun";
+}
+
+print '&lt;br&gt;';
+
+if (is_dir($filename2)){
+   echo "$filename2 é um diretório";
+}else{
+  echo "$filename2 não é um diretório";
+}
+</pre>
+<p><a name="Outras_Fun.C3.A7.C3.B5es" id="Outras_Fun.C3.A7.C3.B5es"></a></p>
+<h2><span class="mw-headline">Outras Funções</span></h2>
+<pre>
+is_link($diretorio) 
+readlink($dir_link) // retorna o path completo do link
+bool symlink ( string $destino, string $linkorigem ) // Cria um link simbólico
+</pre>
+<p><br /></p>
+<p><a name="Espa.C3.A7o_Total_no_Disco" id="Espa.C3.A7o_Total_no_Disco"></a></p>
+<h2><span class="mw-headline">Espaço Total no Disco</span></h2>
+<p>&lt;?php // ESPAÇO TOTAL NO DISCO $diretorio="c:/"; print disk_total_space($diretorio); print "<br />
+";</p>
+<p><br /></p>
+<p><a name="Espa.C3.A7o_Livre_no_Disco" id="Espa.C3.A7o_Livre_no_Disco"></a></p>
+<h2><span class="mw-headline">Espaço Livre no Disco</span></h2>
+<p>// ESPAÇO LIVRE NO DISCO // $df contém o número de bytes disponível em "/" $df = disk_free_space("c:/"); print $df ?&gt;</p>
+<p><br /></p>
+<p><a name="Tamanho_de_Diret.C3.B3rio.2C_n.C3.BAmero_de_arquivos_e_sub-diret.C3.B3rios" id="Tamanho_de_Diret.C3.B3rio.2C_n.C3.BAmero_de_arquivos_e_sub-diret.C3.B3rios"></a></p>
+<h2><span class="mw-headline">Tamanho de Diretório, número de arquivos e sub-diretórios</span></h2>
+<p>&lt;?php // CALCULANDO TAMANHO OCUPADO POR UM DIRETÓRIO, NR DE ARQUIVOS E SUBDIRETÓRIOS // <a href="http://www.go4expert.com/forums/showthread.php?t=290" class="external free" title="http://www.go4expert.com/forums/showthread.php?t=290" rel="nofollow">http://www.go4expert.com/forums/showthread.php?t=290</a></p>
+<p>function getDirectorySize($path) {</p>
+<pre>
+ $totalsize = 0;
+ $totalcount = 0;
+ $dircount = 0;
+ if ($handle = opendir ($path))
+ {
+   while (false !== ($file = readdir($handle)))
+   {
+     $nextpath = $path . '/' . $file;
+     if ($file != '.' &amp;&amp; $file != '..' &amp;&amp; !is_link ($nextpath))
+     {
+       if (is_dir ($nextpath))
+       {
+         $dircount++;
+         $result = getDirectorySize($nextpath);
+         $totalsize += $result['size'];
+         $totalcount += $result['count'];
+         $dircount += $result['dircount'];
+       }
+       elseif (is_file ($nextpath))
+       {
+         $totalsize += filesize ($nextpath);
+         $totalcount++;
+       }
+     }
+   }
+ }
+ closedir ($handle);
+ $total['size'] = $totalsize;
+ $total['count'] = $totalcount;
+ $total['dircount'] = $dircount;
+ return $total;
+</pre>
+<p>}</p>
+<p>function sizeFormat($size) {</p>
+<pre>
+   if($size&lt;1024)
+   {
+       return $size." bytes";
+   }
+   else if($size&lt;(1024*1024))
+   {
+       $size=round($size/1024,1);
+       return $size." KB";
+   }
+   else if($size&lt;(1024*1024*1024))
+   {
+       $size=round($size/(1024*1024),1);
+       return $size." MB";
+   }
+   else
+   {
+       $size=round($size/(1024*1024*1024),1);
+       return $size." GB";
+   }
+</pre>
+<p>}</p>
+<p>// Usando</p>
+<p>$path="D:/_xampplite/htdocs/desweb/7AplicativosExemplo/extras"; $ar=getDirectorySize($path);</p>
+<p>echo "<a name="Detalhes_:_.24path" id="Detalhes_:_.24path"></a></p>
+<h4><span class="mw-headline">Detalhes&#160;: $path</span></h4>
+<p>";</p>
+<p>echo "Tamanho total&#160;: ".sizeFormat($ar['size'])."<br />
+"; echo "No. de arquivos&#160;: ".$ar['count']."<br />
+"; echo "No. de diretórios&#160;: ".$ar['dircount']."<br />
+"; ?&gt;</p>
+<p><br /></p>
+<p><a name="Tamanho_de_diret.C3.B3rio" id="Tamanho_de_diret.C3.B3rio"></a></p>
+<h2><span class="mw-headline">Tamanho de diretório</span></h2>
+<p>&lt;? // CALCULANDO TAMANHO (BYTES) OCUPADO POR UM DIRETÓRIO // <a href="http://www.weberdev.com/get_example-4171.html" class="external free" title="http://www.weberdev.com/get_example-4171.html" rel="nofollow">http://www.weberdev.com/get_example-4171.html</a></p>
+<p>function dir_size( $dir ) {</p>
+<pre>
+   if( !$dir or !is_dir( $dir ) )
+   {
+       return 0;
+   }
+</pre>
+<pre>
+   $ret = 0;
+   $sub = opendir( $dir );
+   while( $file = readdir( $sub ) )
+   {
+       if( is_dir( $dir . '/' . $file ) &amp;&amp; $file !== ".." &amp;&amp; $file !== "." )
+       {
+           $ret += dir_size( $dir . '/' . $file );
+           unset( $file );
+       }
+       elseif( !is_dir( $dir . '/' . $file ) )
+       {
+           $stats = stat( $dir . '/' . $file );
+           $ret += $stats['size'];
+           unset( $file );
+       }
+   }
+   closedir( $sub );
+   unset( $sub );
+   return $ret;
+</pre>
+<p>}</p>
+<p>echo dir_size("D:/_xampplite/htdocs/desweb/1LinguagemPHP/php/tutoriais/trabalhando_com"); ?&gt;</p>
+<p><br />
+&lt;?php</p>
+<p>// MAIS UMA ÓTIMA FUNÇÃO PARA LER O TAMANHO DE UM DIRETÓRIO</p>
+<p>/*</p>
+<pre>
+* PHP Freaks Code Library
+* <a href="http://www.phpfreaks.com/quickcode.php" class="external free" title="http://www.phpfreaks.com/quickcode.php" rel="nofollow">http://www.phpfreaks.com/quickcode.php</a>
+*
+* Title: Directory Size
+* Version: 1.0
+* Author: Nathan Taylor aka(Lakario)
+* Date: Saturday, 12/20/2003 - 12:34 PM
+*
+* 
+*
+* NOTICE: This code is available from PHPFreaks.com code Library.
+*         This code is not Copyrighted by PHP Freaks. 
+*
+*         PHP Freaks does not claim authorship of this code.
+*
+*         This code was submitted to our website by a user. 
+*
+*         The user may or may not claim authorship of this code.
+*
+*         If there are any questions about the origin of this code,
+*         please contact the person who submitted it, not PHPFreaks.com!
+*
+*         USE THIS CODE AT YOUR OWN RISK! NO GUARANTEES ARE GIVEN!
+*
+* SHAMELESS PLUG: Need WebHosting? Checkout WebHost Freaks:
+*                 <a href="http://www.webhostfreaks.com" class="external free" title="http://www.webhostfreaks.com" rel="nofollow">http://www.webhostfreaks.com</a>
+*                 WebHosting by PHP Freaks / The Web Freaks!
+</pre>
+<ul>
+<li>/</li>
+</ul>
+<p><br />
+// * Description / Example: // * // * This code will allow an individual to quickly obtain the size and number of files inside a directory recursively. // * // * It also includes a convenient byte value converter to kilobyte, megabyte, gigabyte, or trilobyte accordingly.</p>
+<p>?&gt;</p>
+<p>&lt;?php function DirStat($directory) { 	global $FolderCount, $FileCount, $FolderSize;</p>
+<p>chdir($directory); 	$directory = getcwd(); 	if($open = opendir($directory)) { 		//while($file = readdir($open)) { 		while(false&#160;!== ($file = readdir($open))) { 			if($file == '..' || $file == '.') continue; 			if(is_file($file)) { 				$FileCount++; 				$FolderSize += filesize($file); 			} elseif(is_dir($file)) { 				$FolderCount++; 			} 		} 		if($FolderCount &gt; 0) { 			$open2 = opendir($directory); 			while($folders = readdir($open2)) { 				$folder = $directory.'/'.$folders; 				if($folders == '..' || $folders == '.') continue; 				if(is_dir($folder)) { 					DirStat($folder); 				} 			} 			closedir($open2); 		} 		closedir($open); 	} }</p>
+<p>function ByteSize($bytes) { 	$size = $bytes / 1024; 	if($size &lt; 1024){ 		$size = number_format($size, 2); 		$size .= 'kb'; 	} else { 		if($size / 1024 &lt; 1024) { 			$size = number_format($size / 1024, 2); 			$size .= 'mb'; 		} elseif($size / 1024 / 1024 &lt; 1024) { 			$size = number_format($size / 1024 / 1024, 2); 			$size .= 'gb'; 		} else { 			$size = number_format($size / 1024 / 1024 / 1024, 2); 			$size .= 'tb'; 		} 	} 	return $size; }</p>
+<p>$folder = 'D:/1Enviar/Hoje'; $dir = getcwd(); DirStat($folder, 0); chdir($dir); $FolderSize = ByteSize($FolderSize);</p>
+<p>echo '<b>Folder Name:</b> '.$folder.'<br />
+'.chr(10); echo '<b>File Count:</b> '.$FileCount.'<br />
+'.chr(10); echo '<b>Folder Size:</b>'.$FolderSize.'<br />
+'.chr(10); ?&gt;</p>
+<p><br /></p>
+<p><a name="Trechos_do_Tutorial_-_The_right_way_to_read_files_with_PHP_da_IBM" id="Trechos_do_Tutorial_-_The_right_way_to_read_files_with_PHP_da_IBM"></a></p>
+<h2><span class="mw-headline">Trechos do Tutorial - The right way to read files with PHP da IBM</span></h2>
+<p><b>USANDO fscanf</b></p>
+<p>fscanf</p>
+<p>Coming back to string processing, fscanf again follows the traditional C file library functions. If you're unfamiliar with it, fscanf reads field data into variables from a file.</p>
+<p>list ($field1, $field2, $field3) = fscanf($fh, "%s&#160;%s&#160;%s");</p>
+<p><br />
+<b>FUNÇÃO fpassthru</b></p>
+<p>No matter how you've been reading your file, you can dump the rest of your data to your standard output channel using fpassthru.</p>
+<p>fpassthru($fh);</p>
+<p><br />
+my_file = file_get_contents("myfilename");</p>
+<p>echo $my_file;</p>
+<p><br /></p>
+<p>Although it isn't best practice, you can write this command even more concisely as:</p>
+<p>echo file_get_contents("myfilename");</p>
+<p><br /></p>
+<p>This article is primarily about dealing with local files, but it's worth noting that you can grab, echo, and parse other Web pages with these functions, as well.</p>
+<p>echo file_get_contents("<a href="http://127.0.0.1/" class="external free" title="http://127.0.0.1/" rel="nofollow">http://127.0.0.1/</a>");</p>
+<p><br /></p>
+<p>This command is effectively the same as:</p>
+<p>$fh = fopen("<a href="http://127.0.0.1/" class="external free" title="http://127.0.0.1/" rel="nofollow">http://127.0.0.1/</a>", "r");</p>
+<p>fpassthru($fh);</p>
+<p><br /></p>
+<p>You must be looking at this and thinking, "That's still way too much effort." The PHP developers agree with you. So you can shorten the above command to:</p>
+<p>readfile("<a href="http://127.0.0.1/" class="external free" title="http://127.0.0.1/" rel="nofollow">http://127.0.0.1/</a>");</p>
+<p><br /></p>
+<p>The readfile function dumps the entire contents of a file or Web page to the default output buffer. By default, this command prints an error message if it fails. To avoid this behavior (if you want to), try:</p>
+<p>@readfile("<a href="http://127.0.0.1/" class="external free" title="http://127.0.0.1/" rel="nofollow">http://127.0.0.1/</a>");</p>
+<p><br /></p>
+<p>Of course, if you actually want to parse your files, the single string that file_get_contents returns might be a bit overwhelming. Your first inclination might be to break it up a little bit with the split() function.</p>
+<p>$array = split("\n", file_get_contents("myfile"));</p>
+<p><br /></p>
+<p>But why go through all that trouble when there's a perfectly good function to do it for you? PHP's file() function does this in one step: It returns an array of strings broken up by lines.</p>
+<p>$array = file("myfile");</p>
+<p><br /></p>
+<p>It should be noted that there is a slight difference between the above two examples. While the split command drops the newlines, the newlines are still attached to the strings in the array when using the file command (as with the fgets command).</p>
+<p>PHP's power goes far beyond this, though. You can parse entire PHP-style .ini files in a single command using parse_ini_file. The parse_ini_file command accepts files similar to Listing 4.</p>
+<p><br />
+Listing 4. A sample .ini file</p>
+<pre>
+; Comment
+[personal information]
+name = "King Arthur"
+quest = To seek the holy grail
+favorite color = Blue
+
+[more stuff]
+Samuel Clemens = Mark Twain
+Caryn Johnson = Whoopi Goldberg
+</pre>
+<p>The following commands would dump this file into an array, then print that array:</p>
+<pre>
+$file_array = parse_ini_file("holy_grail.ini");
+print_r $file_array;
+</pre>
+<p><br />
+The following output is the result:</p>
+<pre>
+Listing 5. Output
+Array
+(
+    [name] =&gt; King Arthur
+    [quest] =&gt; To seek the Holy Grail
+    [favorite color] =&gt; Blue
+    [Samuel Clemens] =&gt; Mark Twain
+    [Caryn Johnson] =&gt; Whoopi Goldberg
+)
+</pre>
+<p><br />
+Of course, you might notice that this command merged the sections. This is the default behavior, but you can fix it easily by passing a second argument to parse_ini_file: process_sections, which is a Boolean variable. Set process_sections to True.</p>
+<p>$file_array = parse_ini_file("holy_grail.ini", true);</p>
+<p>print_r $file_array;</p>
+<p><br /></p>
+<p>And you'll get the following output:</p>
+<p><br />
+Listing 6. Output</p>
+<pre>
+Array
+(
+    [personal information] =&gt; Array
+        (
+            [name] =&gt; King Arthur
+            [quest] =&gt; To seek the Holy Grail
+            [favorite color] =&gt; Blue
+        )
+
+    [more stuff] =&gt; Array
+        (
+            [Samuel Clemens] =&gt; Mark Twain
+            [Caryn Johnson] =&gt; Whoopi Goldberg
+        )
+
+)
+</pre>
+<p><br />
+PHP placed the data into an easily parsable multidimensional array.</p>
+<p>This is just the tip of the iceberg when it comes to PHP file processing. More complex functions like tidy_parse_file and xml_parse can help you handle HTML and XML documents, respectively. See Resources for details on how these particular functions work. These are well worth looking at if you'll be dealing with those types of files, but instead of considering every possible file type you might run into in detail in this article, here are a few good general rules for dealing with the functions I've described thus far.</p>
+<p><br />
+<b>Good practice</b></p>
+<p>Never assume that everything in your program will work as planned. For example, what if the file you're looking for has moved? What if the permissions have been altered and you're unable to read the contents? You can check for these things in advance by using file_exists and is_readable.</p>
+<p><br />
+Listing 7. Use file_exists and is_readable</p>
+<pre>
+$filename = "myfile";
+if (file_exists($filename) &amp;&amp; is_readable ($filename)) {
+	$fh = fopen($filename, "r");
+	# Processing
+	fclose($fh);
+}
+
+In practice, however, such code is probably overkill. Processing the return value of fopen is simpler and more accurate.
+
+if ($fh = fopen($filename, "r")) {
+	# Processing
+	fclose($fh);
+}
+</pre>
+<hr />
+<p>Final do trecho do tut IBM--------------- <a name="L.C3.AA_e_imprime_todo_o_conte.C3.BAdo_de_um_arquivo_CSV" id="L.C3.AA_e_imprime_todo_o_conte.C3.BAdo_de_um_arquivo_CSV"></a></p>
+<h2><span class="mw-headline">Lê e imprime todo o conteúdo de um arquivo CSV</span></h2>
+<pre>
+&lt;?php
+// Lê e imprime todo o conteúdo de um arquivo CSV
+$row = 1;
+$handle = fopen ("test.csv","r");
+while ($data = fgetcsv ($handle, 1000, ",")) {
+   $num = count ($data);
+   print "&lt;p&gt; $num campos na linha $row: &lt;br&gt;";
+   $row++;
+   for ($c=0; $c &lt; $num; $c++) {
+       print $data[$c] . "&lt;br&gt;";
+   }
+}
+fclose ($handle);
+?&gt; 
+&lt;pre&gt;
+
+Outra:
+&lt;pre&gt;
+&lt;?php
+
+define('CSV_BOTH', 1);
+define('CSV_ASSOC', 2);
+define('CSV_NUM', 3);
+
+function parse_csv($filename, $result_type = CSV_BOTH) {
+   if(!file_exists($filename)) {
+       die("file (" . $filename . ") does not exist\n");
+   }
+  
+   $lines = file($filename);
+  
+   $title_line = trim(array_shift($lines));
+   $titles = split(",", $title_line);
+  
+   $records = array();
+   foreach($lines as $line_num =&gt; $line) {   
+       $subject = trim($line);
+       $fields = array();
+       for($field_num = 0; $field_num &lt; count($titles); $field_num++) {
+           if($subject{0} == '"') {
+               preg_match('/^"(([^"]|\\")*)",?(.*)$/', $subject, $matches);
+              
+               $value = $matches[1];
+               $subject = $matches[3];
+              
+               if($result_type == CSV_BOTH || $result_type == CSV_ASSOC) {
+                   $fields[$titles[$field_num]] = $value;
+               }
+              
+               if($result_type == CSV_BOTH || $result_type == CSV_NUM) {
+                   $fields[$field_num] = $value;
+               }
+           } else {
+               preg_match('/^([^,]*),?(.*)$/', $subject, $matches);
+              
+               $value = $matches[1];
+               $subject = $matches[2];
+              
+               if($result_type == CSV_BOTH || $result_type == CSV_ASSOC) {
+                   $fields[$titles[$field_num]] = $value;
+               }
+              
+               if($result_type == CSV_BOTH || $result_type == CSV_NUM) {
+                   $fields[$field_num] = $value;
+               }
+           }
+       }
+      
+       $records[] = $fields;
+   }
+
+   return $records;
+}
+
+?&gt;
+&lt;pre&gt;
+
+This version is conditional - it only adds quotes if needed:
+&lt;pre&gt;
+&lt;?
+function csv_escape($str) {
+   $str = str_replace(array('"', ',', "\n", "\r"), array('""', ',', "\n", "\r"), $str, &amp;$count);
+   if($count) {
+       return '"' . $str . '"';
+   } else {
+       return $str;
+   }
+}
+?&gt;
+
+
+
+&lt;?php
+$caminho = "/home/httpd/html/index.php";
+$arquivo = basename ($caminho);        // $arquivo = "index.php"
+$arquivo = basename ($caminho,".php"); // $arquivo = "index"
+?&gt; 
+</pre>
+<p><a name="rmdir_--_Remove_um_diret.C3.B3rio" id="rmdir_--_Remove_um_diret.C3.B3rio"></a></p>
+<h2><span class="mw-headline">rmdir -- Remove um diretório</span></h2>
+<p>This functions deletes or empties the directory. Without using recursive functions!</p>
+<pre>
+&lt;?php
+
+/**
+ * Removes the directory and all its contents.
+ *
+ * @param string the directory name to remove
+ * @param boolean whether to just empty the given directory, without deleting the given directory.
+ * @return boolean True/False whether the directory was deleted.
+ */
+function deleteDirectory($dirname,$only_empty=false) {
+   if (!is_dir($dirname))
+       return false;
+   $dscan = array(realpath($dirname));
+   $darr = array();
+   while (!empty($dscan)) {
+       $dcur = array_pop($dscan);
+       $darr[] = $dcur;
+       if ($d=opendir($dcur)) {
+           while ($f=readdir($d)) {
+               if ($f=='.' || $f=='..')
+                   continue;
+               $f=$dcur.'/'.$f;
+               if (is_dir($f))
+                   $dscan[] = $f;
+               else
+                   unlink($f);
+           }
+           closedir($d);
+       }
+   }
+   $i_until = ($only_empty)? 1 : 0;
+   for ($i=count($darr)-1; $i&gt;=$i_until; $i--) {
+       echo "\nDeleting '".$darr[$i]."' ... ";
+       if (rmdir($darr[$i]))
+           echo "ok";
+       else
+           echo "FAIL";
+   }
+   return (($only_empty)? (count(scandir)&lt;=2) : (!is_dir($dirname)));
+}
+
+?&gt;
+
+//Outra
+
+&lt;?php
+/* Function to remove directories, even if they contain files or
+subdirectories.  Returns array of removed/deleted items, or false if nothing
+was removed/deleted.
+
+by Justin Frim.  2007-01-18
+
+Feel free to use this in your own code.
+*/
+
+function rmdirtree($dirname) {
+   if (is_dir($dirname)) {    //Operate on dirs only
+       $result=array();
+       if (substr($dirname,-1)!='/') {$dirname.='/';}    //Append slash if necessary
+       $handle = opendir($dirname);
+       while (false !== ($file = readdir($handle))) {
+           if ($file!='.' &amp;&amp; $file!= '..') {    //Ignore . and ..
+               $path = $dirname.$file;
+               if (is_dir($path)) {    //Recurse if subdir, Delete if file
+                   $result=array_merge($result,rmdirtree($path));
+               }else{
+                   unlink($path);
+                   $result[].=$path;
+               }
+           }
+       }
+       closedir($handle);
+       rmdir($dirname);    //Remove dir
+       $result[].=$dirname;
+       return $result;    //Return array of deleted items
+   }else{
+       return false;    //Return false if attempting to operate on a file
+   }
+}
+?&gt;
+</pre>
+<p><br /></p>
+<p><a name="rename_--_Renomear_um_arquivo_.28.24antigo.2C_.24novo.29" id="rename_--_Renomear_um_arquivo_.28.24antigo.2C_.24novo.29"></a></p>
+<h2><span class="mw-headline">rename -- Renomear um arquivo ($antigo, $novo)</span></h2>
+<pre>
+&lt;?php
+  rename("/tmp/tmp_file.txt", "/home/user/login/docs/my_file.txt");
+?&gt; 
+</pre>
+<p><a name="unlink_--_Apaga_um_arquivo" id="unlink_--_Apaga_um_arquivo"></a></p>
+<h2><span class="mw-headline">unlink -- Apaga um arquivo</span></h2>
+<p><a name="mkdir_--_Criar_um_diret.C3.B3rio" id="mkdir_--_Criar_um_diret.C3.B3rio"></a></p>
+<h2><span class="mw-headline">mkdir -- Criar um diretório</span></h2>
+<p>mkdir ("/path/to/my/dir", 0700);</p>
+<p>is_file -- Diz se o arquivo é um arquivo comum (não é diretório)</p>
+<p>file -- Le um arquivo inteiro para um array</p>
+<pre>
+&lt;?php
+// Le um arquivo em um array. Nesse exemplo você pode obter via HTTP para obter
+// o código fonte HTML de uma URL.
+$lines = file ('http://www.exemplo.com/');
+
+// Roda através do array, mostrando o fonte HTML com numeração de linhas.
+foreach ($lines as $line_num =&gt; $line) {
+   echo "Linha #&lt;b&gt;{$line_num}&lt;/b&gt; : " . htmlspecialchars($line) . "&lt;br&gt;\n";
+}
+
+// Outro exemplo, onde obtemos a página web inteira como uma string. Veja também file_get_contents().
+$html = implode ('', file ('http://www.exemplo.com/'));
+?&gt; 
+</pre>
+<p><br /></p>
+<p><a name="file_exists_--_Checa_se_um_arquivo_ou_diret.C3.B3rio_existe" id="file_exists_--_Checa_se_um_arquivo_ou_diret.C3.B3rio_existe"></a></p>
+<h2><span class="mw-headline">file_exists -- Checa se um arquivo ou diretório existe</span></h2>
+<pre>
+$filename = '/caminho/para/qualquer.txt';
+
+if (file_exists($filename)) {
+   print "O arquivo $filename existe";
+} else {
+   print "O arquivo $filename não existe";
+}
+</pre>
+<p><br /></p>
+<p><a name="disk_free_space_--_Retorna_o_espa.C3.A7o_disponivel_no_diret.C3.B3rio" id="disk_free_space_--_Retorna_o_espa.C3.A7o_disponivel_no_diret.C3.B3rio"></a></p>
+<h2><span class="mw-headline">disk_free_space -- Retorna o espaço disponivel no diretório</span></h2>
+<p><br /></p>
+<p><a name="Receber_Conte.C3.BAdo_de_URL" id="Receber_Conte.C3.BAdo_de_URL"></a></p>
+<h2><span class="mw-headline">Receber Conteúdo de URL</span></h2>
+<p>&lt;?php // Trazer conteúdo de arquivo ou de página para string</p>
+<p>// Define a context for HTTP. $aContext = array(</p>
+<pre>
+  'http' =&gt; array(
+      'proxy' =&gt; 'tcp://10.0.0.1:3128', // This needs to be the server and the port of the NTLM Authentication Proxy Server.
+      'request_fulluri' =&gt; True,
+      ),
+  );
+</pre>
+<p>$cxContext = stream_context_create($aContext);</p>
+<p>// Now all file stream functions can use this context. $sFile = file_get_contents("<a href="http://www.google.com" class="external free" title="http://www.google.com" rel="nofollow">http://www.google.com</a>", False, $cxContext); echo $sFile; ?&gt;</p>
+<p><br /></p>
+<p><a name="Recursively_find_files_by_filename_pattern" id="Recursively_find_files_by_filename_pattern"></a></p>
+<h2><span class="mw-headline">Recursively find files by filename pattern</span></h2>
+<p><a href="http://snippets.dzone.com/posts/show/4147" class="external free" title="http://snippets.dzone.com/posts/show/4147" rel="nofollow">http://snippets.dzone.com/posts/show/4147</a></p>
+<p>Scans a directory, and all subdirectories for files, matching a regular expression. Each match is sent to the callback provided as third argument. A simple example:</p>
+<p>function my_handler($filename) {</p>
+<pre>
+ echo $filename . "\n";
+</pre>
+<p>} find_files('c:/', '/php$/', 'my_handler');</p>
+<p><br /></p>
+<p>And the actual snippet</p>
+<p>function find_files($path, $pattern, $callback) {</p>
+<pre>
+ $path = rtrim(str_replace("\\", "/", $path), '/') . '/';
+ $matches = Array();
+ $entries = Array();
+ $dir = dir($path);
+ while (false !== ($entry = $dir-&gt;read())) {
+   $entries[] = $entry;
+ }
+ $dir-&gt;close();
+ foreach ($entries as $entry) {
+   $fullname = $path . $entry;
+   if ($entry != '.' &amp;&amp; $entry != '..' &amp;&amp; is_dir($fullname)) {
+     find_files($fullname, $pattern, $callback);
+   } else if (is_file($fullname) &amp;&amp; preg_match($pattern, $entry)) {
+     call_user_func($callback, $fullname);
+   }
+ }
+</pre>
+<p>}</p>
+<p><br /></p>
+<p><a name="Refer.C3.AAncia" id="Refer.C3.AAncia"></a></p>
+<h2><span class="mw-headline">Referência</span></h2>
+<p><a href="http://phpbrasil.com/articles/print.php/id/310" class="external free" title="http://phpbrasil.com/articles/print.php/id/310" rel="nofollow">http://phpbrasil.com/articles/print.php/id/310</a></p>
+
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 98/1000000
+Post-expand include size: 8/2048000 bytes
+Template argument size: 0/2048000 bytes
+Expensive parser function count: 0/500
+-->
+
+<!-- Saved in parser cache with key ptwikibooks:pcache:idhash:14460-0!1!0!!pt-br!2 and timestamp 20090810192752 -->
+<div class="printfooter">
+Obtido em "<a href="http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos">http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos</a>"</div>
+			<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="/wiki/Especial:Categorias" title="Especial:Categorias">Categoria</a>: <span dir='ltr'><a href="/wiki/Categoria:Aplicativos_em_PHP" title="Categoria:Aplicativos em PHP">Aplicativos em PHP</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Acessos</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+	
+				 <li id="ca-nstab-main" class="selected"><a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos" title="Ver a página de conteúdo [c]" accesskey="c">módulo</a></li>
+				 <li id="ca-talk" class="new"><a href="/w/index.php?title=Discuss%C3%A3o:Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos&amp;action=edit&amp;redlink=1" title="Discussão sobre o conteúdo da página [t]" accesskey="t">Discussão</a></li>
+				 <li id="ca-edit"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos&amp;action=edit" title="Você pode editar esta página. Por favor, utilize o botão Mostrar Previsão antes de salvar. [e]" accesskey="e">Editar</a></li>
+				 <li id="ca-history"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos&amp;action=history" title="Edições anteriores desta página. [h]" accesskey="h">História</a></li>
+				 <li id="ca-move"><a href="/wiki/Especial:Mover/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos" title="Mover esta página [m]" accesskey="m">Mover</a></li>
+				 <li id="ca-watch"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos&amp;action=watch" title="Adicionar esta página aos artigos vigiados [w]" accesskey="w">Vigiar</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Ferramentas pessoais</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+				<li id="pt-acaibeta"><a href="http://pt.wikibooks.org/w/index.php?title=Especial:UsabilityInitiativeOptIn&amp;from=Aplicativos_em_PHP%2FTrabalhando_em_PHP_com%2FArquivos" class="no-text-transform">Experimente o Beta</a></li>
+				<li id="pt-userpage"><a href="/wiki/Usu%C3%A1rio:Ribafs" title="Sua página de utilizador [.]" accesskey=".">Ribafs</a></li>
+				<li id="pt-mytalk"><a href="/wiki/Usu%C3%A1rio_Discuss%C3%A3o:Ribafs" title="Sua página de discussão [n]" accesskey="n">Minha discussão</a></li>
+				<li id="pt-preferences"><a href="/wiki/Especial:Prefer%C3%AAncias" title="Minhas preferências">Minhas preferências</a></li>
+				<li id="pt-watchlist"><a href="/wiki/Especial:P%C3%A1ginas_vigiadas" title="Lista de artigos vigiados. [l]" accesskey="l">Páginas vigiadas</a></li>
+				<li id="pt-mycontris"><a href="/wiki/Especial:Contribui%C3%A7%C3%B5es/Ribafs" title="Lista das suas contribuições [y]" accesskey="y">Minhas contribuições</a></li>
+				<li id="pt-logout"><a href="/w/index.php?title=Especial:Sair&amp;returnto=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos" title="Sair">Sair</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(http://upload.wikimedia.org/wikibooks/pt/b/bc/Wiki.png);" href="/wiki/P%C3%A1gina_principal" title="Página principal [z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div id="p-search" class="portlet">
+		<h5 lang="pt-br" xml:lang="pt-br"><label for="searchInput">Pesquisa</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/w/index.php" id="searchform"><div>
+				<input type='hidden' name="title" value="Especial:Busca"/>
+				<input id="searchInput" name="search" type="text" title="Pesquisar nesta wiki [f]" accesskey="f" value="" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Ir" title="Ir a uma página com este exato nome, caso exista" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Pesquisa" title="Procurar por páginas contendo este texto" />
+			</div></form>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5 lang="pt-br" xml:lang="pt-br">Navegação</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/wiki/P%C3%A1gina_principal">Página principal</a></li>
+				<li id="n-Library"><a href="/wiki/Wikilivros:Biblioteca">Biblioteca</a></li>
+				<li id="n-recentchanges"><a href="/wiki/Especial:Mudan%C3%A7as_recentes" title="A lista de mudanças recentes nesta wiki. [r]" accesskey="r">Mudanças recentes</a></li>
+				<li id="n-randompage"><a href="/wiki/Especial:Aleat%C3%B3ria" title="Carregar página aleatória [x]" accesskey="x">Página aleatória</a></li>
+				<li id="n-help"><a href="/wiki/Ajuda:Conte%C3%BAdos" title="Um local reservado para auxílio.">Ajuda</a></li>
+				<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Donate/pt" title="Ajude-nos">Doações</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-Project'>
+		<h5 lang="pt-br" xml:lang="pt-br">projeto</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-about"><a href="/wiki/Wikilivros:Sobre">Sobre</a></li>
+				<li id="n-portal"><a href="/wiki/Wikilivros:Portal_comunit%C3%A1rio" title="Sobre o projeto e coisas que você poder fazer aqui.">Portal comunitário</a></li>
+				<li id="n-Staff-lounge"><a href="/wiki/Wikilivros:Staff_lounge">Esplanada</a></li>
+				<li id="n-Wikijunior"><a href="/wiki/Wikij%C3%BAnior">Wikijúnior</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-coll-create_a_book'>
+		<h5 lang="pt-br" xml:lang="pt-br">Criar uma coleção</h5>
+		<div class='pBody'>
+<ul id="collectionPortletList"><li id="coll-add_page"><a href="/w/index.php?title=Especial:Livro/add_article/&amp;arttitle=Aplicativos+em+PHP%2FTrabalhando+em+PHP+com%2FArquivos&amp;oldid=0" title="Adicionar a página wiki atual ao seu livro" onclick="collectionCall(&#039;AddArticle&#039;, [&#039;removepage&#039;, wgNamespaceNumber, wgTitle, 0]); return false;" rel="nofollow">Adicionar página ao livro</a></li><li id="coll-help_collections"><a href="/wiki/Ajuda:Livros" title="Mostrar ajuda sobre a ferramenta de livros">Ajuda sobre livros</a></li></ul><script type="text/javascript">/*<![CDATA[*/
+		var wgCollectionAddRemoveSate = "addpage";
+		/*]]>*/</script>
+<script type="text/javascript" src="/w/extensions/Collection/collection/portlet.js?2"></script>		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5 lang="pt-br" xml:lang="pt-br">Ferramentas</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/wiki/Especial:P%C3%A1ginas_afluentes/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos" title="Lista de todas as páginas que ligam-se a esta [j]" accesskey="j">Páginas afluentes</a></li>
+				<li id="t-recentchangeslinked"><a href="/wiki/Especial:Novidades_relacionadas/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos" title="Mudanças recentes em páginas relacionadas a esta [k]" accesskey="k">Alterações relacionadas</a></li>
+<li id="t-upload"><a href="/wiki/Especial:Carregar_imagem" title="Carregar arquivos [u]" accesskey="u">Carregar arquivo</a></li>
+<li id="t-specialpages"><a href="/wiki/Especial:P%C3%A1ginas_especiais" title="Lista de páginas especiais [q]" accesskey="q">Páginas especiais</a></li>
+				<li id="t-print"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos&amp;printable=yes" rel="alternate" title="Versão para impressão desta página [p]" accesskey="p">Versão para impressão</a></li>				<li id="t-permalink"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Arquivos&amp;oldid=111126" title="Link permanente para esta versão desta página">Link permanente</a></li><li id="t-download-as-pdf"><a href="/w/index.php?title=Especial:Livro/render_article/&amp;arttitle=Aplicativos+em+PHP/Trabalhando+em+PHP+com/Arquivos&amp;oldid=111126&amp;writer=rl" rel="nofollow">Versão em PDF</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/skins-1.5/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></div>
+				<div id="f-copyrightico"><a href="http://wikimediafoundation.org/"><img src="/images/wikimedia-button.png" alt="Wikimedia Foundation"/></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> Esta página foi modificada pela última vez às 18h42min, 7 de dezembro de 2008.</li>
+					<li id="copyright">O texto está disponível sob a licença <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>; condições adicionais podem-se aplicar. Veja <a href="http://wikimediafoundation.org/wiki/Terms_of_Use">Condições de Uso</a> para detalhes.</li>
+					<li id="privacy"><a href="/wiki/Wikilivros:Pol%C3%ADtica_de_privacidade" title="Wikilivros:Política de privacidade">Política de privacidade</a></li>
+					<li id="about"><a href="/wiki/Wikilivros:Sobre" title="Wikilivros:Sobre">Sobre</a></li>
+					<li id="disclaimer"><a href="/wiki/Wikilivros:Aviso_geral" title="Wikilivros:Aviso geral">Alerta de Conteúdo</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served by srv129 in 0.231 secs. --></body></html>

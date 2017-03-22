@@ -1,0 +1,327 @@
+Dicas sobre Segurança
+
+
+Sanitization
+
+$badString = '<font size="99" color="#FF0000">HEY</font><script>...</script>';
+Outputs: <font size="99" color="#FF0000">HEY</font><script>...</script>
+
+echo Sanitize::html($badString);
+Outputs: HEY...
+echo Sanitize::html($badString, array('remove' => true));
+Sanitize class has been deprecated and will be removed in 3.0.
+
+
+- Implementação do algoritmo de criptografia BCrypt
+
+O Bcrypt aumenta a segurança dos aplicativos e provavelmente virá implementado no componente Auth por padrão nas próximas versões do Cake.
+
+app/Model/User 
+
+No início: 
+App::uses('BcryptFormAuthenticate', 'Controller/Component/Auth');
+
+Copiar o código da classe BcryptFormAuthenticate.php, do raiz deste aplicativo para:
+cakemodelo/lib/Cake/Controller/Component/Auth
+
+No código da classe do model User, alterar o beforeSave para este 
+
+    function beforeSave($options = Array()) { 
+        if (isset($this->data['User']['password'])) { 
+            $this->data['User']['password'] = BcryptFormAuthenticate::hash($this->data['User']['password']); 
+        } 
+        return true; 
+    } 
+
+No app/Controller/AppController: 
+
+Alteração no $components ... 
+	public $components = array( 
+		'Session', 'Acesso',
+		'Auth' => array( 
+        'authenticate' => array( 
+		    'Blowfish' => array( 
+			    'fields' => array('username' => 'username')) 
+		    ),// https://groups.google.com/forum/#!msg/cake-php/s8RXjtg3IWE/LjdTOVWH7q0J 
+		    'loginRedirect' => array('controller' => '/submenus', 'action' => 'menus'), 
+		    'logoutRedirect' => array('controller' => 'users', 'action' => 'login'), 
+		    'authorize' => array('Controller') // Adicionamos essa linha 
+		) 
+	); 
+Agora veja a diferença entre os hashs: 
+Usando o hash padrão do Auth - 99790b128030b417877948352809548a5d3c55f5 
+Usando o hash do Bcrypt - $2a$10$DYhG93b0qyJfIxfs2guVoOWUva7s4SWbWRR/RtNzvuZOVDU/jwdP. 
+
+Por isso outra alteração obrigatória deve ser aumentar o tamanho do campo password para 60. 
+Outra exigência do bcrypt: o salt alfanumérico no core.php deve ser sempre maior que 20 dígitos. 
+
+Testando
+
+Permita ao público index e edit
+Comente o componente em AppController assim
+
+    public function beforeFilter() { 
+        $this->Auth->allow('menus','index','edit'); // Estes terão acesso público 
+
+	/*	if($this->action != 'menus'){ 
+
+			$controller=$this->params['controller']; 
+			$action=$this->params['action']; 
+			$this->Acesso->access($controller,$action); 
+	 
+			if($this->Acesso->redir==true){ 
+				$this->redirect(array('controller' => 'users','action' => 'login')); 
+			} 
+		} */
+    } 
+
+http://localhost/cakemodelo2/users 
+E altere a senha do usuário "admin" para admin e a dos outros também e salve.
+
+Altere novamente para não permitir add pelo público.
+
+Acesse
+http://localhost/cakemodelo2/logout 
+
+Depois
+http://localhost/cakemodelo2/users/login 
+E teste o aplicativo com os usuários admin, gerente e usuario.
+
+
+
+- Plugin Localized validando campos CPF
+
+Adicionando Validação com o Plugin Localized 
+O plugin Localized contém classes com validação para diversos países, inclusive o Brasil. 
+Validação Específica do Brasil: 
+postal, phone, ssn (cpf e cnpj) 
+
+Download do plugin: 
+https://github.com/cakephp/localized  
+
+Descompactar e renomear para Localized 
+
+Carregar em app/Config/bootstrap.php: 
+CakePlugin::load('Localized');
+
+Adicionar ao model Cliente: 
+<?php 
+App::uses('BrValidation', 'Localized.Validation');
+
+Logo mais abaixo no corpo da classe altere a validação do cpf para ficar assim:
+
+	public $validate = array(
+		'nome' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'cpf' => array(
+				'valid' => array(
+					'rule' => array('ssn', null, 'br'),
+					'message' => 'CPF Inválido!'
+				)
+			)
+	);
+
+Pronto. Ao adicionar ou editar um registro com CPF ele será devidamente validado. 
+
+
+
+- Instalando o componente Acesso (Alternativas: ACL, Usermgmt e plugin Admin)
+
+Esclarecimento: o componente Acesso controla o acesso de usuários ao aplicativo. Ele controla para cada action de cada controller. Mas para isso nós precisamos preencher a tabela privileges através do controller de mesmo nome. Somente após cadastrar cada action de cada controller e seu respectivo usuário, somente então ele funcionará corretamente.
+
+Começe chamando o controller privileges:
+http://localhost/cakemodelo2/privileges/
+
+E cadastrando todos os actions que deseja controlar. Deixe de fora somente os que deseja deixar com acesso ao público. Aqui estou deixando somente o menus, login e logout com acesso ao público.
+
+Copie o código em anexo do componente Acesso para app/Controller/Component
+
+Adicione a entrada do componente Acesso ao AppController:
+
+    public $components = array( 
+        'Session', 'Acesso',
+		...
+	}
+
+Adicione o beforeFilter ao AppController:
+	public function beforeFilter() { 
+		$this->Auth->allow('menus'); // Liberado para o público 
+
+		if($this->action != 'menus'){ 
+
+			$controller=$this->params['controller']; 
+			$action=$this->params['action']; 
+			$this->Acesso->access($controller,$action); 
+	 
+			if($this->Acesso->redir==true){ 
+				$this->redirect(array('controller' => 'users','action' => 'login')); 
+			} 
+		} 
+	} 
+Neste caso, estou configurando para que ele dê acesso ao público somente no action "menus".
+
+Altere o método isAuthorized em AppController para ficar assim:
+
+	public function isAuthorized($user) { 
+		// Admin can access every action 
+		if (isset($user['group_id'])){// && $user['group_id'] == 1) { 
+		    return true; 
+		} 
+
+		// Default deny 
+		return false; 
+	} 
+
+Testando:
+http://localhost/cakemodelo2/
+
+Faça login como admin e cadastre os usuários: gerente no grupo gerentes e usuario no usuarios.
+Então faça logout.
+Faça login como gerente ou usuario e experimente testar os privilégios cadastrados em privileges.
+
+
+
+- Instalação e uso do plugin Security
+
+Para efetuar testes no nosso código e dar sugestões para melhorar a segurança.
+
+- Download - https://github.com/nodesagency/cakephp-security 
+- Descompacte e renomeie para Security 
+- Copie a pasta Security para /app/Plugin 
+- Adicione ao app/Config/bootstrap.php: 
+	CakePlugin::load('Security'); 
+- Executar no terminal 
+cd /var/www/cadcli/app/Console 
+./cake Security.check controller ../Controller 
+
+Este comando não gerou nenhum comentário/relatório 
+./cake Security.check view ../View 
+
+Este gerou um grande relatório: 
+2013-06-18 18:27:10 Info: app/View/Clientes/busca.ctp (2 errors) 
+2013-06-18 18:27:10 Warning:   Line  20 - Unsafe variable output for "$cliente". Please wrap in h() 
+2013-06-18 18:27:10 Warning:   Line  22 - Unsafe variable output for "$cliente". Please wrap in h() 
+2013-06-18 18:27:10 Info: app/View/Pages/home.ctp (3 errors) 
+2013-06-18 18:27:10 Warning:   Line  70 - Unsafe variable output for "$settings". Please wrap in h() 
+2013-06-18 18:27:10 Warning:   Line  85 - Unsafe variable output for "$filePresent". Please wrap in h() 
+E vários outros warnings. Vale apena 
+
+Veja que ele sugere que inclua "h()" em todos os echos. 
+Após adotar h() as mensagens desaparecem. Exemplo em busca.ctp: 
+<?php echo h($cliente['Cliente']['id']); ?> 
+
+
+http://book.cakephp.org/2.0/en/core-utility-libraries/security.html
+http://book.cakephp.org/2.0/en/core-libraries/components/security-component.html
+
+
+Password Confirm Validate
+
+'passwordequal' => array('rule' => 'checkpasswords' , 'message' => 'Passwords Do Not Match')
+
+public function checkpasswords(){
+
+    if(strcmp($this->data['User']['new_password'],$this->data['User']['confirm_password']) == 0 )
+    {
+        return true;
+    }
+    return false;
+}
+http://questiontrack.com/password-confirm-validation-cakephp-1046104.html
+
+Outra
+
+two fields in view file
+
+echo $this->Form->input('password');
+echo $this->Form->input('repass');
+
+Model file
+
+<?php
+class Post extends AppModel {
+    public $validate = array(
+        'repass' => array(
+            'equaltofield' => array(
+            'rule' => array('equaltofield','password'),
+            'message' => 'Require the same value to password.',
+            //'allowEmpty' => false,
+            //'required' => false,
+            //'last' => false, // Stop validation after this rule
+            'on' => 'create', // Limit validation to 'create' or 'update' operations
+            )
+        )
+    );
+
+function equaltofield($check,$otherfield)
+    {
+        //get name of field
+        $fname = '';
+        foreach ($check as $key => $value){
+            $fname = $key;
+            break;
+        }
+        return $this->data[$this->name][$otherfield] === $this->data[$this->name][$fname];
+    } 
+}?>
+
+http://stackoverflow.com/questions/17185246/password-confirm-validation-cakephp
+
+Outra:
+public $validate = array(
+    'password' => array(
+        'confirm' => array(
+            'rule' => array('password', 'password_control', 'confirm'),
+            'message' => 'Repeat password',
+            'last' => true
+        ),
+        'length' => array(
+            'rule' => array('password', 'password_control', 'length'),
+            'message' => 'At least 6 characters'
+        )
+    ),
+    'password_control' => array(
+        'notempty' => array(
+            'rule' => array('notEmpty'),
+            'allowEmpty' => false,
+            'message' => 'Repeat password'
+        )
+    )
+);
+
+public function password($data, $controlField, $test) {
+    if (!isset($this->data[$this->alias][$controlField])) {
+        trigger_error('Password control field not set.');
+        return false;
+    }
+
+    $field = key($data);
+    $password = current($data);
+    $controlPassword = $this->data[$this->alias][$controlField];
+
+    switch ($test) {
+        case 'confirm' :
+            if ($password !== Security::hash($controlPassword, null, true)) {
+                $this->invalidate($controlField, 'Repeat password');
+                return false;
+            }
+            return true;
+
+        case 'length' :
+            return strlen($controlPassword) >= 6;
+
+        default :
+            trigger_error("Unknown password test '$test'.");
+    }
+}
+http://stackoverflow.com/questions/3760663/cakephp-password-validation
+
+	

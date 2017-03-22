@@ -1,0 +1,485 @@
+<script>
+function preenchezeros(campo, tamanho){
+	//captura do texto
+	var strText = campo.value;
+
+	/*verifica se o campo está vazio e pede
+	a confirmação do valor*/
+
+	if (strText == "" ) {
+
+	//apresenta a caixa de confirmação
+	if (confirm("Texto vazio - preencher com " + tamanho + " zeros? ")) {
+		//preeche com a quantidade de zeros informada no
+		//parâmetro tamanho
+
+		for (i=0; i<tamanho;i++)
+			campo.value += "0";
+	}else{
+		//a pessoa clicou no cancelar, voltando o foco para 
+		//o campo
+		campo.focus();
+	}
+
+	}else{ //há alguma string no campo
+
+		//tamanho da string
+		var intTamStr = strText.length;
+
+		/*verifica se o tamanho da string eh 
+		menor ou igual ao tamanho que eh pedido
+		na funcão*/
+
+		if (intTamStr <= tamanho){//executa a adaptação do texto
+
+			//quantos zeros serão incluídos no texto
+			var intTam = parseInt(tamanho) - intTamStr;
+
+			//preenchimento do campo
+			for (i=0; i<intTam; i++){
+				strText = "0" + strText;
+			}
+
+			//atribuição da variável ao campo
+			campo.value = strText;
+
+		}else{ 
+			// o texto eh maior do que eh pedido na função
+			alert("Este campo pode ter no máximo \n" + tamanho + " caracteres.");
+			campo.focus();
+		}
+	}
+}
+
+//Limitar Textarea
+function max(txarea) 
+{ 
+	total = 100; 
+	tam = txarea.value.length; 
+	str=""; 
+	str=str+tam; 
+	Digitado.innerHTML = str; 
+	Restante.innerHTML = total - str; 
+	if (tam > total){ 
+		aux = txarea.value; 
+		txarea.value = aux.substring(0,total); 
+		Digitado.innerHTML = total 
+		Restante.innerHTML = 0 
+	} 
+} 
+
+//Tecla pressionada
+function show_key ( the_key )
+{
+    if ( ! the_key )
+    {
+        the_key = event.keyCode;
+    }
+    document.my_form.key_display.value = String.fromCharCode ( the_key );
+}
+
+// Detectar navegador
+  var version = navigator.appName
+  var number = parseInt(navigator.appVersion)
+  alert("Você está usando " + version + " browser, versão " + number);
+
+//Resolução
+document.write('<font face=verdana size=2 color=black>sua resolução é ' + screen.width + ' x ' + screen.height + ''); 
+if (screen.width == 640) { 
+document.write('<br><font face=verdana size=2 color=black>redirecionamento para página correspondente...'); 
+alert("sua resolução é 640 x 480 será aberta uma nova página correspondente a sua resolução"); 
+// página que abre para está resolução // 
+open('paginadois.html'); 
+}   
+if (screen.width == 800) { 
+document.write('<br><font face=verdana size=2 color=black>redirecionamento para página correspondente...'); 
+alert("sua resolução é 800 x 600 será aberta uma nova página correspondente a sua resolução"); 
+// página que abre para está resolução // 
+open('paginadois.html'); 
+} 
+if (screen.width == 1024) { 
+document.write('<br><font face=verdana size=2 color=black>redirecionamento para página correspondente...'); 
+alert("sua resolução é 1024 x 768 será aberta uma nova página correspondente a sua resolução"); 
+// página que abre para está resolução // 
+open('paginadois.html'); 
+} 
+if (screen.width == 1280) { 
+document.write('<br><font face=verdana size=2 color=black>redirecionamento para página correspondente...'); 
+alert("sua resolução é 1280 x 960 será aberta uma nova página correspondente a sua resolução"); 
+// página que abre para está resolução // 
+open("paginadois.html"); 
+} 
+if (screen.width == 1600) { 
+document.write('<br><font face=verdana size=2 color=black>redirecionamento para página correspondente...'); 
+alert("sua resolução é 1600 x 1200 será aberta uma nova página correspondente a sua resolução"); 
+// página que abre para está resolução // 
+open("paginadois.html"); 
+} 
+
+
+function browser_info() {
+browser="browser info:\n";
+for (propname in navigator) {
+    browser += propname+": "+navigator[propname]+"\n";
+    }
+alert(browser);
+}
+
+function numero2moeda(num) {
+  num = num.toString().replace(/\$|\,/g,'');
+  if(isNaN(num))
+  	num = "0";
+	sign = (num == (num = Math.abs(num)));
+	num = Math.floor(num*100+0.50000000001);
+	cents = num%100;
+	num = Math.floor(num/100).toString();
+  if(cents<10)
+	cents = "0" + cents;
+	for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+	num = num.substring(0,num.length-(4*i+3))+'.'+
+	num.substring(num.length-(4*i+3));
+	return (((sign)?'':'-') + 'R$' + num + ',' + cents);
+}
+
+function mascara_data(recebedata,ind){
+	// ind é o número correspondente ao índice do campo no form
+	// Form com 4 campos: ind=0 para o primeiro e ind=3 para o último
+	var mydata = "";
+	mydata = mydata + recebedata;
+	if (mydata.length == 2){
+		mydata = mydata + "/";
+		document.forms[0].elements[ind].value = mydata;
+	}
+	if (mydata.length == 5){
+		mydata = mydata + "/";
+		document.forms[0].elements[ind].value = mydata;
+	}
+	if (mydata.length == 10){
+		verifica_data(ind);
+	}
+}
+
+function verifica_data (ind) {
+	dia = (document.forms[0].elements[ind].value.substring(0,2));
+	mes = (document.forms[0].elements[ind].value.substring(3,5));
+	ano = (document.forms[0].elements[ind].value.substring(6,10));
+	situacao = "";
+	// verifica o dia valido para cada mes
+	if ((dia < 01)||(dia < 01 || dia > 30) && ( mes == 04 || mes == 06 || mes == 09 || mes == 11 ) || dia > 31) {
+		situacao = "falsa";
+	}
+	// verifica se o mes e valido
+	if (mes < 01 || mes > 12 ) {
+		situacao = "falsa";
+	}
+	// verifica se e ano bissexto
+	if (mes == 2 && ( dia < 01 || dia > 29 || ( dia > 28 && (parseInt(ano / 4) != ano / 4)))) {
+		situacao = "falsa";
+	}
+	if (document.forms[0].elements[ind].value == "") {
+		situacao = "falsa";
+	}
+	if (situacao == "falsa") {
+		alert("Data inválida!");
+		document.forms[0].elements[ind].focus();
+	}
+}
+
+</script>
+
+<body onKeyPress = "show_key(event.which)">
+<!-- Imprimir automaticamente: <body onLoad="self.print() ou window.print();"> -->
+<a href="#" onClick='self.print();'><img src='impressora.gif'></a>
+
+<form method="post" name="my_form">
+<input type=submit value="Browser Info" onClick="browser_info()"><br>
+<input type="submit" value="Botão CSS" style="background: yellow; color: black; font-size: 0.6em"><br>
+Enter um número e clique no botão: <input type=text name=input size=15 value="1000434.23">
+<input type=button value="Convert" onclick="this.form.input.value=numero2moeda(this.form.input.value);"><br>
+Validar Data (Ex.: 25/12/2005): <input type="text" name="data" OnKeyUp="mascara_data (this.value,4)"><br>
+Select Múltiplo (Pressionar Ctrl)<br>
+<select name="autor" size="3" multiple>
+    <option value="1" selected>opção1</option>
+    <option value="2">opção2</option>
+</select><br>
+A tecla pressionada foi: <input type="text" name="key_display" size="2"><br>
+
+<textarea onkeyup="max(this)" onkeypress="max(this)" rows="2" cols="35" name="Area"></textarea><br> 
+<font id=Digitado color=red>0</font> Caracteres digitados &nbsp; / &nbsp; restam <font id=Restante color=red>100</font><br> 
+
+Digite o valor e tecle Tab<INPUT TYPE="text" NAME="primeiro" onBlur="preenchezeros(this, 10)";>
+Completar com Zeros<br>
+    
+<!-- Script by hscripts.com -->
+Estados: <select name=estados>
+<option value="Acre">Acre</option>
+<option value="Alagoas">Alagoas</option>
+<option value="Amapa">Amapa</option>
+<option value="Amazonas">Amazonas</option>
+<option value="Bahia">Bahia</option>
+<option value="Ceara" selected>Ceara</option>
+<option value="Distrito Federal">Distrito Federal</option>
+<option value="Espirito Santo">Espirito Santo</option>
+<option value="Goias">Goias</option>
+<option value="Maranhao">Maranhao</option>
+<option value="Mato Grosso">Mato Grosso</option>
+<option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+<option value="Minas Gerais">Minas Gerais</option>
+<option value="Para">Para</option>
+<option value="Paraiba">Paraiba</option>
+<option value="Parana">Parana</option>
+<option value="Pernambuco">Pernambuco</option>
+<option value="Piaui">Piaui</option>
+<option value="Rio de Janeiro">Rio de Janeiro</option>
+<option value="Rio Grande do Norte">Rio Grande do Norte</option>
+<option value="Rio Grande do Sul">Rio Grande do Sul</option>
+<option value="Rondonia">Rondonia</option>
+<option value="Roraima">Roraima</option>
+<option value="Santa Catarina">Santa Catarina</option>
+<option value="Sao Paulo">Sao Paulo</option>
+<option value="Sergipe">Sergipe</option>
+<option value="Tocantins">Tocantins</option>
+</select><br>
+<!-- Script by hscripts.com -->
+
+Países: <select name="paises" size="1">
+<option>Afghanistan</option>
+<option>Albania</option>
+<option>Algeria</option>
+<option>American Samoa</option>
+<option>Andorra</option>
+<option>Angola</option>
+<option>Anguilla</option>
+<option>Antarctica</option>
+<option>Antigua and Barbuda</option>
+<option>Argentina</option>
+<option>Armenia</option>
+<option>Aruba</option>
+<option selected="selected">Australia</option>
+<option>Austria</option>
+<option>Azerbaijan</option>
+<option>Bahamas</option>
+<option>Bahrain</option>
+<option>Bangladesh</option>
+<option>Barbados</option>
+<option>Belarus</option>
+<option>Belgium</option>
+<option>Belize</option>
+<option>Benin</option>
+<option>Bermuda</option>
+<option>Bhutan</option>
+<option>Bolivia</option>
+<option>Bosnia and Herzegovina</option>
+<option>Botswana</option>
+<option>Bouvet Island</option>
+<option selected>Brasil</option>
+<option>British Indian Ocean territory</option>
+<option>Brunei Darussalam</option>
+<option>Bulgaria</option>
+<option>Burkina Faso</option>
+<option>Burundi</option>
+<option>Cambodia</option>
+<option>Cameroon</option>
+<option>Canada</option>
+<option>Cape Verde</option>
+<option>Cayman Islands</option>
+<option>Central African Republic</option>
+<option>Chad</option>
+<option>Chile</option>
+<option>China</option>
+<option>Christmas Island</option>
+<option>Cocos (Keeling) Islands</option>
+<option>Colombia</option>
+<option>Comoros</option>
+<option>Congo</option>
+<option>Cook Islands</option>
+<option>Costa Rica</option>
+<option>Cote d'Ivoire (Ivory Coast)</option>
+<option>Croatia (Hrvatska)</option>
+<option>Cuba</option>
+<option>Cyprus</option>
+<option>Czech Republic</option>
+<option>Denmark</option>
+<option>Djibouti</option>
+<option>Dominica</option>
+<option>Dominican Republic</option>
+<option>East Timor</option>
+<option>Ecuador</option>
+<option>Egypt</option>
+<option>El Salvador</option>
+<option>Equatorial Guinea</option>
+<option>Eritrea</option>
+<option>Estonia</option>
+<option>Ethiopia</option>
+<option>Falkland Islands</option>
+<option>Faroe Islands</option>
+<option>Fiji</option>
+<option>Finland</option>
+<option>France</option>
+<option>French Guiana</option>
+<option>French Polynesia</option>
+<option>French Southern Territories</option>
+<option>Gabon</option>
+<option>Gambia</option>
+<option>Georgia</option>
+<option>Germany</option>
+<option>Ghana</option>
+<option>Greece</option>
+<option>Greenland</option>
+<option>Grenada</option>
+<option>Guadeloupe</option>
+<option>Guam</option>
+<option>Guatemala</option>
+<option>Guinea-Bissau</option>
+<option>Guinea</option>
+<option>Guyana</option>
+<option>Haiti</option>
+<option>Heard and McDonald Islands</option>
+<option>Honduras</option>
+<option>Hong Kong</option>
+<option>Hungary</option>
+<option>Iceland</option>
+<option>India</option>
+<option>Indonesia</option>
+<option>Iran</option>
+<option>Iraq</option>
+<option>Ireland</option>
+<option>Israel</option>
+<option>Italy</option>
+<option>Jamaica</option>
+<option>Japan</option>
+<option>Jordan</option>
+<option>Kazakhstan</option>
+<option>Kenya</option>
+<option>Kiribati</option>
+<option>Korea (north)</option>
+<option>Korea (south)</option>
+<option>Kuwait</option>
+<option>Kyrgyzstan</option>
+<option>Laos</option>
+<option>Latvia</option>
+<option>Lebanon</option>
+<option>Lesotho</option>
+<option>Liberia</option>
+<option>Liechtenstein</option>
+<option>Lithuania</option>
+<option>Luxembourg</option>
+<option>Macau</option>
+<option>Macedonia</option>
+<option>Madagascar</option>
+<option>Malaysia</option>
+<option>Malawi</option>
+<option>Maldives</option>
+<option>Mali</option>
+<option>Malta</option>
+<option>Marshall Islands</option>
+<option>Martinique</option>
+<option>Mauritania</option>
+<option>Mauritius</option>
+<option>Mayotte</option>
+<option>Mexico</option>
+<option>Micronesia</option>
+<option>Moldova</option>
+<option>Monaco</option>
+<option>Mongolia</option>
+<option>Montserrat</option>
+<option>Morocco</option>
+<option>Mozambique</option>
+<option>Myanmar</option>
+<option>Namibia</option>
+<option>Nauru</option>
+<option>Nepal</option>
+<option>Netherlands Antilles</option>
+<option>Netherlands</option>
+<option>New Caledonia</option>
+<option>New Zealand</option>
+<option>Nicaragua</option>
+<option>Niger</option>
+<option>Nigeria</option>
+<option>Niue</option>
+<option>Norfolk Island</option>
+<option>Northern Mariana Islands</option>
+<option>Norway</option>
+<option>Oman</option>
+<option>Pakistan</option>
+<option>Palau</option>
+<option>Panama</option>
+<option>Papua New Guinea</option>
+<option>Paraguay</option>
+<option>Peru</option>
+<option>Philippines</option>
+<option>Pitcairn</option>
+<option>Poland</option>
+<option>Portugal</option>
+<option>Puerto Rico</option>
+<option>Qatar</option>
+<option>Reunion</option>
+<option>Romania</option>
+<option>Russian Federation</option>
+<option>Rwanda</option>
+<option>Saint Helena</option>
+<option>Saint Kitts and Nevis</option>
+<option>Saint Lucia</option>
+<option>Saint Pierre and Miquelon</option>
+<option>Saint Vincent and the Grenadines</option>
+<option>Samoa</option>
+<option>San Marino</option>
+<option>Sao Tome and Principe</option>
+<option>Saudi Arabia</option>
+<option>Senegal</option>
+<option>Seychelles</option>
+<option>Sierra Leone</option>
+<option>Singapore</option>
+<option>Slovak Republic</option>
+<option>Slovenia</option>
+<option>Solomon Islands</option>
+<option>Somalia</option>
+<option>South Africa</option>
+<option>South Georgia and the South Sandwich Islands</option>
+<option>Spain</option>
+<option>Sri Lanka</option>
+<option>Sudan</option>
+<option>Suriname</option>
+<option>Svalbard and Jan Mayen Islands</option>
+<option>Swaziland</option>
+<option>Sweden</option>
+<option>Switzerland</option>
+<option>Syria</option>
+<option>Taiwan</option>
+<option>Tajikistan</option>
+<option>Tanzania</option>
+<option>Thailand</option>
+<option>Togo</option>
+<option>Tokelau</option>
+<option>Tonga</option>
+<option>Trinidad and Tobago</option>
+<option>Tunisia</option>
+<option>Turkey</option>
+<option>Turkmenistan</option>
+<option>Turks and Caicos Islands</option>
+<option>Tuvalu</option>
+<option>Uganda</option>
+<option>Ukraine</option>
+<option>United Arab Emirates</option>
+<option>United Kingdom</option>
+<option>United States of America</option>
+<option>Uruguay</option>
+<option>Uzbekistan</option>
+<option>Vanuatu</option>
+<option>Vatican City</option>
+<option>Venezuela</option>
+<option>Vietnam</option>
+<option>Virgin Islands (British)</option>
+<option>Virgin Islands (US)</option>
+<option>Wallis and Futuna Islands</option>
+<option>Western Sahara</option>
+<option>Yemen</option>
+<option>Yugoslavia</option>
+<option>Zaire</option>
+<option>Zambia</option>
+<option>Zimbabwe</option>
+</select>
+
+</form>
+
+</body>

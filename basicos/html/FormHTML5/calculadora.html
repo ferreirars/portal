@@ -1,0 +1,100 @@
+﻿<html> 
+<head> 
+<title>Calculadora</title> 
+
+<style>
+body {
+    padding: 0;
+    margin: 0;
+}
+form {
+    font-family: Verdana,Tahoma,sans-serif;
+    font-size: 15px;
+    background-color: #CC3300;
+    max-width: 500px;
+}
+h1 {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    color: #66FFFF;
+    text-shadow: 5px 5px 5px black;
+}
+input {
+    width: 200px;
+    padding: 10px;
+    color: black;
+    margin-left: 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border: 1px solid;
+}
+input:hover, input:focus {
+    border-color: #000066;
+    box-shadow: 5px 0px 9px #FFFF00;
+    background-color: #66FFFF;
+    color: black;
+    font-weight: bold;
+}
+</style>
+<script> 
+function Calculadora() { 
+	var numero1=parseInt(document.getElementById("num1").value); 
+	var numero2=parseInt(document.getElementById("num2").value) ; 
+	var resultado; 
+
+	if (document.getElementById("soma").checked==true) 
+	{ 
+		resultado=numero1+numero2; 
+	}else if (document.getElementById("subr").checked==true){ 
+		if(numero1>numero2) 
+			resultado=numero1-numero2; 
+		else 
+			alert("O primeiro número deve ser maior que o segundo número"); 
+	}else if (document.getElementById("mult").checked==true){ 
+		resultado=numero1*numero2; 
+	}else{ 
+		if(numero1>numero2) 
+			resultado=numero1/numero2; 
+		else 
+			alert("O primeiro número deve ser maior que o segundo número"); 
+	} 
+
+	if(resultado!=null) 
+		document.getElementById("result").value=resultado; 	
+
+}
+
+function Limpar(){ 
+	document.getElementById("num1").value=""; 
+	document.getElementById("num2").value=""; 
+	document.getElementById("result").value=""; 
+
+	for(i=0;i<document.frmCalculadora["operacao"].length;i++){ 
+		document.frmCalculadora["operacao"][i].checked=false; 
+	} 	
+} 
+
+</script> 
+</head> 
+
+<body> 
+<h1>Calculadora</h1> 
+<form action="" name="frmCalculadora"> 
+
+Número1: <input id="num1" name="n1" type="text"><br> 
+Número2: <input id="num2" name="n1" type="text"><br> 
+<input type="radio" id="soma" name="operacao" value="+"> Adição<br> 
+<input type="radio" id="subr" name="operacao" value="-"> Subtração<br> 
+<input type="radio" id="mult" name="operacao" value="*"> Multiplicação<br> 
+<input type="radio" id="divis" name="operacao" value="/"> Divisão<br> 
+Resultado: <input id="result" name="resultado" type="text"><br> 
+<input type="Button" name="" value="Calcular" onclick="Calculadora()"> 
+<input type="Button" value="Limpar" onclick="Limpar()"> 
+
+</form> 
+</body> 
+<!-- Crédito
+Publicado no Canal Front-end web 
+Leia mais em: Criando Form de contato com HTML5, CSS3 e JavaScript http://www.devmedia.com.br/criando-form-de-contato-com-html5-css3-e-javascript/29415#ixzz453cK6sZk
+-->
+</html> 

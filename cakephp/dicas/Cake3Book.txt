@@ -1,0 +1,2521 @@
+Cake3 Book
+
+Cake3 Dicas
+
+Após alterar o namespace nas configurações do aplicativo execute no terminal:
+
+cd /backup/www/cake/base
+composer dumpautoload
+
+config/app.php
+
+return [
+	// More configuration
+	'App' => [
+		'paths' => [
+			'plugins' => [
+				ROOT . DS . 'plugins' . DS,
+				'/path/to/other/plugins/'
+			],
+			'templates' => [
+				APP . 'Template' . DS,
+				APP . 'Template2' . DS
+			],
+			'locales' => [
+				APP . 'Locale' . DS
+			]
+		]
+	]
+];
+
+Escrevendo dados de configurações
+
+static Cake\Core\Configure::write($key, $value)
+
+Configure::write('Company.name','Pizza, Inc.');
+Configure::write('Company.slogan','Pizza for your body and soul');
+
+Com uma única chamada:
+
+Configure::write('Company', [
+	'name' => 'Pizza, Inc.',
+	'slogan' => 'Pizza for your body and soul'
+]);
+
+Lendo dados de configurações
+
+static Cake\Core\Configure::read($key = null)
+
+Configure::read('Company.name');	// Yields: 'Pizza, Inc.'
+Configure::read('Company.slogan');	// Yields: 'Pizza for your body
+									// and soul'
+
+Configure::read('Company');
+
+Excluindo dados de configurações
+
+static Cake\Core\Configure::delete($key)
+
+Configure::delete('Company.name');
+
+Routing
+Oferece ferramentas que mapeiam URLs para actions de controllers.
+
+As rotas são configuradas no arquivo config/routes.php
+
+Assim:
+
+use Cake\Routing\Router;
+
+// Using the scoped route builder.
+Router::scope('/', function ($routes) {
+	$routes->connect('/', ['controller' => 'Clientes', 'action' => 'index']);
+});
+
+Este exemplo deve abrir o action index do controller Clientes quando o cliente chamar o raiz (/) do aplicativo.
+Assim podemos chamar por padrão qualquer action de qualquer controller.
+
+Podemos também passar parêmatros e abrir o action com um específico id:
+
+Router::connect(
+	'/articles/:id',
+	['controller' => 'Articles', 'action' => 'view'],
+	['id' => '\d+', 'pass' => ['id']]
+);
+
+Ou assim:
+
+use Cake\Routing\Router;
+echo Router::url(['controller' => 'Articles', 'action' => 'view', 'id' => 15]);	// Will output /articles/15
+
+Outro exemplo:
+
+use Cake\Routing\Router;
+Router::connect(
+	'/login',
+	['controller' => 'Users', 'action' => 'login'],
+	['_name' => 'login']
+);
+
+echo Router::url(['_name' => 'login']);	// Will output /login
+
+Outro
+
+Router::scope('/blog', ['plugin' => 'Blog'], function ($routes) {
+	$routes->connect('/', ['controller' => 'Articles']);
+});
+
+ou
+
+$routes->connect(
+	'/:controller/:id',
+	['action' => 'view'],
+	['id' => '[0-9]+']
+);
+
+Outros exemplos na documentação oficial do Cake3
+
+Rotas para Plugins
+
+static Cake\Routing\Router::plugin($name, $options = [] , $callback)
+
+Router::plugin('DebugKit', function ($routes) {
+	// Routes connected here are prefixed with '/debug_kit' and
+	// have the plugin route element set to 'DebugKit'.
+	$routes->connect('/:controller');
+});
+
+SEO Friendly Rounting
+
+Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
+	$routes->fallbacks('DashedRoute');
+});
+
+Limitando as rotas criadas
+
+$routes->resources('Articles', [
+	'only' => ['index', 'view']
+]);
+
+Outros
+
+$routes->resources('Articles', [
+	'actions' => ['edit' => 'update', 'add' => 'create']
+]);
+
+
+
+Request
+
+class Cake\Network\Request
+
+Por padrão o request é atribuído para $this->request, e está disponível em Controllers, Cells, Views and Helpers.
+
+$this->request->params['controller'];
+$this->request->param('controller');
+
+// Passed arguments
+$this->request->pass;
+$this->request['pass'];
+$this->request->params['pass'];
+
+Query String Parameters
+
+Cake\Network\Request::query($name)
+
+Query string parameters can be read using Network\Request::$query:
+
+// URL is /posts/index?page=1&sort=title
+$this->request->query('page');
+
+Checking Request Conditions
+
+Cake\Network\Request::is($type)
+
+The request object provides an easy way to inspect certain conditions in a given request. By using the is()
+method you can check a number of common conditions, as well as inspect other application specific request
+criteria:
+
+$this->request->is('post');
+
+Forçar Download ao invés de Exibir
+
+If you want, you can also force a file to be downloaded instead of displayed in the browser by specifying the
+options:
+$this->response->file(
+	$file['path'],
+	['download' => true, 'name' => 'foo']
+);
+
+Limpando o cache do navegador
+
+Interacting with Browser Caching
+
+Cake\Network\Response::disableCache()
+
+You sometimes need to force browsers not to cache the results of a controller action.
+Cake\Network\Response::disableCache() is intended for just that:
+
+public function index()
+{
+	// Do something.
+	$this->response->disableCache();
+}
+
+Controlando o tempo:
+
+Cake\Network\Response::cache():
+
+You can also tell clients that want them to cache responses. By using 
+
+public function index()
+{
+	// Do something.
+	$this->response->cache('-1 minute', '+5 days');
+}
+
+The Expiration Header
+
+Cake\Network\Response::expires($time = null)
+
+You can set the Expires header to a date and time after which the response is no longer considered fresh.
+This header can be set using the Cake\Network\Response::expires() method:
+
+public function view()
+{
+	$this->response->expires('+5 days');
+}
+
+
+
+Controller
+Representam o C do MVC.
+
+class Cake\Controller\Controller
+
+After routing has been applied and the correct controller has been found,
+Os actions dos seus controllers são chamados. Seus controllers devem manipular interpretando os dados requisitados (requests), estando seguros de que os corretos models são chamados e a correta resposta (response) ou view é renderizada.
+Você deve manter seus controllers magros e seus models gordos.
+
+Geralmente um controller é usado para gerenciar a lógica ao redor de um único model.
+
+Em CakePHP os controllers extendem a classe AppController, que encontra-se em src/Controller/AppController.php.
+Controllers vem com métodos que manipulam os requests e são chamados de actions.
+Por padrão cada public método em um controller é chamado de action e é acessível pela URL.
+Um action é responsável por interpretar um request e criar um response.
+Geralmente response é uma view renderizada.
+
+AppController
+É a classe pai de todos os controllers da aplicação. AppController em si extende Cake\Controller\Controller.
+Os métodos e atributos definidos em AppController devem estar disponíveis em todos os controllers do aplicativo.
+
+Podemos usar o AppController para carregar componentes que serão vistos em todos os controllers.
+
+O método initialize do AppController que é invocado no final do construtor dos controllers.
+
+Para compatibilizar com a versão 2 ainda podemos usar a propriedade no AppController:
+
+$components = ...
+
+Cada action de um Controller tem uma view correspondente com o mesmo nome sem () e com .ctp.
+Cada controller deve ter na pasta src/Template uma pasta com a primeira parte do nome. Exemplo:
+
+Controller				Views
+ClientesController		src/Template/Clientes
+
+Actions
+index(), add(), edit()	src/Template/Clientes/index.ctp, add.ctp, edit.ctp
+
+
+Interagindo com Views
+
+No controller
+Cake\Controller\Controller::set(string $var, mixed $value)
+
+// First you pass data from the controller:
+$this->set('color', 'pink');
+
+// Then, in the view, you can utilize the data:
+?>
+You have selected <?= h($color) ?> icing for the cake.
+
+Outro
+
+$data = [
+	'color' => 'pink',
+	'type' => 'sugar',
+	'base_price' => 23.95
+];
+// Make $color, $type, and $base_price
+// available to the view:
+
+$this->set($data);
+
+Definindo propriedades das views antes de serem chamadas
+
+$this->viewBuilder()
+	->helpers(['MyCustom'])
+	->theme('Modern')
+	->className('Modern.Admin');
+
+Renderizando uma view no controller:
+
+namespace App\Controller;
+class RecipesController extends AppController
+{
+// ...
+	public function search()
+	{
+		// Render the view in src/Template/Recipes/search.ctp
+		$this->render();
+	}
+// ...
+}
+
+Renderizando um template específico
+
+public function my_action()
+{
+	$this->render('custom_file');
+}
+
+
+Componentes
+
+São pacotes de lógica que são compartilhados entre controllers.
+O cake já vem com alguns componentes e podemos criar os nossos. Quando você se perceber copiando e colando código entre controller talvez seja mais produtivo criar um componente para isso. A criação de componentes deixa o código dos controller mais enxutos e seu projeto mais reutilizável.
+
+Lembre de chamar os callbacks no AppController para melhor resultado:
+
+public function beforeFilter(Event $event)
+{
+	parent::beforeFilter($event);
+}
+
+When you “bake” an app using Composer the Pages Controller is created in your src/Controller/ folder.
+
+O Cake tem vários bons componentes internos.
+
+Para carregar um componente no AppController:
+
+public function initialize()
+{
+	parent::initialize();
+	$this->loadComponent('Auth', [
+		'loginAction' => [
+			'controller' => 'Users',
+			'action' => 'login',
+			'plugin' => 'Users'
+		],
+		'authError' => 'Did you really think you are allowed to see that?',
+		'authenticate' => [
+			'Form' => [
+				'fields' => ['username' => 'email']
+			]
+		],
+		'storage' => 'Session'
+	]);
+}
+
+Customizing Find Query You can customize the query used to fetch the user record using the finder
+option in authenticate class config:
+public function initialize()
+{
+	parent::initialize();
+	$this->loadComponent('Auth', [
+		'authenticate' => [
+			'Form' => [
+				'finder' => 'auth'
+			]
+		],
+	]);
+}
+This will require your UsersTable to have finder method findAuth(). In the example shown below
+the query is modified to fetch only required fields and add condition:
+
+public function findAuth(\Cake\ORM\Query $query, array $options)
+{
+	$query
+		->select(['id', 'username', 'password'])
+		->where(['Users.active' => 1]);
+	return $query;
+}
+
+Exemplo de função login para funcionar com o Template/Users/login.ctp
+
+public function login()
+{
+	if ($this->request->is('post')) {
+		$user = $this->Auth->identify();
+		if ($user) {
+			$this->Auth->setUser($user);
+			return $this->redirect($this->Auth->redirectUrl());
+		} else {
+			$this->Flash->error(__('Username or password is incorrect'), [
+				'key' => 'auth'
+			]);
+		}
+	}
+}
+
+To use basic authentication, you’ll need to configure AuthComponent:
+
+$this->loadComponent('Auth', [
+	'authenticate' => [
+		'Basic' => [
+			'fields' => ['username' => 'username', 'password' => 'api_key'],
+			'userModel' => 'Users'
+		],
+	],
+	'storage' => 'Memory',
+	'unauthorizedRedirect' => false
+]);
+
+Creating API Keys for Basic Authentication Because basic HTTP sends credentials in plain-text, it is
+unwise to have user’s send their login password. Instead an opaque API key is generally used. You can
+generate these API tokens randomly using libraries from CakePHP:
+namespace App\Model\Table;
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\Utility\Text;
+use Cake\Event\Event;
+use Cake\ORM\Table;
+
+class UsersTable extends Table
+{
+	public function beforeSave(Event $event)
+	{
+	$entity = $event->data['entity'];
+
+	if ($entity->isNew()) {
+		$hasher = new DefaultPasswordHasher();
+
+		// Generate an API 'token'
+		$entity->api_key_plain = sha1(Text::uuid());
+
+		// Bcrypt the token so BasicAuthenticate can check
+		// it during login.
+		$entity->api_key = $hasher->hash($entity->api_key_plain);
+	}
+	return true;
+	}
+}
+
+Using Digest Authentication Digest authentication offers an improved security model over basic authen-
+tication, as the user’s credentials are never sent in the request header. Instead a hash is sent.
+To use digest authentication, you’ll need to configure AuthComponent:
+
+$this->loadComponent('Auth', [
+	'authenticate' => [
+		'Digest' => [
+			'fields' => ['username' => 'username', 'password' => 'digest_hash'],
+			'userModel' => 'Users'
+		],
+	],
+	'storage' => 'Memory',
+	'unauthorizedRedirect' => false
+]);
+
+Here we’re using username + digest_hash as our fields, and use the Users model.
+
+Hashing Passwords For Digest Authentication Because Digest authentication requires a password
+hashed in the format defined by the RFC, in order to correctly hash a password for use with Digest au-
+thentication you should use the special password hashing function on DigestAuthenticate. If you are
+going to be combining digest authentication with any other authentication strategies, it’s also recommended
+that you store the digest password in a separate column, from the normal password hash:
+namespace App\Model\Table;
+use Cake\Auth\DigestAuthenticate;
+use Cake\Event\Event;
+use Cake\ORM\Table;
+
+class UsersTable extends Table
+{
+	public function beforeSave(Event $event)
+	{
+		$entity = $event->data['entity'];
+
+		// Make a password for digest auth.
+		$entity->digest_hash = DigestAuthenticate::password(
+			$entity->username,
+			$entity->plain_password,
+			env('SERVER_NAME')
+		);
+		return true;
+	}
+}
+
+Passwords for digest authentication need a bit more information than other password hashes, based on the
+RFC for digest authentication.
+
+Using ControllerAuthorize ControllerAuthorize allows you to handle authorization checks in a controller
+callback. This is ideal when you have very simple authorization or you need to use a combination of models
+and components to do your authorization and don’t want to create a custom authorize object.
+
+The callback is always called isAuthorized() and it should return a boolean as to whether or not the
+user is allowed to access resources in the request. The callback is passed the active user so it can be checked:
+
+class AppController extends Controller
+{
+	public function initialize()
+	{
+		parent::initialize();
+		$this->loadComponent('Auth', [
+			'authorize' => 'Controller',
+		]);
+	}
+
+	public function isAuthorized($user = null)
+	{
+		// Any registered user can access public functions
+		if (empty($this->request->params['prefix'])) {
+			return true;
+		}
+
+		// Only admins can access admin functions
+		if ($this->request->params['prefix'] === 'admin') {
+			return (bool)($user['role'] === 'admin');
+		}
+
+		// Default deny
+		return false;
+	}
+}
+
+Prevenindo ataques
+
+Using the CsrfComponent
+Simply by adding the CsrfComponent to your components array, you can benefit from the CSRF protec-
+tion it provides:
+
+public function initialize()
+{
+	parent::initialize();
+	$this->loadComponent('Csrf');
+}
+
+Disabling the CSRF Component for Specific Actions
+
+While not recommended, you may want to disable the CsrfComponent on certain requests. You can do this
+using the controller’s event dispatcher, during the beforeFilter() method:
+
+public function beforeFilter(Event $event)
+{
+	$this->eventManager()->off($this->Csrf);
+}
+
+Mensagens em texto e em Flash
+
+// Uses src/Template/Element/Flash/success.ctp
+$this->Flash->success('This was successful');
+
+// Uses src/Template/Element/Flash/great_success.ctp
+$this->Flash->greatSuccess('This was greatly successful');
+
+Alternatively, to set a plain-text message without rendering an element, you can use the set() method:
+$this->Flash->set('This is a message');
+
+An example of using these options:
+// In your Controller
+$this->Flash->success('The user has been saved', [
+	'key' => 'positive',
+	'params' => [
+		'name' => $user->name,
+		'email' => $user->email
+	]
+]);
+
+// In your View
+<?= $this->Flash->render('positive') ?>
+
+<!-- In src/Template/Element/Flash/success.ctp -->
+<div id="flash-<?= h($key) ?>" class="message-info success">
+	<?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
+</div>
+
+// In your Controller
+$this->Flash->warning('My message', ['plugin' => 'PluginName']);
+
+Usando o componente Security num controller
+
+Using the security component is generally done in the controllers beforeFilter(). You would specify
+the security restrictions you want and the Security Component will enforce them on its startup:
+
+namespace App\Controller;
+use App\Controller\AppController;
+use Cake\Event\Event;
+
+class WidgetsController extends AppController
+{
+	public function initialize()
+	{
+		parent::initialize();
+		$this->loadComponent('Security');
+	}
+
+	public function beforeFilter(Event $event)
+	{
+		if (isset($this->request->params['admin'])) {
+			$this->Security->requireSecure();
+		}
+	}
+}
+
+Em todos os controllers:
+
+namespace App\Controller;
+use App\Controller\AppController;
+use Cake\Event\Event;
+
+class WidgetsController extends AppController
+{
+	public function initialize()
+	{
+		parent::initialize();
+		$this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
+	}
+
+	public function beforeFilter(Event $event)
+	{
+		if (isset($this->params['admin'])) {
+			$this->Security->requireSecure();
+		}
+
+	}
+
+	public function forceSSL()
+	{
+		return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
+	}
+}
+
+Paginação
+
+In the controller, we start by defining the default query conditions pagination will use in the $paginate
+controller variable. These conditions, serve as the basis for your pagination queries. They are augmented by
+the sort, direction limit, and page parameters passed in from the URL. It is important to note that the order
+key must be defined in an array structure like below:
+
+class ArticlesController extends AppController
+{
+	public $paginate = [
+	'limit' => 25,
+	'order' => [
+	'Articles.title' => 'asc'
+	]
+	];
+
+	public function initialize()
+	{
+		parent::initialize();
+		$this->loadComponent('Paginator');
+	}
+}
+
+Chamar componente em esperífico controller:
+
+// In a controller action
+$this->loadComponent('OneTimer');
+$time = $this->OneTimer->getTime();
+
+class PostsController extends AppController
+{
+	public function initialize()
+	{
+		parent::initialize();
+		$this->loadComponent('Flash');
+		$this->loadComponent('Cookie');
+	}
+
+	public function delete()
+	{
+		if ($this->Post->delete($this->request->data('Post.id')) {
+		$this->Flash->success('Post deleted.');
+		return $this->redirect(['action' => 'index']);
+	}
+}
+
+
+
+View
+
+class cake\View\View
+
+Views are the V in MVC. Views are responsible for generating the specific output required for the request.
+Often this is in the form of HTML, XML, or JSON, but streaming files and creating PDF’s that users can
+download are also responsibilities of the View Layer.
+
+CakePHP comes with a few built-in View classes for handling the most common rendering scenarios:
+• To create XML or JSON webservices you can use the JSON and XML views.
+• To serve protected files, or dynamically generated files, you can use Sending Files.
+• To create multiple themed views, you can use Themes.
+
+View Templates
+The view layer of CakePHP is how you speak to your users. Most of the time your views will be showing
+(X)HTML documents to browsers, but you might also need to reply to a remote application via JSON, or
+output a CSV file for a user.
+
+By default CakePHP template files are written in plain PHP and have a default extension of .ctp (CakePHP
+Template). These files contain all the presentational logic needed to get the data it received from the con-
+troller in a format that is ready for the audience you’re serving to. If you’d prefer using a templating language
+like Twig 1 , a subclass of View will bridge your templating language and CakePHP.
+
+Template files are stored in src/Template/, in a folder named after the controller that uses the files, and
+named after the action it corresponds to. For example, the view file for the Products controller’s “view()”
+action, would normally be found in src/Template/Products/view.ctp.
+
+The view layer in CakePHP can be made up of a number of different parts. Each part has different uses, and
+will be covered in this chapter:
+• views: Templates are the part of the page that is unique to the action being run. They form the meat
+of your application’s response.
+• elements: small, reusable bits of view code. Elements are usually rendered inside views.
+• layouts: template files that contain presentational code that wraps many interfaces in your application.
+Most views are rendered inside a layout.
+• helpers: these classes encapsulate view logic that is needed in many places in the view layer. Among
+other things, helpers in CakePHP can help you build forms, build AJAX functionality, paginate model
+data, or serve RSS feeds.
+• cells: these classes provide miniature controller-like features for creating self contained UI compo-
+nents. See the View Cells documentation for more information.
+
+View Variables
+
+Any variables you set in your controller with set() will be available in both the view and the layout your
+action renders. In addition, any set variables will also be available in any element. If you need to pass
+additional variables from the view to the layout you can either call set() in the view template, or use a
+Using View Blocks.
+
+You should remember to always escape any user data before outputting it as CakePHP does not automati-
+cally escape output. You can escape user content with the h() function:
+<?= h($user->bio); ?>
+
+Setting View Variables
+
+Cake\View\View::set(string $var, mixed $value)
+Views have a set() method that is analogous to the set() found in Controller objects. Using set() from
+your view file will add the variables to the layout and elements that will be rendered later. See Setting View
+Variables for more information on using set().
+
+In your view file you can do:
+$this->set('activeMenuButton', 'posts');
+
+Then, in your layout, the $activeMenuButton variable will be available and contain the value ‘posts’.
+
+Using View Blocks
+
+View blocks provide a flexible API that allows you to define slots or blocks in your views/layouts that will
+be defined elsewhere. For example, blocks are ideal for implementing things such as sidebars, or regions to
+load assets at the bottom/top of the layout. Blocks can be defined in two ways: either as a capturing block,
+or by direct assignment. The start(), append(), prepend(), assign(), fetch(), and end()
+methods allow you to work with capturing blocks:
+
+You can get the list of all populated blocks using the blocks() method:
+$list = $this->blocks();
+
+// Create the sidebar block.
+$this->start('sidebar');
+echo $this->element('sidebar/recent_topics');
+echo $this->element('sidebar/recent_comments');
+$this->end();
+
+// Append into the sidebar later on.
+$this->start('sidebar');
+echo $this->fetch('sidebar');
+echo $this->element('sidebar/popular_topics');
+$this->end();
+
+You can also append into a block using append():
+$this->append('sidebar');
+echo $this->element('sidebar/popular_topics');
+$this->end();
+
+// The same as the above.
+$this->append('sidebar', $this->element('sidebar/popular_topics'));
+
+assign() can be used to clear or overwrite a block at any time:
+// Clear the previous content from the sidebar block.
+$this->assign('sidebar', '');
+
+Assigning a block’s content is often useful when you want to convert a view variable into a block. For
+example, you may want to use a block for the page title, and sometimes assign the title as a view variable in
+the controller:
+
+// In view file or layout above $this->fetch('title')
+$this->assign('title', $title);
+The prepend() method allows you to prepend content to an existing block:
+
+// Prepend to sidebar
+$this->prepend('sidebar', 'this content goes on top of sidebar');
+
+Displaying Blocks
+You can display blocks using the fetch() method. fetch() will output a block, returning ‘’ if a block
+does not exist:
+
+<?= $this->fetch('sidebar') ?>
+
+You can also use fetch to conditionally show content that should surround a block should it exist. This is
+helpful in layouts, or extended views where you want to conditionally show headings or other markup:
+
+// In src/Template/Layout/default.ctp
+<?php if ($this->fetch('menu')): ?>
+<div class="menu">
+	<h3>Menu options</h3>
+	<?= $this->fetch('menu') ?>
+</div>
+<?php endif; ?>
+
+You can also provide a default value for a block should it not have any content. This allows you to add
+placeholder content for empty states. You can provide a default value using the second argument:
+<div class="shopping-cart">
+	<h3>Your Cart</h3>
+	<?= $this->fetch('cart', 'Your cart is empty') ?>
+</div>
+
+Using Blocks for Script and CSS Files
+The HtmlHelper ties into view blocks, and its script(), css(), and meta() methods each update a
+block with the same name when used with the block = true option:
+
+<?php
+// In your view file
+$this->Html->script('carousel', ['block' => true]);
+$this->Html->css('carousel', null, ['block' => true]);
+?>
+
+// In your layout file.
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title><?= $this->fetch('title') ?></title>
+	<?= $this->fetch('script') ?>
+	<?= $this->fetch('css') ?>
+	</head>
+	// Rest of the layout follows
+
+Exemplo em controller:
+
+namespace App\Controller;
+
+class UsersController extends AppController
+{
+	public function view_active()
+	{
+		$this->set('title', 'View Active Users');
+		$this->viewBuilder()->layout('default_small_ad');
+
+		// or the following before 3.1
+		$this->layout = 'default_small_ad';
+	}
+
+	public function view_image()
+	{
+		$this->viewBuilder()->layout('image');
+
+		// or the following before 3.1
+		$this->layout = 'image';
+		// Output user image
+	}
+}
+
+
+
+Elements
+
+São parte das View, que guardam pequenos blocos de código de apresentação que precisam ser repetidos por toda a página.
+São trechos de código a ser reaproveitado nas páginas. São basicamente mini-views que podem ser incluídas em outras views. Exemplos de uso: Ads, help boxes, navigational controls, extra menus, login forms e callouts são implementados em CakePHP como elements.
+
+Elements live in the src/Template/Element/ folder, and have the .ctp filename extension. They are output
+using the element method of the view:
+echo $this->element('helpbox');
+
+Passing Variables into an Element
+You can pass data to an element through the element’s second argument:
+
+echo $this->element('helpbox', [
+	"helptext" => "Oh, este texto é realmente útil."
+]);
+
+Inside the element file, all the passed variables are available as members of the parameter array (in the same
+way that Controller::set() in the controller works with template files). In the above example, the
+src/Template/Element/helpbox.ctp file can use the $helptext variable:
+
+// Inside src/Template/Element/helpbox.ctp
+echo $helptext; // Outputs "Oh, this text is very helpful."
+
+Using a Data View with Template Files
+
+You should use template files if you need to do some manipulation of your view content before creating
+the final output. For example if we had articles, that had a field containing generated HTML, we would
+probably want to omit that from a JSON response. This is a situation where a view file would be useful:
+
+// Controller code
+class ArticlesController extends AppController
+{
+	public function index()
+	{
+		$articles = $this->paginate('Articles');
+		$this->set(compact('articles'));
+	}
+}
+
+// View code - src/Template/Articles/json/index.ctp
+foreach ($articles as &$$article) {
+	unset($article->generated_html);
+}
+echo json_encode(compact('articles'));
+
+Formulários
+
+// src/Controller/ArticlesController.php:
+public function edit($id = null)
+{
+	if (empty($id)) {
+		throw new NotFoundException;
+	}
+
+	$article = $this->Articles->get($id);
+	// Save logic goes here
+	$this->set('article', $article);
+}
+
+// View/Articles/edit.ctp:
+// Since $article->isNew() is false, we will get an edit form
+<?= $this->Form->create($article) ?>
+
+Output:
+<form method="post" action="/articles/edit/5">
+<input type="hidden" name="_method" value="PUT" />
+
+point to an external domain:
+echo $this->Form->create(null, [
+	'url' => 'http://www.google.com/search',
+	'type' => 'get'
+]);
+
+Output:
+<form method="get" action="http://www.google.com/search">
+
+Using Custom Validators Often models will have multiple validation sets, and you will want FormHelper
+to mark fields required based on a the specific validation rules your controller action is going to apply. For
+example, your Users table has specific validation rules that only apply when an account is being registered:
+
+echo $this->Form->create($user, [
+'context' => ['validator' => 'register']
+]);
+
+The above will use the register validator for the $user and all related associations. If you are creating
+a form for associated entities, you can define validation rules for each association by using an array:
+
+echo $this->Form->create($user, [
+	'context' => [
+		'validator' => [
+			'Users' => 'register',
+			'Comments' => 'default'
+		]
+	]
+]);
+The above would use register for the user, and default for the user’s comments.
+
+FormHelper.
+
+The type of input created depends on the column datatype:
+Column Type Resulting Form Field
+
+string, uuid (char, varchar, etc.) text
+boolean, tinyint(1) checkbox
+decimal number
+float number
+integer number
+text textarea
+text, with name of password, passwd password
+text, with name of email email
+text, with name of tel, telephone, or phone tel
+date day, month, and year selects
+datetime, timestamp day, month, year, hour, minute, and meridian selects
+time hour, minute, and meridian selects
+binary file
+
+The $options parameter allows you to choose a specific input type if you need to:
+
+echo $this->Form->input('published', ['type' => 'checkbox']);
+
+The wrapping div will have a required class name appended if the validation rules for the model’s field
+indicate that it is required and not allowed to be empty. You can disable automatic required flagging using
+the required option:
+
+echo $this->Form->input('title', ['required' => false]);
+
+To skip browser validation triggering for the whole form you can set option ’formnovalidate’
+=> true for the input button you generate using View\Helper\FormHelper::submit() or set
+’novalidate’ => true in options for View\Helper\FormHelper::create().
+
+Exemplos de input
+
+echo $this->Form->input('birth_dt', [
+	'label' => 'Date of birth',
+	'minYear' => date('Y') - 70,
+	'maxYear' => date('Y') - 18,
+]);
+
+echo $this->Form->input('name', [
+	'label' => [
+		'class' => 'thingy',
+		'text' => 'The User Alias'
+	]
+]);
+
+$this->Form->input('name', [
+	'error' => ['Not long enough' => __('This is not long enough')]
+]);
+
+$sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
+echo $this->Form->select('size', $sizes, ['default' => 'm']);
+
+echo $this->Form->time('close_time', [
+	'value' => '13:30:00'
+]);
+
+echo $this->Form->select('rooms', [
+	'multiple' => true,
+	// options with values 1 and 3 will be selected as default
+	'default' => [1, 3]
+]);
+
+echo $this->Form->select(
+	'field',
+	[1, 2, 3, 4, 5],
+	['empty' => '(choose one)']
+);
+
+$options = ['M' => 'Male', 'F' => 'Female'];
+echo $this->Form->select('gender', $options);
+
+echo $this->Form->select('field', [1,2,3,4,5]);
+
+echo $this->Form->select('field', [
+	'Value 1' => 'Label 1',
+	'Value 2' => 'Label 2',
+	'Value 3' => 'Label 3'
+]);
+
+$options = [
+	'Group 1' => [
+		'Value 1' => 'Label 1',
+		'Value 2' => 'Label 2'
+	],
+	'Group 2' => [
+		'Value 3' => 'Label 3'
+	]
+];
+echo $this->Form->select('field', $options);
+
+$options = [
+	[ 'text' => 'Description 1', 'value' => 'value 1', 'attr_name' => 'attr_value 1' ],
+	[ 'text' => 'Description 2', 'value' => 'value 2', 'attr_name' => 'attr_value 2' ],
+	[ 'text' => 'Description 3', 'value' => 'value 3', 'other_attr_name' => 'other_attr_val
+];
+echo $this->Form->select('field', $options);
+
+$options = [
+	'Value 1' => 'Label 1',
+	'Value 2' => 'Label 2'
+];
+
+Alternatively set ‘multiple’ to ‘checkbox’ to output a list of related check boxes:
+echo $this->Form->select('field', $options, [
+	'multiple' => 'checkbox'
+]);
+
+echo $this->Form->checkbox('published', ['hiddenField' => false]);
+
+When creating checkboxes, this option can be set to disable all or
+some checkboxes. To disable all checkboxes set disabled to true:
+$options = [
+	'Value 1' => 'Label 1',
+	'Value 2' => 'Label 2'
+];
+
+echo $this->Form->select('field', $options, [
+	'multiple' => 'checkbox',
+	'disabled' => ['Value 1']
+]);
+
+echo $this->Form->radio(
+	'favorite_color',
+	[
+		['value' => 'r', 'text' => 'Red', 'style' => 'color:red;'],
+		['value' => 'u', 'text' => 'Blue', 'style' => 'color:blue;'],
+		['value' => 'g', 'text' => 'Green', 'style' => 'color:green;'],
+	]
+);
+
+echo $this->Form->input('time', [
+	'type' => 'time',
+	'interval' => 15
+]);
+
+echo $this->Form->time('released', [
+	'interval' => 15,
+	'hour' => [
+		'class' => 'foo-class',
+	],
+	'minute' => [
+		'class' => 'bar-class',
+	],
+]);
+
+echo $this->Form->year('purchased', [
+	'minYear' => 2000,
+	'maxYear' => date('Y')
+]);
+
+echo $this->Form->month('mob');
+echo $this->Form->month('mob', ['monthNames' => false]);
+
+echo $this->Form->hour('created', [
+	'format' => 12
+]);
+
+echo $this->Form->hour('created', [
+	'format' => 24
+]);
+
+echo $this->Form->minute('created', [
+	'interval' => 10
+]);
+
+
+echo $this->Form->password('password');
+
+echo $this->Form->hidden('id');
+
+echo $this->Form->textarea('notes');
+echo $this->Form->textarea('textarea', ['rows' => '5', 'cols' => '5']);
+
+Arquivos/File
+
+echo $this->Form->create($document, ['enctype' => 'multipart/form-data']);
+
+// OR
+echo $this->Form->create($document, ['type' => 'file']);
+
+Next add either of the two lines to your form view file:
+echo $this->Form->input('submittedfile', [
+	'type' => 'file'
+]);
+
+// OR
+echo $this->Form->file('submittedfile');
+
+$this->request->data['submittedfile'] = [
+	'name' => 'conference_schedule.pdf',
+	'type' => 'application/pdf',
+	'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
+	'error' => 0, // On Windows this can be a string.
+	'size' => 41737,
+];
+
+echo $this->Form->datetime('released', [
+	'year' => [
+		'class' => 'year-classname',
+	],
+	'month' => [
+		'class' => 'month-class',
+		'data-type' => 'month',
+	],
+]);
+
+echo $this->Form->label('User.name');
+echo $this->Form->label('User.name', 'Your username');
+
+$options can either be an array of HTML attributes, or a string that will be used as a class name:
+echo $this->Form->label('User.name', null, ['id' => 'user-label']);
+echo $this->Form->label('User.name', 'Your username', 'highlight');
+
+if ($this->Form->isFieldError('gender')) {
+	echo $this->Form->error('gender');
+}
+
+echo $this->Form->submit();
+echo $this->Form->submit('ok.png');
+echo $this->Form->button('A Button');
+echo $this->Form->button('Another Button', ['type' => 'button']);
+echo $this->Form->button('Reset the Form', ['type' => 'reset']);
+echo $this->Form->button('Submit Form', ['type' => 'submit']);
+
+// Will render escaped HTML.
+echo $this->Form->button('<em>Submit Form</em>', [
+	'type' => 'submit',
+	'escape' => true
+]);
+
+Fechando
+
+?= $this->Form->create(); ?>
+<!-- Form elements go here -->
+<?= $this->Form->end(); ?>
+
+echo $this->Form->end(['data-type' => 'hidden']);
+
+Customizing the Templates FormHelper Uses
+
+// In a View class
+$this->loadHelper('Form', [
+	'templates' => 'app_form',
+]);
+
+// in config/app_form.php
+return [
+	'inputContainer' => '<div class="form-control">{{content}}</div>',
+];
+
+You can also change the templates at runtime using the templates() method in a controller:
+
+$myTemplates = [
+	'inputContainer' => '<div class="form-control">{{content}}</div>',
+];
+$this->Form->templates($myTemplates);
+
+List of Templates A list of the default templates and the variables they can expect are:
+• button {{attrs}}, {{text}}
+• checkbox {{name}}, {{value}}, {{attrs}}
+• checkboxFormGroup {{label}}
+• checkboxWrapper {{label}}
+• dateWidget {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
+• error {{content}}
+• errorList {{content}}
+• errorItem {{text}}
+• file {{name}}, {{attrs}}
+• formGroup {{label}}, {{input}}, {{error}}
+• formStart {{attrs}}
+• formEnd No variables are provided.
+• hiddenBlock {{content}}
+• input {{type}}, {{name}}, {{attrs}}
+• inputContainer {{type}}, {{required}}, {{content}}
+• inputContainerError {{type}}, {{required}}, {{content}}, {{error}}
+• inputSubmit {{type}}, {{attrs}}
+• label {{attrs}}, {{text}}, {{hidden}}, {{input}}
+• nestingLabel {{hidden}}, {{attrs}}, {{input}}, {{text}}
+• legend {{text}}
+• option {{value}}, {{attrs}}, {{text}}
+• optgroup {{label}}, {{attrs}}, {{content}}
+• radio {{name}}, {{value}}, {{attrs}}
+• radioWrapper {{input}}, {{label}}
+• select {{name}}, {{attrs}}, {{content}}
+• selectMultiple {{name}}, {{attrs}}, {{content}}
+• submitContainer {{content}}
+• textarea {{name}}, {{attrs}}, {{value}}
+
+// Add custom radio wrapping HTML
+$this->Form->templates([
+	'radioContainer' => '<div class="form-radio">{{content}}</div>'
+]);
+// Create a radio set with our custom wrapping div.
+echo $this->Form->radio('User.email_notifications', ['y', 'n']);
+
+Adding Additional Template Variables to Templates You can add additional template placeholders in
+custom templates, and populate those placeholders when generating inputs:
+// Add a template with the help placeholder.
+$this->Form->templates([
+	'inputContainer' => '<div class="input {{type}}{{required}}">
+	{{content}} <span class="help">{{help}}</span></div>'
+]);
+
+// Generate an input and populate the help variable
+echo $this->Form->input('password', [
+	'templateVars' => ['help' => 'At least 8 characters long.']
+]);
+
+Formulários inteiros
+
+echo $this->Form->inputs([
+	'name' => ['label' => 'custom label']
+]);
+
+You can customize the legend text using an option:
+echo $this->Form->inputs($fields, ['legend' => 'Update news post']);
+
+You can customize the generated inputs by defining additional options in the $fields parameter:
+
+echo $this->Form->inputs([
+	'name' => ['label' => 'custom label']
+]);
+
+echo $this->Form->allInputs(
+	[
+		'name' => ['label' => 'custom label']
+	],
+	null,
+	['legend' => 'Update your post']
+);
+
+echo $this->Form->allInputs(['password' => false]);
+
+Exemplo
+
+$this->Form->create($article);
+// Article inputs.
+echo $this->Form->input('title');
+// Author inputs (belongsTo)
+echo $this->Form->input('author.id');
+echo $this->Form->input('author.first_name');
+echo $this->Form->input('author.last_name');
+// Author profile (belongsTo + hasOne)
+echo $this->Form->input('author.profile.id');
+echo $this->Form->input('author.profile.username');
+// Tags inputs (belongsToMany)
+echo $this->Form->input('tags.0.id');
+echo $this->Form->input('tags.0.name');
+echo $this->Form->input('tags.1.id');
+echo $this->Form->input('tags.1.name');
+// Multiple select element for belongsToMany
+echo $this->Form->input('tags._ids', [
+	'type' => 'select',
+	'multiple' => true,
+	'options' => $tagList,
+]);
+
+// Inputs for the joint table (articles_tags)
+echo $this->Form->input('tags.0._joinData.starred');
+echo $this->Form->input('tags.1._joinData.starred');
+// Comments inputs (hasMany)
+echo $this->Form->input('comments.0.id');
+echo $this->Form->input('comments.0.comment');
+echo $this->Form->input('comments.1.id');
+echo $this->Form->input('comments.1.comment');
+
+ou
+
+$article = $this->Articles->patchEntity($article, $this->request->data, [
+	'associated' => [
+		'Authors',
+		'Authors.Profiles',
+		'Tags',
+		'Comments'
+	]
+]);
+
+echo $this->Form->autocomplete('search', $options);
+echo $this->Form->input('search', ['type' => 'autocomplete']);
+
+echo $this->Html->charset();
+echo $this->Html->charset('ISO-8859-1');
+
+echo $this->Html->css('forms');
+echo $this->Html->css(['forms', 'tables', 'menu']);
+
+echo $this->Html->css('DebugKit.toolbar.css');
+
+include webroot/css/Blog.common.css, you would:
+echo $this->Html->css('Blog.common.css', ['plugin' => false]);
+
+echo $this->Html->style([
+	'background' => '#633',
+	'border-bottom' => '1px solid #000',
+	'padding' => '10px'
+]);
+
+<?= $this->Html->meta(
+	'favicon.ico',
+	'/favicon.ico',
+	['type' => 'icon']
+);
+?>
+
+<?= $this->Html->meta(
+	'keywords',
+	'enter any meta keyword here'
+);
+?>
+
+<?= $this->Html->meta(
+	'description',
+	'enter any meta description here'
+);
+?>
+
+echo $this->Html->docType('html4-trans');
+// Outputs:
+// <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+// "http://www.w3.org/TR/html4/loose.dtd">
+
+echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
+
+echo $this->Html->image("recipes/6.jpg", [
+	"alt" => "Brownies",
+	'url' => ['controller' => 'Recipes', 'action' => 'view', 6]
+]);
+
+echo $this->Html->link(
+	'Enter',
+	'/pages/home',
+	['class' => 'button', 'target' => '_blank']
+);
+
+echo $this->Html->link(
+	'Delete',
+	['controller' => 'Recipes', 'action' => 'delete', 6],
+	['confirm' => 'Are you sure you wish to delete this recipe?'],
+);
+
+<?= $this->Html->media('audio.mp3') ?>
+
+<?= $this->Html->media('video.mp4', [
+	'fullBase' => true,
+	'text' => 'Fallback text'
+]) ?>
+
+<?= $this->Html->media(
+	['video.mp4', ['src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'"]],
+	['autoplay']
+) ?>
+
+web-root/js directory:
+echo $this->Html->script('scripts');
+
+not in webroot/js:
+echo $this->Html->script('/otherdir/script_file');
+
+remote URL:
+echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+
+an array to include multiple files.
+echo $this->Html->script(['jquery', 'wysiwyg', 'scripts']);
+
+output all the script tags added to ‘scriptBottom’:
+echo $this->fetch('scriptBottom');
+
+echo $this->Html->script('Blog.plugins.js', ['plugin' => false]);
+
+Tabelas
+echo $this->Html->tableHeaders(['Date', 'Title', 'Active']);
+
+echo $this->Html->tableHeaders(
+	['Date','Title','Active'],
+	['class' => 'status'],
+	['class' => 'product_table']
+);
+
+echo $this->Html->tableHeaders([
+	'id',
+	['Name' => ['class' => 'highlight']],
+	['Date' => ['class' => 'sortable']]
+]);
+
+echo $this->Html->tableCells([
+	['Jul 7th, 2007', 'Best Brownies', 'Yes'],
+	['Jun 21st, 2007', 'Smart Cookies', 'Yes'],
+	['Aug 1st, 2006', 'Anti-Java Cake', 'No'],
+]);
+
+// Load templates from config/my_html.php
+$this->Html->templates('my_html.php');
+
+// Load specific templates.
+$this->Html->templates([
+	'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
+]);
+
+Criando um Breadcrumbs
+
+To make bread crumbs, first the following in your layout
+template:
+
+echo $this->Html->getCrumbs(' > ', 'Home');
+
+The $startText option can also accept an array. This gives more control over the generated first link:
+
+echo $this->Html->getCrumbs(' > ', [
+	'text' => $this->Html->image('home.png'),
+	'url' => ['controller' => 'Pages', 'action' => 'display', 'home'],
+	'escape' => false
+]);
+
+Any keys that are not text or url will be passed to link() as the $options parameter.
+Now, in your view you’ll want to add the following to start the breadcrumb trails on each of the pages:
+
+$this->Html->addCrumb('Users', '/users');
+$this->Html->addCrumb('Add User', ['controller' => 'Users', 'action' => 'add']);
+
+This will add the output of “Home > Users > Add User” in your layout where getCrumbs was added.
+You can also fetch the crumbs formatted inside an HTML list:
+
+echo $this->Html->getCrumbList();
+
+Formatando Números
+
+// Called as NumberHelper
+echo $this->Number->currency($value, $currency);
+
+// Called as Number
+echo Number::currency($value, $currency);
+
+// Called as NumberHelper
+echo $this->Number->precision(456.91873645, 2);
+
+// Called as Number
+echo Number::precision(456.91873645, 2);
+
+Porcentagem
+
+// Called as NumberHelper. Output: 45.69%
+echo $this->Number->toPercentage(45.691873645);
+
+// Called as Number. Output: 45.69%
+echo Number::toPercentage(45.691873645);
+
+// Called with multiply. Output: 45.7%
+echo Number::toPercentage(0.45691, 1, [
+	'multiply' => true
+]);
+
+Interacting with Human Readable Values
+
+Cake\View\Helper\NumberHelper::toReadableSize(string $size)
+
+This method formats data sizes in human readable forms. It provides a shortcut way to convert bytes to
+KB, MB, GB, and TB. The size is displayed with a two-digit precision level, according to the size of data
+supplied (i.e. higher sizes are expressed in larger terms):
+
+// Called as NumberHelper
+echo $this->Number->toReadableSize(0); // 0 Byte
+echo $this->Number->toReadableSize(1024); // 1 KB
+echo $this->Number->toReadableSize(1321205.76); // 1.26 MB
+echo $this->Number->toReadableSize(5368709120); // 5 GB
+
+// Called as Number
+echo Number::toReadableSize(0); // 0 Byte
+echo Number::toReadableSize(1024); // 1 KB
+echo Number::toReadableSize(1321205.76); // 1.26 MB
+echo Number::toReadableSize(5368709120); // 5 GB
+
+Números
+
+// Called as NumberHelper
+$this->Number->format($value, $options);
+
+// Called as Number
+Number::format($value, $options);
+
+// Called as NumberHelper
+echo $this->Number->format('123456.7890', [
+	'places' => 2,
+	'before' => '¥ ',
+	'after' => ' !'
+]);
+// Output '¥ 123,456.79 !'
+echo $this->Number->format('123456.7890', [
+	'locale' => 'fr_FR'
+]);
+// Output '123 456,79 !'
+// Called as Number
+echo Number::format('123456.7890', [
+	'places' => 2,
+	'before' => '¥ ',
+	'after' => ' !'
+]);
+// Output '¥ 123,456.79 !'
+echo Number::format('123456.7890', [
+	'locale' => 'fr_FR'
+]);
+// Output '123 456,79 !'
+
+// Called as NumberHelper
+echo $this->Number->formatDelta('123456.7890', [
+	'places' => 2,
+	'before' => '[',
+	'after' => ']'
+]);
+// Output '[+123,456.79]'
+
+// Called as Number
+echo Number::formatDelta('123456.7890', [
+	'places' => 2,
+	'before' => '[',
+	'after' => ']'
+]);
+// Output '[+123,456.79]'
+
+
+
+Helper
+
+Carregando um Helper
+
+public function initialize()
+{
+	parent::initialize();
+	if ($this->request->action === 'index') {
+		$this->loadHelper('ListPage');
+	}
+}
+
+class PostsController extends AppController
+{
+	public function beforeRender(Event $event)
+	{
+		parent::beforeRender($event);
+		$builder = $this->viewBuilder();
+		$builder->helpers([
+			'CustomStuff' => $this->_getCustomStuffConfig(),
+		]);
+	}
+}
+
+
+
+Básico sobre Bancos de Dados no Cake
+
+The easiest way to create a database connection is using a DSN string:
+
+use Cake\Datasource\ConnectionManager;
+
+$dsn = 'mysql://root:password@localhost/my_database';
+ConnectionManager::config('default', ['url' => $dsn]);
+
+Once created, you can access the connection object to start using it:
+$connection = ConnectionManager::get('default');
+
+Supported Databases
+
+CakePHP supports the following relational database servers:
+• MySQL 5.1+
+• SQLite 3
+• PostgreSQL 8+
+• SQLServer 2008+
+
+You will need the correct PDO extension installed for each of the above database drivers. Procedural API’s
+are not supported.
+
+Running Select Statements
+
+Running raw SQL queries is a breeze:
+
+use Cake\Datasource\ConnectionManager;
+$connection = ConnectionManager::get('default');
+$results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
+
+You can use prepared statements to insert parameters:
+$results = $connection
+	->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])
+	->fetchAll('assoc');
+
+It is also possible to use complex data types as arguments:
+
+$results = $connection
+	->execute(
+		'SELECT * FROM articles WHERE created >= :created',
+		['created' => DateTime('1 day ago')],
+		['created' => 'datetime']
+	)
+	->fetchAll('assoc');
+
+Instead of writing the SQL manually, you can use the query builder:
+$results = $connection
+	->newQuery()
+	->select('*')
+	->from('articles')
+	->where(['created >' => new DateTime('1 day ago'), ['created' => 'datetime']])
+	->order(['title' => 'DESC'])
+	->execute()
+	->fetchAll('assoc');
+
+Running Insert Statements
+Inserting rows in the database is usually a matter of a couple lines:
+
+use Cake\Datasource\ConnectionManager;
+
+$connection = ConnectionManager::get('default');
+$connection->insert('articles', [
+	'title' => 'A New Article',
+	'created' => new DateTime('now')
+], ['created' => 'datetime']);
+
+Running Update Statements
+Updating rows in the database is equally intuitive, the following example will update the article with id 10:
+
+use Cake\Datasource\ConnectionManager;
+$connection = ConnectionManager::get('default');
+$connection->update('articles', ['title' => 'New title'], ['id' => 10]);
+
+Running Delete Statements
+
+Similarly, the delete() method is used to delete rows from the database, the following example deletes
+the article with id 10:
+
+use Cake\Datasource\ConnectionManager;
+$connection = ConnectionManager::get('default');
+$connection->delete('articles', ['id' => 10]);
+
+Configuration
+
+By convention database connections are configured in config/app.php. The connection information defined
+in this file is fed into Cake\Datasource\ConnectionManager creating the connection configuration
+your application will be using. Sample connection information can be found in config/app.default.php. A
+sample connection configuration would look like:
+
+'Datasources' => [
+	'default' => [
+		'className' => 'Cake\Database\Connection',
+		'driver' => 'Cake\Database\Driver\Mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'username' => 'root',
+		'password' => '',
+		'database' => 'cliente',
+		'encoding' => 'utf8',
+		'timezone' => 'UTC',
+		'cacheMetadata' => true,
+	]
+],
+
+
+Data Types
+
+class Cake\Database\Type
+
+Since not every database vendor includes the same set of data types, or the same names for similar data
+types, CakePHP provides a set of abstracted data types for use with the database layer. The types CakePHP
+supports are:
+
+string Generally backed by CHAR or VARCHAR columns. Using the fixed option will force a CHAR
+column. In SQL Server, NCHAR and NVARCHAR types are used.
+
+text Maps to TEXT types
+uuid Maps to the UUID type if a database provides one, otherwise this will generate a CHAR(36) field.
+integer Maps to the INTEGER type provided by the database.
+biginteger Maps to the BIGINT type provided by the database.
+float Maps to either DOUBLE or FLOAT depending on the database. The precision option can be used
+to define the precision used.
+decimal Maps to the DECIMAL type. Supports the length and precision options.
+boolean Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent booleans.
+binary Maps to the BLOB or BYTEA type provided by the database.
+date Maps to a timezone naive DATE column type.
+datetime Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL Server this turns
+into a TIMESTAMP type. The default return value of this column type is Cake\I18n\Time which
+extends the built-in DateTime class and Carbon 1 .
+timestamp Maps to the TIMESTAMP type.
+time Maps to a TIME type in all databases.
+These types are used in both the schema reflection features that CakePHP provides, and schema generation
+features CakePHP uses when using test fixtures.
+Each type can also provide translation functions between PHP and SQL representations. These methods
+are invoked based on the type hints provided when doing queries. For example a column that is marked
+as ‘datetime’ will automatically convert input parameters from DateTime instances into a timestamp or
+formatted datestrings. Likewise, ‘binary’ columns will accept file handles, and generate file handles when
+reading data.
+
+Consultas
+
+The most basic method is query() which allows you to run already completed SQL queries:
+$stmt = $conn->query('UPDATE posts SET published = 1 WHERE id = 2');
+
+$stmt = $conn->execute(
+	'UPDATE posts SET published = ? WHERE id = ?',
+	[1, 2]
+);
+
+$stmt = $conn->execute(
+	'UPDATE posts SET published_date = ? WHERE id = ?',
+	[new DateTime('now'), 2],
+	['date', 'integer']
+);
+
+Cake\Database\Connection::newQuery()
+This allows you to use rich data types in your applications and properly convert them into SQL statements.
+The last and most flexible way of creating queries is to use the Query Builder. This approach allows you to
+build complex and expressive queries without having to use platform specific SQL:
+
+$query = $conn->newQuery();
+$query->update('posts')
+	->set(['publised' => true])
+	->where(['id' => 2]);
+$stmt = $query->execute();
+
+$query = $conn->newQuery();
+$query->select('*')
+	->from('posts')
+	->where(['published' => true]);
+foreach ($query as $row) {
+	// Do something with the row.
+}
+
+Usando transações
+
+$conn->begin();
+$conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
+$conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+$conn->commit();
+
+Cake\Database\Connection::transactional(callable $callback)
+
+$conn->transactional(function ($conn) {
+$conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
+$conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+
+Usando o prepare
+
+// Statements from execute will have values bound to them already.
+$stmt = $conn->execute(
+	'SELECT * FROM articles WHERE published = ?',
+	[true]
+);
+
+// Statements from prepare will be parameters for placeholders.
+// You need to bind parameters before attempting to execute it.
+$stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
+
+Once you’ve created a prepared statement, you may need to bind additional data. You can bind multiple
+values at once using the bind() method, or bind individual elements using bindValue:
+
+$stmt = $conn->prepare(
+	'SELECT * FROM articles WHERE published = ? AND created > ?'
+);
+
+// Bind multiple values
+$stmt->bind(
+	[true, new DateTime('2013-01-01')],
+	['boolean', 'date']
+);
+
+// Bind a single value
+$stmt->bindValue(0, true, 'boolean');
+$stmt->bindValue(1, new DateTime('2013-01-01'), 'date');
+
+When creating statements you can also use named array keys instead of positional ones:
+$stmt = $conn->prepare(
+	'SELECT * FROM articles WHERE published = :published AND created > :created'
+);
+
+// Bind multiple values
+$stmt->bind(
+	['published' => true, 'created' => new DateTime('2013-01-01')],
+	['published' => 'boolean', 'created' => 'date']
+);
+
+// Bind a single value
+$stmt->bindValue('published', true, 'boolean');
+$stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
+
+Execute e Fetching
+
+Executing & Fetching Rows
+After preparing a statement and binding data to it, you can execute it and fetch rows. Statements should
+be executed using the execute() method. Once executed, results can be fetched using fetch(),
+
+fetchAll() or iterating the statement:
+$stmt->execute();
+
+// Read one row.
+$row = $stmt->fetch('assoc');
+
+// Read all rows.
+$rows = $stmt->fetchAll('assoc');
+
+Contando Registros
+
+$rowCount = count($stmt);
+$rowCount = $stmt->rowCount();
+
+Checando Erros
+
+$code = $stmt->errorCode();
+$info = $stmt->errorInfo();
+
+Quotes
+
+$conn->driver()->autoQuoting(true);
+
+Criando Banco de Dados
+
+Criar conexão
+$dsn = 'mysql://root:password@localhost/';
+
+Consultando
+$connection->query("CREATE DATABASE IF NOT EXISTS my_database");
+
+Em Table Objects
+use Cake\ORM\TableRegistry;
+$articles = TableRegistry::get('Articles');
+
+// Start a new query.
+$query = $articles->find();
+
+// Inside ArticlesController.php
+$query = $this->Articles->find();
+
+Table
+use Cake\ORM\TableRegistry;
+
+$query = TableRegistry::get('Articles')->find();
+
+foreach ($query as $article) {
+	debug($article->title);
+}
+
+$query->where(['id' => 1]); // Return the same query object
+$query->order(['title' => 'DESC']); // Still same object, no SQL executed
+
+$query = $articles
+	->find()
+	->select(['id', 'name'])
+	->where(['id !=' => 1])
+	->order(['created' => 'DESC']);
+foreach ($query as $article) {
+	debug($article->created);
+}
+
+debug($articles->find()->where(['id' => 1]));
+
+$resultsIteratorObject = $articles
+	->find()
+	->where(['id >' => 1])
+	->all();
+
+foreach ($resultsIteratorObject as $article) {
+	debug($article->id);
+}
+
+$resultsArray = $articles
+	->find()
+	->where(['id >' => 1])
+	->toArray();
+
+foreach ($resultsArray as $article) {
+	debug($article->id);
+}
+debug($resultsArray[0]->title);
+
+Selecting A Single Row From A Table
+
+You can use the first() method to get the first result in the query:
+
+$article = $articles
+	->find()
+	->where(['id' => 1])
+	->first();
+
+debug($article->title);
+
+Getting A List Of Values From A Column
+
+// Use the extract() method from the collections library
+// This executes the query as well
+$allTitles = $articles->find()->extract('title');
+
+foreach ($allTitles as $title) {
+	echo $title;
+}
+
+$list = $articles->find('list')->select(['id', 'title']);
+foreach ($list as $id => $title) {
+	echo "$id : $title"
+}
+
+Queries Are Collection Objects
+
+Once you get familiar with the Query object methods, it is strongly encouraged that you visit the Collection
+section to improve your skills in efficiently traversing the data. In short, it is important to remember that
+anything you can call on a Collection object, you can also do in a Query object:
+
+// Use the combine() method from the collections library
+// This is equivalent to find('list')
+$keyValueList = $articles->find()->combine('id', 'title');
+
+// An advanced example
+$results = $articles->find()
+	->where(['id >' => 1])
+	->order(['title' => 'DESC'])
+	->map(function ($row) { // map() is a collection method, it executes the query
+	$row->trimmedTitle = trim($row->title);
+	return $row;
+	})
+	->combine('id', 'trimmedTitle') // combine() is another collection method
+	->toArray(); // Also a collections library method
+
+foreach ($results as $id => $trimmedTitle) {
+	echo "$id : $trimmedTitle";
+}
+
+Selecting Data
+
+Most web applications make heavy use of SELECT queries. CakePHP makes building them a snap. To limit
+the fields fetched, you can use the select() method:
+
+$query = $articles->find();
+$query->select(['id', 'title', 'body']);
+foreach ($query as $row) {
+	debug($row->title);
+}
+
+You can set aliases for fields by providing fields as an associative array:
+
+// Results in SELECT id AS pk, title AS aliased_title, body ...
+$query = $articles->find();
+$query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
+
+To select distinct fields, you can use the distinct() method:
+
+// Results in SELECT DISTINCT country FROM ...
+$query = $articles->find();
+$query->select(['country'])
+->distinct(['country']);
+
+To set some basic conditions you can use the where() method:
+
+// Conditions are combined with AND
+$query = $articles->find();
+$query->where(['title' => 'First Post', 'published' => true]);
+
+// You can call where() multiple times
+$query = $articles->find();
+$query->where(['title' => 'First Post'])
+->where(['published' => true]);
+
+See the Advanced Conditions section to find out how to construct more complex WHERE conditions. To
+apply ordering, you can use the order method:
+
+$query = $articles->find()
+->order(['title' => 'ASC', 'id' => 'ASC']);
+
+In addition to order, the orderAsc and orderDesc methods can be used when you need to sort on
+complex expressions:
+
+// As of 3.0.12 orderAsc & orderDesc are available.
+$query = $articles->find();
+$concat = $query->func()->concat([
+	'title' => 'literal',
+	'synopsis' => 'literal'
+]);
+$query->orderAsc($concat);
+
+To limit the number of rows or set the row offset you can use the limit() and page() methods:
+
+// Fetch rows 50 to 100
+$query = $articles->find()
+	->limit(50)
+	->page(2);
+
+Selecting All Fields From a Table
+By default a query will select all fields from a table, the exception is when you call the select() function
+yourself and pass certain fields:
+
+// Only select id and title from the articles table
+$articles->find()->select(['id', 'title']);
+
+If you wish to still select all fields from a table after having called select($fields), you can pass the
+table instance to select() for this purpose:
+
+// Only all fields from the articles table including
+// a calculated slug field.
+$query = $articlesTable->find();
+$query
+	->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
+	->select($articlesTable); // Select all fields from articles
+
+New in version 3.1: Passing a table object to select() was added in 3.1.
+
+// Results in SELECT COUNT(*) count FROM ...
+$query = $articles->find();
+$query->select(['count' => $query->func()->count('*')]);
+
+A number of commonly used functions can be created with the func() method:
+• sum() Calculate a sum. The arguments will be treated as literal values.
+• avg() Calculate an average. The arguments will be treated as literal values.
+• min() Calculate the min of a column. The arguments will be treated as literal values.
+• max() Calculate the max of a column. The arguments will be treated as literal values.
+• count() Calculate the count. The arguments will be treated as literal values.
+• concat() Concatenate two values together. The arguments are treated as bound parameters unless
+marked as literal.
+• coalesce() Coalesce values. The arguments are treated as bound parameters unless marked as
+literal.
+• dateDiff() Get the difference between two dates/times. The arguments are treated as bound
+parameters unless marked as literal.
+• now() Take either ‘time’ or ‘date’ as an argument allowing you to get either the current time, or
+current date.
+• extract() Returns the specified date part from the SQL expression.
+• dateAdd() Add the time unit to the date expression.
+• dayOfWeek() Returns a FunctionExpression representing a call to SQL WEEKDAY function.
+
+$query = $articles->find();
+$concat = $query->func()->concat([
+	'title' => 'literal',
+	' NEW'
+]);
+$query->select(['title' => $concat]);
+
+$query = $articles->find();
+$year = $query->func()->year([
+	'created' => 'literal'
+]);
+$time = $query->func()->date_format([
+	'created' => 'literal',
+	"'%H:%i'" => 'literal'
+]);
+$query->select([
+	'yearCreated' => $year,
+	'timeCreated' => $time
+]);
+
+// Use a stored procedure
+$query = $articles->find();
+$lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
+$query->where(function ($exp) use ($lev) {
+	return $exp->between($lev, 0, $tolerance);
+});
+
+Group e Having
+
+$query = $articles->find();
+$query->select([
+	'count' => $query->func()->count('view_count'),
+	'published_date' => 'DATE(created)'
+])
+->group('published_date')
+->having(['count >' => 3]);
+
+$query = $articles->find();
+$publishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'Y']), 1
+$notPublishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'N'])
+$query->select([
+	'number_published' => $query->func()->sum($publishedCase),
+	'number_unpublished' => $query->func()->sum($unpublishedCase)
+])
+->group('published');
+
+$query = $cities->find()
+	->where(function ($exp, $q) {
+		return $exp->addCase(
+			[
+				$q->newExpr()->lt('population', 100000),
+				$q->newExpr()->between('population', 100000, 999000),
+				$q->newExpr()->gte('population', 999001),
+			],
+			['SMALL', 'MEDIUM', 'LARGE'], # values matching conditions
+			['string', 'string', 'string'] # type of each value
+		);
+	});
+# WHERE CASE
+# WHEN population < 100000 THEN 'SMALL'
+# WHEN population BETWEEN 100000 AND 999000 THEN 'MEDIUM'
+# WHEN population >= 999001 THEN 'LARGE'
+# END
+
+Any time there are fewer case conditions than values, addCase will automatically produce an if ..
+then .. else statement:
+
+$query = $cities->find()
+	->where(function ($exp, $q) {
+		return $exp->addCase(
+			[
+				$q->newExpr()->eq('population', 0),
+			],
+			['DESERTED', 'INHABITED'], # values matching conditions
+			['string', 'string'] # type of each value
+		);
+	});
+# WHERE CASE
+# WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
+
+Condições Avançadas
+
+$query = $articles->find()
+	->where([
+		'author_id' => 3,
+		'OR' => [['view_count' => 2], ['view_count' => 3]],
+	]);
+
+$query = $articles->find()
+	->where(['author_id' => 2])
+	->orWhere(['author_id' => 3]);
+
+$query = $articles->find()
+	->where(['author_id' => 2])
+	->orWhere(['author_id' => 3])
+	->andWhere([
+		'published' => true,
+		'view_count >' => 10
+	])
+	->orWhere(['promoted' => true]);
+
+$query = $articles->find()
+	->where(['title LIKE' => '%First%'])
+	->andWhere(function ($exp) {
+		return $exp->or_([
+			'author_id' => 2,
+			'is_highlighted' => true
+		]);
+	});
+
+$query = $articles->find()
+	->where(function ($exp) {
+		return $exp
+			->eq('author_id', 2)
+			->eq('published', true)
+			->notEq('spam', true)
+			->gt('view_count', 10);
+	});
+
+$query = $articles->find()
+	->where(function ($exp) {
+		$orConditions = $exp->or_(['author_id' => 2])
+			->eq('author_id', 5);
+		return $exp
+			->add($orConditions)
+			->eq('published', true)
+			->gte('view_count', 10);
+	});
+
+$query = $articles->find()
+	->where(function ($exp) {
+		$orConditions = $exp->or_(function ($or) {
+			return $or->eq('author_id', 2)
+				->eq('author_id', 5);
+		});
+		return $exp
+			->not($orConditions)
+			->lte('view_count', 10);
+	});
+
+You can negate sub-expressions using not():
+
+$query = $articles->find()
+	->where(function ($exp) {
+		$orConditions = $exp->or_(['author_id' => 2])
+			->eq('author_id', 5);
+		return $exp
+			->not($orConditions)
+			->lte('view_count', 10);
+	});
+
+Returning the Total Count of Records
+Using a single query object, it is possible to obtain the total number of rows found for a set of conditions:
+
+$total = $articles->find()->where(['is_active' => true])->count();
+
+The count() method will ignore the limit, offset and page clauses, thus the following will return
+the same result:
+
+$total = $articles->find()->where(['is_active' => true])->limit(10)->count();
+
+Join
+
+$query = $articles->find()
+	->hydrate(false)
+	->join([
+		'table' => 'comments',
+		'alias' => 'c',
+		'type' => 'LEFT',
+		'conditions' => 'c.article_id = articles.id',
+	]);
+
+// Join with an alias and string conditions
+$query = $articles->find();
+$query->leftJoin(
+	['Authors' => 'authors'],
+	['Authors.id = Articles.author_id']);
+
+// Join with an alias, array conditions, and types
+$query = $articles->find();
+$query->innerJoin(
+	['Authors' => 'authors'],
+	[
+	'Authors.promoted' => true,
+	'Authors.created' => new DateTime('-5 days'),
+	'Authors.id = Articles.author_id'
+	],
+	['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']);
+
+Insert
+
+$query = $articles->query();
+$query->insert(['title', 'body'])
+	->values([
+	'title' => 'First post',
+	'body' => 'Some body text'
+])
+->execute();
+
+$select = $articles->find()
+	->select(['title', 'body', 'published'])
+	->where(['id' => 3]);
+
+$query = $articles->query()
+	->insert(['title', 'body', 'published'])
+	->values($select)
+	->execute();
+
+Update
+
+$query = $articles->query();
+$query->update()
+	->set(['published' => true])
+	->where(['id' => $id])
+	->execute();
+
+Delete
+
+$query = $articles->query();
+$query->delete()
+	->where(['id' => $id])
+	->execute();
+
+Prevenindo SQL Injection
+
+$query->where(function ($exp) use ($userData, $values) {
+	// Column names in all expressions are not safe.
+	return $exp->in($userData, $values);
+});
+
+When building function expressions, function names should never contain user data:
+// Not safe.
+$query->func()->{$userData}($arg1);
+
+// Also not safe to use an array of
+// user data in a function expression
+$query->func()->coalesce($userData);
+
+Raw expressions are never safe:
+$expr = $query->newExpr()->add($userData);
+$query->select(['two' => $expr]);
+
+Unions
+
+Unions are created by composing one or more select queries together:
+$inReview = $articles->find()
+	->where(['need_review' => true]);
+
+$unpublished = $articles->find()
+	->where(['published' => false]);
+
+$unpublished->union($inReview);
+
+You can create UNION ALL queries using the unionAll() method:
+$inReview = $articles->find()
+	->where(['need_review' => true]);
+
+$unpublished = $articles->find()
+	->where(['published' => false]);
+
+$unpublished->unionAll($inReview);
+
+Adicionando campo calculado
+
+// Assuming we have built the fields, conditions and containments.
+$query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
+	return $results->map(function ($row) {
+		$row['age'] = $row['birth_date']->diff(new \DateTime)->y;
+		return $row;
+	});
+});
+
+
+
+Behaviors
+
+Cake\ORM\Table::addBehavior($name, array $options = [] )
+
+Behaviors provide an easy way to create horizontally re-usable pieces of logic related to table classes. You
+may be wondering why behaviors are regular classes and not traits. The primary reason for this is event
+listeners. While traits would allow for re-usable pieces of logic, they would complicate binding events.
+To add a behavior to your table you can call the addBehavior() method. Generally the best place to do
+this is in the initialize() method:
+
+namespace App\Model\Table;
+use Cake\ORM\Table;
+
+class ArticlesTable extends Table
+{
+	public function initialize(array $config)
+	{
+		$this->addBehavior('Timestamp');
+	}
+}
+
+Getting a Single Entity by Primary Key
+
+Cake\ORM\Table::get($id, $options = [] )
+
+It is often convenient to load a single entity from the database when editing or view entities and their related
+data. You can do this by using get():
+
+// In a controller or table method.
+// Get a single article
+
+$article = $articles->get($id);
+// Get a single article, and related comments
+$article = $articles->get($id, [
+	'contain' => ['Comments']
+]);
+
+Getting the First Result
+
+The first() method allows you to fetch only the first row from a query. If the query has not been
+executed, a LIMIT 1 clause will be applied:
+
+// In a controller or table method.
+$query = $articles->find('all', [
+	'order' => ['Articles.created' => 'DESC']
+]);
+$row = $query->first();
+
+Getting a Count of Results
+
+Once you have created a query object, you can use the count() method to get a result count of that query:
+
+// In a controller or table method.
+$query = $articles->find('all', [
+	'conditions' => ['Articles.title LIKE' => '%Ovens%']
+]);
+$number = $query->count();
+
+Finding Key/Value Pairs
+
+It is often useful to generate an associative array of data from your application’s data. For example, this is
+very useful when creating <select> elements. CakePHP provides a simple to use method for generating
+‘lists’ of data:
+
+// In a controller or table method.
+$query = $articles->find('list');
+$data = $query->toArray();
+
+// Data now looks like
+$data = [
+	1 => 'First post',
+	2 => 'Second article I wrote',
+];
+
+class ArticlesTable extends Table
+{
+	public function initialize(array $config)
+	{
+		$this->displayField('title');
+	}
+}
+
+Using innerJoin
+
+$query = $articles->find();
+$query->innerJoinWith('Tags', function ($q) {
+	return $q->where(['Tags.name' => 'CakePHP']);
+});
+
+$query = $products->find()->innerJoinWith(
+	'Shops.Cities.Countries', function ($q) {
+		return $q->where(['Countries.name' => 'Japan']);
+	}
+);
+
+Validação de Dados
+
+To create a default validation object in your table, create the validationDefault() function:
+
+use Cake\ORM\Table;
+use Cake\Validation\Validator;
+
+class ArticlesTable extends Table
+{
+	public function validationDefault(Validator $validator)
+	{
+	$validator
+		->requirePresence('title', 'create')
+		->notEmpty('title');
+	$validator
+		->allowEmpty('link')
+		->add('link', 'valid-url', ['rule' => 'url']);
+	...
+	return $validator;
+	}
+}
+
+class ArticlesTable extends Table
+{
+	public function validationUpdate($validator)
+	{
+		$validator
+			->add('title', 'notEmpty', [
+				'rule' => 'notEmpty',
+				'message' => __('You need to provide a title'),
+			])
+			->add('body', 'notEmpty', [
+				'rule' => 'notEmpty',
+				'message' => __('A body is required')
+			]);
+		return $validator;
+	}
+}
+
+// In src/Model/Table/UsersTable.php
+public function buildRules(RulesChecker $rules)
+{
+	$rules->add($rules->isUnique('email'));
+	return $rules;
+}
+// Elsewhere in your application code
+$userEntity->email = 'a@duplicated.email';
+$usersTable->save($userEntity); // Returns false
+
+Saving Data
+class Cake\ORM\Table
+After you have loaded your data you will probably want to update and save the changes.
+
+Insert
+
+use Cake\ORM\TableRegistry;
+
+$articlesTable = TableRegistry::get('Articles');
+$article = $articlesTable->newEntity();
+$article->title = 'A New Article';
+$article->body = 'This is the body of the article';
+if ($articlesTable->save($article)) {
+	// The $article entity contains the id now
+	$id = $article->id;
+}
+
+Updating Data
+
+Updating your data is equally easy, and the save() method is also used for that purpose:
+
+use Cake\ORM\TableRegistry;
+
+$articlesTable = TableRegistry::get('Articles');
+$article = $articlesTable->get(12); // Return article with id 12
+$article->title = 'CakePHP is THE best PHP framework!';
+$articlesTable->save($article);
+
+483

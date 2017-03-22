@@ -1,0 +1,53 @@
+Dicas sobre Element no Cake
+
+
+Muitas aplicações possuem pequenos blocos de código de apresentação que precisam ser repetidos a cada página, às vezes em diferentes lugares no layout. O CakePHP ajuda você a repetir partes do seu website que precisam ser reutilizados. Estas partes reutilizáveis são chamadas de Elements (ou Elementos). Propagandas, caixas de ajuda, controles de navegação, menus extras, formulários de login e chamadas geralmente são implementadas como elements. Um element é básicamente uma mini-view que pode ser incluída em outras views, layouts e até mesmo em outros elements. Elements podem ser usados para criar uma view mais legível, colocando o processamento de elementos repetidos em seu próprio arquivo. Eles também podem ajudá-lo a re-usar conteúdos fragmentados pela sua aplicação.
+
+Element - são pequenos trechos de código que podem ser usados nas views para qualquer utilidade. 
+Um element pode ser acessado por qualquer view.
+
+Diretório - /app/View/Elements/ 
+
+No local da view onde queremos que apareça o código do elemento inserimos: 
+echo $this->element('espacos'); 
+
+Podemos passar informações para um element através do seu segundo parâmetro: 
+echo $this->element(’helpbox’, array( 
+    "textoajuda" => "Oh, this text is very helpful." 
+)); 
+echo $textoajuda;  
+
+
+Criando um element simples e útil:
+
+Criar o arquivo:
+/app/View/Elements/menutopo.ctp
+
+<ul class="actions"> 
+	<?php 
+		$valor = $this->Session->read('Auth.User');
+		$usuario=$valor['username'];
+		$grupo=$valor['group_id'];
+
+	echo $this->Html->link('Produtos', '/submenus/menus'); 
+	if($grupo==1){
+		echo $this->Html->link('Administração', '/submenus/admin'); 
+	}
+
+	if($usuario=='Não logado!'){
+				echo $this->Html->link(__('Login'), array('controller'=>'users','action'=>'login')); 
+	}else{
+				echo $this->Html->link(__('Logout'), array('controller'=>'users','action'=>'logout'));
+	} 
+		if(!$usuario) $usuario='Não logado!';
+		echo '&nbsp;&nbsp;&nbsp;Logado como: '. $usuario; 
+
+	?>
+</ul> 
+
+Chamar numa view qualquer com:
+echo $this->element('menutopo'); 
+
+
+http://book.cakephp.org/2.0/en/views.html
+

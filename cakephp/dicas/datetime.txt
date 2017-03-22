@@ -1,0 +1,62 @@
+Trabalhando com data e hora no Cake
+
+
+Formatar data para 'd/m/Y':
+$data = date('d/m/Y', strtotime($datanaoformatada));
+$data = date('m/d/Y', strtotime($post->data()))
+
+Outra
+date('Y-m-d', strtotime("-2 weeks"))
+
+Formatar Usando o TimeHelper
+App::import( 'Helper', 'Time' );
+$time = new TimeHelper(new View);
+echo $time->format('d/m/Y', '2011-08-22 11:53:00');
+
+Formatar usando CakeTime
+App::uses('CakeTime', 'Utility');
+if (CakeTime::isToday('2013-08-20')) {// Aqui pode vir uma variável
+    // greet user with a happy birthday message
+    print $this->Session->setFlash(__('Happy birthday you...'));
+}
+
+Fuso Horário
+Com o timeHelper
+
+App::import( 'Helper', 'Time' );
+$time = new TimeHelper(new View);
+$checkTime = $time->gmt( );
+$this->set( 'checkTime',$checkTime );
+
+Com o CakeTime
+App::uses('CakeTime', 'Utility');
+echo CakeTime::convert(time(), new DateTimeZone('America/Fortaleza'));
+
+
+App::uses('CakeTime', 'Utility');
+echo CakeTime::format('d/m/Y H:i:s','2011-08-22 11:53:00');
+
+App::uses('CakeTime', 'Utility');
+echo CakeTime::nice('2011-08-22 11:53:00');
+ou
+echo CakeTime::niceShort('2011-08-22 11:53:00');
+
+echo CakeTime::timeAgoInWords('Aug 22, 2011', array('format' => 'd/m/Y'));
+
+Trimestre de um ano:
+echo CakeTime::toQuarter('Aug 20, 2013');
+
+
+CakeTime::isToday($dateString, $timezone = NULL)
+CakeTime::isThisWeek($dateString, $timezone = NULL)
+CakeTime::isThisMonth($dateString, $timezone = NULL)
+CakeTime::isThisYear($dateString, $timezone = NULL)
+CakeTime::wasYesterday($dateString, $timezone = NULL)
+CakeTime::isTomorrow($dateString, $timezone = NULL)
+CakeTime::wasWithinLast($timeInterval, $dateString, $timezone = NULL)
+
+
+http://book.cakephp.org/2.0/en/core-libraries/helpers/time.html
+http://book.cakephp.org/2.0/en/core-utility-libraries/time.html
+http://book.cakephp.org/2.0/en/views/helpers.html
+

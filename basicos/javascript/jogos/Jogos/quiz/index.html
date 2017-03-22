@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<script src="write.js"></script>
+	<title> ... Loading ... </title>
+	
+
+<!-- 	<script src="test.js"></script> -->
+	
+	<style>
+	
+	body
+	{
+		font-family:Arial;
+	}
+	
+	.chosen
+	{
+	background:yellow;
+	}
+	
+	.right
+	{background:lime;}
+	
+	.wrong
+	{background:red;}
+	</style>
+</head>
+
+<body>
+
+
+
+<a name="top"><font size="7">
+<script>
+document.write(quizname)
+document.title = quizname;
+</script></font></a>
+<br><br>
+<script>
+document.write(desc)
+</script>
+<form method="get" name="form1">
+<input type="hidden" name="num" value="">
+<input type="hidden" name="real" value="">
+
+<span id="results"></span>
+
+<script>
+
+var letters = new Array("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
+
+for(i=0;i<num;i++)
+{
+
+	document.write(i+1 + ") &nbsp; " + questions[i] + "?<blockquote>")
+	var options = answers//[i].split("#")
+	for(j=0;j<options[i].length;j++)
+	{
+		document.write("<span id='a"+i+"b"+j+"' class=''><input type='radio' value='"+options[i][j]+"' name='a"+(i+1)+"'>&nbsp;"+letters[j] + ") &nbsp; "  + options[i][j]+"</span><br>")
+	}
+//onclick='alert(this.id)'
+	document.write("<span id='rw"+i+"' class='' style='display:none;'>right/wrong</span><BR><span id='expl"+i+"' class='' style='display:none;'>expl<Br></span></blockquote>")
+}
+
+document.form1.num.value=num
+document.form1.real.value=real
+</script>
+
+<div id="buttons"><input type="button" value="Check answers" onclick="findout()">
+</div>
+
+<div id="redobuttons" style="display:none"><input type="button" value="Re-take test" onclick="location.href='index.html?file='+file[1]"></div>
+</form>
+
+<script>
+var num = questions.length
+
+for(i=0;i<num;i++)
+{
+eval("a"+i + "=-1")
+}
+
+function findout()
+{	
+buttons.style.display="none"
+redobuttons.style.display=""
+
+var correct = 0
+var wrong = 0
+var notanswered = 0
+
+		for(i=0;i<num;i++)
+		{
+			q = eval("document.form1.a"+(i+1)+".length")
+			for(x=0;x<q;x++)	
+			{
+				r = eval("document.form1.a"+(i+1)+"["+x+"].checked")
+				if(r == true)	
+				{
+					eval("a"+i+"=x");
+					eval("a"+i+"b"+x+".className='chosen'")
+					eval("a"+i+"b"+(real[i]-1)+".className='right'")
+				}
+			}
+			
+	//		alert("Real: " + real[i])
+			//alert("Answer: " + eval("a"+i))
+			if(eval("a"+i) == -1)
+			{
+				notanswered++
+				eval("rw"+i+".innerHTML='<BR>Failed to answer!<BR>'")
+			}
+			else if(eval("a"+i) == (real[i]-1))
+			{
+				correct++;
+				eval("rw"+i+".innerHTML='<BR>Correct!<BR>'")
+
+			}
+			else
+			{
+				wrong++
+				eval("rw"+i+".innerHTML='<Br>Wrong!  The right answer was "+letters[(real[i]-1)]+").'")
+				eval("expl"+i+".innerHTML=expl[i]")
+				eval("expl"+i+".style.display=''")
+				
+			}
+
+			eval("rw"+i+".style.display=''")				
+			
+		}
+		
+		pc = correct/num * 100
+		
+		results.innerHTML += "You got " + correct + " questions right out of " + num + ".<BR>"
+		if(notanswered > 0){results.innerHTML += "You failed to answer " + notanswered + " questions.<BR>"}
+		results.innerHTML += "Percentage: " + pc.toFixed(1) + "%<BR><BR>"
+		results.innerHTML += "Review your answers below.<BR><BR>"
+		location.href="#top"
+}
+
+function doit()
+{
+a1b1.className="chosen"
+a2b0.className="wrong"
+rw1.className="right"
+expl1.className="chosen"
+}
+//doit()
+</script>
+
+<font size="-1">CWE Quiz Program created by <a href="http://www.coolwebeffects.net/games/quiz.html">Coolwebeffects</a>.
+</font>
+</body>
+</html>

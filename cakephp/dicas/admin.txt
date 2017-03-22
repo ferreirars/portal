@@ -1,0 +1,74 @@
+Implementação da seção de administração (admin)
+
+A seção de administração de um aplicativo geralmente é uma seção com acesso restrito apenas a alguns usuários administradores. Ela destina-se à manutenção do aplicativo, assim como ao gerenciamento do conteúdo: inserir, atualizar e remover registros. Também ao gerenciamento de usuários e suas permissões.
+Para isso geralmente se utiliza componentes como o Auth, o ACL e outros de terceiros como o 
+Acesso - https://github.com/ribafs/acesso/archive/master.zip (criado pelo ribafs), 
+O plugin (muito bom): UserMgmt: http://usermgmt.ektanjali.com/. 
+O plugin https://github.com/Maldicore/Admin/
+Existem outros plugins para esta finalidade.
+
+
+Plugin Admin para seção de Administração de Aplicativos com CakePHP
+
+Download
+https://github.com/Maldicore/Admin/
+
+Exigências:
+Seu aplicativo tenha o Componente Auth instalado. Geralmente os plugins para admin usam o Auth.
+
+Basta seguir cuidadosamente o readme. 
+
+
+Para criar uma seção de administração você mesmo, veja algumas dicas:
+
+Faremos assim: clientes, funcionarios, produtos e pedidos terão as actions e views:
+	index
+	view
+	admin_add
+	admin_edit
+	admin_delete
+
+O público somente acessará submenus/menus e login e logout
+
+Nos controllers clientes, funcionarios, produtos e pedidos:
+- index, view e busca poderão ser acessados pelos usuários "usuario", "gerente" e "admin"
+- admin_add, admin_edit e admin_delete somente serão a cessadas pelos usuários "gerente" e "admin"
+
+Os demais controllers e actions (submenus, privileges, groups e users) somente poderão ser acessados pelo "admin", ou pelos usuários do grupo "admins".
+	
+Descomentar a linha do prefixes em core.php:
+	Configure::write('Routing.prefixes', array('admin'));
+
+
+Exemplo para o controller Clientes e suas views:
+
+Renomear 
+as views para 	index.ctp, view.ctp, admin_add.ctp e admin_edit.ctp
+os actions para index(), view(), admin_add(), admin_edit() e admin_delete()
+
+Ajustar os links em index.ctp:
+Alterar o link para add:
+		<li><?php echo $this->Html->link(__('New Cliente'), array('action' => 'add')); ?></li>
+Para:
+<li><?php echo $this->Html->link(__('New Cliente'), array('controller' => 'admin/clientes','action' => 'add')); ?></li>
+
+Alterar edit:
+<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $cliente['Cliente']['id'])); ?>
+Para:
+<?php echo $this->Html->link(__('Edit'), array('controller' => 'admin/clientes','action' => 'edit', $cliente['Cliente']['id'])); ?>
+
+Alterar delete:
+<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $cliente['Cliente']['id']), null, __('Are you sure you want to delete # %s?', $cliente['Cliente']['id'])); ?>
+Para:
+
+Link em edit.ctp ficarão assim:
+		<li><?php echo $this->Form->postLink(__('Delete'), array('controller' => 'admin/clientes','action' => 'delete', $this->Form->value('Cliente.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Cliente.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List Clientes'), '/clientes/index'); ?></li>
+		<li><?php echo $this->Html->link(__('List Pedidos'), '/pedidos/index'); ?> </li>
+		<li><?php echo $this->Html->link(__('New Pedido'), array('controller' => 'admin/pedidos', 'action' => 'add')); ?> </li>
+
+Proceder de forma semelhante para os demais controllers e seus actions e views respectivas.
+Na dúvida consulte o código do aplicativo "cakemodelo".
+
+
+

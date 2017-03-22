@@ -1,0 +1,118 @@
+Este aplicativo terá como ponto forte o plugin Usermgmt, que controla muito bem o acesso de cada usuário a cada seção do aplicativo.
+
+Instalação do cake na pasta cakeusermgmt
+
+Tabelas: clientes, funcionarios, produtos e pedidos e o script do plugin
+
+http://localhost/cakeusermgmt
+
+Configurações
+
+- Configuração do banco em app/Config/database.php
+- Configuração dos salts em app/Config/core.php
+- Configuração do app/Config/routes.php:
+	Router::connect('/', array('controller' => 'clientes', 'action' => 'index'));
+
+- Dê permissão de escrita ao Apache em app/tmp se num Linux
+
+- Geração do código do CRUD somente para a tabela clientes, funcionarios, produtos e pedidos, usando o bake: 
+	./cake bake all
+
+- Instalação do plugin Usermgmt:
+- Download
+http://www.ektanjali.com/products (registro gratuito)
+ou (parece menos atualizado)
+https://github.com/chetanvarshney/User-Management-Plugin-for-Cakephp-2.x
+
+- Descompacte e renomeie a pasta para Usermgmt
+
+- Copie a pasta renomeada para app/Plugin
+
+- Importar o sql do banco em app/Plugin/Usermgmt/Config/Schema/usermgmt-1.6.sql para o banco do aplicativo
+
+- Adapte o código do AppController.php para ficar assim:
+
+<?php
+	class AppController extends Controller 
+	{
+		public $helpers = array('Form', 'Html', 'Session', 'Js', 'Usermgmt.UserAuth');
+		public $components = array('Session','RequestHandler', 'Usermgmt.UserAuth');
+
+		function beforeFilter(){
+			$this->userAuth();
+		}
+		private function userAuth(){
+			$this->UserAuth->beforeFilter($this);
+		}
+	}
+?>
+
+- Habilite o plugin em app/Config/bootstrap.php:
+        // load Usermgmt plugin and apply plugin routes. Keep all the other plugins you are using here
+        CakePlugin::loadAll(array(
+            'Usermgmt' => array('routes' => true, 'bootstrap' => true),
+        ));
+
+- Adicione o CSS do plugin ao app/View/Layouts/default.ctp
+
+ <?php  echo $this->Html->css('/usermgmt/css/umstyle');?>
+
+- Veja se precisa alterar algo:
+app/Plugin/Usermgmt/Config/bootstrap.php
+
+Pode configurar o suporte ao reCaptcha:
+app/Plugin/Usermgmt/Config/bootstrap.php
+
+	if(!defined("USE_RECAPTCHA")) {
+		define("USE_RECAPTCHA", true); // alterar para true aqui
+	}
+	/*
+		set Admin group id here
+	*/
+	if(!defined("PRIVATE_KEY_FROM_RECAPTCHA")) {
+		define("PRIVATE_KEY_FROM_RECAPTCHA", 'admin'); // Entrar com o login do administrador
+	}
+	/*
+		set Admin group id here
+	*/
+	if(!defined("PUBLIC_KEY_FROM_RECAPTCHA")) {
+		define("PUBLIC_KEY_FROM_RECAPTCHA", 'admin');// Entrar com o login do administrador
+	}
+
+
+Acessando:
+
+http://localhost/usermgmt/permissions 
+
+- user e password defaults:
+username- admin@admin.com
+password- 123456
+
+Escolha a função no menu ou na combo Select Controller.
+
+
+- Mais prático para a criação de novos aplicativos 
+- Pelos meus poucos testes: Incompatível com o plugin cakept_br e com o componente ACL
+
+Adicionar Grupo
+- Add Group
+- Entre com nome e alias 
+- Clique em Add Group
+
+Adicionar Usuário
+- Add User
+- Entre com grupo e demais dados
+- Clique em Add User
+
+Para conceder permissão para algum action de um Cntroller:
+-Selecione Permissions
+- Select Controller - Clientes (por exemplo)
+- Selecione o usuário à direita da Action (Ex.: User - index) e clique em Update
+- Com isso o específico usuário User terá acesso à action index.
+
+Faça o logout e veja que não terá mais acesso a nenhuma seção do site.
+Só poderá acessar se fizer login.
+
+Planeje seus grupos de usuários e crie os usuários para então dar as devidas permissões às seções do site para cada usuário.
+
+

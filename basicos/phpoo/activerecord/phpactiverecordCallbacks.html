@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>PHP ActiveRecord - Callbacks - An easy to use ORM for PHP</title>
+		<link rel="canonical" href="http://www.phpactiverecord.org/projects/main/wiki/Callbacks"/>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="issue,bug,tracker" />
+		<meta name="description" content="Redmine" />
+		<meta name="googlebot" content="NOODP" />
+		<meta name="robots" content="index,follow,noodp,noydir" />
+		<link href="/stylesheets/blueprint/screen.css?1281816324" media="screen" rel="stylesheet" type="text/css" />
+		<link href="/stylesheets/blueprint/print.css?1281816324" media="print" rel="stylesheet" type="text/css" />
+		<!--[if lt IE 8]><link href="/stylesheets/blueprint/ie.css?1281816324" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<link href="/themes/basecamp/stylesheets/application.css?1276826287" media="screen" rel="stylesheet" type="text/css" />
+		<link href="/stylesheets/jstoolbar.css?1281816324" media="screen" rel="stylesheet" type="text/css" />
+		<!--[if IE]>
+		    <style type="text/css">
+		      * html body{ width: expression( document.documentElement.clientWidth < 900 ? '900px' : '100%' ); }
+		      body {behavior: url(/stylesheets/csshover.htc?1281816324);}
+		    </style>
+		<![endif]-->
+		
+		<!-- page specific tags -->
+		
+  <link href="/stylesheets/scm.css?1281816324" media="screen" rel="stylesheet" type="text/css" />
+		<link href="/themes/basecamp/stylesheets/main.css?1277354265" media="screen" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	
+<div id="wrapper">
+	<div id="header">
+	    <div class="container">
+	        <div class="span-7">
+	            <h1><a href="http://www.phpactiverecord.org/" target="_top">php.activerecord</a></h1>
+	        </div>
+	        <div class="span-12" id="main-nav">
+		        <ul class="horizontal"><li><a href="/projects/main/wiki/Callbacks" class="guides">Wiki</a></li>
+<li><a href="/docs/index/main" class="docs">Docs</a></li>
+<li><a href="/news/index/main?project_id=main" class="news">Notícia</a></li>
+<li><a href="/projects/main/boards" class="boards">Fóruns</a></li>
+<li><a href="/welcome/about/main" class="about-us">About us</a></li></ul>	        </div>
+          <div class="span-5 last" id="account-menu">
+		        <ul class="horizontal"><li><a href="/login" class="login">Entrar</a></li>
+<li><a href="/account/register" class="register">Cadastre-se</a></li></ul>          </div>
+	    </div>
+	</div>
+
+	<div id="main-frame">
+		<div id="breadcrumbs" class="container">
+			<ul class="span-24 last">
+				<li><a href="/">Home</a></li><li><a href="/projects/main/wiki">Wiki</a></li><li class="last"><a href="/projects/main/wiki/Callbacks">Callbacks</a></li>
+			</ul>
+		</div>
+
+		<div id="main" class="container">
+			<div id="content" class="span-16 colborder">
+				
+				<div class="contextual">
+
+
+<span id="watcher"></span>
+
+
+
+
+
+
+<a href="/projects/main/wiki/Callbacks/history" class="icon icon-history">Histórico</a>
+</div>
+
+
+
+
+
+<div class="wiki">
+  <h2 id="Callbacks">Callbacks<a href="#Callbacks" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li><a href="/projects/main/wiki/Callbacks#before-callbacks">Before callbacks</a></li>
+		<li><a href="/projects/main/wiki/Callbacks#after-callbacks">After callbacks</a></li>
+	</ul>
+
+
+	<p>Callbacks allow the programmer to hook into the life cycle of an ActiveRecord\Model object. You can control the state of your object by declaring certain methods to be called before or after methods are invoked on your object inside of ActiveRecord.</p>
+
+
+	<h4 id="before-callbacks">Before callbacks</h4>
+
+
+	<p>If a before_* callback returns false, execution of any other callbacks after the offending callback will not be fired and the model will not be saved/deleted.</p>
+
+
+	<p><strong>before_save</strong>: called before a model is saved<br /><strong>before_create</strong>: called before a NEW model is to be inserted into the database<br /><strong>before_update</strong>: called before an existing model has been saved<br /><strong>before_validation</strong>: called before running validators<br /><strong>before_validation_on_create</strong>: called before validation on a NEW model being inserted<br /><strong>before_validation_on_update</strong>: same as above except for an existing model being saved<br /><strong>before_destroy</strong>: called after a model has been deleted</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Order</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$before_create</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">apply_tax</span><span class="dl">'</span></span>); <span class="c"># new records only</span>
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$before_save</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">upcase_state</span><span class="dl">'</span></span>); <span class="c"># new OR updated records</span>
+<span class="no"> 4</span> 
+<span class="no"> 5</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">apply_tax</span>() {
+<span class="no"> 6</span>     <span class="r">if</span> (<span class="lv">$this</span>-&gt;state == <span class="s"><span class="dl">'</span><span class="k">VA</span><span class="dl">'</span></span>)
+<span class="no"> 7</span>       <span class="lv">$tax</span> = <span class="fl">0.045</span>;
+<span class="no"> 8</span>     <span class="r">elseif</span> (<span class="lv">$this</span>-&gt;state == <span class="s"><span class="dl">'</span><span class="k">CA</span><span class="dl">'</span></span>)
+<span class="no"> 9</span>       <span class="lv">$tax</span> = <span class="fl">0.10</span>;
+<span class="no"><strong>10</strong></span>     <span class="r">else</span>
+<span class="no">11</span>       <span class="lv">$tax</span> = <span class="fl">0.02</span>;
+<span class="no">12</span> 
+<span class="no">13</span>     <span class="lv">$this</span>-&gt;tax = <span class="lv">$this</span>-&gt;price * <span class="lv">$tax</span>;
+<span class="no">14</span>   }
+<span class="no">15</span> 
+<span class="no">16</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">upcase_state</span>() {
+<span class="no">17</span>     <span class="lv">$this</span>-&gt;state = <span class="pd">strtoupper</span>(<span class="lv">$this</span>-&gt;state);
+<span class="no">18</span>   }
+<span class="no">19</span> }
+<span class="no"><strong>20</strong></span> 
+<span class="no">21</span> <span class="lv">$attributes</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">item_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Honda Civic</span><span class="dl">'</span></span>,
+<span class="no">22</span>   <span class="s"><span class="dl">'</span><span class="k">price</span><span class="dl">'</span></span> =&gt; <span class="fl">7000.00</span>, <span class="s"><span class="dl">'</span><span class="k">state</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">va</span><span class="dl">'</span></span>);
+<span class="no">23</span> 
+<span class="no">24</span> <span class="lv">$order</span> = <span class="co">Order</span>::create(<span class="lv">$attributes</span>);
+<span class="no">25</span> <span class="pd">echo</span> <span class="lv">$order</span>-&gt;tax; <span class="c"># =&gt; 315.00</span>
+<span class="no">26</span> <span class="pd">echo</span> <span class="lv">$order</span>-&gt;state; <span class="c"># =&gt; VA</span>
+<span class="no">27</span> 
+<span class="no">28</span> <span class="c"># somehow our order changed states!</span>
+<span class="no">29</span> <span class="lv">$order</span>-&gt;state = <span class="s"><span class="dl">'</span><span class="k">nc</span><span class="dl">'</span></span>;
+<span class="no"><strong>30</strong></span> <span class="lv">$order</span>-&gt;save();
+<span class="no">31</span> <span class="pd">echo</span> <span class="lv">$order</span>-&gt;state; <span class="c"># =&gt; NC</span>
+</span></code></pre>
+
+	<h4 id="after-callbacks">After callbacks</h4>
+
+
+	<p><strong>after_save</strong>: called after a model is saved<br /><strong>after_create</strong>: called after a NEW model has been inserted into the database<br /><strong>after_update</strong>: called after an existing model has been saved<br /><strong>after_validation</strong>: called after running validators<br /><strong>after_validation_on_create</strong>: called after validation on a NEW model being inserted<br /><strong>after_validation_on_update</strong>: same as above except for an existing model being saved<br /><strong>after_destroy</strong>: called after a model has been deleted</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$after_create</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">send_new_user_email</span><span class="dl">'</span></span>); <span class="c"># new records only</span>
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$after_destroy</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">delete_all_related_data</span><span class="dl">'</span></span>);
+<span class="no"> 4</span> 
+<span class="no"> 5</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">delete_all_related_data</span>() {
+<span class="no"> 6</span>     <span class="c"># delete all associated objects</span>
+<span class="no"> 7</span>   }
+<span class="no"> 8</span> 
+<span class="no"> 9</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">send_new_user_email</span>() {
+<span class="no"><strong>10</strong></span>     <span class="pd">mail</span>(<span class="lv">$this</span>-&gt;email, <span class="s"><span class="dl">&quot;</span><span class="k">Thanks for signing up, </span><span class="il"><span class="dl">{</span><span class="lv">$this</span>-&gt;name<span class="dl">}</span></span><span class="k">!</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">The subject</span><span class="dl">&quot;</span></span>);
+<span class="no">11</span>   }
+<span class="no">12</span> }
+<span class="no">13</span> 
+<span class="no">14</span> <span class="lv">$attributes</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Jax</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">email</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">nonya@nonya.com</span><span class="dl">'</span></span>);
+<span class="no">15</span> <span class="lv">$user</span> = <span class="co">User</span>::create(<span class="lv">$attributes</span>);
+<span class="no">16</span> <span class="c"># an e-mail was just sent...</span>
+<span class="no">17</span> 
+<span class="no">18</span> <span class="lv">$user</span>-&gt;<span class="pd">delete</span>();
+<span class="no">19</span> <span class="c"># everything associated with this user was just deleted</span>
+</span></code></pre>
+</div>
+
+
+
+
+
+
+<p class="other-formats">Exportar para
+	<span><a href="/projects/main/wiki/Callbacks?format=html&amp;version=2" class="html" rel="nofollow">HTML</a></span>
+	<span><a href="/projects/main/wiki/Callbacks?format=txt&amp;version=2" class="txt" rel="nofollow">TXT</a></span>
+</p>
+
+
+
+
+
+
+
+				
+			</div>
+
+			<div id="sidebar" class="span-7 last">
+				<div class="r-button" id="stable-build">
+					<a href="/download">Get Stable Build - <em>v1.0</em><p>June 27 2010</p></a>
+				</div>
+				<div class="r-button" id="nightly-build">
+					<a href="/download">Get Nightly Build <p>May 10, 2011 00:00</p></a>
+				</div>
+		
+				
+
+				<h2 id="news-header">
+	<a href="/news">Latest News</a>
+	<a class="feed" href="/projects/main/news.atom"><img src="/images/feed-icon-14x14.png"/></a>
+</h2>
+
+<ul id="news-summary" class="icon-list">
+	
+	<li class="article">
+		<a href="/news/5-did-you-know-php-ar-has-eager-loading">Did you know? PHP-AR has Eager Loading</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-08-31T23:31:08Z">Tue Aug 31 19:31:08 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="/news/4-php-activerecord-1-0-released">php-activerecord 1.0 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-28T00:02:55Z">Sun Jun 27 20:02:55 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="/news/3-website-updated-with-forums-and-wiki">Website updated with forums and wiki</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-18T21:37:23Z">Fri Jun 18 17:37:23 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="/news/2-php-activerecord-1-0-rc1-released">php-activerecord 1.0 RC1 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-04-07T00:00:15Z">Tue Apr 06 20:00:15 -0400 2010</em> ago
+			
+			<span class="comments"><a href="/news/2-php-activerecord-1-0-rc1-released">15</a></span>
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="/news/1-welcome-to-phpactiverecord-org">Welcome to phpactiverecord.org!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2009-08-02T00:00:15Z">Sat Aug 01 20:00:15 -0400 2009</em> ago
+			
+			<span class="comments"><a href="/news/1-welcome-to-phpactiverecord-org">7</a></span>
+			
+		</div>
+		
+	</li>
+	
+</ul>
+
+
+
+
+				<h2><a href="/projects/main/activity">Recent Activity</a></h2>
+<ul id="recent-activity" class="icon-list">
+		<li class="message">
+	  
+		<a href="/boards/4/topics/795-please-help-me-understand-when-where-to-put-the-plural">I have a class called &quot;QuizUser&quot;.
+
+I can reference and successfully retrieve da...</a>
+		
+		<div class="author">
+			by <a href="/users/779">Andrew Sinning</a>
+			<em class="relative" title="2011-07-15T14:42:53Z">Fri Jul 15 10:42:53 -0400 2011</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="/boards/4/topics/794-how-does-php-activerecord-treat-camelcase-and-under_scores">Could somebody please clarify the rules for how php.activerecord deals with camel...</a>
+		
+		<div class="author">
+			by <a href="/users/779">Andrew Sinning</a>
+			<em class="relative" title="2011-07-15T14:01:17Z">Fri Jul 15 10:01:17 -0400 2011</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="/boards/4/topics/793-re-help-with-relationships">ok Ive worked it out: 
+
+$hardware = Hardware::find_by_id('847' , array('include...</a>
+		
+		<div class="author">
+			by <a href="/users/790">james cowie</a>
+			<em class="relative" title="2011-07-15T11:27:12Z">Fri Jul 15 07:27:12 -0400 2011</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="/boards/4/topics/792-help-with-relationships">Hello I have to tables Hardware &amp; HardwareHosts. hardware has ID and name and Har...</a>
+		
+		<div class="author">
+			by <a href="/users/790">james cowie</a>
+			<em class="relative" title="2011-07-15T11:16:37Z">Fri Jul 15 07:16:37 -0400 2011</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="/boards/4/topics/791-re-stable-vs-nightly">Thanks I will grab the nightly build and give it a try then.</a>
+		
+		<div class="author">
+			by <a href="/users/785">Vincent Lu</a>
+			<em class="relative" title="2011-07-13T03:56:30Z">Tue Jul 12 23:56:30 -0400 2011</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/1e4dd2881803a8d67396047664a3223e8e734a22">only check directory exists if something was supplied</a>
+		
+		<div class="author">
+			by <a href="/users/4">Kien La</a>
+			<em class="relative" title="2011-04-25T03:47:57Z">Sun Apr 24 23:47:57 -0400 2011</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/490f119acda09a32be93a4515ce7add4d97689a7">GH-134: Expressions parsing was using field = null instead of IS</a>
+		
+		<div class="author">
+			by <a href="/users/3">Jacques Fuentes</a>
+			<em class="relative" title="2011-03-23T02:15:01Z">Tue Mar 22 22:15:01 -0400 2011</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/769a869c4c82af4d3cff79a05502f6938e11dc7a">fix default port for memcached and namespace option</a>
+		
+		<div class="author">
+			by <a href="/users/3">Jacques Fuentes</a>
+			<em class="relative" title="2011-03-23T01:57:17Z">Tue Mar 22 21:57:17 -0400 2011</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/7250e9a620c159915974e071ca4d04305eb8983f">Merge branch 'gh101-has_many-through' of https://github.com/greut/php-activerecor...</a>
+		
+		<div class="author">
+			by <a href="/users/3">Jacques Fuentes</a>
+			<em class="relative" title="2011-03-23T01:55:10Z">Tue Mar 22 21:55:10 -0400 2011</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/a780ad14bae71d7531b59177bc31722a79e01510">cache namespace should come first and provide a delimiter</a>
+		
+		<div class="author">
+			by <a href="/users/3">Jacques Fuentes</a>
+			<em class="relative" title="2011-03-23T01:30:11Z">Tue Mar 22 21:30:11 -0400 2011</em>
+		</div>
+	</li>
+	</ul>
+
+
+				
+  
+<h3>Wiki</h3>
+
+<a href="/projects/main/wiki">Página inicial</a><br />
+<a href="/projects/main/wiki/Page_index">Índice por título</a><br />
+<a href="/projects/main/wiki/Date_index">Índice por data</a><br />
+
+
+				
+			</div>
+		</div>
+	</div>
+
+	<div id="ajax-indicator" style="display:none;"><span>Carregando...</span></div>
+
+	<div id="footer">
+	    <div class="container">
+	        <div class="span-24 last">
+			    <ul class="horizontal">
+	<li><a href="/">Home</a></li>
+	<li><a href="/projects/main/wiki/Callbacks">Wiki</a></li>
+	<li><a href="/docs">Documentation</a></li>
+	<li><a href="http://github.com/kla/php-activerecord/issues">Issues</a></li
+	<li><a href="/news">News</a></li>
+	<li><a href="/projects/main/boards">Forums</a></li>
+	<li class="last"><a href="/welcome/about">About Us</a></li>
+</ul>
+<p>
+	<a href="http://www.phpactiverecord.org/" target="_top">phpactiverecord.org - An easy to use ORM for PHP</a><br/>
+	<a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>
+</p>
+
+	        </div>
+	    </div>
+	</div>
+</div>
+
+
+<script src="/assets/core.js?1281816347" type="text/javascript"></script>
+
+
+<script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10078176-1"); pageTracker._trackPageview();} catch(err) {}</script>
+
+
+
+</body>
+</html>

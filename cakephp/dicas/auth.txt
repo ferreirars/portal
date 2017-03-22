@@ -1,0 +1,124 @@
+Dicas sobre o Componente Auth
+
+Identificação, autenticação e autorização de usuários é uma parte comum de quase todas as aplicações web. No CakePHP o AuthComponent fornece uma maneira modular de fazer essas tarefas. O AuthComponent permite combinar objetos de autenticação, autorização e objetos para criar formas flexíveis de identificação e verificação de autorização do usuário.
+
+Este pequeno tutorial é um resumo do oficial (em inglês), uma versão resumida, pois quem fará o principal trabalho de controle de acesso será o componente Acesso.
+
+
+Alerta: a tabela users não deve ter nenhum usuário cadastrado no início, deve estar vazia.
+Os usuários devem ser cadastrados após a implementação do Auth e através do controller users.
+
+Caso receba a mensagem:
+Erro: Table useres for model User was not found in datasource default. 
+Isso aconteceu comigo sempre que instalei o o plugin Cakept_br.
+
+Adicione a variável $useTable ao model User
+public $useTable = 'users';
+
+
+Adaptado do tutorial oficial:
+http://book.cakephp.org/2.0/en/tutorials-and-examples/blog-auth-example/auth.html
+
+Ajustar AppController.php para isso: 
+
+class AppController extends Controller { 
+    public $components = array( 
+        'Session', 
+        'Auth' => array( 
+			'loginAction' => array('controller'=>'users','action'=>'login'),
+            'loginRedirect' => array('controller' => 'clientes', 'action' => 'index'), 
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'login'), 
+			'authorize' => array('Controller') // Added this line 
+        ) 
+    ); 
+
+    public function beforeFilter() { 
+        $this->Auth->allow('menus','index'); // Estes terão acesso público 
+    } 
+
+	public function isAuthorized($user) { 
+		if (isset($user['group_id']){ 
+		    return true; 
+		} 
+		return false; 
+	} 
+} 
+
+
+Adicionar ao controller Users: 
+
+	public function login() { 
+		if ($this->request->is('post')) { 
+		    if ($this->Auth->login()) { 
+		        $this->redirect($this->Auth->redirect()); 
+		    } else { 
+		        $this->Session->setFlash(__('Invalid username or password, try again')); 
+		    } 
+		} 
+	} 
+
+	public function logout() { 
+		$this->redirect($this->Auth->logout()); 
+	} 
+
+
+Criar a view Users/login.ctp: 
+
+<div class="users form"> 
+<?php echo $this->Session->flash('auth'); ?> 
+<?php echo $this->Form->create('User'); ?> 
+    <fieldset> 
+        <legend><?php echo __('Please enter your username and password'); ?></legend> 
+        <?php echo $this->Form->input('username'); 
+        echo $this->Form->input('password'); 
+    ?> 
+    </fieldset> 
+<?php echo $this->Form->end(__('Login')); ?> 
+</div> 
+
+
+Início do model User.php: 
+
+App::uses('AppModel', 'Model'); 
+App::uses('AuthComponent', 'Controller/Component'); 
+
+class User extends AppModel { 
+
+	public function beforeSave($options = array()) { 
+		if (isset($this->data[$this->alias]['password'])) { 
+		    $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']); 
+		} 
+		return true; 
+	} 
+
+Pronto. Estas são as alterações necessárias. 
+
+
+Testando
+
+Agora tente adicionar um cliente, funcionario, produto ou pedido ou editar. 
+Verá que será redirecionado para o login com a mensagem de que não tem autorização. 
+
+Adicionar Usuário
+Agora precisamos permitir, por enquanto, que o público use a view "add" em AppController para adicionar um usuário admin. 
+
+$this->Auth->allow('menus','index','add'); 
+ 
+Acesse então 
+http://localhost/cakemodelo2/users/ 
+
+E adicione um usuário "admin" ao grupo "admins". 
+
+Após adicionar desfaça então as alterações no AppController:
+$this->Auth->allow('menus'); // Deixando para o acesso público somente 'menus'.
+
+Faça o login como user "admin" em: 
+http://localhost/cakemodelo2/users/login 
+
+Agora terá direito a qualquer operação como admin.
+Lembre que para fazer logout pode chamar:
+http://localhost/cakemodelo2/users/logout 
+
+Prontinho, temos nosso aplicativo com controle de acesso implementado via componente Auth.
+
+

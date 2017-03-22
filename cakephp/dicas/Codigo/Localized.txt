@@ -1,0 +1,45 @@
+Localized
+Este plugin traz validação brasileira para CPF, CNPJ, CEP e Telefone.
+O plugin Localized contém classes com validação para diversos países, inclusive o Brasil. 
+
+Validação Específica do Brasil: postal, phone, ssn (cpf e cnpj) 
+
+Download do plugin: 
+https://github.com/cakephp/localized  
+
+Descompactar e renomear para Localized e copiar para a pasta app/Plugin
+
+Carregar em app/Config/bootstrap.php: 
+CakePlugin::load('Localized'); 
+
+Adicionar ao model desejado:
+
+Adicione no início do arquivo:
+App::uses('BrValidation', 'Localized.Validation');
+
+Na classe:
+    public $validate = array( 
+        'nome' => array( 
+            'notempty' => array( 
+                'rule' => array('notempty'), 
+                //'message' => 'Your custom message here', 
+                //'allowEmpty' => false, 
+                //'required' => false, 
+                //'last' => false, // Stop validation after this rule 
+                //'on' => 'create', // Limit validation to 'create' or 'update' operations 
+            ), 
+        ), 
+        'cpf' => array( 
+            'notempty' => array( 
+                'rule' => array('notempty'), 
+                //'message' => 'Your custom message here', 
+                //'allowEmpty' => false, 
+                //'required' => false, 
+                //'last' => false, // Stop validation after this rule 
+                //'on' => 'create', // Limit validation to 'create' or 'update' operations 
+            ), 
+        ), 
+    ); 
+
+Pronto. Ao adicionar ou editar um registro com CPF ele será validado. 
+

@@ -1,0 +1,142 @@
+Dicas Diversas para CakePHP
+
+
+Alguns detectores embutidos que podemos usar:
+
+    is('get') checar se a requisição atual é GET.
+    is('put') checar se a requisição atual é PUT.
+    is('post') checar se a requisição atual é POST.
+    is('delete') checar se a requisição atual é DELETE.
+    is('head') checar se a requisição atual é HEAD.
+    is('options') checar se a requisição atual é OPTIONS.
+    is('ajax') checar se a requisição atual é vem com X-Requested-with = XmlHttpRequest.
+    is('ssl') checar se a requisição atual veio via SSL
+    is('flash') checar se a requisição atual tem um User-Agent do Flash
+    is('mobile') checar se a requisição atual veio de uma lista comum de mobile agents.
+
+
+Método set()
+
+Função do controller que tem como objetivo receber uma variável simples ou array e deixá-lá disponível para uma view.
+
+Parâmetros
+
+string|array $variavel - string ou array de dados
+string|array $variavel2 optional null
+    $variavel1 funciona como uma chave. Não usada se $variavel1 for um array associativo, de outra forma serve como o values para a chave $variavel1.
+
+Link
+http://book.cakephp.org/2.0/en/controllers.html#interacting-with-views
+
+set(string $var, mixed $value), 
+$var é uma string
+$value pode ser uma variável simples ou um array de dados
+
+Exemplos:
+
+$conditions = $this->postConditions($this->request->data);
+$orders = $this->Order->find('all', compact('conditions'));
+$this->set('orders', $orders);
+
+$conditions = $this->postConditions(
+    $this->request->data,
+    array(
+        'num_items' => '>=',
+        'referrer' => 'LIKE'
+    )
+);
+$orders = $this->Order->find('all', compact('conditions'));
+
+Criando o título da página no layout
+$this->set('title_for_layout', 'This is the page title');
+
+compact é atualmente uma função PHP:
+compact — Cria um array contendo variáveis e seus valores
+
+Exemplo:
+
+$city  = "San Francisco";
+$state = "CA";
+$event = "SIGGRAPH";
+
+$location_vars = array("city", "state");
+
+$result = compact("event", "nothing_here", $location_vars);
+print_r($result);
+
+Retorna:
+Array
+(
+    [event] => SIGGRAPH
+    [city] => San Francisco
+    [state] => CA
+)
+print $result['city'];
+
+Uso do compact
+
+    Parameters:
+    mixed $one required
+    A string or an array of data.
+    mixed $two optional NULL
+
+The compact function returns an associative array, built by taking the names specified in the input array, using them as keys, and taking the values of the variables referenced by those names and making those the values. For example:
+
+$fred = 'Fred Flinstone';
+$barney = 'Barney Rubble';
+$names = compact('fred', 'barney');
+
+$variable_to_pass = 'Fred';
+$this->set(compact('variable_to_pass'));
+
+Otherwise, the two parameter form of set can be used:
+
+$variable_to_pass = 'Fred';
+$this->set('variable_to_pass', $variable_to_pass);
+
+
+Um exemplo de uso seria:
+
+Forma trabalhosa:
+
+    $this->set('dados', $dados);
+    $this->set('variados', $variados);
+    $this->set('textos', $textos);
+
+Outra forma:
+
+    $this->set(array('dados'=> $dados, 'variados'=>$variados, 'textos'=> $textos));
+
+Usando compact:
+    $this->set(compact('dados'));
+
+Crédito: http://sotecnologia.eti.br/?p=349
+
+
+// Testar se o model Texto existe ou não
+if ($this->Texto) {
+       $this->Post->saveField('slug', $this->Text->truncate(Inflector::slug($post['Post']['title']),25,array('exact'=>false,'html'=>false,'ending'=>'')));
+}
+
+
+Classe String
+
+Truncando string:
+echo String::truncate(
+    'The killer crept forward and tripped on the rug.',
+    22,
+    array(
+        'ellipsis' => '...',
+        'exact' => false
+    )
+);
+
+
+Truncando link numa view:
+<?php 
+echo $this->Html->link( $this->Text->truncate('This is a very long link that needs to be truncated', 10), 
+'/pages/home', 
+array('class' => 'button', 'target' => '_blank') ); 
+?>
+
+

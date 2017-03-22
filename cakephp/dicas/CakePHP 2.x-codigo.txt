@@ -1,0 +1,93 @@
+CakePHP 2.x
+
+Código
+
+Conbtroller
+
+class RelatoriosController extends AppController {
+	public function relatorio() {
+		$mes = $this->request->data['Relatorio']['mes'];
+
+		$this->layout='recibo';
+		$options = array('conditions' => array('Relatorio.mes' => $mes));
+
+		$this->set('relatorio', $this->Relatorio->find('all', $options));
+	}
+
+Model
+
+class Relatorio extends AppModel {
+
+	public function mes($numero){
+        $mes = $this->find('first', array(
+            'conditions'=>array('Relatorio.numero'=>$numero),
+            'fields'=>array('Relatorio.mes')
+        ));
+		return $mes;
+	}
+
+
+View/Relatórios/index.ctp
+
+<div class="actions">
+	<h3><?php echo __('Actions'); ?></h3>
+	<?php echo $this->Form->create('Relatorio', array('action' => 'relatorio')); ?>
+	<?php echo $this->Form->input('mes', array('label'=>'Mês a Imprimir')); ?>
+	<?php echo $this->Form->end(__('Imprimir')); ?>
+
+View/Relatórios/relatorio.ctp
+
+<?php 
+if(!isset($relatorio[0]['Relatorio']['mes'])){
+	echo $this->Html->scriptBlock('alert("Relatório não encontrado!")');
+	echo $this->Html->scriptBlock('window.location.href="/condominio/relatorios/index"');
+//echo $this->Html->scriptBlock('window.location.href="'.$this->Html->url(array('controller'
+//=> 'users', 'action' => 'redirect_user'), true).'"'); 
+}
+
+print '<table width="100%"><tr>';
+$x=0;
+
+foreach($relatorio as $relatorio){
+	print "
+	<td>
+		<p><font size=\"3\"><b>Condomínio Ferreira</b></font></p>
+		<table width=\"80%\" border=\"1\">
+			<tr><td>".__('Inquilino')."</td>
+				<td><b>".h($relatorio['Relatorio']['inquilino'])."</td></tr>
+			<tr><td>".__('Numero')."</td>
+				<td>".h($relatorio['Relatorio']['numero'])."</td></tr>
+			<tr><td>".__('Mes')."</td>
+				<td>".h($relatorio['Relatorio']['mes'])."</td></tr>
+			<tr><td>".__('Vencimento')."</td>
+				<td>".h($relatorio['Relatorio']['vencimento'])."</td></tr>
+			<tr><td>".__('Pessoas')."</td>
+				<td>".h($relatorio['Relatorio']['pessoas'])."</td></tr>
+			<tr><td>".__('Cagece')."</td>
+				<td>".h($relatorio['Relatorio']['cagece'])."</td></tr>
+			<tr><td>".__('Condominio')."</td>
+				<td>".h($relatorio['Relatorio']['condominio'])."</td></tr>
+			<tr><td>".__('Multa')."</td>
+				<td>".h($relatorio['Relatorio']['multa'])."</td></tr>
+			<tr><td><b>".__('Total')."</td>
+				<td><b>".h($relatorio['Relatorio']['total'])."</td></tr>
+			<tr><td>".__('Observacao')."</td>
+				<td>".h($relatorio['Relatorio']['observacao'])."</td></tr>
+		</table>
+	</td>
+	";
+	$x++;
+
+	if($x%3==0) print '</tr><tr>';
+	if($x==6) {
+		//$quebra = "<p style=\"page-break-before: always;\"></p>";
+		print "<tr><td colspan=\"3\">&nbsp;</td></tr>";
+		print "<tr><td colspan=\"3\">&nbsp;</td></tr>";
+		print "<tr><td colspan=\"3\">&nbsp;</td></tr>";
+		print "<tr><td colspan=\"3\">&nbsp;</td></tr>";
+	}
+
+}
+	print '</tr></table>';
+?>
+

@@ -1,0 +1,18 @@
+Dicas sobre Paginação no CakePHP
+
+
+Customizando a paginação
+
+Padrão: 20 itens por página 
+Configuração no controller: 
+public $paginate = array('limit' => 10); 
+ou
+public $paginate = array('limit' => 10, 'order' => 'Cliente.nome');	 
+Obs.: vale lembrar que a paginação no Cake cria links nos cabeçalhos permitindo a ordenação por qualquer uma das colunas.
+Basta clicar no título da coluna para ordenar por ela.
+Lembrando ainda que quando geramos o código pelo Bake ele já implementa direitinho a paginação.
+
+
+http://book.cakephp.org/2.0/en/core-libraries/helpers/paginator.html
+http://book.cakephp.org/2.0/en/core-libraries/components/pagination.html
+

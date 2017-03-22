@@ -1,0 +1,306 @@
+
+
+<html>
+<head>
+  <!--
+  <rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+    <rdf:Description
+      rdf:about="http://www.firephp.org/services/trackback/Reference/Developers/ExtendingFirebug"
+      dc:identifier="http://www.firephp.org/services/trackback/Reference/Developers/ExtendingFirebug"
+      dc:title="FirePHP - Extending Firebug < Reference"
+      trackback:ping="http://www.firephp.org/services/trackback/Reference/Developers/ExtendingFirebug" />
+  </rdf:RDF>
+  -->
+  <title>FirePHP - Extending Firebug < Reference</title>
+  <link rel="stylesheet" href="/css/Style.css"></link>
+  <link rel="pingback" href="http://www.firephp.org/services/pingback/Reference/Developers/ExtendingFirebug" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="keywords" content="php, firefox, firebug, firephp, extension, ajax, javascript, zend framework, developer, development, debug, tool" />
+  <meta name="description" content="FirePHP enables you to print to your Firebug Console using a simple PHP function call." />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+  <script src="/js/jquery.js"></script>
+  
+  <script type="text/javascript" src="/js/jtabber.js"></script>
+
+    
+  <base href="http://www.firephp.org/"/>
+</head>
+
+<body topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="min-width:1000px;">
+
+<center>
+<br>
+<table style="margin-top: 3px;" border="0" cellpadding="0" cellspacing="0" width="90%">
+  <tr>
+    <td><img src="/images/PageBorder_NWC.gif" border="0" width="4" height="3"></td>
+    <td align="left" background="/images/PageBorder_N.gif"><img src="/images/PageBorder_NW.gif" border="0" width="4" height="3"></td>
+    <td><img src="/images/PageBorder_NEC.gif" border="0" width="10" height="3"></td>
+  </tr>
+  <tr>
+    <td valign="top" background="/images/PageBorder_W.gif"><img src="/images/PageBorder_WN.gif" border="0" width="4" height="3"></td>
+    <td nowrap bgcolor="#FFFFFF" valign="top" width="100%">
+
+
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+
+    <tr>
+    <td class="header" valign="middle" align="center" style="padding-left: 10px;"><a href="/"><img src="/images/BugLogo.png" width="51" height="51" border="0"></a></td>
+	  <td class="header" align="right" width="50%" style="padding-right: 30px;">
+	  
+	  <table border="0" cellspacing="0" cellpadding="0">
+	  	<tr>
+	  		<td nowarp align="center">Firebug Extension</td>
+	  		<td style="color: gray;">for</td>
+	  	<tr>
+	  	<tr>
+	  		<td nowarp align="center">AJAX Development</td>
+				<td></td>
+			</tr>
+		</table>
+			  		
+ 	 </td>
+    <td nowrap class="header" align="right" style="padding-right: 30px; padding-left: 30px; height: 50px;font-family:verdana, arial, helvetica, sans-serif; font-size:24px; font-weight: bold;">
+    
+<a href="/" class="headerlabel">FirePHP</a>
+    
+    </td>
+    <td class="header" align="left" width="50%" style="padding-left: 30px; padding-right: 30px;" nowrap>
+
+<b><a href="http://www.firephp.org/Wiki/Reference/Fb">fb</a>(</b> mixed <font style="font-family:'Courier New',Courier,monospace;">$Object</font> [, string <font style="font-family:'Courier New',Courier,monospace;">$Label</font> ] [, string <font style="font-family:'Courier New',Courier,monospace;">$Type</font> ] <b>)</b>
+
+    </td>
+  </tr>
+    
+
+                 
+
+  <tr>
+  	<td style="height: 17px;">&nbsp;</td>
+  </tr>
+</table>  
+
+				
+<table border="0" width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bgcolor="#FFFFFF">
+  <tr>
+	<td id="content" class="body" width="100%" valign="top" height="450" style="padding: 17px; padding-top: 0px; padding-bottom: 10px; font-family: verdana, arial, helvetica, sans-serif; font-size: 11px">
+     						     						
+<div style="width: 100%; padding-bottom: 3px; text-align: right; font-size: 10px; color: #BBBBBB; font-weight: bold">Extending Firebug < Reference < <a href="/">Home</a></div>            
+           
+
+<p><font size="3"><b>Introduction</b></font></p>
+
+<div style="padding-left: 10px;">
+<p>The primary motivations for extending Firebug instead of publishing an independent extension without the requirement of needing Firebug installed are:</p>
+<ul>
+  <li>Firebug provides 95% of all functionality required to track and manage browser requests and contexts as needed by FirePHP</li>
+  <li>Firebug provides a large base of library functions</li>
+  <li>The user interface of Firebug is already used by many developers and FirePHP will attempt to stay as consistent with the existing UI as possible to minimize the adoption and learning curves of FirePHP</li>
+</ul>
+<p>This tutorial focuses on how FirePHP is able to extend Firebug in an effort to help you make your own additions to Firebug.</p>
+</div>
+
+<br>
+<p><font size="3"><b>Concepts and Quick Recap</b></font></p>
+
+<div style="padding-left: 10px;">
+<p>The <a target="_blank" href="http://developer.mozilla.org/en/docs/Gecko">Gecko</a> engine behind Firefox is designed to allow you to build user interfaces using an XML-based language called <a target="_blank" href="http://developer.mozilla.org/en/docs/XUL">XUL</a>. One primary objective of this language is to allow you to <a target="_blank" href="http://developer.mozilla.org/en/docs/XUL_Overlays">overlay</a> new components by essentially inserting them into existing XUL applications like Firefox. <a target="_blank" href="https://addons.mozilla.org/firefox/extensions/">Firefox extensions</a> make heavy use of overlays to add functionality to Firefox without needing to modify the Firefox code.</p>
+<p>Similarly FirePHP uses overlays to add functionality to Firebug without needing to modify Firebug itself.</p>
+</div>
+
+<br>
+<p><font size="3"><b>Example</b></font></p>
+
+<div style="padding-left: 10px;">
+<p>The following example illustrates how to add a new panel called "Test Panel" to Firebug.</p>
+<p>You can download and install this extension from:<br>
+<a target="_blank" href="http://firephp.googlecode.com/files/FirebugTestExtension-0.0.2.xpi">http://firephp.googlecode.com/files/FirebugTestExtension-0.0.2.xpi</a></p>
+
+<br>
+<p><font size="2"><b>Assumptions and Requirements</b></font></p>
+
+<div style="padding-left: 10px;">
+<p>To keep this tutorial brief I am assuming you have some basic knowledge on how to build a Firefox extension and you have your development environment already setup. If you need more information on these topics you can visit the <a target="_blank" href="http://developer.mozilla.org/en/docs/Extensions">Mozilla Developer Center</a>.</p>
+<p>The extension for this example is called "FirebugTestExtension" and you can change any references to this name if you are trying this out with your own extension.</p>
+<p>When developing additions to Firebug it is very useful to have the Firebug source available. I suggest that you extract the Firebug XPI package and load it into your development environment just like your own extensions. This way you can add debug code to Firebug during development and can look through all the Firebug code to help understand what happens behind the scenes.</p>
+<p>You should be familiar with using Firebug.</p>
+</div>
+
+<br>
+<p><font size="2"><b>The Overlay Definition</b></font></p>
+
+<div style="padding-left: 10px;">
+<p>First we need to tell Gecko that we want to add some UI elements to Firebug. This is done in the <b>chrome.manifest</b> file.</p>
+<div style="width: 650px; margin: 10px; padding: 5px; padding-left: 15px; padding-right: 15px; background-color:#F9F9F9; overflow: auto;"><pre style="font-family: Courier;">
+overlay chrome://firebug/content/firebugOverlay.xul  chrome://firebugtestextension/content/firebugOverlay.xul 
+</pre></div>
+
+<p>This means we want to overlay the content of <i>chrome://firebugtestextension/content/firebugOverlay.xul</i> on top of <i>chrome://firebug/content/firebugOverlay.xul</i> which is a specific Firebug file.</p>
+<p>Gecko will create a new JavaScript context that we can load our own XUL and JavaScript code into.</p>
+<p>Next we define the XUL code used to insert new UI components. The following code will add two buttons to a specific location in the Firebug UI. The buttons will not be visible by default but will be made visible by code we are going to add. These are the buttons that show above the Firebug panel tabs next to the Firebug logo and "Inspect" button.</p>
+
+<div style="width: 650px; margin: 10px; padding: 5px; padding-left: 15px; padding-right: 15px; background-color:#F9F9F9; overflow: auto;"><pre style="font-family: Courier;">
+&lt;?xml version=&quot;1.0&quot;?&gt; 
+&lt;overlay xmlns=&quot;http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul&quot;&gt; 
+  &lt;script type=&quot;application/x-javascript&quot;
+          src=&quot;chrome://FirebugTestExtension/content/FirebugPanel.js&quot;/&gt; 
+  &lt;commandset id=&quot;mainCommandSet&quot;&gt; 
+    &lt;command id=&quot;cmd_button1FirebugTestExtension&quot; oncommand=&quot;Firebug.FirebugTestExtension.button1()&quot;/&gt; 
+    &lt;command id=&quot;cmd_button2FirebugTestExtension&quot; oncommand=&quot;Firebug.FirebugTestExtension.button2()&quot;/&gt; 
+  &lt;/commandset&gt; 
+  &lt;toolbar id=&quot;fbToolbar&quot; align=&quot;center&quot;&gt; 
+    &lt;hbox id=&quot;fbToolbarInner&quot; insertbefore=&quot;fbDetachButton&quot; flex=&quot;1&quot; align=&quot;center&quot;&gt; 
+      &lt;hbox id=&quot;fbFirebugTestExtensionButtons&quot; insertafter=&quot;fbNetButtons&quot;&gt; 
+        &lt;toolbarbutton label=&quot;Button 1&quot; class=&quot;toolbar-text-button&quot; tooltiptext=&quot;Button 1&quot; command=&quot;cmd_button1FirebugTestExtension&quot;/&gt; 
+        &lt;toolbarbutton label=&quot;Button 2&quot; class=&quot;toolbar-text-button&quot; tooltiptext=&quot;Button 2&quot; command=&quot;cmd_button2FirebugTestExtension&quot;/&gt; 
+      &lt;/hbox&gt; 
+    &lt;/hbox&gt; 
+  &lt;/toolbar&gt; 
+&lt;/overlay&gt; 
+</pre></div>
+</div>
+
+<br>
+<p><font size="2"><b>The JavaScript Code</b></font></p>
+
+<div style="padding-left: 10px;">
+<p>In the XUL file we are including a JavaScript file from <i>chrome://firebugtestextension/content/FirebugPanel.js</i>. This file has the following content.</p>
+<div style="width: 650px; margin: 10px; padding: 5px; padding-left: 15px; padding-right: 15px; background-color:#F9F9F9; overflow: auto;"><pre style="font-family: Courier;">
+FBL.ns(function() { with (FBL) { 
+Firebug.FirebugTestExtension = extend(Firebug.Module, { 
+  shutdown: function() {
+    if(Firebug.getPref('defaultPanelName')=='FirebugTestExtension') {
+      /* Optional */
+      Firebug.setPref('defaultPanelName','console');
+    }
+  },
+  showPanel: function(browser, panel) { 
+    var isFirebugTestExtension = panel &amp;&amp; panel.name == &quot;FirebugTestExtension&quot;; 
+    var FirebugTestExtensionButtons = browser.chrome.$(&quot;fbFirebugTestExtensionButtons&quot;); 
+    collapse(FirebugTestExtensionButtons, !isFirebugTestExtension); 
+  }, 
+  button1: function() { 
+    FirebugContext.getPanel(&quot;FirebugTestExtension&quot;).printLine('Clicked Button 1'); 
+  }, 
+  button2: function() { 
+    FirebugContext.getPanel(&quot;FirebugTestExtension&quot;).printLine('Clicked Button 2'); 
+  } 
+}); 
+function FirebugTestExtensionPanel() {} 
+FirebugTestExtensionPanel.prototype = extend(Firebug.Panel, { 
+  name: &quot;FirebugTestExtension&quot;, 
+  title: &quot;Test Panel&quot;, 
+  searchable: false, 
+  editable: false,
+  printLine: function(message) {
+    var elt = this.document.createElement(&quot;p&quot;);
+    elt.innerHTML = message;
+    this.panelNode.appendChild(elt);
+  }
+}); 
+Firebug.registerModule(Firebug.FirebugTestExtension); 
+Firebug.registerPanel(FirebugTestExtensionPanel); 
+}});
+</pre></div>
+
+<p>We create two new objects. A <i>Firebug.Module</i> and a <i>Firebug.Panel</i>. The Module is designed to do all the heavy lifting of your new logic while the Panel is designed to primarily concern itself with the display of your new features in the "panel" which is the large white area underneath the tabs in the Firebug extension.</p>
+<p>The <i>Firebug.FirebugTestExtension.showPanel()</i> method is called whenever a new tab is selected by the user. Note that this method fires even when the panel being selected is not ours. If you want to know if specifically your panel was selected you must test for it as shown. Here we now tell Firebug to display the buttons we added in the XUL overlay by referencing them via the <i>fbFirebugTestExtensionButtons</i> id (and hide them if our panel is not shown).</p>
+<p>We also implemented two methods to catch events coming from the two XUL commands we setup and connected with the buttons in the XUL file. When the events fire (you click on the buttons) we obtain a reference to the FirebugTestExtension panel and and call the <i>printLine()</i> method.</p>
+<p>In <i>FirebugTestExtensionPanel.printLine()</i> you can see that we create a new paragraph element and append it to <i>this.panelNode</i> which is a reference to a DIV tag that Firebug automatically adds as the top level element of the document that resides in the white bottom panel.</p>
+<p>At the bottom of our JavaScript file we register the Module and Panel with Firebug. This will cause Firebug to create the new tab in its UI when it initializes.</p>
+</div>
+
+<br>
+<p><font size="2"><b>A note about Firebug</b></font></p>
+
+<div style="padding-left: 10px;">
+<p>Firebug is designed to help developers debug and build web-applications and more specifically help in working with a specific page or set of pages. Firebug will by design create a new Panel context for each new top-level page requested. This is why the content of the panel (which you can see after you have clicked the buttons a few times) is removed when you navigate to a new URL or open a new browser tab. When you return to a previous tab the content of the panel will be returned. It is important that you keep this logic in mind when you build your own additions. Pages loaded into framesets or iframe elements contained within the top-level document will not create a new context for Firebug and you are able to capture these events and update your Panel.</p>
+<p>A helpful strategy is to use the <i>Firebug.Module</i> to gather and store information about the requests that are occurring and use the <i>Firebug.Panel</i> to access the Module and obtain relevant information given the current Panel context (based on the currently displayed page) for the purpose of rendering the UI. The way this interaction should ideally work is outside the scope of this tutorial. You may want to review the <i>net.js</i> file or any other panel files in the Firebug extension. There is also some information about the internals of Firebug available at <a target="_blank" href="http://developer.mozilla.org/en/docs/FirebugInternals">http://developer.mozilla.org/en/docs/FirebugInternals</a>.</p>
+</div>
+
+<br>
+<p><font size="2"><b>Summary</b></font></p>
+
+<div style="padding-left: 10px;">
+<p>The above code succeeds in extending Firebug because Gecko within Firefox will initialize Firebug first, then based on our overlay directive call our JavaScript code to register the new module and panel and then initialize the UI for the Firebug extension.</p>
+</div>
+
+</div>
+
+<br>
+
+
+				</td>
+			</tr>
+      <tr>
+        <td style="padding-bottom: 10px; padding-top: 5px;">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td width="50%" align="left">&nbsp;</td>
+              <td width="50%" style="padding-left: 17px; padding-right: 17px; text-align: right; color: #BBBBBB;">Last Modified: Aug  4, 2008</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+			<tr>
+			  <td class="footer" style="padding:3px;" align="center">
+			     <table border="0" cellpadding="0" cellspacing="0">
+			       <tr>
+               <td style="color: #bbbbbb; font-size: 10px;">Copyright &copy; 2006 - 2009</td>
+               <td style="padding-left: 7px; padding-right: 7px;"><a target="_blank" href="http://www.christophdorn.com/"><img src="/images/CD_Icon_21x11_bbbbbb.png" width="21" height="11" border="0"></a></td>
+               <td style="color: #bbbbbb; font-size: 10px;"><a target="_blank" href="http://www.christophdorn.com/" style="color: #bbbbbb; text-decoration: none;">Christoph Dorn</a></td>
+			       </tr>
+			     </table>
+			  </td>
+			</tr>
+		</table>
+
+    </td>
+    <td height="100%" background="/images/PageBorder_E.gif">
+      <table height="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td valign="top"><img src="/images/PageBorder_EN.gif" border="0" width="10" height="9"></td>
+        </tr>
+        <tr>
+          <td valign="bottom"><img src="/images/PageBorder_ES.gif" border="0" width="10" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td><img src="/images/PageBorder_SWC.gif" border="0"></td>
+    <td align="left" background="/images/PageBorder_S.gif">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td align="left"><img src="/images/PageBorder_SW.gif" border="0" width="9" height="10"></td>
+          <td align="right"><img src="/images/PageBorder_SE.gif" border="0" width="5" height="10"></td>
+        </tr>
+      </table>
+    </td>
+    <td><img src="/images/PageBorder_SEC.gif" border="0" width="10" height="10"></td>
+  </tr>
+</table>
+
+<br><br>
+</center>
+
+
+
+  
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-1180396-1");
+pageTracker._initData();
+pageTracker._trackPageview('Reference/Developers/ExtendingFirebug');
+</script>
+
+
+		</body>
+</html>

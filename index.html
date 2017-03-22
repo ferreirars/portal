@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Simple Static CMS</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/sociais.css" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+<style>
+/* MENU Central */
+<!-- http://cssdeck.com/labs/centering-horizontal-menu-navigation-or-tabs-lists-with-css -->
+body {
+    font-family: Georgia;
+}
+
+ul {
+	list-style: none;
+	overflow: hidden;	
+	text-align: center;
+    background: url(./images/banner-bg.jpg);
+}
+
+ul li {
+	display: inline-block;
+}
+
+ul li a {
+	padding: 5px 10px;
+	color: #50adf4;	
+	line-height: 3em;
+	display: block; /* or inline-block */
+	background: #191717;
+/*    background: url(./images/bg-menu.png);*/
+}
+
+ul li a:hover {
+	color: #9aedea;
+}
+
+</style>
+
+  <style>
+/* Seções do Site */
+
+  #inicio{
+    background: url(./images/banner-bg.jpg);
+    min-height: 900px;
+	}
+  #sociais{
+    background: url(./images/banner-bg.jpg);
+    padding-top: 100px;
+    min-height: 800px;
+	}
+  #conteudo{
+	padding-top: 100px;
+    background: url(./images/banner-bg.jpg);
+    min-height: 700px;
+	}
+  #sobre{
+    padding-top: 100px;
+    background: url(./images/banner-bg.jpg);
+    min-height: 900px;
+	}
+  #rodape{
+    padding-top: 400px;
+    background: url(./images/banner-bg.jpg);
+    min-height: 600px;
+	}
+
+  </style>
+
+<body>
+<!-- Menu html -->
+<ul>
+  <li><a href="#imagem"><strong><i>Início</i></strong></a></li>
+  <li><a href="#sociais"><strong><i>Redes Sociais</i></strong></a></li>
+  <li><a class="active" href="#conteudo"><strong><i style="color:#fff;">Conteúdo do Site</i></strong></a></li>
+  <li><a href="#sobre"><strong><i>Sobre Mim</i></strong></a></li>
+  <li><a href="#rodape"><strong><i>Rodapé</i></strong></a></li>
+</ul>
+
+  <!--imagem AQUI -->
+  <section id="imagem">
+    <div class="bg-color">
+		<div id="inicio">
+        <header id="header">
+          <div class="container">
+	  		<div class="row">
+    			<div class="col-md-7 text-center">
+    			<div align="right">
+				<br><br>
+                   	<img style="border:5px solid #6B4902;border-radius: 50%;" src="images/avatar.png" title="Ribamar FS">&nbsp;&nbsp;
+    			<br><br>
+                </div>
+   				</div><!-- Removi o restante do antigo menu iOS like-->
+		    </div><!-- / row -->
+          </div><!-- / container -->
+        </header>
+        <div class="container">
+          <div class="row">
+            <div class="inner text-center">
+              <h1 class="logo-name">RibaFS Portal</h1>
+              <h1 class="titulo">Desenvolvimeto Web</h1>
+<br>
+<p>Confira os itens de conteúdo no item de menu acima <a href="http://localhost/#conteudo">Conteúdo do Site</a> e outros tópicos no menu acima.<br>
+Este site foi criado usando o <a href="https://github.com/ribafs/static-cms/" target="_blank">Static CMS</a>.</p>
+  			   </div><!-- / inicio -->
+          </div>
+        </div>
+        </div>
+      </div><!-- / bg-color -->
+  </section><!-- / imagem -->
+
+  <section id="sociais">
+
+    <h1 align="center" class="titulo">Redes Sociais</h1>
+    <br><br>
+    <div class="row">
+		<div class="col-md-2 text-center">
+           <div class="content">
+          		<a href="https://github.com/ribafs?tab=repositories"><i class="fa fa-4x fa-github-square" style="color:#FFB03B;"></i></a>
+          		<h2><a href="https://github.com/ribafs?tab=repositories">GitHub</a></h2>
+          		<a href="https://github.com/ribafs?tab=repositories"><b>Projetos no GitHub</b></a>
+           </div>
+        </div>
+      <div class="col-md-2 text-center">
+        <div class="content">
+      		<a href="https://twitter.com/intent/tweet?text=http://ribafs.org/"><i class="fa fa-4x fa-twitter-square" style="color:#FFB03B;"></i></a>
+      		<h2><a href="https://twitter.com/intent/tweet?text=http://ribafs.org/">Twitter</a></h2>
+      		<a href="https://twitter.com/intent/tweet?text=http://ribafs.org/"><b>Rede Social</b></a>
+         </div>
+      </div>
+      <div class="col-md-2 text-center">
+         <div class="content">
+        		<a href="mailto:ribafs@gmail.com"><i class="fa fa-4x fa-envelope-square" style="color:#FFB03B;"></i></a>
+        		<h2><a href="mailto:ribafs@gmail.com">E-mail</a></h2>
+        		<a href="mailto:ribafs@gmail.com"><b>Comunicação.</b></a>
+         </div>
+      </div>
+      <div class="col-md-2 text-center">
+         <div class="content">
+        		<a href="https://ribafs.slack.com/messages/simple-static-cms/"><i class="fa fa-4x fa-slack" style="color:#FFB03B;"></i></a>
+        		<h2><a href="https://ribafs.slack.com/messages/simple-static-cms/">Slack</a></h2>
+        		<a href="https://ribafs.slack.com/messages/simple-static-cms/"><b>Chat ágil</b></a>
+         </div>
+      </div>
+      <div class="col-md-2 text-center">
+         <div class="content">
+        		<a href="https://pinterest.com/pin/create/button/?url=http://ribafs.org"><i class="fa fa-4x fa-pinterest-square" style="color:#FFB03B;"></i></a>
+        		<h2><a href="https://pinterest.com/pin/create/button/?url=http://ribafs.org">Pinterest</a></h2>
+        		<a href="https://pinterest.com/pin/create/button/?url=http://ribafs.org"><b>Rede social de livros</b></a>
+         </div>
+      </div>
+      <div class="col-md-2 text-center">
+         <div class="content">
+        		<a href="https://plus.google.com/share?url=http://ribafs.org/"><i class="fa fa-4x fa-google-plus-square" style="color:#FFB03B;"></i></a>
+        		<h2><a href="https://plus.google.com/share?url=http://ribafs.org/">Google+</a></h2>
+        		<a href="https://plus.google.com/share?url=http://ribafs.org/"><b>Rede social tipo o Facebook</b></a>
+         </div>
+      </div>
+    </div><!-- /row-->
+    <div class="row"
+      <div class="grid grid-pad" align="center">
+        <div class="col-md-4 text-center">
+           <div class="content"></div>
+        </div>
+    		<div class="col-md-2 text-center">
+           <div class="content">
+          		<a href="https://www.linkedin.com/shareArticle?mini=true&url=http://ribafs.org"><i class="fa fa-4x fa-linkedin-square" style="color:#FFB03B;"></i></a>
+          		<h2><a href="https://www.linkedin.com/shareArticle?mini=true&url=http://ribafs.org">Linkedin</a></h2>
+          		<a href="https://www.linkedin.com/shareArticle?mini=true&url=http://ribafs.org"><b>Rede Social de Enpregos</b></a>
+           </div>
+        </div>
+        <div class="col-md-5 text-center">
+           <div class="content"></div>
+        </div>	
+  		<div class="col-md-2 text-center">
+          <div class="content">
+  		       <a href="https://www.facebook.com/sharer/sharer.php?u=http://ribafs.org/"><i class="fa fa-4x fa-facebook-square" style="color:#FFB03B;"></i></a>
+  		       <h2><a href="https://www.facebook.com/sharer/sharer.php?u=http://ribafs.org/">Facebook</a></h2>
+  		       <a href="https://www.facebook.com/sharer/sharer.php?u=http://ribafs.org/"><b>Rede Social</b></a>
+           </div>
+      </div>
+        <div class="col-md-1 text-center">
+               <div class="social"></div>
+        </div>
+    </div><!-- / grid grid-pad -->
+  </div><!-- / row -->
+    </section><!-- / sociais -->
+
+<section id="conteudo">
+    <h1 align="center" class="titulo">Conteúdo do Site</h1>
+    <br><br>
+    <div class="row">
+  		<div class="col-md-2 text-center">
+          <div class="content">
+  		       <a href="/basicos/index.html"><i class="fa fa-4x fa-html5" style="color:#FFB03B;"></i></a>
+  		       <h2><a href="/basicos/index.html">Básicos</a></h2>
+  		       <a href="/basicos/index.html"><b>HTML, CSS, JavaScript, jQuery, PHP, PHPOO, etc.</b></a>
+           </div>
+      </div>
+      <div class="col-md-2 text-center">
+        <div class="content">
+      		<a href="/servidores/index.html"><i class="fa fa-4x fa-desktop" style="color:#FFB03B;"></i></a>
+      		<h2><a href="/servidores/index.html">Servidores</a></h2>
+      		<a href="/servidores/index.html"><b>Administração de servidores Linux, web e SGBD!</b></a>
+         </div>
+      </div>
+      <div class="col-md-2 text-center">
+         <div class="content">
+        		<a href="/postgresql/index.html"><i class="fa fa-4x fa-database" style="color:#FFB03B;"></i></a>
+        		<h2><a href="/postgresql/index.html">PostgreSQL</a></h2>
+        		<a href="/postgresql/index.html"><b>Administração e usos do robusto SGBD PostgreSQL.</b></a>
+         </div>
+      </div>
+      <div class="col-md-2 text-center">
+         <div class="content">
+        		<a href="/cakephp/index.html"><i class="fa fa-4x fa-tasks" style="color:#FFB03B;"></i></a>
+        		<h2><a href="/cakephp/index.html">CakePHP 3</a></h2>
+        		<a href="/cakephp/index.html"><b>Criação de Aplicativos usando o Framework CakePHP 3</b></a>
+         </div>
+      </div>
+      <div class="col-md-2 text-center">
+         <div class="content">
+        		<a href="/joomla/index.html"><i class="fa fa-4x fa-joomla" style="color:#FFB03B;"></i></a>
+        		<h2><a href="/joomla/index.html">Joomla 3</a></h2>
+        		<a href="/joomla/index.html"><b>Criação de sites com o CMS Joomla 3 e extensões</b></a>
+         </div>
+      </div>
+      <div class="col-md-2 text-center">
+         <div class="content">
+        		<a href="/blog/index.html"><i class="fa fa-4x fa-rss-square" style="color:#FFB03B;"></i></a>
+        		<h2><a href="/blog/index.html">Blog</a></h2>
+        		<a href="/blog/index.html"><b>Saúde e Reflexões</b></a>
+         </div>
+      </div>
+    </div><!-- /row-->
+</section> <!-- / conteudo -->
+
+<section id="sobre">
+	<div align="center">
+	    <h2 align="center" class="titulo">Sobre Ribamar FS</h2>
+
+	</div>
+</section><!--/sobre-->
+
+<footer id="rodape">
+	<div align="center">
+		<p><i><a href="http://ribafs.org">RibaFS</a><font color="#39b4bf"> © All rights reserved. Design: </font><a href="http://templated.co">TEMPLATED</a></i></p>
+	</div>
+</footer>	
+
+</body>
+</html>

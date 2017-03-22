@@ -1,0 +1,28 @@
+- reCaptcha nas views add e edit
+
+- Download - https://github.com/CakeDC/recaptcha 
+- Descompacte e renomeie para Recaptcha 
+- Copie a pasta Recaptcha para app/Plugin 
+- Adicione ao app/Config/bootstrap.php: 
+	CakePlugin::load('Recaptcha'); 
+	Configure::write('Recaptcha.publicKey', 'sua-public-api-key'); 
+	Configure::write('Recaptcha.privateKey', 'sua-private-api-key'); 
+	Troque o texto pelas respectivas chaves. 
+	Chaves podem ser obtidas aqui: http://www.google.com/recaptcha 
+- Adicionar ao controller (ou ao AppController para todos os controllers): 
+	public $components = array('Recaptcha.Recaptcha'); 
+- Na view chame o método display, entre os inputs do form. Uma boa posição é logo antes do submit 
+	<?php echo $this->Recaptcha->display();?>
+
+Importante checar o código no Controller (supondo o form da view add.ctp): 
+Alterar esta linha no action add():
+			if ($this->Cliente->save($this->request->data)) {
+Para
+			if ($this->Cliente->save($this->request->data) && $this->Recaptcha->verify()) {
+
+Para usar outro template: 
+echo $this->Recaptcha->display(array('recaptchaOptions'=>array('theme' => 'blackglass'))); 
+Veja outros: 
+http://code.google.com/intl/it-IT/apis/recaptcha/docs/customization.html 
+
+

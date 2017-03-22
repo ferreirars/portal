@@ -1,0 +1,19 @@
+Instalação do Debug Kit
+
+Site para download - https://github.com/cakephp/debug_kit
+Caso por algum motivo não funcione baixe pelo git (ver abaixo)
+
+- Acessar o terminal
+- Criar uma pasta qualquer (criei dk)
+- Acessar a pasta dk e executar:
+	git clone git://github.com/cakephp/debug_kit.git
+- O comando acima trouxe o DebugKit na pasta DebugKit
+- Copie a pasta DebugKit que ele criou em dk para app/Plugin
+- Adicione ao final do bootstrap.php:
+CakePlugin::load('DebugKit');
+- Adicione ao AppController:
+public $components = array('DebugKit.Toolbar');
+
+Ao entrar no aplicativo agora verá um novo ícone acima e à esquerda que é o DebugKit.
+Clique nele e explore seus recursos.
+

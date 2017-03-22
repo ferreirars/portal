@@ -1,0 +1,1 @@
+php ..\composer.phar create-project --prefer-dist cakephp/app %1

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>--Formulário Contato--</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link href="estilo.css" rel="stylesheet" media="all" />
+    <script src="script.js"></script>
+</head>
+<!--
+<!-- Crédito
+Publicado no Canal Front-end web 
+Leia mais em: Criando Form de contato com HTML5, CSS3 e JavaScript http://www.devmedia.com.br/criando-form-de-contato-com-html5-css3-e-javascript/29415#ixzz453cK6sZk
+-->
+<body>
+    <form name="meu_form">
+        <h1>Entre em contato</h1>
+        <p class="nome">
+            <input type="text" id="nomeid" placeholder="Tiago Vale" required="required" name="nome" />
+            <label for="nome">Nome</label>
+        </p>
+        <p class="fone">
+            <input type="text" id="foneid" placeholder="(xx)xx-xx-xx-xx" name="fone" />
+            <label for="fone">Fone</label>
+        </p>
+        <p>
+            <input type="email" id="emailid" placeholder="fulano@mail.com" name="email" />
+            <label for="email">Email</label>
+        </p>
+        <p>
+            <textarea placeholder="Deixe sua opinião"></textarea>
+        </p>
+        <p class="submit">
+            <input type="submit" onclick="Enviar();" value="Enviar" />
+        </p>
+    </form>
+</body>
+</html>

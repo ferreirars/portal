@@ -1,0 +1,115 @@
+Dicas sobre os CallBacks do Cake
+
+
+Se você quiser colocar alguma lógica logo antes ou após uma operação de model do CakePHP, use funções tipo callbacks. Estas funções podem ser definidas em classes do model (incluindo o AppModel). Certifique-se de anotar os valores de retorno esperados para cada uma dessas funções especiais.
+
+== CallBacks em models
+
+beforeFind(array $queryData)
+
+afterFind
+afterFind(array $results, boolean $primary = false)
+
+beforeValidate
+beforeValidate(array $options = array())
+
+beforeSave
+beforeSave(array $options = array())
+
+public function beforeSave($options = array()) {
+    if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {
+        $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);
+        $this->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->data['Event']['enddate']);
+    }
+    return true;
+}
+
+	/**
+	 * Converting the publish date field to mysql date format before save.
+	 * 
+	 * @return bool
+	 */
+	public function beforeSave() {
+		if (isset($this->data[$this->alias]["publish_date"])) {
+			$date = date("Y-m-d", strtotime($this->data[$this->alias]["publish_date"]));
+			$this->data[$this->alias]["publish_date"] = $date;
+		}
+		return true;
+	}
+
+public function dateFormatBeforeSave($dateString) {
+    return date('Y-m-d', strtotime($dateString));
+}
+
+
+afterSave
+afterSave(boolean $created)
+
+beforeDelete
+beforeDelete(boolean $cascade = true)
+
+// using app/Model/ProductCategory.php
+// In the following example, do not let a product category be deleted if it still contains products.
+// A call of $this->Product->delete($id) from ProductsController.php has set $this->id .
+// Assuming 'ProductCategory hasMany Product', we can access $this->Product in the model.
+public function beforeDelete($cascade = true) {
+    $count = $this->Product->find("count", array(
+        "conditions" => array("product_category_id" => $this->id)
+    ));
+    if ($count == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+afterDelete
+afterDelete()
+
+Place any logic that you want to be executed after every deletion in this callback method.
+
+onError
+onError()
+
+Called if any problems occur.
+
+
+CallBacks de Controller
+
+beforeFilter
+
+beforeRender
+
+afterFilter
+
+
+== CallBacks em Controllers
+
+Lembre-se de adicionar os helpers Html e Form padrões se você incluiu o atributo $helpers em seu AppController.
+
+Também lembre de fazer as chamadas de callbacks do AppController nos controllers filhos para obter melhores resultados:
+
+function beforeFilter() {
+    parent::beforeFilter();
+}
+
+Os controllers do CakePHP vêm equipados com callbacks que você pode usar para inserir lógicas em torno do ciclo de vida de uma requisição:
+
+Controller::beforeFilter()
+
+    Este método é executado antes de cada ação dos controllers. É um ótimo lugar para verificar se há uma sessão ativa ou inspecionar as permissões de um usuário.
+
+    O método beforeFilter() será chamado para ações não encontradas e ações criadas pelo scaffold do Cake.
+
+
+Controller::beforeRender()
+
+    Chamada após a lógica da ação de um controller, mas antes da view ser renderizada. Este callback não é usado com frequência mas pode ser preciso se você chamar o método render() manualmente antes do término de uma ação.
+
+Controller::afterFilter()
+
+    Chamada após cada ação dos controllers, e após a completa renderização da view. Este é o último método executado do controller.
+
+

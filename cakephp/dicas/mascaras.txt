@@ -1,0 +1,51 @@
+Máscaras no CakePHP
+
+
+- Máscara na view index (CPF)
+
+Enquanto não descubro uma função do Cake que faz isso...
+
+O CPF é um campo texto mas constituido somente de números. A listagem (index.ctp) mostra a relação de números sem nenhuma formatação. Ajudaria se formatassemos usando uma máscara adequada para CPF, ajudaria a visualizar. Vamos fazer isso agora para a view Clientes/index.ctp:
+
+
+Substitua a linha
+		<td><?php echo h($cliente['Cliente']['cpf']); ?>&nbsp;</td>
+
+Por este código:
+<?php 
+$cpfmask1 = substr($cliente['Cliente']['cpf'], 0,3);
+$cpfmask2 = substr($cliente['Cliente']['cpf'], 3,3);
+$cpfmask3 = substr($cliente['Cliente']['cpf'], 6,3);
+$cpfmask4 = substr($cliente['Cliente']['cpf'], 9,2);
+$cpfmask = $cpfmask1.'.'.$cpfmask2.'.'.$cpfmask3.'-'.$cpfmask4
+ ?>
+		<td><?php echo h($cpfmask); ?>&nbsp;</td>
+Com isso a listagem mostrará o CPF com a sua máscara.
+
+
+- Máscara em formulários com jQuery
+Adicionando Máscaras com o plugin maskedinput do jQuery: 
+
+- Baixar o jQuery - http://jquery.com/ 
+		Maskedinput - http://digitalbush.com/projects/masked-input-plugin/ 
+- Renomear jQuery para jquery.js e maskedinput para jquery.maskedinput.js 
+- Copiar ambos para app/webroot/js 
+- Criar a referência para ambos em app/View/Layout/default.ctp ou outro layout, na seção head, assim: 
+	echo $this->Html->script(array('jquery','jquery.maskedinput'));
+- Editar a view onde deseja a máscara e adicionar ao final: 
+
+<script type="text/javascript"> 
+    jQuery(document).ready(function($){        
+        $("#cpf").focus(); 
+        $("#cpf").mask("999.999.999-99"); 
+    }); 
+</script> 
+
+Ainda na mesma view edite o campo onde ficará a máscara: 
+		echo $this->Form->input('cpf',array('label'=>'CPF','id'=>'cpf')); 
+Crétidos: http://linguagensdeprogramacao.wordpress.com/2011/11/16/mascaras-com-cakephp/ 
+
+Quando customizamos um campo para exibir máscara, precisamos remover a máscara antes de mandar para o banco, especialmente campos numéricos.
+
+
+

@@ -1,0 +1,132 @@
+Dicas sobre Controllers
+
+Os controllers correspondem ao ‘C’ no padrão MVC. Após o roteamento ter sido aplicado e o controller correto encontrado, a ação do controller é chamada. Seu controller deve lidar com a interpretação dos dados de uma requisição, certificando-se que os models corretos são chamados e a resposta ou view esperada seja exibida. Os controllers podem ser vistos como intermediários entre a camada Model e View. Você vai querer manter seus controllers magros e seus Models gordos. Isso lhe ajudará a reutilizar seu código e testá-los mais facilmente.
+
+Mais comumente, controllers são usados para gerenciar a lógica de um único model. Por exemplo, se você está construindo um site para uma padaria online, você pode ter um RecipesController e um IngredientsController gerenciando suas receitas e seus ingredientes. No CakePHP, controllers são nomeados de acordo com o model que manipulam. É também absolutamente possível ter controllers que usam mais de um model.
+
+Os controllers da sua aplicação são classes que estendem a classe CakePHP AppController, a qual por sua vez estende a classe Controller do CakePHP. A classe AppController pode ser definida em /app/Controller/AppController.php e deve conter métodos que são compartilhados entre todos os seus controllers.
+
+Os controllers fornecem uma série de métodos que são chamados de ações. Ações são métodos em um controller que manipulam requisições. Por padrão, todos os métodos públicos em um controller são ações e acessíveis por urls.
+
+Os atributos e métodos criados em AppController vão estar disponíveis para todos os controllers da sua aplicação. Este é o lugar ideal para criar códigos que são comuns para todos os seus controllers. Componentes (que você vai aprender mais tarde) são a melhor alternativa para códigos que são usados por muitos (mas não obrigatoriamente em todos) controllers.
+
+Enquanto regras normais de herança de classes orientadas à objetos são aplicadas, o CakePHP também faz um pequeno trabalho extra quando se trata de atributos especiais do controller. A lista de componentes (components) e helpers usados no controller são tratados diferentemente. Nestes casos, as cadeias de valores do AppController são mescladas com os valores de seus controllers filhos. Os valores dos controllers filhos sempre sobrescreveram os do AppController.
+
+O CakePHP mescla as seguintes variáveis do AppController em controllers da sua aplicação:
+    $components
+    $helpers
+    $uses
+
+Lembre-se de adicionar os helpers Html e Form padrões se você incluiu o atributo $helpers em seu AppController.
+
+Também lembre de fazer as chamadas de callbacks do AppController nos controllers filhos para obter melhores resultados:
+
+function beforeFilter() {
+    parent::beforeFilter();
+}
+
+
+Usando dois ou mais models em um controller
+
+	Indicar model padrão:
+	function beforeFilter() { 
+		$this->Auth->userModel = 'Usuario'; 
+	} 
+	Para usar em um controller mais de um model indique no controller:
+
+	public $uses = array('User', 'Permissao', 'Cliente');
+
+
+Acessando Outros Models ou Controllers
+
+	Chamando outro controller: 
+
+		App::import('Controller', 'Users'); 
+		$Users = new UsersController; 
+		$Users->constructClasses(); 
+
+	Estando num model chamar outro model: 
+		$Category = ClassRegistry::init("OutroModel"); 
+		$category = $Category->findById($underThisCategoryId); 
+
+	Colocando classes personalizadas a disposição do aplicativo em Cake: 
+
+	- insira a classe em um diretório 
+	- Adicione ao app/Config/bootstrap.php (diretório fora do aplicativo do cake): 
+	App::build(array( 
+		'GlobalUsers' => array(dirname(CAKE_CORE_INCLUDE_PATH).DS.'mydir'.DS) 
+	), App::REGISTER); 
+	- Adicione ao AppController.php: 
+	App::uses('UsersController','GlobalUsers'); 
+
+	UsersController - nome do arquivo atual, no caso UsersController.php 
+	Agora podemos acessar a classe do nosso controller atual. 
+	Crédito: http://www.shahariaazam.com/access-custom-class-inside-cakephp-apps/ 
+
+
+Recebendo informações sobre campos com facilidade
+Estando em um controller:
+$this->Post->id = 22;
+echo $this->Post->field('name');
+
+
+= CakePHP Controller properties, methods, callbacks
+
+== CakePHP controller properties:
+
+$action = null
+$autoLayout = true
+$autoRender = true
+$base = null
+$beforeFilter = null
+$cacheAction = false
+$components = array()
+$data = array()
+$helpers = array()
+$here = null
+$layout = 'default'
+$name = null
+$output = null
+$pageTitle = false
+$params = array()
+$persistModel = false
+$plugin = null
+$uses = false
+$view = 'View'
+$viewPath = null
+$webroot = null
+$_viewClass = null
+$_viewVars = array()
+        
+
+== CakePHP controller methods
+
+cleanUpFields ()
+constructClasses ()
+disableCache()
+flash(string $message, string $url, integer $pause, string $layout)
+flashOut ($message, $url, $pause = 1)
+generateFieldNames ($data = null, $doCreateOptions = true)
+loadModel(string $modelClass, mixed $id)
+paginate()
+postConditions ($data, $operator = '', $bool = 'AND', $exclusive = false)
+redirect(mixed $url, integer $status, boolean $exit)
+referer(mixed $default = null, boolean $local = false)
+render ($action = null, $layout = null, $file = null)
+requestAction(string $url, array $options)
+set (string $var, mixed $value)
+setAction ($action)
+validate ()
+validateErrors ()
+        
+
+== CakePHP controller callbacks
+
+afterFilter ()
+beforeFilter ()
+beforeRender ()
+        
+Vide callbacks.txt para detalhes.
+
+http://book.cakephp.org/2.0/en/controllers.html
+

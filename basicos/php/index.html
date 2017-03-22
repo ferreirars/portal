@@ -1,0 +1,516 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - PHP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">PHP</h2>
+<h3 style="text-align: center;">Introdução ao PHP</h3>
+
+<p><strong>Iniciando na Programa&ccedil;&atilde;o com PHP</strong></p>
+
+<p>Para poder programar com PHP precisamos de um servidor web, ent&atilde;o instalaremos em nosso computador o programa <a href="http://xampp.sf.net/">http://xampp.sf.net</a> que cria um diret&oacute;rio htdocs, onde devemos criar nossos programas em PHP.</p>
+
+<p>&Eacute; importante saber que atualmente o PHP deva ser a linguagem mais popular para programar para a web. Acredito que a facilidade de programar ele, os recursos oferecidos por ele, a documenta&ccedil;&atilde;o farta em seu site (<a href="http://php.net/">http://php.net</a>) e a grande aceita&ccedil;&atilde;o da comunidade foram respons&aacute;veis pela popularidade.</p>
+
+<p>Tentarei deixar de lado os assuntos mais trabalhosos para mostrar o lado bom, de maneira simples e agrad&aacute;vel. Veremos que com o PHP temos muitos recursos para criar sites e aplicativos.</p>
+
+<p>Existe uma tradi&ccedil;&atilde;o para quando estamos iniciando a programar em qualquer linguagem, que &eacute; a de criar um programa bem simples, que apenas mostre uma frase na tela, no caso &ldquo;Hello World!&rdquo;. Veja nosso programa que mostra na tela essa mensagem traduzida:</p>
+
+<p>&lt;?php</p>
+
+<p>print &ldquo;Ol&aacute; Mundo!&rdquo;;</p>
+
+<p>?&gt;</p>
+
+<p>Para ver como isso funciona precisamos criar um arquivo no diret&oacute;rio web e chamar este arquivo no navegador. Nosso diret&oacute;rio web &eacute; c:\xampp\htdocs</p>
+
+<p>Vamos criar neste diret&oacute;rio o arquivo ola.php, contendo:</p>
+
+<p>&lt;?php</p>
+
+<p>print &ldquo;Ol&aacute; Mundo!&rdquo;;</p>
+
+<p>?&gt;</p>
+
+<p>E chamar no navegador assim:</p>
+
+<p><a href="http://localhost/ola.php">http://localhost/ola.php</a></p>
+
+<p>Ent&atilde;o veremos a nossa frase Ol&aacute; Mundo!</p>
+
+<p><strong>Programando para Desktop com PHP</strong></p>
+
+<p>Nada nos impede de criar aplicativos que ser&atilde;o usados apenas de forma offline usando o nosso PHP. Podemos tranquilamente usar para este fim. Para a cria&ccedil;&atilde;o de aplicativos, ap&oacute;s dominar o b&aacute;sico do PHP, eu recomendo que use o Framework CakePHP.</p>
+
+<p><strong>PHP com HTML</strong></p>
+
+<p>Vale lembrar que o PHP sempre fica do lado do servidor. Ele processa informa&ccedil;&otilde;es solicitadas pelo visitante e as devolve. Devolve tudo no formato HTML, juntamente com CSS e JavaScript, que ficam do lado do cliente.</p>
+
+<p>Um c&oacute;digo em PHP precisa iniciar com a TAG &lt;?php e terminar com ?&gt;. Qualquer arquivo que contenha c&oacute;digo PHP precisa ter a extens&atilde;o .php. Sendo assim, o interpretador do PHP n&atilde;o olhar&aacute; para outros tipos de arquivos. E quando verificar arquivos .php somente processar&aacute; os trechos entre &lt;?php e ?&gt;, o que estiver fora destas TAGs ele n&atilde;o olha.</p>
+
+<p>O navegador interpreta todo c&oacute;digo em HTML antes de mostrar na tela.</p>
+
+<h1>Separador de Instru&ccedil;&otilde;es</h1>
+
+<p>Observe que ao final da linha:</p>
+
+<p>print &quot;Como vai?&quot;;</p>
+
+<p>Cada instru&ccedil;&atilde;o do PHP termina com ponto e v&iacute;rgula.</p>
+
+<p>Instru&ccedil;&atilde;o &ndash; &eacute; um comando &uacute;nico que damos ao PHP.</p>
+
+<p>Exemplo: print &ldquo;Ol&aacute;&rdquo;;</p>
+
+<p>O PHP permite escrever mais de uma instru&ccedil;&atilde;o por linha, mas devemos evitar, por conta de que fica obscuro o c&oacute;digo.</p>
+
+<p><strong>Coment&aacute;rios</strong><br />
+Em PHP existem tr&ecirc;s formas de se escrever coment&aacute;rios:</p>
+
+<p>// - este &eacute; coment&aacute;rio oriundo do C++ e para apenas uma linha</p>
+
+<p>/*</p>
+
+<p>Este &eacute; o coment&aacute;rio oriundo do C</p>
+
+<p>e para</p>
+
+<p>m&uacute;ltiplas linhas</p>
+
+<p>*/</p>
+
+<p># - Este &eacute; o coment&aacute;rio oriundo do shell, para uma &uacute;nica linha e que deve ser evitado, pois est&aacute; em processo de obsolesc&ecirc;ncia.</p>
+
+<p><strong>Estruturas de Controle</strong></p>
+
+<p>Vejamos um pequeno trecho de c&oacute;digo mais &uacute;til e interessante. Suponha que seu col&eacute;gio tenha suas 4 notas dos 4 bimestres e precise fazer o c&aacute;lculo para saber se voc&ecirc; passou. Ele tem uma f&oacute;rmula que &eacute; somar as 4 notas e dividir tudo por 4 para tirar a m&eacute;dia. Veja:</p>
+
+<p>Vamos criar um arquivo notas.php com o conte&uacute;do abaixo ou testar diretamente no php-console, sem as tags inicial e final.</p>
+
+<p><strong>IF - ELSE</strong></p>
+
+<p>&lt;?php</p>
+
+<pre>
+$aluno = &#39;&lt;b&gt;Elias EF&lt;/b&gt;&#39;;
+
+$nota1 = 10;
+$nota2 = 9;
+$nota3 = 7;
+$nota4 = 5;
+
+$resultado = ($nota1 + $nota2 + $nota3 + $nota4) / 4;
+
+if( $resultado &gt;= 7 ){
+    print &quot;O aluno $aluno foi aprovado, com nota $resultado&quot;;
+}else{
+    print &#39;O aluno n&atilde;o passou!&#39;;
+}
+?&gt;</pre>
+
+<p><strong>Vari&aacute;veis</strong><br />
+Como o nome sugere seu valor varia. Vejamos.</p>
+
+<p>Uma vari&aacute;vel tem:</p>
+
+<p>nome - $aluno, que &eacute; o nome precedido de $.</p>
+
+<p>valor - &#39;Elias EF&#39;</p>
+
+<p>tipo &ndash; string (acontece que o PHP n&atilde;o declara tipos de vari&aacute;veis)</p>
+
+<p><strong>Tipos de Dados</strong></p>
+
+<p>O tipo de dados de uma vari&aacute;vel ser&aacute; reconhecido quando o c&oacute;digo for executado:</p>
+
+<p>string, inteiro, float/double, boleano, array, objeto e resource.</p>
+
+<p><strong>Nome</strong><strong>s de</strong><strong> Vari&aacute;veis</strong></p>
+
+<ul>
+	<li>
+	<p>O nome das vari&aacute;veis precisa come&ccedil;ar com uma letra ou pelo s&iacute;mbolo de sublinhado</p>
+	</li>
+	<li>
+	<p>O nome de vari&aacute;veis pode conter somente caracteres alfa-num&eacute;ricos e sublinhado: a-z, A-Z, 0-9 e _ .</p>
+	</li>
+	<li>
+	<p>N&atilde;o pode conter espa&ccedil;os. Quando v&aacute;rias palavras podemos usar o sublinhado para separ&aacute;-las: $minha_variavel.</p>
+	</li>
+</ul>
+
+<p>As vari&aacute;veis podem ter seu valor alterado durante a execu&ccedil;&atilde;o do script, da&iacute; seu nome.</p>
+
+<p>&nbsp;</p>
+
+<p><strong>Atribui&ccedil;&atilde;o</strong></p>
+
+<p>Se eu quiser guardar a primeira nota na vari&aacute;vel $nota1, ent&atilde;o preciso atribuir 10 para $nota1, assim:</p>
+
+<p>$nota1 = 10;</p>
+
+<p>Veja que usamos o sinal de igual para atribuir e terminamos com ponto e v&iacute;rgula.</p>
+
+<p>Posso atribuir um valor diretamente para uma vari&aacute;vel, mas veja que tamb&eacute;m posso atribuir uma f&oacute;rmula bem grande para a vari&aacute;vel, assim:</p>
+
+<p>$resultado = ($nota1 + $nota2 + $nota3 + $nota4) / 4;<br />
+Parecido com uma calculadora o PHP far&aacute; os c&aacute;lculos e guardar&aacute; o valor na vari&aacute;vel $resultado.</p>
+
+<p>Na pr&oacute;xima linha ele vai testar o valor do $resultado. (if( $resultado &gt;= 7 ){)</p>
+
+<p>Se for maior ou igual a 7 ele mostrar&aacute; a primeira mensagem.</p>
+
+<p>Caso contr&aacute;rio ent&atilde;o mostrar&aacute; a segunda mensagem. (}else{)</p>
+
+<p>Vejamos mais um exemplo pr&aacute;tico e interessante de uso do PHP</p>
+
+<p><strong>IF &ndash; ELSE IF &ndash; ELSE</strong></p>
+
+<p>if (expressao){</p>
+
+<p>executado de true e encessa o teste.</p>
+
+<p>}else if (expressao2){</p>
+
+<p>executado se true e encessa o teste.</p>
+
+<p>}else if (expressao3){</p>
+
+<p>executado se true e encessa o teste.</p>
+
+<p>}else if (expressaoN){</p>
+
+<p>executado se true e encessa o teste.</p>
+
+<p>}else{</p>
+
+<p>executado se false</p>
+
+<p>}</p>
+
+<p>Lembrando que somente entra no pr&oacute;ximo teste, se o anterior for falso.</p>
+
+<p>$hora = 14;</p>
+
+<p>if($hora &lt;= 12){</p>
+
+<p>print &ldquo;Est&aacute; de manh&atilde;&rdquo;;</p>
+
+<p>}else if ($hora &gt; 12 &amp;&amp; $hora &lt; 18){</p>
+
+<p>print &ldquo;Est&aacute; de tarde&rdquo;;</p>
+
+<p>}else{</p>
+
+<p>print &ldquo;Est&aacute; de noite&rdquo;;</p>
+
+<p>}</p>
+
+<p><strong>if - else</strong></p>
+
+<p>O <strong>if</strong> testa uma express&atilde;o</p>
+
+<p>Caso a express&atilde;o seja verdadeira, todo o c&oacute;digo ap&oacute;s o <strong>if</strong> ser&aacute; executado.</p>
+
+<p>Caso n&atilde;o seja verdadeira o c&oacute;digo ap&oacute;s o <strong>else</strong> ser&aacute; executado.</p>
+
+<p><strong>i</strong><strong>f &ndash; eles if &ndash; else</strong><br />
+O <strong>if</strong> testa uma express&atilde;o<br />
+Caso a express&atilde;o seja verdadeira, todo o c&oacute;digo ap&oacute;s o <strong>if</strong> ser&aacute; executado.</p>
+
+<p>Caso a express&atilde;o seja falsa ent&atilde;o o else if testar&aacute; uma nova express&atilde;o</p>
+
+<p>Caso a nova express&atilde;o seja verdadeira o c&oacute;digo ap&oacute;s o else if ser&aacute; executado<br />
+Caso a nova express&atilde;o seja falsa, o c&oacute;digo ap&oacute;s o else ou o novo else if ser&aacute;</p>
+
+<p>executado</p>
+
+<p><strong>Criando Strings</strong></p>
+
+<p>Strings pequenas, com apenas uma linha podem ser mostradas com print ou echo, mas textos com v&aacute;rias linhas podem ser armazenados com o recurso chamado Heredoc:</p>
+
+<p><em><strong>Armazenando o texto numa vari&aacute;vel</strong></em></p>
+
+<p><code>$str = &lt;&lt;&lt;EOD<br />
+Exemplo de uma string<br />
+distribu&iacute;da em v&aacute;rias linhas<br />
+utilizando a sintaxe heredoc.<br />
+EOD;</code></p>
+
+<p>&nbsp;</p>
+
+<p><em><strong>Ou simplesmente mostrando</strong></em></p>
+
+<p>echo &lt;&lt;&lt;show</p>
+
+<p>&lt;a href=&quot;index.php&quot;&gt;In&iacute;cio&lt;/a&gt;</p>
+
+<p>&lt;h3&gt;Edite Seus Dados&lt;/h3&gt;</p>
+
+<p>&lt;form action=&quot;update.php&quot; method=&quot;post&quot;&gt;</p>
+
+<p>&lt;table width=&quot;500&quot; border=&quot;1&quot;&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;Nome&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;nome&quot; value=&quot;$nome&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;Nascimento&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;data_nasc&quot; value=$data_nasc&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;tr&gt;</p>
+
+<p>&lt;th scope=&quot;row&quot;&gt;E-mail&lt;/th&gt;</p>
+
+<p>&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;$email&quot;&gt;&lt;/td&gt;</p>
+
+<p>&lt;/tr&gt;</p>
+
+<p>&lt;/table&gt;</p>
+
+<p>&lt;/form&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>show;</p>
+
+<p>&nbsp;</p>
+
+<p><strong>Mais uma estrutura interessante do PHP - </strong><strong>Switch</strong></p>
+
+<p>switch &ndash; Este testa uma vari&aacute;vel contra alguns valores. Parece com um bloco de if else if. Quando encontra o valor correto executa o c&oacute;digo seguinte e sai da itera&ccedil;&atilde;o.</p>
+
+<p>$opcao = 3;</p>
+
+<p>switch($opcao)</p>
+
+<p>{</p>
+
+<p>case 1:</p>
+
+<p>print 1;</p>
+
+<p>break;</p>
+
+<p>case 2:</p>
+
+<p>print 2;</p>
+
+<p>break;</p>
+
+<p>case 3:</p>
+
+<p>print 3;</p>
+
+<p>break;</p>
+
+<p>case 4:</p>
+
+<p>print 4;</p>
+
+<p>break;</p>
+
+<p>case 5:</p>
+
+<p>print 5;</p>
+
+<p>break;</p>
+
+<p>default:</p>
+
+<p>print &#39;Nenhuma das anteriores&#39;;</p>
+
+<p>break;</p>
+
+<p>}</p>
+
+<p>Obs.: Caso removamos um dos comandos break o c&oacute;digo continua no pr&oacute;ximo case.</p>
+
+<p><strong>La&ccedil;os: for, while, forwach</strong></p>
+
+<p>Estruturas que resolvem v&aacute;rios problemas com pouco esfor&ccedil;o.</p>
+
+<p><strong>for</strong></p>
+
+<p>for($x = 1;$x &lt;= 10;$x++){</p>
+
+<p>print $x;</p>
+
+<p>}</p>
+
+<p>for($x = 1;$x &lt;= 10;$x++){</p>
+
+<p>print $x.&#39;&lt;br&gt;&#39;;</p>
+
+<p>}</p>
+
+<p>for($x = 0;$x &lt; 10;$x++){</p>
+
+<p>print $x;</p>
+
+<p>}</p>
+
+<p>Existem varia&ccedil;&otilde;es de uso do for. No caso abaixo, como n&atilde;o temos teste do valor, o incremento continua indefinidamente:</p>
+
+<p>for($x=0; ;$x++){</p>
+
+<p>print $x;</p>
+
+<p>}</p>
+
+<p>Nestes casos precisamos inserir um teste no corpo do for, assim:</p>
+
+<p>for($x=0; ;$x++){</p>
+
+<p>if($x&gt;10){</p>
+
+<p>break;<br />
+}</p>
+
+<p>print $x;</p>
+
+<p>}</p>
+
+<p><strong>Continue</strong><br />
+Este comando sai do la&ccedil;o e volta na pr&oacute;xima itera&ccedil;&atilde;o, ou um certo n&uacute;mero de comandos para sair do la&ccedil;o. Veja</p>
+
+<p>&nbsp;</p>
+
+<p>for ($i = 0; $i &lt; 10; ++$i) {<br />
+if ($i &lt; 5){<br />
+continue;<br />
+}<br />
+print &quot;$i&lt;br&gt;&quot;;<br />
+}</p>
+
+<p>&nbsp;</p>
+
+<p><strong>Break</strong></p>
+
+<p>Interrompe o la&ccedil;o, entregando o processamento para a linha seguinte ao la&ccedil;o.</p>
+
+<p>for ($x = 0; $x &lt; 5; ++$x) {<br />
+if ($x == 2) {<br />
+break;<br />
+}<br />
+print &quot;$x&lt;br&gt;&quot;;<br />
+}</p>
+
+<p>Experimente.</p>
+
+<p><strong>foreach</strong></p>
+
+<p>La&ccedil;o atrav&eacute;s de um array.</p>
+
+<p>$arr = array(1, 2, 3, 4);<br />
+foreach ($arr as $value) {<br />
+$value = $value * 2;<br />
+print $value;<br />
+}<br />
+// $arr is now array(2, 4, 6, 8)<br />
+unset($value); // Limpar a vari&aacute;vel, que armazena o valor</p>
+
+<p><strong>Colher Chave e Valor</strong></p>
+
+<p>$arr = array(1, 2, 3, 4);<br />
+foreach ($arr as $chave =&gt; $value) {<br />
+$value = $value * 2;<br />
+print &#39;Chave: &#39;.$chave.&#39; - Valor: &#39;.$value.&#39;&lt;br&gt;&#39;;<br />
+}<br />
+unset($valor); // Limpar a vari&aacute;vel, que armazena o valor</p>
+
+<p>Existe muito mais recursos, mas me parece que j&aacute; d&aacute; para perceber isso com estes exemplos mostrados.</p>
+
+<p>Qualquer d&uacute;vida sobre qualquer comando do PHP v&aacute; at&eacute; o site oficial em <a href="http://php.net/">http://php.net</a> e fa&ccedil;a uma busca pelo comando, que ver&aacute; a sintaxe e muitos exemplos de uso.</p>
+
+<p><strong>Atribui&ccedil;&atilde;o</strong></p>
+
+<p>Atribuir um valor para uma vari&aacute;vel &eacute; entregar um valor para ela guardar.</p>
+
+<p>Exemplo</p>
+
+<p>$variavel = 5;</p>
+
+<p>Estamos acima dizendo que a variavel guarde o valor 5.</p>
+
+<p>&nbsp;</p>
+
+<p><strong>Compara&ccedil;&atilde;o</strong></p>
+
+<p>Compara&ccedil;&atilde;o &eacute; o que fazemos em uma express&atilde;o geralmente em if.</p>
+
+<p>Exemplo</p>
+
+<p>if($x==3)</p>
+
+<p>Estou querendo dizer acima: se $x for igual a 3.</p>
+
+<p>Veja que quando queremos atribuir usamos apenas um sinal de igualdade:</p>
+
+<p>$x = 3;</p>
+
+<p>Quando queremos comparar usamos dois sinais de igualdade: if($x == 3)</p>
+
+<p>Com = armazenamos um valor em uma vari&aacute;vel.</p>
+
+<p>Com == eu testo se uma vari&aacute;vel &eacute; igual a um valor.</p>
+
+<p>&nbsp;</p>
+
+
+</div>
+<!-- Final de conteudo -->
+
+<!-- Rodapé-->
+<footer id="rodape">
+	<div align="center">
+		<p><a href="http://ribafs.org">RibaFS</a>. All rights reserved. Design: <a href="http://templated.co">TEMPLATED</a></p>
+	</div>
+</footer>	
+</body>
+</html>

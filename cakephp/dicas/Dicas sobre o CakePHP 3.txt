@@ -1,0 +1,103 @@
+Dicas sobre o CakePHP 3
+
+use Cake\Datasource\ConnectionManager;
+
+$connection = ConnectionManager::get('default');
+$results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
+
+ou
+$results = $connection->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])->fetchAll('assoc');
+
+
+Insert
+use Cake\Datasource\ConnectionManager;
+
+$connection = ConnectionManager::get('default');
+$connection->insert('articles', [
+    'title' => 'A New Article',
+    'created' => new DateTime('now')
+], ['created' => 'datetime']);
+
+Update
+use Cake\Datasource\ConnectionManager;
+$connection = ConnectionManager::get('default');
+$connection->update('articles', ['title' => 'New title'], ['id' => 10]);
+
+Delete
+use Cake\Datasource\ConnectionManager;
+$connection = ConnectionManager::get('default');
+$connection->delete('articles', ['id' => 10]);
+
+
+$stmt = $conn->query('UPDATE posts SET published = 1 WHERE id = 2');
+
+The query() method does not allow for additional parameters. If you need additional parameters you should use the execute() method, which allows for placeholders to be used:
+
+$stmt = $conn->execute(
+    'UPDATE posts SET published = ? WHERE id = ?',
+    [1, 2]
+);
+
+$stmt = $conn->execute(
+    'UPDATE posts SET published_date = ? WHERE id = ?',
+    [new DateTime('now'), 2],
+    ['date', 'integer']
+);
+
+$stmt->execute();
+
+// Read one row.
+$row = $stmt->fetch('assoc');
+
+// Read all rows.
+$rows = $stmt->fetchAll('assoc');
+
+// Read rows through iteration.
+foreach ($rows as $row) {
+    // Do work
+}
+
+$rowCount = count($stmt);
+$rowCount = $stmt->rowCount();
+
+Insert
+$query = $articles->query();
+$query->insert(['title', 'body'])
+    ->values([
+        'title' => 'First post',
+        'body' => 'Some body text'
+    ])
+    ->execute();
+
+$select = $articles->find()
+    ->select(['title', 'body', 'published'])
+    ->where(['id' => 3]);
+
+$query = $articles->query()
+    ->insert(['title', 'body', 'published'])
+    ->values($select)
+    ->execute()
+
+Update
+$query = $articles->query();
+$query->update()
+    ->set(['published' => true])
+    ->where(['id' => $id])
+    ->execute();
+
+Delete
+$query = $articles->query();
+$query->delete()
+    ->where(['id' => $id])
+    ->execute();
+
+Outras
+$matchingComment = $articles->association('Comments')->find()
+    ->select(['article_id'])
+    ->distinct()
+    ->where(['comment LIKE' => '%CakePHP%']);
+
+$query = $articles->find()
+    ->where(['id' => $matchingComment]);
+
+

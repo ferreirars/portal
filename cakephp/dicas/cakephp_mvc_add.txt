@@ -1,0 +1,114 @@
+MVC
+
+== Model
+Nesta camada são realizadas as operações de validação, leitura e escrita de 
+dados no banco de dados. É responsável por salvar e receber dados do banco de
+dados, como também efetua diversos processamentos com os dados.
+
+A camada Model é o cérebro da aplicação. Basicamente qualquer coisa para ler, 
+alterar, salvar ou excluir dados é nesta camada. A camada Model é a camada que
+sofreu a maior transformação na versão 3.
+
+Nas versões anteriores o Model era representado por classes Model e Behavior.
+
+Na versão 3 agora temos as classes Table, Entity, Behavior e Query.
+
+As classes Table representam os dados armazenados, normalmente uma tabela e são
+responsáveis por encontrar, salvar e validar nossos dados. Também são 
+responsáveis por manipular grandes massas de dados, como cálculo dos totais de
+uma coleção de dados.
+
+As classes Entity formam um conceito inteiramente novo e elas representam dados
+simples, isto é, apenas um registro na tabela. Usando classes Entity permite a
+você criar campos de dados virtuais muito complexos.
+
+Classes Behavior funcionam exatamente como as da versão anterior, complementando
+as clases Table e Entity. 
+
+A nova classe Query dá ao CakePHP 3 uma incrível e poderosa maneira de interagir
+com bancos de dados relacionais padrões, através do que é chamada de uma 
+interface fluente.
+
+Exemplo da nova classe Query:
+
+/**
+ * Assume that $connection and $table have already been set earlier
+ * $connection is the database connection (A Cake\Database\Connection object)
+ * $table is the table object to run the query on (A Cake\ORM\Table object)
+ */
+
+$query = new Cake\ORM\Query($connection, $table);
+
+$query
+    ->select([
+        'id',
+        'first_name',
+        'last_name',
+        'email_address'
+    ])
+    ->where([
+        'status' => true,
+        'email_address LIKE' => '%@gmail.com'
+    ])
+    ->order(['last_name' => 'ASC']);
+
+A consulta acima deve gerar o SQL seguinte:
+SELECT id, first_name, last_name, email_address FROM users WHERE status = 1 AND email_address LIKE '%@gmail.com' ORDER BY last_name ASC
+
+
+
+Uma boa prática é trazer para esta camada tudo que diz respeito às regras de
+negócio, como cálculos ou validações de integridade de dados.
+
+== Controller
+É o responsável pela integração entre as camadas Model e View. Basicamente a 
+View irá realizar uma solicitação para o Controller como por exemplo uma coleção
+de dados ou a solicitação de remover algum item do banco e o Controller, por sua
+vez, irá enviar a instrução para a camada Model executar.
+
+Nesta camada (Controller) também podemos realizar verificações que não se 
+referem às regras de negócio, visto que a boa prática é manter as regras de
+negócio no Model.
+
+O Controller é o coração do aplicativo. Esta camada é a que teve a menor 
+quantidade de alterações da versão 2 para a 3. É responsável por controlar o 
+fluxo de dados da aplicação: recebe requisições da view e as envia para o model.
+Então recebe do model, efetua algum processamento e envia de volta a resposta 
+para a view. Deve ter o mínimo de código.
+
+Uma solicitação de entrada do cliente é enviada para uma ação de um controller
+específico, que tem a lógica necessária para determinar quais dados são 
+necessários e em qua tabela estariam. O controller verifica se o cliente 
+solicitante tem permissão para acessar tais dados e qual view deve ser usada
+para a saída dos dados. A camada controller consiste de classes Controller e
+classes Component. Um componente tem função parecida com a dos Behavior para os
+Model, eles auxiliam os Controllers, assim como os Behavior auxiliam os Models.
+O componente encapsula código que deve ser compartilhado com os Controllers.
+
+Do livro do CakePHP 3. Como funciona uma requisição:
+
+- O dispatche/despachante CakePHP usa o roteador/router para determinar qual ação do controller deve ser chamado para servir a solicitação de entrada
+- O controller, então, verificar se há detalhes de autenticação (se necessário) e quaisquer parâmetros de solicitação, tais como IDs, extensões de arquivos, etc.
+- A ação/action do controller solicita os dados necessários da camada de modelo
+- A camada Model recupera os dados solicitados a partir do armazenamento de dados, manipula e formata conforme necessário e retorna os dados para o controlador
+- O controlador então passa os dados para a camada de visão
+- A camada View torna os dados em HTML (ou JSON, PDF, XML, etc.)
+- Finalmente, o controlador volta a saída da camada View para o dispatcher, que envia para o cliente.
+
+
+== View
+É a camada responsável por tudo que é visual, páginas, formulários, listagens,
+menus, o HTML. Tudo aquilo que interage com o usuário deve estar presente nesta
+camada. Representadas por HTML, classes Helpers, View, View Cells
+
+A View não realiza operações diretamente com o banco de dados nem trata 
+diretamente com o Model. Ela as solicita e e exibe através do Controller, que
+intermedia suas solicitações com o Model.
+
+No CakePHP 3 as views agora ficam no diretório Template
+
+O diretório View contém apenas classes gerais.
+
+Se o Model é o cérebro da nossa aplicação, então a View é a pele.
+
+

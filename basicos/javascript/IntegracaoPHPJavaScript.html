@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - Integração PHPxJS</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">Integração PHPxJS</h2>
+<p><b>Integração entre PHP e JavaScript</b></p>
+<p>O PHP pode ter acesso às variáveis do JavaScript e o JavaScript
+pode ter acesso às variáveis do PHP. Veja alguns exemplos:</p>
+<p>PHP Comunicando com JavaScript: PHP recebendo variáveis do
+JavaScript e JavaScript recebendo variáveis do PHP</p>
+<p>&lt;!-- Arquivo php2_js.php --&gt;</p>
+<p>&lt;h1 style='font-size:18px;text-align:center;'&gt;Integração
+entre PHP e JavaScript&lt;/h1&gt;</p>
+<p>Lembrando que o PHP é processado no servidor (pelo Apache, por
+exemplo)</p>
+<p>Enquanto que o JavaScript é processado no cliente (pelo
+Navegador).</p>
+<p><b>&lt;h2&gt;Variáveis em JavaScript&lt;/h2&gt;</b></p>
+<p>&lt;script&gt;</p>
+<p>var variavel_js=250;</p>
+<p>alert(&quot;A variável_js vale &quot;+variavel_js);</p>
+<p>document.write(&quot;A variável_js vale &quot;+variavel_js);</p>
+<p>document.write(&quot;&lt;br&gt;&quot;);</p>
+<p>document.write(&quot;Aqui não saimos do Navegador ainda&lt;br&gt;&quot;);</p>
+<p>&lt;/script&gt;</p>
+<p><b>&lt;h2&gt;Variáveis em PHP&lt;/h2&gt;</b></p>
+<p>&lt;?php</p>
+<p>$variavel_php=850;</p>
+<p>print &quot;&lt;script&gt;alert('A variavel_php vale
+'+$variavel_php)&lt;/script&gt;&quot;;</p>
+<p>print &quot;O alert anterior recebeu a variável do servidor e
+exibiu&lt;br&gt;&quot;;</p>
+<p>print &quot;&lt;br&gt;A \$variavel_php vale $variavel_php&lt;br&gt;&quot;;</p>
+<p>?&gt;</p>
+<p><b>&lt;h2&gt;JavaScript recebendo de PHP&lt;/h2&gt;</b></p>
+<p>&lt;script&gt;</p>
+<p>variavel2_js = '&lt;?=$variavel_php?&gt;' - 150;</p>
+<p>alert(&quot;variavel2_js recebeu \&quot;$variavel_php - 150\&quot;
+e agora vale &quot; + variavel2_js);</p>
+<p>alert(&quot;Para receber o valor da variável do PHP no navegador,
+a página já deve ter vindo do servidor.&quot;);</p>
+<p>document.write(&quot;variavel2_js recebeu \&quot;$variavel_php -
+150\&quot; e agora vale &quot; + variavel2_js);</p>
+<p>document.write(&quot;&lt;br&gt;&quot;);</p>
+<p>&lt;/script&gt;</p>
+<p><b>&lt;h2&gt;PHP recebendo de JavaScript&lt;/h2&gt;</b></p>
+<p>&lt;?php</p>
+<p>$variavel2_php=&quot;&lt;script&gt;document.write(variavel2_js)&lt;/script&gt;&quot;;</p>
+<p>print &quot;Usando PHP: A variavel2_php recebeu variavel2_js e
+agora vale $variavel2_php&lt;br&gt;&lt;br&gt;&quot;;</p>
+<p>print &quot;Isso acima está errado, pois apenas é algo que tem
+valor quando chega ao navegador.&lt;br&gt;&lt;br&gt;&quot;;</p>
+<p>print &quot;Para que o PHP receba de fato o valor de uma variável
+em JS, esta variável deve ser recebida por uma variável</p>
+<p>em PHP submetida para o servidor, por exemplo o campo de um
+formulário&lt;br&gt;&lt;br&gt;&quot;;</p>
+<p>// Não podemos concatenar assim: &lt;script&gt;alert('A variável
+variavel2_php agora vale' + $variavel2_php)&lt;/script&gt;</p>
+<p>// Pois a variável $variavel2_php contém &lt;script&gt;alert(...</p>
+<p>print &quot;&lt;script&gt;document.write('Usando JS: A variável
+variavel2_php agora vale' )&lt;/script&gt; $variavel2_php&quot;;</p>
+<p>?&gt;</p>
+<p>&lt;script&gt;var varSigla=&quot;DNOCS&quot;;&lt;/script&gt;</p>
+<p>&lt;form method=&quot;POST&quot; action=&quot;php_js2.php&quot;&gt;</p>
+<p>&lt;br&gt;&lt;br&gt;</p>
+<p>Clique Neste campo e mude o foco: 
+</p>
+<p>&lt;input name=&quot;sigla&quot; maxlength=&quot;13&quot;
+value=&quot;ValorOriginal&quot; onFocus=&quot;this.value=varSigla&quot;&gt;</p>
+<p>&lt;input type=submit value=Enviar&gt;</p>
+<p>&lt;/form&gt;</p>
+<p><br/>
+<br/>
+
+</p>
+<p>&lt;?php</p>
+<p>print &quot;&lt;font color='red'&gt;&lt;h4&gt;Para Ajuda com a
+depuração do JavaScript: 
+</p>
+<p>usando o Firefox vá em Ferramentas - Console de
+Erros&lt;/h4&gt;&lt;/font&gt;&quot;;</p>
+<p>echo &quot;&lt;hr&gt;&lt;h2&gt;Código Fonte&lt;/h2&gt;&quot;;</p>
+<p>show_source(__FILE__);</p>
+<p>?&gt;</p>
+<p>&lt;?php</p>
+<p>// Arquivo php2_js.php</p>
+<p>if ($_POST['sigla']){</p>
+<p>	echo &quot;A variável sigla, campo do Form que valia
+'ValorOriginal', recebeu o valor da variável JS 'DNOCS'&lt;br&gt;&quot;;</p>
+<p>	echo &quot;que foi atribuído à variável \$sigla do PHP através
+do campo do form!&quot;;</p>
+<p>}</p>
+<p>echo &quot;&lt;hr&gt;&lt;h2&gt;Código Fonte&lt;/h2&gt;&quot;;</p>
+<p>show_source(__FILE__);</p>
+<p>?&gt;</p>
+<p>Outro Exemplo de Integração do PHP com JavaScript</p>
+<p>&lt;h1&gt;Integração entre PHP e JavaScript&lt;/h1&gt;</p>
+<p>&lt;script&gt;</p>
+<p>var nome;</p>
+<p>nome = prompt('Qual o seu nome?','João Brito Cunha');</p>
+<p>&lt;/script&gt;</p>
+<p>&lt;h2&gt;PHP Mostrando variável JavaScript&lt;/h2&gt;</p>
+<p>&lt;?php</p>
+<p>echo &quot;Seu nome é &lt;script&gt;document.write(nome)&lt;/script&gt;&quot;;</p>
+<p>echo &quot;&lt;script&gt;alert('Seu nome é '+nome)&lt;/script&gt;&quot;;</p>
+<p>?&gt;</p>
+<p><b>&lt;h2&gt;JavaScript Mostrando variável PHP&lt;/h2&gt;</b></p>
+<p>&lt;?php</p>
+<p>$arquivo=&quot;phpjs.php&quot;;</p>
+<p>$acao='excluir';</p>
+<p>$tipo='diretorio';</p>
+<p>echo &quot;&lt;br&gt;&lt;br&gt;Arquivo = $arquivo  Ação = $acao
+e Tipo = $tipo&quot;;</p>
+<p>?&gt;</p>
+<p>&lt;script&gt;</p>
+<p>if(!confirm(&quot;Confirma?&quot;)){</p>
+<p>    alert(&quot;Não confirmou!&quot;);</p>
+<p>}else{</p>
+<p>    alert(&quot;Arquivo = &lt;?=$arquivo?&gt; Acao = &lt;?=$acao?&gt;
+Tipo = &lt;?=$tipo?&gt;&quot;);</p>
+<p>}</p>
+<p>&lt;/script&gt;</p>
+<p><b>&lt;h2&gt;HTML e JavaScript Mostrando variável PHP&lt;/h2&gt;</b></p>
+<p>&lt;?php $sigla=&quot;DNOCS&quot;; ?&gt;</p>
+<p>&lt;form&gt;</p>
+<p>Clique Neste campo e mude o foco&lt;br&gt;</p>
+<p>&lt;input name=&quot;sigla&quot; maxlength=&quot;10&quot;
+value=&quot;&lt;?=$sigla?&gt;&quot; 
+</p>
+<p>       
+onBlur=&quot;javascript:location.href='&lt;?=$PHP_SELF?&gt;?sigla=document.forms[0].sigla.value'&quot;&gt;</p>
+<p>&lt;/form&gt;</p>
+<p><br/>
+<br/>
+
+</p>
+<p>Passing JavaScript variables to PHP</p>
+<p>Original em:</p>
+<p><a href="http://www.webcheatsheet.com/php/passing_javascript_variables_php.php">http://www.webcheatsheet.com/php/passing_javascript_variables_php.php</a>
+</p>
+<p>Criar arquivo js.html com o conteúdo:</p>
+<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+<p>width = screen.width;</p>
+<p>height = screen.height;</p>
+<p>if (width &gt; 0 &amp;&amp; height &gt;0) {</p>
+<p>    window.location.href = &quot;http://localhost/main.php?width=&quot;
++ width + &quot;&amp;height=&quot; + height;</p>
+<p>} else 
+</p>
+<p>    exit();</p>
+<p>&lt;/script&gt;</p>
+<p>Criar o arquivo main.php com o seguinte conteúdo:</p>
+<p>&lt;?php</p>
+<p>echo &quot;&lt;h1&gt;Screen Resolution:&lt;/h1&gt;&quot;;</p>
+<p>echo &quot;Width  : &quot;.$_GET['width'].&quot;&lt;br&gt;&quot;;</p>
+<p>echo &quot;Height : &quot;.$_GET['height'].&quot;&lt;br&gt;&quot;;</p>
+<p>?&gt;</p>
+</body>
+</html>

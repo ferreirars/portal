@@ -1,0 +1,140 @@
+Migrations
+
+Da terceira parte do blog tutorial
+
+But first, we need to modify our tables.
+Migrations Plugin¶
+
+We will use the migrations plugin to create a table in our database. If you already have an articles table in your database, erase it.
+
+Now open your application’s composer.json file. Normally you would see that the migrations plugin is already under require. If not, add it by executing:
+
+composer require cakephp/migrations:~1.0
+
+The migrations plugin will now be in your application’s plugins folder. Also, add Plugin::load('Migrations'); to your application’s bootstrap.php file.
+
+Once the plugin is loaded, run the following command to create a migration file:
+
+bin/cake bake migration CreateArticles title:string body:text category_id:integer created modified
+
+A migration file will be generated in the /config/Migrations folder with the following:
+
+<?php
+
+use Migrations\AbstractMigration;
+
+class CreateArticlesTable extends AbstractMigration
+{
+    public function change()
+    {
+        $table = $this->table('articles');
+        $table->addColumn('title', 'string', [
+            'default' => null,
+            'limit' => 255,
+            'null' => false,
+        ]);
+        $table->addColumn('body', 'text', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->addColumn('category_id', 'integer', [
+            'default' => null,
+            'limit' => 11,
+            'null' => false,
+        ]);
+        $table->addColumn('created', 'datetime', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->addColumn('modified', 'datetime', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->create();
+    }
+}
+
+Run another command to create a categories table. If you need to specify a field length, you can do it within brackets in the field type, ie:
+
+bin/cake bake migration CreateCategories parent_id:integer lft:integer[10] rght:integer[10] name:string[100] description:string created modified
+
+This will generate the following file in config/Migrations:
+
+<?php
+
+use Migrations\AbstractMigration;
+
+class CreateCategoriesTable extends AbstractMigration
+{
+    public function change()
+    {
+        $table = $this->table('categories');
+        $table->addColumn('parent_id', 'integer', [
+            'default' => null,
+            'limit' => 11,
+            'null' => false,
+        ]);
+        $table->addColumn('lft', 'integer', [
+            'default' => null,
+            'limit' => 10,
+            'null' => false,
+        ]);
+        $table->addColumn('rght', 'integer', [
+            'default' => null,
+            'limit' => 10,
+            'null' => false,
+        ]);
+        $table->addColumn('name', 'string', [
+            'default' => null,
+            'limit' => 100,
+            'null' => false,
+        ]);
+        $table->addColumn('description', 'string', [
+            'default' => null,
+            'limit' => 255,
+            'null' => false,
+        ]);
+        $table->addColumn('created', 'datetime', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->addColumn('modified', 'datetime', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->create();
+    }
+}
+
+Now that the migration files are created, you can edit them before creating your tables. We need to change the 'null' => false for the parent_id field with 'null' => true because a top-level category has a null parent_id.
+
+Run the following command to create your tables:
+
+bin/cake migrations migrate
+
+Modifying the Tables¶
+
+With our tables set up, we can now focus on categorizing our articles.
+
+We suppose you already have the files (Tables, Controllers and Templates of Articles) from part 2. So we’ll just add the references to categories.
+
+We need to associated the Articles and Categories tables together. Open the src/Model/Table/ArticlesTable.php file and add the following:
+
+// src/Model/Table/ArticlesTable.php
+
+namespace App\Model\Table;
+
+use Cake\ORM\Table;
+
+class ArticlesTable extends Table
+{
+    public function initialize(array $config)
+    {
+        $this->addBehavior('Timestamp');
+        // Just add the belongsTo relation with CategoriesTable
+        $this->belongsTo('Categories', [
+            'foreignKey' => 'category_id',
+        ]);
+    }
+}
+

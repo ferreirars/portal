@@ -1,0 +1,312 @@
+O método find() no Cake
+
+
+Sintaxe:
+find(string $type = 'tipo', array $params = array());
+
+Model::find()
+
+O método find() é um dos mais importantes do Cake para acesso a bancos de dados.
+Tanto funciona nos controllers quanto nos models.
+
+No controller:
+$this->Post->find('all');
+
+No model:
+$this->find('all');
+
+Ele funciona como uma consulta SQL ao banco, sendo que abstrai o uso do SQL.
+Veja a consulta abaixo:
+
+"select pessoas from unidades where numero = '$apto'"
+
+Agora usando o método find:
+
+$pessoasapto = $this->Despesa->find('first', array(
+	            'conditions'=>array('Unidade.numero'=>$numero),
+	            'fields'=>array('Unidade.pessoas')
+	        ));
+
+Correspondendo as partes:
+
+WHERE - 'conditions'=>array('Unidade.numero'=>$numero)
+SELECT - 'fields'=>array('Unidade.pessoas') // Este é o retorno
+
+Isto $this->Despesa->find( acusa o uso no controller. Se fosse no model seria assim: $this->find(
+
+
+Lista de possíveis conditions que podemos usar:
+Nome        Default  Descrição
+------------------------------
+type        'first'  pode ser 'all', 'first', 'list' ou 'count'. Determina que tipo de operação find para executar. 
+
+conditions  null     array contendo um select de condições find como pares key/value (chave/valor)
+
+fields      null     array especificando que fields/campos devem ser recebidos na consulta select do resultado
+
+order       null     sql 'order by conditions. nome do campo/field precisa ser seguida por ASC ou DESC
+
+page        null     número da página, usada para dados paginados
+
+limit       null     um limit em um número de resultados retornados, como 'select * from orders limit 20'.
+
+offset      null     sql offset value (valor de deslocamento do SQL) (Eu não usei esta consulta muito, mas eu acho que ele
+					 se refere a pular X registros retornados em uma consulta)
+
+recursive      1     o cakephp recursive value, relatado como modelo associado de dados
+
+
+ORDER BY examples:
+
+array('order'=>'date ASC')
+array('order'=>'date DESC')
+array('order'=>'User.id DESC')
+
+array(
+    'conditions' => array('Model.field' => $thisValue), //array of conditions
+    'recursive' => 1, //int
+    'fields' => array('Model.field1', 'DISTINCT Model.field2'), //array of field names
+    'order' => array('Model.created', 'Model.field3 DESC'), //string or array defining order
+    'group' => array('Model.field'), //fields to GROUP BY
+    'limit' => n, //int
+    'page' => n, //int
+    'offset' => n, //int
+    'callbacks' => true //other possible values are false, 'before', 'after'
+)
+
+Exemplos de uso:
+
+// Retorna todos os campos de todos os registros da tabela despesas
+$todas = ($this->Despesa->find('all'));
+pr($todas);exit;
+Mostrará:
+
+Array
+(
+    [0] => Array
+        (
+            [Despesa] => Array
+                (
+                    [id] => 1
+                    [tipo] => cag
+                    [descricao] => CAGECE
+                    [mes] => 08/2013
+                    [valor] => 550.00
+                    [obs] => 
+                )
+
+        )
+
+    [1] => Array
+        (
+            [Despesa] => Array
+                (
+                    [id] => 2
+                    [tipo] => con
+                    [descricao] => COELCE
+                    [mes] => 08/2013
+                    [valor] => 25.30
+                    [obs] => 
+                )
+
+        )
+...
+
+Para usar:
+
+$todas = ($this->Despesa->find('all'));
+print $todas[0]['Despesa']['id'];
+
+
+// Retorna todos os campos de todos os registros da tabela despesas - Usando list
+$todas = ($this->Despesa->find('list'));
+pr($todas);exit;
+Mostrará:
+
+Array
+(
+    [1] => 1
+    [2] => 2
+    [3] => 3
+    [4] => 4
+    [5] => 5
+)
+
+Usando:
+print $teste[3];
+
+
+// Retorna todos os campos somente do primeiro registro da tabela despesas - Usando first
+$todas = ($this->Despesa->find('first'));
+pr($todas);exit;
+Mostrará:
+Array
+(
+    [Despesa] => Array
+        (
+            [id] => 1
+            [tipo] => cag
+            [descricao] => CAGECE
+            [mes] => 08/2013
+            [valor] => 550.00
+            [obs] => 
+        )
+
+)
+
+Usando:
+print $todas['Despesa']['mes'];
+
+Retornará:
+08/2013
+
+
+// Retornar a quantidade de registros da tabela despesas - Usando count
+$todas = ($this->Despesa->find('count'));
+
+Usando:
+print $todas;
+
+Retornará:
+5
+
+
+// Retorna todos os campos de um registro, em que id = 5:
+$this->Despesa->find('all', array('conditions'=>array('Despesa.id'=>5)));
+
+$despesa5 = $this->Despesa->find('all', array('conditions'=>array('Despesa.id'=>5)));
+pr($despesa5);exit;
+
+Retornará:
+Array
+(
+    [0] => Array
+        (
+            [Despesa] => Array
+                (
+                    [id] => 5
+                    [tipo] => con
+                    [descricao] => Material de limpeza
+                    [mes] => 08/2013
+                    [valor] => 17.00
+                    [obs] => 
+                )
+
+        )
+
+)
+
+Usando:
+
+$despesa5 = $this->Despesa->find('all', array('conditions'=>array('Despesa.id'=>5)));
+print $despesa5[0]['Despesa']['valor'];
+
+$this->Despesa->find('all', array('conditions'=>array('Despesa.id'=>5)));
+
+
+// Retorna todos os campos de um registro, em que id é diferente de 5:
+$this->Despesa->find('all', array('conditions'=>array('Despesa.id'=>'<> 5')));
+
+Diferentes (<> , = , !=, >, <, etc)
+$teste = $this->Despesa->find('all', array('conditions'=>array('Despesa.id >'=>'2')));
+
+//
+$this->Despesa->find('all',
+                  array('conditions'=>array('Despesa.id >'=>2),
+                        'fields'=>'Despesa.tipo',
+                        'order'=>'Despesa.id ASC',
+                        'limit'=>5,
+                        'recursive'=>0));
+
+Retorna:
+Array
+(
+    [0] => Array
+        (
+            [Despesa] => Array
+                (
+                    [tipo] => con
+                )
+
+        )
+
+    [1] => Array
+        (
+            [Despesa] => Array
+                (
+                    [tipo] => con
+                )
+
+        )
+...
+
+// Com data, funções entre '':
+$teste=$this->Despesa->find('all', 
+                   array('conditions'=>array('Despesa.id'=>2, 
+                                             'DATE(Despesa.data)'=>'CURDATE()')));
+
+findByNomecampo('Nome Aqui') - retorna o registro que contém este nome, similar a find('first')
+$nomearray = $this->Cliente->findByNome('Arsenio Neal Tate');
+Retorno:
+Array
+(
+    [Cliente] => Array
+        (
+            [id] => 94
+            [nome] => Arsenio Neal Tate
+            [email] => feugiat.tellus.lorem@vel.org
+            [data_nasc] => 2013-12-21
+            [cpf] => 68200086559
+            [obs] => 
+        )
+
+)
+
+findAllByNome('Ribamar FS') - retorna todos os registros com este nome, similar a find('all')
+
+Com mais de um campo
+findAllByNomeOrEmail('Ribamar FS', 'ribafs@gmail.com');
+
+Retornando o top id
+$this->Form->find('all', array(
+    'fields' => array('Form.id'), // just return the id, thank you
+    'order' => 'Form.id DESC',    // sort the query result by id DESC
+    'limit' => 1,                 // gimme the top id
+    'recursive' => -1,            // don't scan associated models in the query
+));
+
+ou
+$this->Form->find('first', array(
+     'fields' => array('Form.id'),
+     'order' => array('Form.id DESC'),
+     'recursive' => -1,
+     )
+);
+
+Usando AND e OR
+$conditions = array(
+
+   'OR' => array(
+      array('Company.name' => 'Future Holdings'),
+      array('Company.name' => 'Steel Mega Works')
+   ),
+
+   'AND' => array(
+      array(
+
+         'OR'=>array(
+            array('Company.status' => 'active'),
+
+            'NOT'=>array(
+               array('Company.status'=> array('inactive', 'suspended'))
+            )
+         )
+     )
+   )
+);
+
+
+Detalhes:
+http://book.cakephp.org/2.0/en/models/retrieving-your-data.html
+
+

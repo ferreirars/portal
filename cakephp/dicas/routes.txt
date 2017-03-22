@@ -1,0 +1,58 @@
+Dicas sobre Rotas/Routes
+
+Tudo que começar com /cooks/ deve ser enviado para o users controller:
+Router::connect(
+    '/cooks/:action/*', array('controller' => 'users')
+);
+
+
+A rota padrão do CakePHP 2.4.0
+	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	O 'home' final é uma view
+
+Custom route
+
+class SlugRoute extends CakeRoute {
+ 
+    function parse($url) {
+        $params = parent::parse($url);
+        if (empty($params)) {
+            return false;
+        }
+        App::import('Model', 'Post');
+        $Post = new Post();
+        $count = $Post->find('count', array(
+            'conditions' => array('Post.slug LIKE ?' => $params['slug'] .'%'),
+            'recursive' => -1
+        ));
+        if ($count) {
+            return $params;
+        }
+        return false;
+    }
+ 
+}
+
+Obs: slug é tipo o alias do Joomla, que ajusta a parte relativa ao nome artigo para fazer parte da URL. Se o título do artigo for "A saúde é importante", o Joomla cria o alias como "a_saude_e_importante".
+
+    App::import('Lib', 'routes/SlugRoute');
+     
+    Router::connect('/:slug', array('controller' => 'posts', 'action' => 'view'), array('routeClass' => 'SlugRoute'));
+
+O arquivo routes.php:
+
+					// / - path					controller			action		view
+	Router::connect('/', array('controller' => 'clientes', 'action' => 'index', 'home'));
+
+
+	- Adicionando rotas para clientes, admin, login e logout
+
+	Router::connect('/', array('controller' => 'submenus', 'action' => 'menus'));// Aplicativo
+	Router::connect('/admin', array('controller' => 'submenus', 'action' => 'admin')); //Admin
+	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
+
+
+http://book.cakephp.org/2.0/en/core-utility-libraries/router.html
+http://book.cakephp.org/2.0/en/development/routing.html
+

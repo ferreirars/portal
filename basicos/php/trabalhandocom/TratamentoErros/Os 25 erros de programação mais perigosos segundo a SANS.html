@@ -1,0 +1,470 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="pt-BR">
+<head profile="http://gmpg.org/xfn/11">
+
+    <title>Os 25 erros de programação mais perigosos segundo a SANS | the brain is a machine</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="geekness, music power and opensource" />
+		
+	<link rel="stylesheet" type="text/css" href="http://core.eti.br/wp-content/themes/byty/style.css" />
+	
+  	<link rel="alternate" type="application/rss+xml" href="http://core.eti.br/feed/" title="the brain is a machine Posts RSS feed" />
+	<link rel="alternate" type="application/rss+xml" href="http://core.eti.br/comments/feed/" title="the brain is a machine Comments RSS feed" />
+	<link rel="pingback" href="http://core.eti.br/xmlrpc.php" />
+	
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://core.eti.br/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://core.eti.br/wp-includes/wlwmanifest.xml" /> 
+<script type='text/javascript' src='http://core.eti.br/wp-includes/js/jquery/jquery.js?ver=1.2.6'></script>
+
+
+<!-- all in one seo pack 1.4.6.15 [234,299] -->
+<meta name="description" content="Saiu no site da SANS a lista criada com o consenso entre varios profissionais e empresas do ramo de segurança e desenvolvimento descrevendo os 25 erros de" />
+<meta name="keywords" content="desenvolvimento seguro,python,segurança" />
+<!-- /all in one seo pack -->
+<link rel="stylesheet" type="text/css" href="http://core.eti.br/wp-content/plugins/friendfeed-activity-widget/widget.css" />
+				
+	<script type="text/javascript">
+		window.google_analytics_uacct = "UA-758273-1";
+	</script>
+	  <!-- added by plugin Last.Fm Records -->
+  <style type="text/css">
+    #lastfmrecords    { padding: 0px; padding-bottom: 10px; }
+    #lastfmrecords li { list-style-type: none; margin: 0px; padding: 0px; display: inline; }
+    img.cdcover       { height: 50px; width: 50px; margin: 0px 5px 5px 0px; border: 0px; }
+  </style>
+
+	<meta name="now-reading-version" content="4.4.3" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://core.eti.br/wp-content/plugins/sociable/sociable.css" />
+<style type="text/css">.recentcomments a{display:inline !important;padding: 0 !important;margin: 0 !important;}</style>
+
+</head>
+
+<body class="wordpress y2009 m01 d23 h17 single postid-373 s-y2009 s-m01 s-d22 s-h16 s-category-seguranca s-tag-desenvolvimento-seguro s-tag-python s-tag-seguranca s-author-coredump">
+
+<div id="wrapper" class="hfeed">
+
+    <div id="header">
+    	<div id="branding">
+    		<div id="blog-title"><span><a href="http://core.eti.br/" title="the brain is a machine" rel="home">the brain is a machine</a></span></div>
+    			
+    		<div id="blog-description">geekness, music power and opensource</div>
+    		    	</div><!--  #branding -->
+    	<div id="access">
+    		<div class="skip-link"><a href="#content" title="Skip navigation to the content">Skip to content</a></div>
+            <div id="menu"><ul><li class="page_item page-item-107"><a href="http://core.eti.br/curriculos/" title="Curriculo">Curriculo</a></li><li class="page_item page-item-109"><a href="http://core.eti.br/artigos-e-outros/" title="Artigos">Artigos</a></li><li class="page_item page-item-297"><a href="http://core.eti.br/public-keys/" title="Public Keys">Public Keys</a></li><li class="page_item page-item-242"><a href="http://core.eti.br/archives/" title="Arquivo">Arquivo</a></li></ul></div>
+        </div><!-- #access -->
+    </div><!-- #header-->
+    
+
+<div id="top_ad">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2106564387213889";
+/* 728x90, criado 11/12/08 */
+google_ad_slot = "5041353373";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+   
+    <div id="main">
+    
+	<div id="container">
+		<div id="content">
+
+			<div id="nav-above" class="navigation">
+				<div class="nav-previous"><a href="http://core.eti.br/2009/01/19/classificados-ainda/"><span class="meta-nav">&laquo;</span> Classificados, ainda!</a></div>
+				<div class="nav-next"></div>
+			</div>
+
+<div id="single-top" class="aside">
+<ul class="xoxo">
+</ul>
+</div><!-- #single-top .aside -->
+
+			<div id="post-373" class="hentry p1 post publish author-coredump category-seguranca tag-desenvolvimento-seguro tag-python tag-seguranca y2009 m01 d22 h16">
+    			<h1 class="entry-title">Os 25 erros de programação mais perigosos segundo a SANS</h1>
+<div class="entry-meta"><span class="author vcard">By <a class="url fn n" href="http://core.eti.br/author/coredump/" title="View all posts by coredump">coredump</a></span><span class="meta-sep"> | </span><span class="entry-date"><abbr class="published" title="2009-01-22T16:11:36-0200">January 22, 2009</abbr></span></div><!-- .entry-meta -->
+				<div class="entry-content">
+<p>Saiu no site da SANS a lista criada com o consenso entre varios profissionais e empresas do ramo de segurança e desenvolvimento descrevendo os<a href="http://www.sans.org/top25errors/" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.sans.org');"> 25 erros de programação mais perigosos</a> para o desenvolvimento seguro. Eu vou traduzir os nomes e informação básicos mas o melhor é ler <a href="http://www.sans.org/top25errors/" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.sans.org');">o artigo na íntegra</a>, em inglês.</p>
+<p>Os erros estão separados em três categorias: Interação insegura entre componentes, Gerenciamento arriscado de recursos, Defensas porosas.</p>
+<p><strong>Categoria: Interação insegura entre componentes</strong></p>
+<ol>
+<li><strong>Validação Imprópria de Entradas</strong>: Entradas que recebem dados e os aceitam mesmo sem certificar que eles são do tipo/formato esperado.</li>
+<li><strong>Codificação ou Escape Impróprios de Saída</strong>: Saídas que não são codificadas ou escapadas corretamente são a maior fonte de ataques de injeção de código.</li>
+<li><strong>Falha ao Preservar a Estrutura da Busca SQL (conhecido como Injeção de SQL)</strong>: Se os atacantes podem influenciar as procuras SQL do seu programa, então eles podem controlar o seu banco de dados.</li>
+<li><strong>Falha ao Preservar a Estrutura do Código da Página (conhecido como &#8220;Cross-site Scripting&#8221;)</strong>: Assim como o anterior, se os atacantes podem injetar código ou scripts em sua página, eles podem controlar a página.</li>
+<li><strong>Falha ao Preservar a Estrutura de Comandos do Sistema Operacional</strong>: Se você permitir que entradas ilegais sejam passadas para aplicativos do sistema operacional, o atacante pode controlar o servidor.</li>
+<li><strong>Transmissão de Dados Sensíveis em Texto Puro</strong>: Senhas, dados de cartão e qualquer informação considerada sensível deve ser criptografada.</li>
+<li><strong>Falsificação de Requisição Entre Sites</strong>: Um atacante pode criar uma requisição que é enviada a outro site forjando a origem e fazendo o mesmo partir de um usuário inocente, aproveitando credenciais de autenticação e acessos.</li>
+<li><strong>Condição de Corrida</strong>: Atacantes vão sempre procurar por condições de corrida no software para conferir se alguma informação importante não é obtida no processo.</li>
+<li><strong>Vazamento de Informações em Mensagens de Erro</strong>: Atacantes vão procurar por mensagens de erro que descrevam mais que o necessário, como nomes de campos SQL, objetos e bibliotecas sendo utilizadas.</li>
+</ol>
+<p><strong>Categoria: Gerenciamento arriscado de recursos:</strong></p>
+<ol>
+<li><strong>Falha ao Limitar Operações aos Limites de um Buffer de Memória</strong>: O conhecido buffer overflow.</li>
+<li><strong>Controle Externo de Dados Sensíveis</strong>: Informações críticas que são mantidas fora de um banco de dados por questões de performance não deviam ser facilmente acessíveis por atacantes.</li>
+<li><strong>Controle Externo de de Caminho ou Nome de Arquivo</strong>: Quando você usa dados externos para montar um nome de arquivo ou caminho de gravação, você está se arriscando a ser atacado.</li>
+<li><strong>Caminho de Procura Inseguro</strong>: Se o caminho de procura de recursos estiver em algum lugar sob controle de um atacante, bibliotecas ou código pode ser inserido a revelia.</li>
+<li><strong>Falha ao Controlar a Geração de Código</strong>: Caso o atacante consiga influenciar a geração de código dinâmico (se geração de código dinâmico for utilizada no programa) ele poderá controlar todo seu código.</li>
+<li><strong>Download de Código sem Verificação de Integridade</strong>: Se você executa código obtido por download, você confia na fonte. Atacantes podem aproveitar esta confiança.</li>
+<li><strong>Desligamento ou Liberação Impróprias de Recursos</strong>: Arquivos, conexões e classes precisam ser corretamente encerradas.</li>
+<li><strong>Inicialização Imprópria</strong>: Dados, bibliotecas e sistemas inicializados incorretamente podem abrir margens para problemas.</li>
+<li><strong>Cálculos Incorretos</strong>: Quando o atacante tem algum controle sobre as entradas usadas em operações matemáticas, isso pode gerar vulnerabilidades.</li>
+</ol>
+<p><strong>Categoria: Defensas porosas:</strong></p>
+<ol>
+<li><strong>Controle de Acesso Impróprio</strong>: Se você não garante que seus usuários estão fazendo apenas o que deviam, os atacantes irão se aproveitar de sua autenticação.</li>
+<li><strong>Uso de um Algoritmo Criptográfico Quebrado ou Vulnerável</strong>: Utilização de algoritmos fracos ou comprometidos levam a falhas de criptografia e vulnerabilidades.</li>
+<li><strong>Senha no Código</strong>: deixar um usuário e uma senha no próprio código traz inúmeros problemas.</li>
+<li><strong>Permissão de Acesso Insegura para Recurso Crítico</strong>: Configurações, arquivos de dados e bancos de dados devem ter suas permissões de acesso protegidas.</li>
+<li><strong>Uso de Valores Insuficientemente Aleatórios</strong>: Se você usa tipos de segurança que dependem de aleatoriedade, usar um gerador aleatório insuficiente só vai causar problemas.</li>
+<li><strong>Execução com Privilégios Desnecessários</strong>: Se seu programa precisa de privilégios elevados para executar suas funções, ele deve abrir mão destes direitos assim que ele termina de executar as ações que precisavam dos privilégios.</li>
+<li><strong>Aplicação de Segurança do Lado do Servidor pelo Cliente</strong>: Atacantes podem usar engenharia reversa em um cliente de software e escrever seus próprios clientes removendo testes e aplicações de segurança.</li>
+</ol>
+<p>Algumas coisas foram realmente chatas de traduzir, sinta-se livre para sugerir correções.</p>
+<p>intel</p>
+<p>PS: Lembre-se sempre &#8220;os 25 mais&#8221; não quer dizer &#8220;os 25 únicos&#8221;. <em>Grain of Salt </em>faz bem.</p>
+
+<div class="sociable">
+<div class="sociable_tagline">
+<strong>Compartilhe:</strong>
+</div>
+<ul>
+	<li><a rel="nofollow" href="http://digg.com/submit?phase=2&amp;url=http%3A%2F%2Fcore.eti.br%2F2009%2F01%2F22%2Fos-25-erros-de-programacao-mais-perigosos-segundo-a-sans%2F&amp;title=Os%2025%20erros%20de%20programa%C3%A7%C3%A3o%20mais%20perigosos%20segundo%20a%20SANS" onclick="javascript:pageTracker._trackPageview('/outbound/article/digg.com');" title="Digg"><img src="http://core.eti.br/wp-content/plugins/sociable/images/digg.png" title="Digg" alt="Digg" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" href="http://del.icio.us/post?url=http%3A%2F%2Fcore.eti.br%2F2009%2F01%2F22%2Fos-25-erros-de-programacao-mais-perigosos-segundo-a-sans%2F&amp;title=Os%2025%20erros%20de%20programa%C3%A7%C3%A3o%20mais%20perigosos%20segundo%20a%20SANS" onclick="javascript:pageTracker._trackPageview('/outbound/article/del.icio.us');" title="del.icio.us"><img src="http://core.eti.br/wp-content/plugins/sociable/images/delicious.png" title="del.icio.us" alt="del.icio.us" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" href="http://www.facebook.com/share.php?u=http%3A%2F%2Fcore.eti.br%2F2009%2F01%2F22%2Fos-25-erros-de-programacao-mais-perigosos-segundo-a-sans%2F&amp;t=Os%2025%20erros%20de%20programa%C3%A7%C3%A3o%20mais%20perigosos%20segundo%20a%20SANS" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.facebook.com');" title="Facebook"><img src="http://core.eti.br/wp-content/plugins/sociable/images/facebook.png" title="Facebook" alt="Facebook" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" href="http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=http%3A%2F%2Fcore.eti.br%2F2009%2F01%2F22%2Fos-25-erros-de-programacao-mais-perigosos-segundo-a-sans%2F&amp;title=Os%2025%20erros%20de%20programa%C3%A7%C3%A3o%20mais%20perigosos%20segundo%20a%20SANS" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.google.com');" title="Google"><img src="http://core.eti.br/wp-content/plugins/sociable/images/googlebookmark.png" title="Google" alt="Google" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fcore.eti.br%2F2009%2F01%2F22%2Fos-25-erros-de-programacao-mais-perigosos-segundo-a-sans%2F&amp;title=Os%2025%20erros%20de%20programa%C3%A7%C3%A3o%20mais%20perigosos%20segundo%20a%20SANS&amp;source=the+brain+is+a+machine+geekness%2C+music+power+and+opensource&amp;summary=Saiu%20no%20site%20da%20SANS%20a%20lista%20criada%20com%20o%20consenso%20entre%20varios%20profissionais%20e%20empresas%20do%20ramo%20de%20seguran%C3%A7a%20e%20desenvolvimento%20descrevendo%20os%2025%20erros%20de%20programa%C3%A7%C3%A3o%20mais%20perigosos%20para%20o%20desenvolvimento%20seguro.%20Eu%20vou%20traduzir%20os%20nomes%20e%20informa" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.linkedin.com');" title="LinkedIn"><img src="http://core.eti.br/wp-content/plugins/sociable/images/linkedin.png" title="LinkedIn" alt="LinkedIn" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" href="http://slashdot.org/bookmark.pl?title=Os%2025%20erros%20de%20programa%C3%A7%C3%A3o%20mais%20perigosos%20segundo%20a%20SANS&amp;url=http%3A%2F%2Fcore.eti.br%2F2009%2F01%2F22%2Fos-25-erros-de-programacao-mais-perigosos-segundo-a-sans%2F" onclick="javascript:pageTracker._trackPageview('/outbound/article/slashdot.org');" title="Slashdot"><img src="http://core.eti.br/wp-content/plugins/sociable/images/slashdot.png" title="Slashdot" alt="Slashdot" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fcore.eti.br%2F2009%2F01%2F22%2Fos-25-erros-de-programacao-mais-perigosos-segundo-a-sans%2F&amp;title=Os%2025%20erros%20de%20programa%C3%A7%C3%A3o%20mais%20perigosos%20segundo%20a%20SANS" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.stumbleupon.com');" title="StumbleUpon"><img src="http://core.eti.br/wp-content/plugins/sociable/images/stumbleupon.png" title="StumbleUpon" alt="StumbleUpon" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" href="http://technorati.com/faves?add=http%3A%2F%2Fcore.eti.br%2F2009%2F01%2F22%2Fos-25-erros-de-programacao-mais-perigosos-segundo-a-sans%2F" onclick="javascript:pageTracker._trackPageview('/outbound/article/technorati.com');" title="Technorati"><img src="http://core.eti.br/wp-content/plugins/sociable/images/technorati.png" title="Technorati" alt="Technorati" class="sociable-hovers" /></a></li>
+	<li><a rel="nofollow" href="http://twitter.com/home?status=http%3A%2F%2Fcore.eti.br%2F2009%2F01%2F22%2Fos-25-erros-de-programacao-mais-perigosos-segundo-a-sans%2F" onclick="javascript:pageTracker._trackPageview('/outbound/article/twitter.com');" title="TwitThis"><img src="http://core.eti.br/wp-content/plugins/sociable/images/twitter.gif" title="TwitThis" alt="TwitThis" class="sociable-hovers" /></a></li>
+</ul>
+</div>
+
+									</div>
+				<div class="entry-utility"><span class="cat-links">This entry was posted in <a href="http://core.eti.br/category/seguranca/" title="View all posts in segurança" rel="category tag">segurança</a></span><span class="tag-links">  and tagged <a href="http://core.eti.br/tag/desenvolvimento-seguro/" rel="tag">desenvolvimento seguro</a>, <a href="http://core.eti.br/tag/python/" rel="tag">python</a>, <a href="http://core.eti.br/tag/seguranca/" rel="tag">segurança</a></span>. Bookmark the <a href="http://core.eti.br/2009/01/22/os-25-erros-de-programacao-mais-perigosos-segundo-a-sans/" title="Permalink to Os 25 erros de programação mais perigosos segundo a SANS">permalink</a>. <a class="comment-link" href="#respond" title ="Post a comment">Post a comment</a> or leave a trackback: <a class="trackback-link" href="http://core.eti.br/2009/01/22/os-25-erros-de-programacao-mais-perigosos-segundo-a-sans/trackback/" title ="Trackback URL for your post" rel="trackback">Trackback URL</a>.</div><!-- .entry-utility -->
+			</div><!-- .post -->
+
+<div id="single-insert" class="aside">
+<ul class="xoxo">
+</ul>
+</div><!-- #single-insert .aside -->
+
+			<div id="nav-below" class="navigation">
+				<div class="nav-previous"><a href="http://core.eti.br/2009/01/19/classificados-ainda/"><span class="meta-nav">&laquo;</span> Classificados, ainda!</a></div>
+				<div class="nav-next"></div>
+			</div>
+
+			<div id="comments">
+
+
+				<div id="comments-list" class="comments">
+					<h3><span>One</span> Comment</h3>
+
+					<ol>
+						<li id="comment-80014" class="comment c0 c-y2009 c-m01 c-d22 c-h17 alt">
+							<div class="comment-author vcard"><img alt='' src='http://www.gravatar.com/avatar/ab2e2315abd0315da80542df748c1a93?s=80&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D80&amp;r=X' class='photo avatar avatar-80 photo' height='80' width='80' /> <span class="fn n"><a href="http://fudeblog.zyakannazio.eti.br"   rel='external nofollow' class='url url'>Cesar Cardoso</a></span></div>
+							<div class="comment-meta">Posted 22 de January, 2009 at 17:00 <span class="meta-sep">|</span> <a href="#comment-80014" title="Permalink to this comment">Permalink</a></div>
+							<p>Três comentários sobre a primeira categoria&#8230;</p>
+<p>SQL Injection (item 3) se tornou um clássico da programação tosca para a Web, desde os tempos do PHPNuke.</p>
+<p>XSS (item 4) é A falha de programação da Web 2.0.</p>
+<p>Quem comete a falha do item 6 a esta altura do campeonato deveria ser proibido de projetar sistemas.</p>
+						</li>
+
+					</ol>
+				</div><!-- #comments-list .comments -->
+
+				<div id="respond">
+					<h3>Post a Comment</h3>
+
+					<div class="formcontainer">	
+						<form id="commentform" action="http://core.eti.br/wp-comments-post.php" method="post">
+
+
+							<p id="comment-notes">Your email is <em>never</em> published nor shared. Required fields are marked <span class="required">*</span></p>
+
+                            <div id="form-section-author" class="form-section">
+    							<div class="form-label"><label for="author">Name</label> <span class="required">*</span></div>
+    							<div class="form-input"><input id="author" name="author" type="text" value="" size="30" maxlength="20" tabindex="3" /></div>
+                            </div><!-- #form-section-author .form-section -->
+
+                            <div id="form-section-email" class="form-section">
+    							<div class="form-label"><label for="email">Email</label> <span class="required">*</span></div>
+    							<div class="form-input"><input id="email" name="email" type="text" value="" size="30" maxlength="50" tabindex="4" /></div>
+                            </div><!-- #form-section-email .form-section -->
+
+                            <div id="form-section-url" class="form-section">
+    							<div class="form-label"><label for="url">Website</label></div>
+    							<div class="form-input"><input id="url" name="url" type="text" value="" size="30" maxlength="50" tabindex="5" /></div>
+                            </div><!-- #form-section-url .form-section -->
+
+
+                            <div id="form-section-comment" class="form-section">
+    							<div class="form-label"><label for="comment">Comment</label></div>
+    							<div class="form-textarea"><textarea id="comment" name="comment" cols="45" rows="8" tabindex="6"></textarea></div>
+                            </div><!-- #form-section-comment .form-section -->
+
+
+							<div class="form-submit"><input id="submit" name="submit" type="submit" value="Post Comment" tabindex="7" /><input type="hidden" name="comment_post_ID" value="373" /></div>
+
+							
+						</form><!-- #commentform -->
+						
+						
+					</div><!-- .formcontainer -->
+
+				</div><!-- #respond -->
+
+			</div><!-- #comments -->
+
+
+		</div><!-- #content -->
+	</div><!-- #container -->
+
+	<div id="primary" class="aside main-aside">
+		<ul class="xoxo">
+
+
+<li id="lastfm-records" class="widgetcontainer widget_lastfmrecords"><h3 class="widgettitle">Ouvindo!</h3>
+
+
+  <ol id="lastfmrecords">
+    <li>
+      <a href='http://www.last.fm/music/Matanza/_/Wide+Open+Road'>
+        <img class='cdcover cover1' src='http://a1.phobos.apple.com/r10/Music/db/b1/cf/mzi.zgpzjunz.170x170-75.jpg' title='To Hell With Johnny Cash: Matanza' alt='cd cover' />
+      </a>
+    </li>
+    <li>
+      <a href='http://www.last.fm/music/Cobra+Starship/_/Bring+It+%28Snakes+On+A+Plane%29'>
+        <img class='cdcover cover2' src='http://userserve-ak.last.fm/serve/64s/9268213.gif' title='While The City Sleeps, We Rule The Streets: Cobra Starship' alt='cd cover' />
+      </a>
+    </li>
+    <li>
+      <a href='http://www.last.fm/music/Circa+Survive/_/The+Difference+Between+Medicine+And+Poison+Is+In+The+Dose'>
+        <img class='cdcover cover3' src='http://userserve-ak.last.fm/serve/64s/16873749.jpg' title='On Letting Go: Circa Survive' alt='cd cover' />
+      </a>
+    </li>
+    <li>
+      <a href='http://www.last.fm/music/Black+Eyed+Peas/_/Don%27t+Phunk+With+My+Heart'>
+        <img class='cdcover cover4' src='http://userserve-ak.last.fm/serve/64s/8672885.jpg' title='Monkey Business: Black Eyed Peas' alt='cd cover' />
+      </a>
+    </li>
+    <li>
+      <a href='http://www.last.fm/music/ASIAN+KUNG-FU+GENERATION/_/Haruka+Kanata'>
+        <img class='cdcover cover5' src='http://userserve-ak.last.fm/serve/64s/13447103.jpg' title='Houkai Amplifier: ASIAN KUNG-FU GENERATION' alt='cd cover' />
+      </a>
+    </li>
+    <li>
+      <a href='http://www.last.fm/music/Billy+Paul/_/Your+Song'>
+        <img class='cdcover cover6' src='http://userserve-ak.last.fm/serve/64s/22104187.jpg' title='360 Degrees of Billy Paul: Billy Paul' alt='cd cover' />
+      </a>
+    </li>
+  </ol>
+  <!-- Last.Fm Records 1.4.1 (coredump777, recenttracks ?>) -->
+</li>
+
+		<li id="text-298678131" class="widgetcontainer widget_text">			<h3 class="widgettitle">Lendo!</h3>
+			<div class="textwidget"><div style="margin:0px;" align="center">
+  <embed width="190" height="300" src="http://www.goodreads.com/images/widget/widget2.swf" quality="high" wmode="transparent" FlashVars="id=1697476&amp;shelf=collection&amp;title=&amp;sort=date_added&amp;order=d&amp;params=amazon,thebrainisama-20,dest_site,amazon"></embed>
+</div>
+<div style="margin:0px;" align="center">
+	<a href="http://www.goodreads.com/user/show/1697476" target="_blank"><img alt="Widget_logo" border="0" height="32" src="http://www.goodreads.com/images/widget/widget_logo.gif" title="my goodreads profile" width="190" /></a>
+</div></div>
+		</li><li id="tag_cloud" class="widgetcontainer widget_tag_cloud"><h3 class="widgettitle">Tags!</h3>
+<a href='http://core.eti.br/tag/admin/' class='tag-link-33' title='8 topics' rel="tag" style='font-size: 10.7096774194pt;'>admin</a>
+<a href='http://core.eti.br/tag/artigos/' class='tag-link-19' title='10 topics' rel="tag" style='font-size: 11.6129032258pt;'>artigos</a>
+<a href='http://core.eti.br/tag/bahia/' class='tag-link-27' title='2 topics' rel="tag" style='font-size: 8pt;'>bahia</a>
+<a href='http://core.eti.br/tag/blog/' class='tag-link-17' title='11 topics' rel="tag" style='font-size: 12.064516129pt;'>blog</a>
+<a href='http://core.eti.br/tag/cavando/' class='tag-link-60' title='2 topics' rel="tag" style='font-size: 8pt;'>cavando</a>
+<a href='http://core.eti.br/tag/cinema/' class='tag-link-78' title='2 topics' rel="tag" style='font-size: 8pt;'>cinema</a>
+<a href='http://core.eti.br/tag/desenvolvimento-seguro/' class='tag-link-116' title='7 topics' rel="tag" style='font-size: 10.2580645161pt;'>desenvolvimento seguro</a>
+<a href='http://core.eti.br/tag/desobediencia-virtual/' class='tag-link-12' title='6 topics' rel="tag" style='font-size: 9.8064516129pt;'>desobediência Virtual</a>
+<a href='http://core.eti.br/tag/eee-pc/' class='tag-link-84' title='4 topics' rel="tag" style='font-size: 8.90322580645pt;'>eee pc</a>
+<a href='http://core.eti.br/tag/eventos/' class='tag-link-28' title='7 topics' rel="tag" style='font-size: 10.2580645161pt;'>eventos</a>
+<a href='http://core.eti.br/tag/exim/' class='tag-link-18' title='4 topics' rel="tag" style='font-size: 8.90322580645pt;'>exim</a>
+<a href='http://core.eti.br/tag/fapesp/' class='tag-link-31' title='2 topics' rel="tag" style='font-size: 8pt;'>fapesp</a>
+<a href='http://core.eti.br/tag/fisl/' class='tag-link-26' title='5 topics' rel="tag" style='font-size: 9.35483870968pt;'>fisl</a>
+<a href='http://core.eti.br/tag/funstuff/' class='tag-link-29' title='12 topics' rel="tag" style='font-size: 12.5161290323pt;'>funstuff</a>
+<a href='http://core.eti.br/tag/gaming/' class='tag-link-7' title='4 topics' rel="tag" style='font-size: 8.90322580645pt;'>Gaming</a>
+<a href='http://core.eti.br/tag/gnome/' class='tag-link-51' title='3 topics' rel="tag" style='font-size: 8.45161290323pt;'>gnome</a>
+<a href='http://core.eti.br/tag/gtk/' class='tag-link-16' title='4 topics' rel="tag" style='font-size: 8.90322580645pt;'>gtk</a>
+<a href='http://core.eti.br/tag/humor/' class='tag-link-89' title='3 topics' rel="tag" style='font-size: 8.45161290323pt;'>humor</a>
+<a href='http://core.eti.br/tag/iphone/' class='tag-link-87' title='5 topics' rel="tag" style='font-size: 9.35483870968pt;'>iphone</a>
+<a href='http://core.eti.br/tag/jailbreak/' class='tag-link-90' title='2 topics' rel="tag" style='font-size: 8pt;'>jailbreak</a>
+<a href='http://core.eti.br/tag/javascript/' class='tag-link-72' title='2 topics' rel="tag" style='font-size: 8pt;'>javascript</a>
+<a href='http://core.eti.br/tag/linux/' class='tag-link-20' title='33 topics' rel="tag" style='font-size: 22pt;'>linux</a>
+<a href='http://core.eti.br/tag/linuxchix/' class='tag-link-23' title='2 topics' rel="tag" style='font-size: 8pt;'>linuxchix</a>
+<a href='http://core.eti.br/tag/literatura/' class='tag-link-10' title='8 topics' rel="tag" style='font-size: 10.7096774194pt;'>Literatura</a>
+<a href='http://core.eti.br/tag/musica/' class='tag-link-14' title='12 topics' rel="tag" style='font-size: 12.5161290323pt;'>Música</a>
+<a href='http://core.eti.br/tag/minas-gerais/' class='tag-link-68' title='3 topics' rel="tag" style='font-size: 8.45161290323pt;'>minas gerais</a>
+<a href='http://core.eti.br/tag/nerdagem/' class='tag-link-30' title='33 topics' rel="tag" style='font-size: 22pt;'>nerdagem</a>
+<a href='http://core.eti.br/tag/notebook/' class='tag-link-57' title='5 topics' rel="tag" style='font-size: 9.35483870968pt;'>notebook</a>
+<a href='http://core.eti.br/tag/opiniao/' class='tag-link-32' title='23 topics' rel="tag" style='font-size: 17.4838709677pt;'>opinião</a>
+<a href='http://core.eti.br/tag/palestras/' class='tag-link-24' title='8 topics' rel="tag" style='font-size: 10.7096774194pt;'>palestras</a>
+<a href='http://core.eti.br/tag/privacidade/' class='tag-link-64' title='15 topics' rel="tag" style='font-size: 13.8709677419pt;'>privacidade</a>
+<a href='http://core.eti.br/tag/python/' class='tag-link-15' title='14 topics' rel="tag" style='font-size: 13.4193548387pt;'>python</a>
+<a href='http://core.eti.br/tag/resenhas/' class='tag-link-80' title='7 topics' rel="tag" style='font-size: 10.2580645161pt;'>resenhas</a>
+<a href='http://core.eti.br/tag/rpg/' class='tag-link-36' title='3 topics' rel="tag" style='font-size: 8.45161290323pt;'>rpg</a>
+<a href='http://core.eti.br/tag/seguranca/' class='tag-link-5' title='27 topics' rel="tag" style='font-size: 19.2903225806pt;'>segurança</a>
+<a href='http://core.eti.br/tag/smtp/' class='tag-link-22' title='3 topics' rel="tag" style='font-size: 8.45161290323pt;'>smtp</a>
+<a href='http://core.eti.br/tag/spam/' class='tag-link-21' title='5 topics' rel="tag" style='font-size: 9.35483870968pt;'>spam</a>
+<a href='http://core.eti.br/tag/trac/' class='tag-link-48' title='2 topics' rel="tag" style='font-size: 8pt;'>trac</a>
+<a href='http://core.eti.br/tag/turbogears/' class='tag-link-39' title='8 topics' rel="tag" style='font-size: 10.7096774194pt;'>turbogears</a>
+<a href='http://core.eti.br/tag/tv/' class='tag-link-8' title='6 topics' rel="tag" style='font-size: 9.8064516129pt;'>TV</a>
+<a href='http://core.eti.br/tag/video-games/' class='tag-link-70' title='2 topics' rel="tag" style='font-size: 8pt;'>video games</a>
+<a href='http://core.eti.br/tag/warhammer/' class='tag-link-93' title='2 topics' rel="tag" style='font-size: 8pt;'>warhammer</a>
+<a href='http://core.eti.br/tag/wheel-of-time/' class='tag-link-79' title='3 topics' rel="tag" style='font-size: 8.45161290323pt;'>wheel of time</a>
+<a href='http://core.eti.br/tag/windows/' class='tag-link-46' title='14 topics' rel="tag" style='font-size: 13.4193548387pt;'>windows</a>
+<a href='http://core.eti.br/tag/wow/' class='tag-link-59' title='11 topics' rel="tag" style='font-size: 12.064516129pt;'>wow</a></li>		<li id="recent-posts" class="widgetcontainer widget_recent_entries">			<h3 class="widgettitle">Posts Recentes</h3>
+			<ul>
+						<li><a href="http://core.eti.br/2009/01/22/os-25-erros-de-programacao-mais-perigosos-segundo-a-sans/">Os 25 erros de programação mais perigosos segundo a SANS </a></li>
+						<li><a href="http://core.eti.br/2009/01/19/classificados-ainda/">Classificados, ainda! </a></li>
+						<li><a href="http://core.eti.br/2009/01/17/classificado-vendo-meu-desktop/">Classificado: Vendo meu desktop </a></li>
+						<li><a href="http://core.eti.br/2009/01/17/restaurante-naan-em-brasilia-otima-pedida/">Restaurante Naan em Brasília, ótima pedida </a></li>
+						<li><a href="http://core.eti.br/2009/01/12/fim-de-ano-em-divinopolis-mg/">Fim de ano em Divinópolis (MG) </a></li>
+						</ul>
+		</li>
+		<li id="recent-comments" class="widgetcontainer widget_recent_comments">			<h3 class="widgettitle">Comentários Recentes</h3>
+			<ul id="recentcomments"><li class="recentcomments"><a href="http://core.eti.br"   rel='external nofollow' class='url'>coredump</a> on <a href="http://core.eti.br/2008/12/03/top-2008-os-melhores-do-ano-na-minha-opiniao/comment-page-1/#comment-80017">Top 2008 - Os melhores do ano na minha opinião</a></li><li class="recentcomments">Marco on <a href="http://core.eti.br/2008/12/03/top-2008-os-melhores-do-ano-na-minha-opiniao/comment-page-1/#comment-80016">Top 2008 - Os melhores do ano na minha opinião</a></li><li class="recentcomments"><a href="http://www.triagerh.com.br" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/www.triagerh.com.br');"  rel='external nofollow' class='url'>robson sena</a> on <a href="http://core.eti.br/2008/04/05/resenha-asus-eee-pc-e-como-instalar-o-xp/comment-page-1/#comment-80015">Resenha: Asus Eee PC (e como instalar o XP)</a></li><li class="recentcomments"><a href="http://fudeblog.zyakannazio.eti.br"   rel='external nofollow' class='url'>Cesar Cardoso</a> on <a href="http://core.eti.br/2009/01/22/os-25-erros-de-programacao-mais-perigosos-segundo-a-sans/comment-page-1/#comment-80014">Os 25 erros de programação mais perigosos segundo a SANS</a></li><li class="recentcomments"><a href="http://www.ataliba.eti.br"   rel='external nofollow' class='url'>Ataliba</a> on <a href="http://core.eti.br/2009/01/12/fim-de-ano-em-divinopolis-mg/comment-page-1/#comment-80013">Fim de ano em Divinópolis (MG)</a></li></ul>
+		</li><li id="linkcat-13" class="widgetcontainer widget_links"><h3 class="widgettitle">Blogroll</h3>
+
+	<ul class='xoxo blogroll'>
+<li><a href="http://blog.kov.eti.br/" rel="friend co-worker" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/blog.kov.eti.br');" title="Gustavo Noronha">Blog do Kov</a></li>
+<li><a href="http://caio.ueberalles.net/log/" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/caio.ueberalles.net');">caio1982</a></li>
+<li><a href="http://www.cetico.org/" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/www.cetico.org');" title="Yves Junqueira">Cetico.org</a></li>
+<li><a href="http://www.devaneios.org" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/www.devaneios.org');" title="Blog do Perry">Devaneios</a></li>
+<li><a href="http://www.efetividade.net" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/www.efetividade.net');">Efetividade.net</a></li>
+<li><a href="http://zyakannazio.eti.br/fudeblog" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/zyakannazio.eti.br');" title="Fudeblog por César Cardoso">Fudeblog</a></li>
+<li><a href="http://jeici.osimortais.com.br/" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/jeici.osimortais.com.br');" title="Blog do Mário">Inside Job</a></li>
+<li><a href="http://adriana.osimortais.com.br/" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/adriana.osimortais.com.br');" title="Adriana Almeida">Middle of Nowhere</a></li>
+<li><a href="http://nanica.net/blog/" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/nanica.net');" title="Blog da Nicole, agora em Londres!">Noites na Cidade</a></li>
+<li><a href="http://fnorte.osimortais.com.br/" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/fnorte.osimortais.com.br');" title="Fernando Norte">Norte Navigator</a></li>
+<li><a href="http://olharesdelirio.blogspot.com/" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/olharesdelirio.blogspot.com');" title="Blog da Li">Olhares de Lírio</a></li>
+<li><a href="http://eduardoduca.blogspot.com/" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/eduardoduca.blogspot.com');" title="Weblog do Duca.">Weblog Eduardo Duca</a></li>
+<li><a href="http://walkingaround.wordpress.com/" rel="" onclick="javascript:pageTracker._trackPageview('/outbound/blogroll/walkingaround.wordpress.com');" title="Leandro Santoro e suas histórias.">Whatever</a></li>
+
+	</ul>
+</li>
+		</ul>
+	</div><!-- #primary .aside -->
+
+	<div id="secondary" class="aside main-aside">
+		<ul class="xoxo">
+			<li id="search" class="widgetcontainer widget_thematic_search">				<h3 class="widgettitle"><label for="s">Search</label></h3>
+				<form id="searchform" method="get" action="http://core.eti.br">
+					<div>
+						<input id="s" name="s" type="text" value="" size="20" tabindex="1" />
+						<input id="searchsubmit" name="searchsubmit" type="submit" value="Search" tabindex="2" />
+					</div>
+				</form>
+			</li>
+<li id="ffactivity" class="widgetcontainer widget_ffactivity"><h3 class="widgettitle">Socializando!</h3>
+<!-- Updated on Fri, 23 Jan 2009 17:02:52 -0200 -->
+<div id="ff-activity">
+<div class="ff-event ff-twitter ff-event-odd" style="background-image: url('http://friendfeed.com/static/images/icons/twitter.png?v=df0a0affa8100c494df42159627a38b0');">
+	<p class="title">Duro quando voce observa que um dos seus unicos amigos na cidade &eacute; seu psiquiatra.</p>
+	<p class="ff-meta"><small><a href="http://twitter.com/coredumpaovivo" class="external">Friday 13:33</a></small></p>
+</div>
+<div class="ff-event ff-twitter ff-event-even" style="background-image: url('http://friendfeed.com/static/images/icons/twitter.png?v=df0a0affa8100c494df42159627a38b0');">
+	<p class="title">Firefox reslveu nao rodar applets java mais. Isso inclui o teclado do bb. Thanks.</p>
+	<p class="ff-meta"><small><a href="http://twitter.com/coredumpaovivo" class="external">Friday 12:04</a></small></p>
+</div>
+<div class="ff-event ff-twitter ff-event-odd" style="background-image: url('http://friendfeed.com/static/images/icons/twitter.png?v=df0a0affa8100c494df42159627a38b0');">
+	<p class="title">Na procura por um cliente jabber/gtalk descente pro WM. Acho que vai sobrar o fring</p>
+	<p class="ff-meta"><small><a href="http://twitter.com/coredumpaovivo" class="external">Friday 0:49</a></small></p>
+</div>
+<div class="ff-event ff-google-reader ff-event-even" style="background-image: url('http://friendfeed.com/static/images/icons/googlereader.png?v=5996dd645157314e06bcaaf8f75b6ed9');">
+	<p class="title">Shared: <a href="http://www.engadget.com/2009/01/22/windows-7-put-up-against-vista-and-xp-in-hardcore-multicore-benc/" class="external">Windows 7 put up against Vista and XP in hardcore multicore benchmarks, XP wins</a></p>
+	<p class="ff-meta"><small><a href="http://www.google.com/reader/shared/13063022763876034414" class="external">Friday 0:48</a></small></p>
+</div>
+<div class="ff-event ff-twitter ff-event-odd" style="background-image: url('http://friendfeed.com/static/images/icons/twitter.png?v=df0a0affa8100c494df42159627a38b0');">
+	<p class="title">Teste</p>
+	<p class="ff-meta"><small><a href="http://twitter.com/coredumpaovivo" class="external">Friday 0:40</a></small></p>
+</div>
+<div class="ff-event ff-twitter ff-event-even" style="background-image: url('http://friendfeed.com/static/images/icons/twitter.png?v=df0a0affa8100c494df42159627a38b0');">
+	<p class="title">Eu tenho meus contatos no Google. Agora preciso passa-los pro HTC. Obviamente, n&atilde;o existe uma forma simples de fazer isso.</p>
+	<p class="ff-meta"><small><a href="http://twitter.com/coredumpaovivo" class="external">Friday 0:11</a></small></p>
+</div>
+<div class="ff-event ff-twitter ff-event-odd" style="background-image: url('http://friendfeed.com/static/images/icons/twitter.png?v=df0a0affa8100c494df42159627a38b0');">
+	<p class="title"><a href="http://twitpic.com/15yf5" class="external">http://twitpic.com/15yf5</a> - Finalmente twitter no celular!! Com direito a self portrait!</p>
+	<p class="ff-meta"><small><a href="http://twitter.com/coredumpaovivo" class="external">Thursday 20:49</a></small></p>
+</div>
+<div class="ff-event ff-google-reader ff-event-even" style="background-image: url('http://friendfeed.com/static/images/icons/googlereader.png?v=5996dd645157314e06bcaaf8f75b6ed9');">
+	<p class="title">Shared 3 links</p>
+	<div class="ff-list">
+		<p><a href="http://feeds.feedburner.com/~r/typepad/riogringa/my_weblog/~3/519990789/my-new-favorite-commercial.html" rel="me" class="external" title="Don&#039;t Worry, I&#039;ll Take Care of Her">Don&#039;t Worry, I&#039;ll Take Care of Her</a></p>
+		<p><a href="http://www.convergenciadigital.com.br/cgi/cgilua.exe/sys/start.htm?infoid=17494&amp;sid=18" rel="me" class="external" title="Pen Drives: Novos vil&otilde;es na &aacute;rea de Seguran&ccedil;a da Informa&ccedil;&atilde;o">Pen Drives: Novos vil&otilde;es na &aacute;rea de Seguran&ccedil;a da Informa&ccedil;&atilde;o</a></p>
+		<p><a href="http://feeds.feedburner.com/~r/boingboing/iBag/~3/520112143/heavy-metal-band-nam.html" rel="me" class="external" title="Heavy Metal band name taxonomy">Heavy Metal band name taxonomy</a></p>
+	</div>
+	<p class="ff-meta"><small><a href="http://www.google.com/reader/shared/13063022763876034414" class="external">Thursday 19:34</a></small></p>
+</div>
+<div class="ff-event ff-the-brain-is-a-machine ff-event-odd" style="background-image: url('http://friendfeed.com/static/images/icons/blog.png?v=d3fe9e9d1dd09839623e597a92ecbb00');">
+	<p class="title"><a href="http://core.eti.br/2009/01/22/os-25-erros-de-programacao-mais-perigosos-segundo-a-sans/" class="external">Os 25 erros de programa&ccedil;&atilde;o mais perigosos segundo a SANS</a></p>
+	<p class="ff-meta"><small><a href="http://core.eti.br" class="external">Thursday 16:11</a></small></p>
+</div>
+<div class="ff-event ff-google-reader ff-event-even" style="background-image: url('http://friendfeed.com/static/images/icons/googlereader.png?v=5996dd645157314e06bcaaf8f75b6ed9');">
+	<p class="title">Shared: <a href="http://superuseless.blogspot.com/2009/01/lati-dude-longi-dude.html" class="external">Lati-dude &amp; Longi-dude</a></p>
+	<p class="ff-meta"><small><a href="http://www.google.com/reader/shared/13063022763876034414" class="external">Thursday 2:48</a></small></p>
+</div>
+<div class="ff-event ff-twitter ff-event-odd" style="background-image: url('http://friendfeed.com/static/images/icons/twitter.png?v=df0a0affa8100c494df42159627a38b0');">
+	<p class="title">fazendo flash da ROM no Tytn II. CAGA&Ccedil;O</p>
+	<p class="ff-meta"><small><a href="http://twitter.com/coredumpaovivo" class="external">Thursday 2:20</a></small></p>
+</div>
+<p class="ff-account"><a href="http://friendfeed.com/coredump" rel="me" class="external">My FriendFeed profile &#8230;</a></p>
+</div>
+
+</li>		<li id="text-209616351" class="widgetcontainer widget_text">			<h3 class="widgettitle">Jabá</h3>
+			<div class="textwidget"><!-- boo-widget start -->
+<script type="text/javascript">
+bb_bid = "1603";
+bb_lang = "pt-BR";
+bb_name = "fixedlist";
+bb_keywords = "segurança da informação,mmorpg,programação,indie,comédia,informática";
+bb_width = "200px";
+bb_limit = "6";
+</script>
+<script type="text/javascript" src="http://widgets.boo-box.com/javascripts/embed.js"></script>
+<!-- boo-widget end --></div>
+		</li>		<li id="rss-links" class="widgetcontainer widget_thematic_rsslinks">			<h3 class="widgettitle">RSS Links</h3>
+			<ul>
+				<li><a href="http://core.eti.br/feed/" title="the brain is a machine Posts RSS feed" rel="alternate nofollow" type="application/rss+xml">All posts</a></li>
+				<li><a href="http://core.eti.br/comments/feed/" title="the brain is a machine Comments RSS feed" rel="alternate nofollow" type="application/rss+xml">All comments</a></li>
+			</ul>
+		</li><li id="statpress" class="widgetcontainer widget_statpress"><h3 class="widgettitle">Estatísticas!</h3>
+Tivemos 0 visitas hoje, de um total de 1695 desde 14 de December, 2008. O post mais visitado é Página: Home.</li>		</ul>
+	</div><!-- #secondary .aside -->
+    </div><!-- #main -->
+    
+    
+
+	<div id="footer">
+                    <div id="siteinfo">        
+    		<span id="generator-link">Powered by <a href="http://WordPress.org/" title="WordPress" rel="generator">WordPress</a></span><span class="meta-sep">. </span><span id="designer-link">Built on the <a href="http://themeshaper.com/thematic-for-wordpress" title="Thematic Theme Framework" rel="designer">Thematic Theme Framework</a>.</span>		</div><!-- #siteinfo -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper .hfeed -->
+
+	<!-- Google Analytics for WordPress | http://yoast.com/wordpress/google-analytics/ -->
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		var pageTracker = _gat._getTracker("UA-758273-1");
+	</script>
+	<script type="text/javascript">
+		pageTracker._initData();
+		
+		pageTracker._trackPageview();
+	</script>
+	<!-- End of Google Analytics code -->
+	
+</body>
+</html>

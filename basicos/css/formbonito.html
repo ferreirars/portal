@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Network Manager*</title>
+<style>
+/*     Creating a form without table    */
+/*     Author= "AJAY TALWAR"            */
+/*     Email- ajayslide183@gmail.com    */
+
+*{ margin:0; padding:0;}
+body{ font:100% normal Arial, Helvetica, sans-serif; background:#161712;}
+form,input,select,textarea{margin:0; padding:0; color:#fff;}
+
+div.box{
+margin:0 auto;
+width:500px;
+background:#222;
+position:relative;
+top:50px;
+border:1px solid #262626;
+}
+
+div.box h1{ 
+color:#FFF5CC;
+font-size:18px;
+text-transform:uppercase;
+padding:5px 0 5px 5px;
+border-bottom:1px solid #161712;
+border-top:1px solid #161712; 
+}
+
+div.box label{
+width:100%;
+display: block;
+background:#1C1C1C;
+border-top:1px solid #262626;
+border-bottom:1px solid #161712;
+padding:10px 0 10px 0;
+}
+div.box label span{
+display: block;
+color:#bbb;
+font-size:12px;
+float:left;
+width:100px;
+text-align:right;
+padding:5px 20px 0 0;
+}
+
+div.box .input_text{
+padding:10px 10px;
+width:200px;
+background:#262626;
+border-bottom: 1px double #171717;
+border-top: 1px double #171717;
+border-left:1px double #333;
+border-right:1px double #333;
+}
+
+div.box .message{
+padding:7px 7px;
+width:350px;
+background:#262626;
+border-bottom: 1px double #171717;
+border-top: 1px double #171717;
+border-left:1px double #333;
+border-right:1px double #333;
+overflow:hidden;
+height:150px;
+}
+
+div.box .button
+{
+margin:0 0 10px 0;
+padding:4px 7px;
+background:#CC0000;
+border:0px;
+position: relative;
+top:10px;
+left:382px;
+width:100px;
+border-bottom: 1px double #660000;
+border-top: 1px double #660000;
+border-left:1px double #FF0033;
+border-right:1px double #FF0033;
+}
+</style>
+</head><body>
+     <form action="./" method="post">
+          <div class="box">
+            <h1>Contact Form</h1>
+            <label>
+               <span>Full name *</span>
+               <input class="input_text" name="name" id="name" type="text">
+            </label>
+             <label>
+               <span>Email *</span>
+               <input class="input_text" name="email" id="email" type="text">
+            </label>
+             <label>
+                <span>Subject *</span>
+                <input class="input_text" name="subject" id="subject" type="text">
+            </label>
+            <label>
+                <span>Message *</span>
+                <textarea class="message" name="feedback" id="feedback"></textarea>
+                 <input class="button" value="Submit Form" type="submit">
+              
+            </label>
+        </div>
+    </form>
+</body></html>

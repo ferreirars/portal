@@ -1,0 +1,20 @@
+Geração de Código Customizada
+
+Copie 
+/var/www/cake/lib/Cake/Console/Templates/* 
+para
+/var/www/cake/app/Console/Templates
+
+Acesse o Terminal
+cd /var/www/cake/app/Console
+./cake bake project --skel Templates/skel
+
+Com isso criará um novo esqueleto de projeto partindo do 
+/var/www/cake/app/Console/Templates/skel
+
+Para customizar a estrutura que é usada pelo bake na geração de código para as tabelas
+editamos os arquivos de:
+app/Console/Templates/default
+
+http://mark-story.com/posts/view/acl-menu-component
+

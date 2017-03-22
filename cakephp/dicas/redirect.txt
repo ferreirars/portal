@@ -1,0 +1,51 @@
+Dicas sobre Redirecionamentos
+
+
+Controller::redirect(mixed $url, integer $status, boolean $exit)
+
+$this->redirect(array('controller' => 'clientes', 'action' => 'add'));
+
+// Quando no próprio controller, basta citar o action
+$this->redirect(array('action' => 'add'));
+
+// Com path
+$this->redirect('/clientes/index'));
+
+// Com URL
+$this->redirect('http://www.example.com');
+
+// Passando parâmetro: $id
+$this->redirect(array('action' => 'edit', $id));
+
+//Voltar para a página que fez a requisição:
+$this->redirect($this->referer());
+
+$this->redirect($this->referer(array('action' => 'index')));
+
+public function autoRedirect($whereTo, $useReferer = true) {
+        if ($useReferer && $this->Controller->referer() != '/' . $this->Controller->params['url']['url']) {
+            $this->Controller->redirect($this->Controller->referer($whereTo, true));
+        } else {
+            $this->Controller->redirect($whereTo);
+        }
+}
+
+public function postRedirect($whereTo, $status = 302) {
+        $this->Controller->redirect($whereTo, $status);
+    }
+
+Redirect to 404 not found:
+throw new NotFoundException('404 Error - Page not found');
+
+// Conteúdo movido ou deletado
+if (empty($manufacturer)) {
+    $this->Session->setFlash(__('Invalid Manufacturer', true));
+    $this->redirect(array('action'=>'index'), 301);
+}
+
+Redirecionar para si mesmo, ou seja, não sair da página atual
+
+http://book.cakephp.org/2.0/en/development/routing.html
+http://book.cakephp.org/2.0/en/installation/url-rewriting.html
+http://book.cakephp.org/2.0/en/controllers/request-response.html
+

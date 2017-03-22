@@ -1,0 +1,23 @@
+Configurando o Aplicativo em Cake para Português do Brasil
+
+
+Plugin para tradução cakept-br
+
+Baixar de - https://github.com/jrbasso/cake_ptbr/archive/master.zip
+
+Descompactar e renomear para
+app/Plugin/CakePtbr
+
+Adicionar ao app/Config/bootstrap.php:
+
+// Tradução
+CakePlugin::load('CakePtbr'); 
+include CakePlugin::path('CakePtbr') . 'Config' . DS . 'bootstrap.php'; 
+// Tradução das mensagens do core 
+include CakePlugin::path('CakePtbr') . 'Config' . DS . 'traducao_core.php'; 
+// Alteração das regras de inflections 
+include CakePlugin::path('CakePtbr') . 'Config' . DS . 'inflections.php'; 
+
+Agora, se atualizar seu aplicativo estando em um controller, verá Action traduzida, as palavras da paginação também entre outras.
+
+

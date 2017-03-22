@@ -1,0 +1,67 @@
+Dicas de Formatação de dados no Cake
+
+
+Formatação de datas em formulário
+echo $this->Form->input('data_nasc',array( 
+	'dateFormat' => 'DMY', 
+	'label' => 'Nascimento', 
+	'minYear' => date('Y') - 120, // mínimo menos 120 
+    'maxYear' => date('Y') - 0 // máximo menos 10. Varia de 1893 a 2013 
+)); 
+
+- Formatação de datas na listagem (index.ctp)
+Na index.ctp adicionar abaixo do foreach: 
+<?php $data_nasc = date("d/m/Y", strtotime($cliente['Cliente']['data_nasc']));?> 
+
+Substituir
+		<td><?php echo h($cliente['Cliente']['data_nasc']); ?>&nbsp;</td>
+Por:
+<td><?php echo h($data_nasc); ?>&nbsp;</td>
+
+
+App::import('Helper', 'Number');
+$Number = new NumberHelper(new View(null));
+$number = '535';
+echo $Number->currency($number, 'BRR');
+
+Precisão
+
+App::import('Helper', 'Number');
+$Number = new NumberHelper(new View(null));
+$number = '535.45678';
+echo $Number->precision(456.91873645, 2);// Outputs: 456.92
+
+Porcentagem
+
+App::import('Helper', 'Number');
+$Number = new NumberHelper(new View(null));
+echo $Number->toPercentage(45.691873645); // Outputs: 45.69%
+
+CakeNumber
+
+App::uses('CakeNumber', 'Utility');
+echo CakeNumber::format('123456.7890', array(
+    'places' => 2,
+    'before' => 'R$ ',
+    'escape' => false,
+    'decimals' => ',',
+    'thousands' => '.'
+));
+
+Retorna: R$ 123.456,79 
+Desabilitar o cache:
+No core.php descomentar a linha abaixo
+// Configure::write('Cache.disable', true);
+
+If you need TextHelper functionalities outside of a View, use the String class:
+
+$texto = 'Uma frase de exemplo';
+$palavra = 'frase';
+App::uses('String', 'Utility');
+echo String::highlight($texto, $palavra, array('format' => '<span class="highlight">\1</span>'));
+
+
+http://book.cakephp.org/2.0/en/core-libraries/helpers/number.html
+http://book.cakephp.org/2.0/en/core-utility-libraries/time.html
+http://book.cakephp.org/2.0/en/core-utility-libraries/number.html
+

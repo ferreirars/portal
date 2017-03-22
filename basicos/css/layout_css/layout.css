@@ -1,0 +1,102 @@
+body{
+	margin:0;
+	padding:0;
+	line-height: 1.5em;
+}
+
+b{
+	font-size: 110%;
+}
+
+em{
+	color: red;
+}
+
+#pagina{
+	width: 1000px; /*Largura da página total, toda a área útil*/
+	margin: 0 auto; /*Centralizar o container na página*/
+}
+
+#cabecalho{
+	background: #EAEAEA;
+	height: 150px; /*Altura da seção do cabeçalho*/
+	border: 1px red solid;
+}
+
+#logo{
+	float:left;
+	width: 47%;
+}
+
+#logo h1{
+	margin: 0;
+	padding-top: 15px;
+}
+
+#banner{
+	float:left;
+	margin-left:30px;
+	width: 49%;
+}
+
+#banner h1{
+	margin: 0;
+	padding-top: 15px;
+}
+
+#centro{
+	width: 100%;
+	margin: 0;
+	order: 1px green solid;
+}
+
+#conteudo{
+	float:left;
+	width:594px;
+	border: 1px green solid;
+}
+
+#conteudo h1{
+	font-weight:normal;
+}
+
+#menu{
+	float: left;
+	width: 200px; /*Largura do menu*/
+	background: #C8FC98;
+	border: 1px green solid;
+	clear:right;
+}
+
+#modulos{
+	clear:right;
+	float: left;
+	width: 200px; 
+	background: #FDE95E;
+	border: 1px green solid;
+}
+
+#rodape{
+	clear: both;
+	width: 100%;
+	background: black;
+	color: #FFF;
+	text-align: center;
+	padding: 4px 0;
+	border: 1px white solid;
+}
+
+#rodape a{
+	color: #FFFF80;
+}
+
+.tubo{
+	margin: 10px; /*Margens para a DIV interna dentro de cada coluna (para prover um melhor preenchimento)*/
+	margin-top: 0;
+}
+
+/* Observar a diferença entre ID e classe.
+Quando tem ID (#) só pode ser usado uma única vez na página
+Sendo classe (.) pode ser usado tantas vezes quanto quizer
+*/
+

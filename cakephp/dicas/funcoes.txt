@@ -1,0 +1,49 @@
+Algumas Funções úteis para Cake
+
+
+__(string $string_id[, $formatArgs])
+
+Exemplo:
+__('You have %s unread messages', $number);
+
+
+__d(string $domain, string $msg, mixed $args = null)
+
+echo __d('PluginName', 'This is my plugin'); // Troca PluginName pela mensagem
+
+
+__n(string $singular, string $plural, integer $count, mixed $args = null) // Retorna plural
+Returns correct plural form of message identified by $singular and $plural for count $count. Some languages have more than one form for plural messages dependent on the count.
+
+
+convertSlash(string $string)
+
+Converts forward slashes to underscores and removes the first and last underscores in a string. Returns the converted string
+
+
+debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+
+
+h(string $text, boolean $double = true, string $charset = null)
+    Convenience wrapper for htmlspecialchars().
+
+
+pr(mixed $var)
+    Convenience wrapper for print_r(), with the addition of wrapping <pre> tags around the output.
+
+
+
+sortByKey(array &$array, string $sortby, string $order = 'asc', integer $type = SORT_NUMERIC)
+
+    Sorts given $array by key $sortby.
+
+stripslashes_deep(array $value)
+
+    Recursively strips slashes from the supplied $value. Returns the modified array.
+
+
+http://book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html
+http://book.cakephp.org/2.0/en/models/additional-methods-and-properties.html
+http://book.cakephp.org/2.0/en/core-libraries.html
+http://book.cakephp.org/2.0/en/contributing/cakephp-coding-conventions.html
+

@@ -1,0 +1,50 @@
+/* Créditos - http://stackoverflow.com/questions/8141513/how-to-create-a-css-only-vertical-drop-down-menu */
+/*VERTICAL MENU*/
+nav.vertical{
+  position:relative;
+  width:200px;
+}
+
+/* ALL UL */
+nav.vertical ul{
+  position: fixed;
+  list-style: none;
+}
+/* ALL LI */
+nav.vertical li{
+  position:relative;
+  width:100%;
+}
+/* ALL A */
+nav.vertical a{
+  display:block;
+  color:#fff;
+  text-decoration:none;
+  padding:10px 15px;
+  background:#337ab7;
+  transition:0.2s;
+}
+/* ALL A HOVER */
+nav.vertical li:hover > a{
+  background:#3e6da5;
+}
+
+/* INNER UL HIDE */
+nav.vertical ul ul{
+  position:absolute;
+  left:0%;
+  top:0;
+  width:100%;
+  visibility:hidden;
+  opacity:0;
+  transition: transform 0.2s;
+  transform: translateX(50px);
+}
+/* INNER UL SHOW */
+nav.vertical li:hover > ul{
+  left:100%;
+  visibility:visible;  
+  opacity:1;
+  transform: translateX(0px);
+}
+

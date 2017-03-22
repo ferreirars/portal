@@ -1,0 +1,403 @@
+Dicas de PHP
+
+Dicas que são úteis em qualquer aplicativo.
+
+== Operador Ternário/Expressão Condicional
+
+$retorno = isset ($x) ? $x : 0;
+
+Silimar a:
+if(isset ($x)) {
+	$retorno = $x;
+}else{
+	$retorno = 0;
+}
+
+
+== Identificador único
+$idunico = md5(uniqid(microtime(), 1)).getmypid();
+print $idunico;
+Retorna: e24077859a91baddc537cd9d69449c941532
+
+
+Criar número realmente aleatório
+mt_srand((double)microtime()*1000000);
+print mt_rand();
+print mt_rand();
+// 1369582106372919427
+
+
+Filtro de Caracteres Especiais
+
+Importante antes de armazenar no banco e antes de exibir, vindo do banco.
+
+addslashes($str) - Adiciona barras invertidas às aspas de a uma string
+$str = "Is your name O'reilly?";
+echo addslashes($str);
+// Saída: Is your name O\'reilly?
+
+quotemeta — Adiciona uma barra invertida antes dos meta caracteres:
+. \ + * ? [ ^ ] ( $ )
+
+Exemplo:
+$str = "Hello world. (can you hear me?)";
+echo quotemeta($str);
+// Saída: Hello world\. \(can you hear me\?\)
+
+nl2br — Insere quebras de linha HTML antes de todas newlines em uma string
+echo nl2br("foo isn't\n bar");
+
+
+str_replace — Substitui todas as ocorrências da string de procura com a string de substituição
+Exemplo:
+$string = "Apenas uma vez será suficiente";
+$trocar = "será";
+$por = "não será";
+
+print str_replace($trocar, $por, $string);
+
+
+trim — Retira espaço no ínicio e final de uma string
+$semespacos = trim($texto);
+
+
+is_int — Informa se a variável é do tipo inteiro
+
+if (is_int(23))
+
+is_ array
+is_ bool
+is_ callable
+is_ double
+is_ float
+is_ int
+is_ integer
+is_ long
+is_ null
+is_ numeric
+is_ object
+is_ real
+is_ resource
+is_ scalar
+is_ string
+
+
+substr — Retorna uma parte de uma string
+string substr ( string $string , int $start [, int $length ] )
+
+start
+- Pode iniciar do começo para o final da string (valor positivo)
+- Do final para o começo (valor negativo)
+
+length - quando negativo, retiramos a parte negativa do todo da string
+
+Exemplos:
+print substr("abcdef", 0, 3);  // retorna "abc", comece em 0 e pegue 3
+print substr("abcdef", -2, 2); // retorna "ef", comece do segundo de traz para a frente e traga 2
+print substr("abcdef", 0, -2); // retorna "abcd", ou seja, começa em 0 e não traz os 2 últimos
+
+
+strlen — Retorna o tamanho de uma string
+$str = 'abcdef';
+echo strlen($str); // 6
+
+
+number_format — Formata um número com os milhares agrupados
+string number_format ( float $number , int $decimals , string $dec_point , string $thousands_sep )
+// Notação Brasileira
+$valor = '1235.99';
+$nombre_format_br = number_format($valor, 2, ',', '.');
+print $nombre_format_br;
+// 1.234,56
+
+
+PHP para Matemática
+
+log — Logaritmo natural
+print log(10);
+
+rad2deg — Converte o número em radianos para o equivalente em graus 
+$pi = 3.14;
+echo rad2deg($pi);
+
+deg2rad — Converte o número em graus ao equivalente em radianos 
+echo deg2rad(45); // 0.785398163397
+
+
+checkdate — Valida uma data Gregoriana
+bool checkdate ( int $month , int $day , int $year )
+Exemplo:
+$data = '2013-08-21';
+$d = explode('-',$data);
+
+$ano = $d[0];
+$mes = $d[1];
+$dia = $d[2];
+
+$vdata = checkdate ( $mes , $dia , $ano );
+
+if($vdata){
+	print 'Data válida';
+}else{
+	print 'Data inválida';
+}
+
+explode — Divide uma string em strings
+array explode ( string $delimiter , string $string [, int $limit ] )
+
+$data = '2013-08-21';
+$d = explode('-',$data);
+
+$ano = $d[0];
+$mes = $d[1];
+$dia = $d[2];
+
+
+== Adicionar um array a outro
+
+array_merge — Funde dois ou mais arrays
+
+$array1 = array("cor" => "vermelho", 2, 4);
+$array2 = array("a", "b", "cor" => "verde", "forma" => "trapezoide", 4);
+$result = array_merge($array1, $array2);
+print '<pre>';
+print_r($result);
+print '</pre>';
+
+Observe que cor ficou apenas o último (vermelho), o primeiro foi sobrescrito.
+
+array_diff — Analisa as diferenças entre arrays
+
+$array1 = array("a" => "verde", "vermelho", "azul", "vermelho");
+$array2 = array("b" => "verde", "amarelo", "vermelho");
+$result = array_diff($array1, $array2);
+print_r($result);// Mostrará: Array ( [1] => azul ) // Somente o que tem de diferente entre ambos
+
+array_diff_assoc — Computa a diferença entre arrays com checagem adicional de índice
+
+$array1 = array("a" => "verde", "b" => "marrom", "c" => "azul", "vermelho");
+$array2 = array("a" => "verde", "amarelo", "vermelho");
+$result = array_diff_assoc($array1, $array2);
+print_r($result);
+
+Mostrará:
+Array
+(
+    [b] => marrom
+    [c] => azul
+    [0] => vermelho
+)
+
+array_intersect — Calcula a interseção entre arrays
+
+$array1 = array("a" => "verde", "vermelho", "azul");
+$array2 = array("b" => "verde", "amarelo", "vermelho");
+$result = array_intersect($array1, $array2);
+print_r($result);
+
+Mostrará:
+Array
+(
+    [a] => verde
+    [0] => vermelho
+)
+
+array_fill — Preenche um array com valores
+array array_fill ( int $start_index , int $num , mixed $value )
+
+$a = array_fill(5, 6, 'banana');
+$b = array_fill(-2, 2, 'pear');
+print_r($a);
+print_r($b);
+?>
+
+O exemplo acima irá imprimir:
+Array
+(
+    [5]  => banana
+    [6]  => banana
+    [7]  => banana
+    [8]  => banana
+    [9]  => banana
+    [10] => banana
+)
+Array
+(
+    [-2] => pear
+    [0] => pear
+)
+
+array_key_exists — Checa se uma chave ou índice existe em um array
+bool array_key_exists ( mixed $key , array $search )
+
+$busca_array = array("primeiro" => 1, "segundo" => 4);
+if (array_key_exists("primeiro", $busca_array)) {
+    echo "O elemento 'primeiro' está no array!";
+}
+
+array_keys — Retorna todas as chaves de um array
+array array_keys ( array $input [, mixed $search_value [, bool $strict ]] )
+
+array_map — Aplica uma função em todos os elementos dos arrays dados
+function cubo($n)
+{
+    return $n*$n*$n;
+}
+
+$a = array(1, 2, 3, 4, 5);
+$b = array_map("cubo", $a);
+print_r($b);
+?>
+
+E programa acima faz com que $b tenha:
+Array
+(
+    [0] => 1
+    [1] => 8
+    [2] => 27
+    [3] => 64
+    [4] => 125
+)
+
+array_pad — Expande um array para um certo comprimento utilizando um determinado valor
+array array_pad ( array $input , int $pad_size , mixed $pad_value )
+
+$input = array(12, 10, 9);
+
+$result = array_pad($input, 5, 0); // 5 é o novo tamanho
+// $result é array(12, 10, 9, 0, 0)
+
+$result = array_pad($input, -7, -1);
+// $result é array(-1, -1, -1, -1, 12, 10, 9)
+
+$result = array_pad($input, 2, "noop");
+// Não será expandido
+
+array_pop — Retira um elemento do final do array
+mixed array_pop ( array &$array )
+
+$cesta = array("laranja", "banana", "melancia", "morango");
+$fruta = array_pop($cesta);
+print_r($cesta);
+?>
+
+Depois disso, $cesta terá 3 elementos:
+Array
+(
+    [0] => laranja
+    [1] => banana
+    [2] => melancia
+)
+
+array_product — Calcula o produto dos valores de um array
+number array_product ( array $array )
+
+$a = array(2, 4, 6, 8);
+echo "product(a) = " . array_product($a) . "\n";
+
+array_push — Adiciona um ou mais elementos no final de um array
+int array_push ( array &$array , mixed $var [, mixed $... ] )
+
+$cesta = array("laranja", "morango");
+array_push($cesta, "melancia", "batata");
+print_r($cesta);
+
+array_rand — Retorna um ou mais elementos aleatórios de um array
+mixed array_rand ( array $input [, int $num_req ] )
+
+array_reduce — Reduz um array para um único valor através de um processo iterativo utilizando uma função
+
+array_search — Procura por um valor em um array e retorna sua chave correspondente caso seja encontrado
+ mixed array_search ( mixed $needle , array $haystack [, bool $strict ] )
+
+$array = array(0 => 'blue', 1 => 'red', 2 => 'green', 3 => 'red');
+
+$key = array_search('green', $array); // $key = 2;
+$key = array_search('red', $array);   // $key = 1;
+
+array_shift — Retira o primeiro elemento de um array
+mixed array_shift ( array &$array )
+
+array_slice — Extrai uma parcela de um array
+
+array_splice — Remove uma parcela do array e substitui com outros elementos
+
+array_sum — Calcula a soma dos elementos de um array
+$a = array(2, 4, 6, 8);
+echo "soma(a) = ".array_sum($a)."\n";
+
+$b = array("a" => 1.2, "b" => 2.3, "c" => 3.4);
+echo "soma(b) = ".array_sum($b)."\n";
+
+array_unique — Remove os valores duplicados de um array
+$input = array("a" => "verde", "vermelho", "b" => "verde", "azul", "vermelho");
+$result = array_unique($input);
+print_r($result);
+
+array_values — Retorna todos os valores de um array
+array array_values ( array $input )
+
+$array = array("tamanho" => "G", "cor" => "dourado");
+print_r(array_values ($array));
+
+asort — Ordena um array mantendo a associação entre índices e valores
+bool asort ( array &$array [, int $sort_flags ] )
+
+compact — Cria um array contendo variáveis e seus valores
+array compact ( mixed $varname [, mixed $... ] )
+
+$cidade = "Sao Paulo";
+$estado = "SP";
+$evento = "SIGGRAPH";
+
+$localidade = array("cidade", "estado");
+
+$result = compact("evento", "nada_aqui", $localidade);
+print_r($result);
+?>
+
+O exemplo acima irá imprimir:
+Array
+(
+    [evento] => SIGGRAPH
+    [cidade] => Sao Paulo
+    [estado] => SP
+)
+
+count — Conta o número de elementos de uma variável, ou propriedades de um objeto
+int count ( mixed $var [, int $mode ] )
+
+sizeof — Sinônimo de count()
+
+current — Retorna o elemento corrente em um array
+mixed current ( array &$array )
+Todo array tem um ponteiro interno para o elemento "atual", o qual é inicializado para apontar para o primeiro elemento inserido em um array.
+
+list — Cria variáveis como se fossem arrays
+
+
+Variáveis Variáveis
+
+<?php
+$reciboextra2=array(0=>'2a', 1=>'2b', 2=>'2c', 3=>'2d');
+$reciboextra3=array(0=>'3a', 1=>'3b', 2=>'3c', 3=>'3d');
+$reciboextra4=array(0=>'4a', 1=>'4b', 2=>'4c', 3=>'4d');
+
+$numero=0;
+echo "<pre>";
+for($x=2;$x<5;$x++){
+
+//Aqui voc� transforma a string em nome de vari�vel
+ $var = ${"reciboextra$x"};
+
+echo "Var:reciboextra$x\tNumero:$x\tValor:" . $var[$numero] . '<br>';
+echo "---------------------------------\n";
+
+$numero++;
+}
+
+echo "</pre>";
+?>
+
+Testar online http://www.compileonline.com/execute_php_online.php
+

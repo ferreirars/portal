@@ -1,0 +1,277 @@
+Dicas sobre Models
+
+
+Atributos do Model
+
+Indicar nome de configuração do database
+public $useDbConfig = 'alternate';
+
+Prefixo das Tabelas
+public $tablePrefix = 'alternate_';
+
+Nome do campo Primary Key
+public $primaryKey = 'example_id';
+
+Display field
+Nomes de campos em tabelas para tabelas relacionadas
+Convenção: title ou name
+Se diferente indicar no model com:
+public $displayField = 'nomedocampo'; 
+
+Tabela Default
+public $useTable = 'users';
+
+Caso receba a mensagem:
+Erro: Table useres for model User was not found in datasource default. 
+Isso aconteceu comigo sempre que instalei o o plugin Cakept_br.
+
+Adicione a variável $useTable contendo o nome da tabela ao model User
+public $useTable = 'usuarios';
+
+
+Acessando Outros Models ou Controllers
+
+	Chamando outro controller: 
+
+		App::import('Controller', 'Users'); 
+		$Users = new UsersController; 
+		$Users->constructClasses(); 
+
+	Estando num model chamar outro model: 
+		$Category = ClassRegistry::init("OutroModel"); 
+		$category = $Category->findById($underThisCategoryId); 
+
+	Colocando classes personalizadas a disposição do aplicativo em Cake: 
+
+	- insira a classe em um diretório 
+	- Adicione ao app/Config/bootstrap.php (diretório fora do aplicativo do cake): 
+	App::build(array( 
+		'GlobalUsers' => array(dirname(CAKE_CORE_INCLUDE_PATH).DS.'mydir'.DS) 
+	), App::REGISTER); 
+	- Adicione ao AppController.php: 
+	App::uses('UsersController','GlobalUsers'); 
+
+	UsersController - nome do arquivo atual, no caso UsersController.php 
+	Agora podemos acessar a classe do nosso controller atual. 
+	Crédito: http://www.shahariaazam.com/access-custom-class-inside-cakephp-apps/ 
+
+
+Salvando Dados
+
+if ($this->ModelName->save($this->request->data)) {
+    $this->Session->setFlash('Data Saved!');
+}
+
+Salvando Muitos
+
+$data = array(
+    array('title' => 'title 1'),
+    array('title' => 'title 2'),
+);
+$this->ModelName->saveAll($data);
+
+Delete
+
+$this->Model->delete($this->request->data('Model.id'));
+
+Delete all
+
+$this->Model->deleteAll(array('Model.spam' => true), false);
+
+
+Recebendo dados
+
+    find threaded
+    find neighbors
+    findAllBy
+    findBy
+    query
+    field
+    read
+    More complex CakePHP find examples
+
+
+CakePHP Model properties, methods, callbacks, and validation
+
+CakePHP Model properties:
+
+$belongsTo = array()
+$cacheQueries = true
+$data = array()
+$displayField = null
+$hasAndBelongsToMany = array()
+$hasMany = array()
+$hasOne = array()
+$id = false
+$logTransactions = false
+$name = null
+$primaryKey = null
+$recursive = 1
+$useDbConfig = 'default'
+$useTable = null
+$validate = array()
+$validationErrors = array()
+        
+
+CakePHP Model methods:
+
+bindModel ($params)
+create ()
+delete ($id = null, $cascade = true)
+escapeField ($field)
+execute ($data)
+exists ()
+field ($name, $conditions = null, $order = null)
+find ($conditions = null, $fields = null, $order = null, $recursive = null)
+findAll ($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null)
+findAllThreaded ($conditions = null, $fields = null, $sort = null)
+findCount ($conditions = null, $recursive = 0)
+findNeighbours ($conditions = null, $field, $value)
+generateList ($conditions = null, $order = null, $limit = null, $keyPath = null, $valuePath = null)
+getAffectedRows ()
+getColumnType ($column)
+getColumnTypes ()
+getDisplayField ()
+getID ($list=0)
+getLastInsertID ()
+getNumRows ()
+hasAny ($conditions = null)
+hasField ($name)
+invalidate ($field)
+invalidFields ($data = array())
+isForeignKey ($field)
+loadInfo ()
+query ()
+read ($fields = null, $id = null)
+remove ($id = null, $cascade = true)
+save ($data = null, $validate = true, $fieldList = array())
+saveField ($name, $value, $validate = false)
+set ($one, $two = null)
+setDataSource ($dataSource = null)
+setSource ($tableName)
+unbindModel ($params)
+validates ($data=array())
+setSource ($tableName)
+        
+
+CakePHP Model callbacks
+
+afterDelete ()
+afterFind ($results)
+afterSave ()
+beforeDelete ()
+beforeFind (&$queryData)
+beforeSave ()
+beforeValidate ()
+        
+
+CakePHP Model validation
+
+'VALID_EMAIL`
+'VALID_NOT_EMPTY`
+'VALID_NUMBER`
+'VALID_YEAR`
+       
+
+
+Controller::loadModel(string $modelClass, mixed $id)
+
+    O método loadModel vem a calhar quando você precisa usar um model que não é padrão do controller ou o seu model não está associado com este.
+
+$this->loadModel('Article');
+$recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
+
+$this->loadModel('User', 2);
+$user = $this->User->read();
+
+Indicando o prefixo das tabelas:
+class Example extends AppModel {
+    public $tablePrefix = 'prefx_'; // will look for 'prefx_examples'
+}
+
+Indicando o nome da primary key (somente quando diferente de id)
+class Example extends AppModel {
+    public $primaryKey = 'example_id'; // example_id is the field name in the database
+}
+
+
+Indicando o label de uma tabela: usado pelo gerador em relacionamentos para trazer como título da tabela. Se for name ou title não precisa disso. Apenas quando difefrente:
+
+class User extends AppModel {
+    public $displayField = 'descricao';
+}
+
+
+name
+Name do model. Se não for especificadono model então o model seta o nome da classe pelo construtor.
+
+class Example extends AppModel {
+    public $name = 'Example';
+}
+
+http://book.cakephp.org/2.0/en/models.html
+http://book.cakephp.org/2.0/en/models/model-attributes.html
+http://book.cakephp.org/2.0/en/cakephp-overview/understanding-model-view-controller.html
+http://book.cakephp.org/2.0/en/models/associations-linking-models-together.html
+
+
+Usando CallBacks
+
+	/**
+	 * Converting the publish date field to mysql date format before save.
+	 * 
+	 * @return bool
+	 */
+	public function beforeSave() {
+		if (isset($this->data[$this->alias]["publish_date"])) {
+			$date = date("Y-m-d", strtotime($this->data[$this->alias]["publish_date"]));
+			$this->data[$this->alias]["publish_date"] = $date;
+		}
+		return true;
+	}
+
+
+Algumas funções customizadas
+
+	/**
+	 * latest function.
+	 *
+	 * @access public
+	 * @return array
+	 */
+	public function latest($limit = 1) {
+		$posts = $this->find('all', array(
+			'conditions' => array(
+				'Post.is_published' => 1
+			),
+			'order' => array(
+				'Post.publish_date' => 'DESC',
+				'Post.created' => 'DESC'
+			),
+			'limit' => $limit
+		));
+		if (count($posts) === 1 && $limit === 1) {
+			$posts = $posts[0];
+		}
+		return $posts;
+	}
+	
+	/**
+	 * recent function.
+	 * 
+	 * @access public
+	 * @return array
+	 */
+	public function recent() {
+		return $this->find('all', array(
+			'conditions' => array(
+				'Post.is_published' => 1
+			),
+			'order' => array(
+				'Post.publish_date' => 'DESC'
+			),
+			'limit' => 5
+		));
+	}
+
+

@@ -1,0 +1,39 @@
+Fluxo das informações
+Adicionar ao
+Relatorios/index.ctp:
+
+	<?php 
+	echo $this->Form->create('Relatorio', array('action' => 'relatorio');
+	echo $this->Form->input('mes', ['label'=>'Mês a Imprimir']);
+	echo $this->Form->end(__('Imprimir'));
+	?>
+
+No controller Relatorios
+
+class RelatoriosController extends AppController {
+
+Criar
+	public function relatorio() {
+		$mes = $this->request->data['Relatorio']['mes'];
+
+		$this->layout='recibo';
+		$options = array('conditions' => array('Relatorio.mes' => $mes));
+
+		$this->set('relatorio', $this->Relatorio->find('all', $options));
+	}
+	
+
+Model/RelatoriosTable.php
+
+class Relatorio extends AppModel {
+
+Criar:
+	public function mes($numero){
+        $mes = $this->find('first', array(
+            'conditions'=>['Relatorios.numero'=>$numero],
+            'fields'=>['Relatorios.mes']
+        ));
+		return $mes;
+	}
+	
+

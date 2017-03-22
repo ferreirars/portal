@@ -1,0 +1,208 @@
+Dicas do HtmlHelper
+
+
+echo $this->Html->charset('UTF-8');
+
+Include CSS:
+echo $this->Html->css('recibo');
+
+Incluir vários arquivos:
+echo $this->Html->css(array('forms', 'tables', 'menu'));
+
+echo $this->Html->css('Blog.common.css', null, array('plugin' => false));// Inclui app/webroot/css/Blog.common.css
+
+echo $this->Html->style(array(
+    'background' => '#633',
+    'border-bottom' => '1px solid #000',
+    'padding' => '10px'
+));
+
+Incluir imagem em  /app/webroot/img/
+echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
+
+Imagem com link:
+echo $this->Html->image("recipes/6.jpg", array(
+    "alt" => "Brownies",
+    'url' => array('controller' => 'recipes', 'action' => 'view', 6)
+));
+
+Criar link
+echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank'));
+echo $this->Html->link(
+    'Dashboard',
+    array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
+);
+
+Link com mensagem de confirmação:
+echo $this->Html->link(
+    'Delete',
+    array('controller' => 'recipes', 'action' => 'delete', 6),
+    array(),
+    "Are you sure you wish to delete this recipe?"
+);
+
+Áudio e Vídeo
+
+<?php echo $this->Html->media('audio.mp3'); ?>
+
+ <?php echo $this->Html->media('video.mp4', array(
+     'fullBase' => true,
+     'text' => 'Fallback text'
+ )); ?>
+
+<?php echo $this->Html->media(
+     array('video.mp4', array('src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'")),
+     array('autoplay')
+ ); ?>
+
+
+Incluir script.js em /app/webroot/js
+echo $this->Html->script('scripts');
+
+Incluir js em outro dir:
+echo $this->Html->script('/otherdir/script_file');
+
+Js remoto:
+echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+
+Include de vários arquivos:
+echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
+
+echo $this->Html->tableHeaders(
+    array('Date','Title','Active'),
+    array('class' => 'status'),
+    array('class' => 'product_table')
+);
+
+Output:
+
+<tr class="status">
+     <th class="product_table">Date</th>
+     <th class="product_table">Title</th>
+     <th class="product_table">Active</th>
+</tr>
+
+echo $this->Html->tableHeaders(array(
+    'id',
+    array('Name' => array('class' => 'highlight')),
+    array('Date' => array('class' => 'sortable'))
+));
+
+Output:
+
+<tr>
+    <th>id</th>
+    <th class="highlight">Name</th>
+    <th class="sortable">Date</th>
+</tr>
+
+
+echo $this->Html->tableCells(array(
+    array('Jul 7th, 2007', 'Best Brownies', 'Yes'),
+    array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
+    array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),
+));
+
+Output:
+
+<tr><td>Jul 7th, 2007</td><td>Best Brownies</td><td>Yes</td></tr>
+<tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
+<tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td>No</td></tr>
+
+echo $this->Html->tableCells(array(
+    array('Jul 7th, 2007', array('Best Brownies', array('class' => 'highlight')) , 'Yes'),
+    array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
+    array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id' => 'special'))),
+));
+
+Output:
+
+<tr><td>Jul 7th, 2007</td><td class="highlight">Best Brownies</td><td>Yes</td></tr>
+<tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
+<tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td id="special">No</td></tr>
+
+echo $this->Html->tableCells(
+    array(
+        array('Red', 'Apple'),
+        array('Orange', 'Orange'),
+        array('Yellow', 'Banana'),
+    ),
+    array('class' => 'darker')
+);
+
+Output:
+
+<tr class="darker"><td>Red</td><td>Apple</td></tr>
+<tr><td>Orange</td><td>Orange</td></tr>
+<tr class="darker"><td>Yellow</td><td>Banana</td></tr>
+
+
+Adicionando jQuery
+
+First of all download your preferred javascript library and place it in app/webroot/js
+
+Then you must include the library in your page. To include it in all pages, add this line to the <head> section of app/View/Layouts/default.ctp (copy this file from lib/Cake/View/Layouts/default.ctp if you have not created your own):
+
+echo $this->Html->script('jquery'); // Include jQuery library
+
+Replace jquery with the name of your library file (.js will be added to the name).
+
+Evitando conflitos
+$this->Js->JqueryEngine->jQueryObject = '$j';
+echo $this->Html->scriptBlock(
+    'var $j = jQuery.noConflict();',
+    array('inline' => false)
+);
+// Tell jQuery to go into noconflict mode
+
+
+echo $this->Html->meta(
+    'favicon.ico',
+    '/favicon.ico',
+    array('type' => 'icon')
+);
+
+
+CakePHP Html Helper
+
+addCrumb ($name, $link)
+charset ($charset, $return = false)
+checkbox ($fieldName, $title = null, $htmlAttributes = null, $return = false)
+css ($path, $rel = 'stylesheet', $htmlAttributes = null, $return = false)
+dateTimeOptionTag ($tagName, $dateFormat = 'DMY', $timeFormat = '12', $selected = null, $selectAttr = null, $optionAttr = null, $showEmpty = true)
+dayOptionTag ($tagName, $value = null, $selected = null, $selectAttr = null, $optionAttr = null, $showEmpty = true)
+file ($fieldName, $htmlAttributes = null, $return = false)
+formTag ($target = null, $type = 'post', $htmlAttributes = null)
+getCrumbs ($separator = '»', $startText = false, $return = false)
+guiListTree ($data, $htmlAttributes = null, $bodyKey = 'body', $childrenKey = 'children', $return = false)
+hidden ($fieldName, $htmlAttributes = null, $return = false)
+hourOptionTag ($tagName, $value = null, $format24Hours = false, $selected = null, $selectAttr = null, $optionAttr = null, $showEmpty = true)
+image ($path, $htmlAttributes = null, $return = false)
+input ($fieldName, $htmlAttributes = null, $return = false)
+link ($title, $url = null, $htmlAttributes = null, $confirmMessage = false, $escapeTitle = true, $return = false)
+linkEmail ($title, $email = null, $options = null)
+meridianOptionTag ($tagName, $value = null, $selected = null, $selectAttr = null, $optionAttr = null, $showEmpty = true)
+minuteOptionTag ($tagName, $value = null, $selected = null, $selectAttr = null, $optionAttr = null, $showEmpty = true)
+monthOptionTag ($tagName, $value = null, $selected = null, $selectAttr = null, $optionAttr = null, $showEmpty = true)
+parseHtmlOptions ($options, $exclude = null, $insertBefore = ' ', $insertAfter = null)
+password ($fieldName, $htmlAttributes = null, $return = false)
+radio ($fieldName, $options, $inbetween = null, $htmlAttributes = array(), $return = false)
+selectTag ($fieldName, $optionElements, $selected = null, $selectAttr = null, $optionAttr = null, $showEmpty = true, $return = false)
+setFormTag ($tagValue)
+submit ($caption = 'Submit', $htmlAttributes = null, $return = false)
+tableCells ($data, $oddTrOptions = null, $evenTrOptions = null, $return = false)
+tableHeaders ($names, $trOptions = null, $thOptions = null, $return = false)
+tagErrorMsg ($field, $text)
+tagIsInvalid ($model, $field)
+tagValue ($fieldName)
+textarea ($fieldName, $htmlAttributes = null, $return = false)
+trim ()
+url ($url = null, $return = false)
+validate ()
+validateErrors ()
+yearOptionTag ($tagName, $value = null, $minYear = null, $maxYear = null, $selected = null, $selectAttr = null, $optionAttr = null, $showEmpty = true)
+_parseAttributes ($options, $exclude = null, $insertBefore = ' ', $insertAfter = null)
+        
+
+http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html
+

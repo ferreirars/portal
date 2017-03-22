@@ -1,0 +1,125 @@
+Criando seções de Busca para Aplicativos com Cake
+
+
+Busca Simples
+
+Exemplo para o controller clientes: 
+Controller: 
+    function busca(){ 
+        if (!empty($this->data)) { 
+            $searchstr = $this->data['Cliente']['termo']; 
+            $this->set('searchstring', $this->data['Cliente']['termo']); 
+            $conditions = array( 
+                'conditions' => array( 
+                    'or' => array( 
+                        "Cliente.nome LIKE" => "%$searchstr%" 
+                     ) 
+                ) 
+            ); 
+            $this->set('clientes', $this->Cliente->find('all', $conditions)); 
+        } 
+    } 
+
+Criar uma view Clientes/busca.ctp: 
+<h1>Clientes</h1> 
+<div class="actions"> 
+    <h3><?php echo __('Actions'); ?></h3> 
+    <ul> 
+        <li><?php echo $this->Html->link(__('List Cliente'), array('action' => 'index')); ?></li> 
+        <li><?php echo $this->Html->link(__('List Pedidos'), array('controller' => 'pedidos', 'action' => 'index')); ?> </li> 
+        <li><?php echo $this->Html->link(__('New Pedido'), array('controller' => 'pedidos', 'action' => 'add')); ?> </li> 
+    </ul> 
+</div> 
+
+<?php 
+    echo $this->Form->create("Cliente",array('action' => 'busca')); 
+    echo $this->Form->input("termo", array('label' => 'Procurando por')); 
+    echo $this->Form->end("Busca"); 
+?> 
+<p><?php echo $this->Html->link(("Add Cliente"), array('action' => 'busca')); ?> 
+<table> 
+<?php 
+if(isset($clientes)){ 
+    foreach ($clientes as $cliente): ?> 
+    <tr> 
+        <td><?php echo $cliente['Cliente']['id']; ?></td> 
+        <td><?php echo $this->Html->link($cliente['Cliente']['nome'],'/clientes/view/'.$cliente['Cliente']['id']);?></td> 
+        <td><?php echo $cliente['Cliente']['email']; ?></td> 
+    </tr> 
+    <?php endforeach; 
+} 
+?> 
+</table> 
+Adicionar um link para a busca na index.ctp:
+    <li><?php echo $this->Html->link(__('Busca'), array('action' => 'busca')); ?></li> 
+
+
+
+== Busca com paginação do resultado
+
+Criar o action busca() no controller Clientes: 
+	public function busca() { 
+	//Crédito: 
+	// http://stackoverflow.com/questions/11050531/cakephp-search-pagination-issues-losing-values-to-the-next-page 
+		if(isset($this->request->data['Cliente']['termo'])){ 
+			if(!empty($this->request->data['Cliente']['termo'])){ 
+				$keyword = trim($this->request->data['Cliente']['termo']); 
+				$this->redirect('/clientes/busca/keyword:'.$keyword); 
+			} 
+		}elseif(isset($this->params['named']['keyword'])){ 
+			if(!empty($this->params['named']['keyword'])){ 
+				$keyword =$this->params['named']['keyword']; 
+				$this->paginate['conditions'] = array("Cliente.nome LIKE" => "%$keyword%"); 
+			} 
+		} 
+		$this->set('clientes', $this->paginate()); 
+	} 
+
+Criar a view busca.ctp: 
+<h2>Clientes</h2> 
+<?php 
+    echo $this->Form->create('Cliente', array( 
+    'url' => array_merge(array('action' => 'busca'), $this->params['pass']) 
+	)); 
+    echo $this->Form->input("termo", array('label' => '',"placeholder" => "Seja criterioso em sua busca...")); 
+     echo $this->Form->submit(__('Busca', true), array('div' => false)); 
+     echo $this->Form->end(); 
+?> 
+<br> 
+<table> 
+<?php if(isset($clientes)){?> 
+	<tr> 
+		<th><?php echo $this->Paginator->sort('id'); ?></th> 
+		<th><?php echo $this->Paginator->sort('nome'); ?></th> 
+		<th><?php echo $this->Paginator->sort('email','E-mail'); ?></th> 
+	</tr> 
+<?php 
+	foreach ($clientes as $cliente): ?> 
+    <tr> 
+        <td><?php echo $cliente['Cliente']['id']; ?></td> 
+        <td><?php echo $this->Html->link($cliente['Cliente']['nome'],'/clientes/view/'.$cliente['Cliente']['id']);?></td> 
+        <td><?php echo $cliente['Cliente']['email']; ?></td> 
+    </tr> 
+	<?php endforeach; ?> 
+</table> 
+	<p> 
+	<?php 
+	echo $this->Paginator->counter(array( 
+	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}') 
+	)); 
+	?>	 
+	</p> 
+	<div class="paging"> 
+	<?php 
+		echo $this->Paginator->prev('<< ' . __('previous'), array(), null, array('class' => 'prev disabled')); 
+		echo $this->Paginator->numbers(array('separator' => '')); 
+		echo $this->Paginator->next(__('next') . ' >>', array(), null, array('class' => 'next disabled')); 
+	}
+	?>	 
+	</div> 
+
+Adicionar link para busca na index.ctp ao final.
+		<li><?php echo $this->Html->link(__('Busca'), array('busca' => 'controller', 'clientes' => 'action')); ?>
+
+
+

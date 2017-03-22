@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt" dir="ltr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta name="generator" content="MediaWiki 1.16alpha-wmf" />
+		<meta name="keywords" content="Aplicativos em PHP/Trabalhando em PHP com/Permissões de arquivos e diretórios" />
+		<link rel="alternate" type="application/x-wiki" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios&amp;action=edit" />
+		<link rel="edit" title="Editar" href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios&amp;action=edit" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikilivros (pt)" />
+		<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/" />
+		<link rel="alternate" type="application/rss+xml" title="Feed RSS Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=rss" />
+		<link rel="alternate" type="application/atom+xml" title="Feed Atom Wikilivros" href="/w/index.php?title=Especial:Mudan%C3%A7as_recentes&amp;feed=atom" />
+		<title>Aplicativos em PHP/Trabalhando em PHP com/Permissões de arquivos e diretórios - Wikilivros</title>
+		<link rel="stylesheet" href="/skins-1.5/common/shared.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/common/commonPrint.css?233xz" type="text/css" media="print" />
+		<link rel="stylesheet" href="/skins-1.5/monobook/main.css?233xz" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/skins-1.5/chick/main.css?233xz" type="text/css" media="handheld" />
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE50Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE55Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/skins-1.5/monobook/IE60Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/skins-1.5/monobook/IE70Fixes.css?233xz" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="print" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Handheld.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="handheld" />
+		<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Monobook.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=-&amp;action=raw&amp;maxage=2678400&amp;smaxage=0&amp;ts=20090810192510&amp;gen=css" type="text/css" />
+		<link rel="stylesheet" href="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.css&amp;action=raw&amp;ctype=text/css" type="text/css" />
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins-1.5/common/IEFixes.js?233xz"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/skins-1.5";
+		var wgArticlePath = "/wiki/$1";
+		var wgScriptPath = "/w";
+		var wgScript = "/w/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://pt.wikibooks.org";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permissões_de_arquivos_e_diretórios";
+		var wgTitle = "Aplicativos em PHP/Trabalhando em PHP com/Permissões de arquivos e diretórios";
+		var wgAction = "view";
+		var wgArticleId = "14509";
+		var wgIsArticle = true;
+		var wgUserName = "Ribafs";
+		var wgUserGroups = ["*", "user", "autoconfirmed"];
+		var wgUserLanguage = "pt-br";
+		var wgContentLanguage = "pt";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = 110872;
+		var wgVersion = "1.16alpha-wmf";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = [",	.", " 	,"];
+		var wgDigitTransformTable = ["", ""];
+		var wgMainPageTitle = "Página principal";
+		var wgMWSuggestTemplate = "http://pt.wikibooks.org/w/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest";
+		var wgDBname = "ptwikibooks";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["com sugestões", "sem sugestões"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		var wgAjaxWatch = {"watchMsg": "Vigiar", "unwatchMsg": "Desinteressar-se", "watchingMsg": "Vigiando...", "unwatchingMsg": "Deixando de vigiar..."};
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="/skins-1.5/common/wikibits.js?233xz"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="/skins-1.5/common/ajax.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/ajaxwatch.js?233xz"></script>
+		<script type="text/javascript" src="/skins-1.5/common/mwsuggest.js?233xz"></script>
+		<script type="text/javascript">/*<![CDATA[*/
+		var wgNotice='';var wgNoticeLocal='';
+		/*]]>*/</script>
+		<script type="text/javascript" src="http://upload.wikimedia.org/centralnotice/wikibooks/pt-br/centralnotice.js?233xz"></script>
+
+		<script type="text/javascript" src="/w/index.php?title=-&amp;action=raw&amp;smaxage=0&amp;gen=js&amp;useskin=monobook"><!-- site js --></script>
+		<script type="text/javascript" src="/w/index.php?title=Usu%C3%A1rio:Ribafs/monobook.js&amp;action=raw&amp;ctype=text/javascript"></script>
+	</head>
+<body class="mediawiki ltr ns-0 ns-subject page-Aplicativos_em_PHP_Trabalhando_em_PHP_com_Permissões_de_arquivos_e_diretórios skin-monobook">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+		<div id="siteNotice"><script type='text/javascript'>if (wgNotice != '') document.writeln(wgNotice);</script></div>		<h1 id="firstHeading" class="firstHeading">Aplicativos em PHP/Trabalhando em PHP com/Permissões de arquivos e diretórios</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">De Wikilivros</h3>
+			<div id="contentSub"><span class="subpages">&lt; <a href="/wiki/Aplicativos_em_PHP" title="Aplicativos em PHP">Aplicativos em PHP</a> | <a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com" title="Aplicativos em PHP/Trabalhando em PHP com">Trabalhando em PHP com</a></span></div>
+									<div id="jump-to-nav">Ir para: <a href="#column-one">navegação</a>, <a href="#searchInput">pesquisa</a></div>			<!-- start content -->
+			<p><br /></p>
+<table id="toc" class="toc" summary="Tabela de conteúdo">
+<tr>
+<td>
+<div id="toctitle">
+<h2>Tabela de conteúdo</h2>
+</div>
+<ul>
+<li class="toclevel-1"><a href="#chmod_-_altera_permiss.C3.B5es_de_arquivos_e_diret.C3.B3rios"><span class="tocnumber">1</span> <span class="toctext">chmod - altera permissões de arquivos e diretórios</span></a></li>
+<li class="toclevel-1"><a href="#chown"><span class="tocnumber">2</span> <span class="toctext">chown</span></a></li>
+<li class="toclevel-1"><a href="#chgrp_--_Modifica_o_grupo_do_arquivo"><span class="tocnumber">3</span> <span class="toctext">chgrp -- Modifica o grupo do arquivo</span></a></li>
+<li class="toclevel-1"><a href="#is_writable_--_Diz_se_pode-se_escrever_para_o_arquivo_.28writable.29"><span class="tocnumber">4</span> <span class="toctext">is_writable -- Diz se pode-se escrever para o arquivo (writable)</span></a></li>
+<li class="toclevel-1"><a href="#umask_--_Modificar_a_umask_atual"><span class="tocnumber">5</span> <span class="toctext">umask -- Modificar a umask atual</span></a></li>
+</ul>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+//<![CDATA[
+ if (window.showTocToggle) { var tocShowText = "mostrar"; var tocHideText = "esconder"; showTocToggle(); } 
+//]]>
+</script>
+<p><a name="chmod_-_altera_permiss.C3.B5es_de_arquivos_e_diret.C3.B3rios" id="chmod_-_altera_permiss.C3.B5es_de_arquivos_e_diret.C3.B3rios"></a></p>
+<h2><span class="mw-headline">chmod - altera permissões de arquivos e diretórios</span></h2>
+<pre>
+&lt;?php
+chmod ("/arquivo/diretorio", 755);  // decimal; provavelmente incorreto
+chmod ("/arquivo/diretorio", "u+rwx,go+rx"); // string; incorreto
+chmod ("/arquivo/diretorio", 0755);  // octal; representaÃ§Ã£o correta do modo
+?&gt; 
+
+function permissoes($arquivo,$perms,$acao){
+	print "&lt;form name=frm method=post action=acoes.php&gt;";
+	print "&lt;input name=pm value=$perms&gt;";
+	print "&lt;input type=hidden name=perms value=$perms&gt;";
+	print "&lt;input type=hidden name=ar value=$arquivo&gt;";
+	print "&lt;input type=hidden name=acao value=$acao&gt;";		
+	print "&lt;input name=ar value=$arquivo readonly style='background-color:#FAEBD7'&gt;";
+	print "&lt;input type=submit name=prm value=Alterar&gt;";
+	print "&lt;/form&gt;";
+
+	if (isset($_POST['prm'])){
+		$ar=$_POST['ar'];
+		$perms=octdec($_POST['pm']);
+		$ch = chmod($ar, $perms);
+		if(!$ch) {
+			die ("Erro ao alterar as permissÃÂµes!");
+		}else{
+			print "&lt;script&gt;location='index.php'&lt;/script&gt;";
+		}
+	}
+}
+
+&lt;?php
+// Escrita e leitura para o proprietario, nada ninguem mais
+chmod ("/somedir/somefile", 0600);
+
+// Escrita e leitura para o proprietario, leitura para todos os outros
+chmod ("/somedir/somefile", 0644);
+
+// Tudo para o proprietario, leitura e execucao para os outros
+chmod ("/somedir/somefile", 0755);
+
+// Tudo para o proprietario, leitura e execucao para o grupo do prop
+chmod ("/somedir/somefile", 0750);
+?&gt; 
+
+Value    Permission Level
+400    Owner Read
+200    Owner Write
+100    Owner Execute
+40    Group Read
+20    Group Write
+10    Group Execute
+4    Global Read
+2    Global Write
+1    Global Execute
+
+
+&lt;?php
+function chmodnum($mode) {
+   $mode2=$mode;
+   $realmode = "";
+   $legal =  array("","w","r","x","-");
+   $attarray = preg_split("//",$mode);
+   for($i=0;$i&lt;count($attarray);$i++){
+       if($key = array_search($attarray[$i],$legal)){
+           $realmode .= $legal[$key];
+       }
+   }
+   $mode = str_pad($realmode,9,'-');
+   $trans = array('-'=&gt;'0','r'=&gt;'4','w'=&gt;'2','x'=&gt;'1');
+   $mode = strtr($mode,$trans);
+   $newmode = '';
+   $newmode .= $mode[0]+$mode[1]+$mode[2];
+   $newmode .= $mode[3]+$mode[4]+$mode[5];
+   $newmode .= $mode[6]+$mode[7]+$mode[8];
+   return $mode2.' = '.$newmode;
+}
+
+echo chmodnum('drwxr-xr-x');
+?&gt;
+
+alguns exemplos:
+
+drwxr-xr-x =&gt; 755
+drwxr-xr-x =&gt; 755
+dr-xr-xr-x =&gt; 555
+drwxr-xr-x =&gt; 755
+drwxr-xr-x =&gt; 755
+drwxr-xr-x =&gt; 755
+drwxr-xr-x =&gt; 755
+drwxrwxrwt =&gt; 776
+drwxr-xr-x =&gt; 755
+drwxr-xr-x =&gt; 755
+lrwxrwxrwx =&gt; 777
+</pre>
+<p><br /></p>
+<p><a name="chown" id="chown"></a></p>
+<h2><span class="mw-headline">chown</span></h2>
+<p>Esta função não trabalha com arquivos remotos</p>
+<pre>
+&lt;?php
+
+$file_name= "test";
+$path = "/var/www/html/test/" . $file_name ;
+
+$user_name = "root";
+
+chown($path, $user_name);
+
+?&gt;
+
+&lt;?php
+function recurse_chown_chgrp($mypath, $uid, $gid)
+{
+   $d = opendir ($mypath) ;
+   while(($file = readdir($d)) !== false) {
+       if ($file != "." &amp;&amp; $file != "..") {
+
+           $typepath = $mypath . "/" . $file ;
+
+           //print $typepath. " : " . filetype ($typepath). "&lt;BR&gt;" ;
+           if (filetype ($typepath) == 'dir') {
+               recurse_chown_chgrp ($typepath, $uid, $gid);
+           }
+
+           chown($typepath, $uid);
+           chgrp($typepath, $gid);
+
+       }
+   }
+
+ }
+
+recurse_chown_chgrp ("uploads", "ribafs", "meugrupo") ;
+?&gt; 
+
+&lt;?php
+function recurse_chown_chgrp($path2dir, $uid, $gid){
+   $dir = new dir($path2dir);
+   while(($file = $dir-&gt;read()) !== false) {
+       if(is_dir($dir-&gt;path.$file)) {
+           recurse_chown_chgrp($dir-&gt;path.$file, $uid, $gid);
+       } else {
+           chown($file, $uid);
+           chgrp($file, $gid);
+       }
+   }
+   $dir-&gt;close();
+}
+?&gt; 
+</pre>
+<p><br /></p>
+<p><a name="chgrp_--_Modifica_o_grupo_do_arquivo" id="chgrp_--_Modifica_o_grupo_do_arquivo"></a></p>
+<h2><span class="mw-headline">chgrp -- Modifica o grupo do arquivo</span></h2>
+<p>filegroup -- Lê o grupo do arquivo</p>
+<p>fileperms -- Lê as permissões do arquivo</p>
+<p>fileowner -- Lê o dono (owner) do arquivo</p>
+<p>is_readable -- Diz se o arquivo/diretório é legivel (readable)</p>
+<pre>
+&lt;?php
+if (is_readable('my_link')) {
+  header('Location: /my_link');
+}
+?&gt;
+</pre>
+<p><a name="is_writable_--_Diz_se_pode-se_escrever_para_o_arquivo_.28writable.29" id="is_writable_--_Diz_se_pode-se_escrever_para_o_arquivo_.28writable.29"></a></p>
+<h2><span class="mw-headline">is_writable -- Diz se pode-se escrever para o arquivo (writable)</span></h2>
+<pre>
+&lt;?php
+
+$file = '/home/vincent/arquivo.sh';
+
+if(is_executable($file)) {
+   echo $file.' Ã© executÃ¡vel';
+} else {
+   echo $file.' nÃ£o Ã© executÃ¡vel';
+}
+
+?&gt; 
+</pre>
+<p><br /></p>
+<p><a name="umask_--_Modificar_a_umask_atual" id="umask_--_Modificar_a_umask_atual"></a></p>
+<h2><span class="mw-headline">umask -- Modificar a umask atual</span></h2>
+<pre>
+&lt;?php
+umask(0670);                    //- set umask
+$handle = fopen('file', 'w');  //- 0006
+mkdir("/path/dir");            //- 0107
+?&gt;
+
+calculate the result:
+&lt;?php
+$umask = 0670;
+umask($umask);
+//- if you are creating a new directory, $permission = 0777;
+//- if you are creating a new file, $permission = 0666.
+printf( "result: %04o", $permission &amp; ( 0777 - $umask) );
+?&gt;
+</pre>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 17/1000000
+Post-expand include size: 37/2048000 bytes
+Template argument size: 0/2048000 bytes
+Expensive parser function count: 0/500
+-->
+
+<!-- Saved in parser cache with key ptwikibooks:pcache:idhash:14509-0!1!0!!pt-br!2 and timestamp 20090810192916 -->
+<div class="printfooter">
+Obtido em "<a href="http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios">http://pt.wikibooks.org/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios</a>"</div>
+			<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="/wiki/Especial:Categorias" title="Especial:Categorias">Categoria</a>: <span dir='ltr'><a href="/wiki/Categoria:Aplicativos_em_PHP" title="Categoria:Aplicativos em PHP">Aplicativos em PHP</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Acessos</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+	
+				 <li id="ca-nstab-main" class="selected"><a href="/wiki/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios" title="Ver a página de conteúdo [c]" accesskey="c">módulo</a></li>
+				 <li id="ca-talk" class="new"><a href="/w/index.php?title=Discuss%C3%A3o:Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios&amp;action=edit&amp;redlink=1" title="Discussão sobre o conteúdo da página [t]" accesskey="t">Discussão</a></li>
+				 <li id="ca-edit"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios&amp;action=edit" title="Você pode editar esta página. Por favor, utilize o botão Mostrar Previsão antes de salvar. [e]" accesskey="e">Editar</a></li>
+				 <li id="ca-history"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios&amp;action=history" title="Edições anteriores desta página. [h]" accesskey="h">História</a></li>
+				 <li id="ca-move"><a href="/wiki/Especial:Mover/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios" title="Mover esta página [m]" accesskey="m">Mover</a></li>
+				 <li id="ca-watch"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios&amp;action=watch" title="Adicionar esta página aos artigos vigiados [w]" accesskey="w">Vigiar</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Ferramentas pessoais</h5>
+		<div class="pBody">
+			<ul lang="pt-br" xml:lang="pt-br">
+				<li id="pt-acaibeta"><a href="http://pt.wikibooks.org/w/index.php?title=Especial:UsabilityInitiativeOptIn&amp;from=Aplicativos_em_PHP%2FTrabalhando_em_PHP_com%2FPermiss%C3%B5es_de_arquivos_e_diret%C3%B3rios" class="no-text-transform">Experimente o Beta</a></li>
+				<li id="pt-userpage"><a href="/wiki/Usu%C3%A1rio:Ribafs" title="Sua página de utilizador [.]" accesskey=".">Ribafs</a></li>
+				<li id="pt-mytalk"><a href="/wiki/Usu%C3%A1rio_Discuss%C3%A3o:Ribafs" title="Sua página de discussão [n]" accesskey="n">Minha discussão</a></li>
+				<li id="pt-preferences"><a href="/wiki/Especial:Prefer%C3%AAncias" title="Minhas preferências">Minhas preferências</a></li>
+				<li id="pt-watchlist"><a href="/wiki/Especial:P%C3%A1ginas_vigiadas" title="Lista de artigos vigiados. [l]" accesskey="l">Páginas vigiadas</a></li>
+				<li id="pt-mycontris"><a href="/wiki/Especial:Contribui%C3%A7%C3%B5es/Ribafs" title="Lista das suas contribuições [y]" accesskey="y">Minhas contribuições</a></li>
+				<li id="pt-logout"><a href="/w/index.php?title=Especial:Sair&amp;returnto=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios" title="Sair">Sair</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(http://upload.wikimedia.org/wikibooks/pt/b/bc/Wiki.png);" href="/wiki/P%C3%A1gina_principal" title="Página principal [z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div id="p-search" class="portlet">
+		<h5 lang="pt-br" xml:lang="pt-br"><label for="searchInput">Pesquisa</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/w/index.php" id="searchform"><div>
+				<input type='hidden' name="title" value="Especial:Busca"/>
+				<input id="searchInput" name="search" type="text" title="Pesquisar nesta wiki [f]" accesskey="f" value="" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Ir" title="Ir a uma página com este exato nome, caso exista" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Pesquisa" title="Procurar por páginas contendo este texto" />
+			</div></form>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5 lang="pt-br" xml:lang="pt-br">Navegação</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/wiki/P%C3%A1gina_principal">Página principal</a></li>
+				<li id="n-Library"><a href="/wiki/Wikilivros:Biblioteca">Biblioteca</a></li>
+				<li id="n-recentchanges"><a href="/wiki/Especial:Mudan%C3%A7as_recentes" title="A lista de mudanças recentes nesta wiki. [r]" accesskey="r">Mudanças recentes</a></li>
+				<li id="n-randompage"><a href="/wiki/Especial:Aleat%C3%B3ria" title="Carregar página aleatória [x]" accesskey="x">Página aleatória</a></li>
+				<li id="n-help"><a href="/wiki/Ajuda:Conte%C3%BAdos" title="Um local reservado para auxílio.">Ajuda</a></li>
+				<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Donate/pt" title="Ajude-nos">Doações</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-Project'>
+		<h5 lang="pt-br" xml:lang="pt-br">projeto</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-about"><a href="/wiki/Wikilivros:Sobre">Sobre</a></li>
+				<li id="n-portal"><a href="/wiki/Wikilivros:Portal_comunit%C3%A1rio" title="Sobre o projeto e coisas que você poder fazer aqui.">Portal comunitário</a></li>
+				<li id="n-Staff-lounge"><a href="/wiki/Wikilivros:Staff_lounge">Esplanada</a></li>
+				<li id="n-Wikijunior"><a href="/wiki/Wikij%C3%BAnior">Wikijúnior</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class='generated-sidebar portlet' id='p-coll-create_a_book'>
+		<h5 lang="pt-br" xml:lang="pt-br">Criar uma coleção</h5>
+		<div class='pBody'>
+<ul id="collectionPortletList"><li id="coll-add_page"><a href="/w/index.php?title=Especial:Livro/add_article/&amp;arttitle=Aplicativos+em+PHP%2FTrabalhando+em+PHP+com%2FPermiss%C3%B5es+de+arquivos+e+diret%C3%B3rios&amp;oldid=0" title="Adicionar a página wiki atual ao seu livro" onclick="collectionCall(&#039;AddArticle&#039;, [&#039;removepage&#039;, wgNamespaceNumber, wgTitle, 0]); return false;" rel="nofollow">Adicionar página ao livro</a></li><li id="coll-help_collections"><a href="/wiki/Ajuda:Livros" title="Mostrar ajuda sobre a ferramenta de livros">Ajuda sobre livros</a></li></ul><script type="text/javascript">/*<![CDATA[*/
+		var wgCollectionAddRemoveSate = "addpage";
+		/*]]>*/</script>
+<script type="text/javascript" src="/w/extensions/Collection/collection/portlet.js?2"></script>		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5 lang="pt-br" xml:lang="pt-br">Ferramentas</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/wiki/Especial:P%C3%A1ginas_afluentes/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios" title="Lista de todas as páginas que ligam-se a esta [j]" accesskey="j">Páginas afluentes</a></li>
+				<li id="t-recentchangeslinked"><a href="/wiki/Especial:Novidades_relacionadas/Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios" title="Mudanças recentes em páginas relacionadas a esta [k]" accesskey="k">Alterações relacionadas</a></li>
+<li id="t-upload"><a href="/wiki/Especial:Carregar_imagem" title="Carregar arquivos [u]" accesskey="u">Carregar arquivo</a></li>
+<li id="t-specialpages"><a href="/wiki/Especial:P%C3%A1ginas_especiais" title="Lista de páginas especiais [q]" accesskey="q">Páginas especiais</a></li>
+				<li id="t-print"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios&amp;printable=yes" rel="alternate" title="Versão para impressão desta página [p]" accesskey="p">Versão para impressão</a></li>				<li id="t-permalink"><a href="/w/index.php?title=Aplicativos_em_PHP/Trabalhando_em_PHP_com/Permiss%C3%B5es_de_arquivos_e_diret%C3%B3rios&amp;oldid=110872" title="Link permanente para esta versão desta página">Link permanente</a></li><li id="t-download-as-pdf"><a href="/w/index.php?title=Especial:Livro/render_article/&amp;arttitle=Aplicativos+em+PHP/Trabalhando+em+PHP+com/Permiss%C3%B5es+de+arquivos+e+diret%C3%B3rios&amp;oldid=110872&amp;writer=rl" rel="nofollow">Versão em PDF</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/skins-1.5/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></div>
+				<div id="f-copyrightico"><a href="http://wikimediafoundation.org/"><img src="/images/wikimedia-button.png" alt="Wikimedia Foundation"/></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> Esta página foi modificada pela última vez às 17h23min, 5 de dezembro de 2008.</li>
+					<li id="copyright">O texto está disponível sob a licença <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>; condições adicionais podem-se aplicar. Veja <a href="http://wikimediafoundation.org/wiki/Terms_of_Use">Condições de Uso</a> para detalhes.</li>
+					<li id="privacy"><a href="/wiki/Wikilivros:Pol%C3%ADtica_de_privacidade" title="Wikilivros:Política de privacidade">Política de privacidade</a></li>
+					<li id="about"><a href="/wiki/Wikilivros:Sobre" title="Wikilivros:Sobre">Sobre</a></li>
+					<li id="disclaimer"><a href="/wiki/Wikilivros:Aviso_geral" title="Wikilivros:Aviso geral">Alerta de Conteúdo</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served by srv185 in 0.154 secs. --></body></html>

@@ -1,0 +1,688 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+
+
+  <title>JavaScript Developer: Estruturas de Controle e Objetos</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<meta name="generator" content="Blogger">
+<link rel="icon" type="image/vnd.microsoft.icon" href="http://www.blogger.com/favicon.ico">
+<link rel="alternate" type="application/atom+xml" title="JavaScript Developer - Atom" href="http://jsdev.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="JavaScript Developer - RSS" href="http://jsdev.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="JavaScript Developer - Atom" href="http://www.blogger.com/feeds/34235652/posts/default">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.blogger.com/rsd.g?blogID=34235652">
+<link rel="alternate" type="application/atom+xml" title="JavaScript Developer - Atom" href="http://jsdev.blogspot.com/feeds/115800933951330072/comments/default">
+ <link rel="stylesheet" type="text/css" href="js_estruturas-de-controle-e-objetos_arquivos/blog_controls.html"> <link rel="stylesheet" type="text/css" href="js_estruturas-de-controle-e-objetos_arquivos/authorization.html">
+
+  <style type="text/css">
+
+/* 
+Blogger Template Style
+Name:     TicTac
+Author:   Dan Cederholm
+URL:      www.simplebits.com
+Date:     1 March 2004
+*/
+
+/* ---( page defaults )--- */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, sans-serif;
+  font-size: small;
+  text-align: center;
+  color: #333;
+  background: #e0e0e0;
+  }
+
+blockquote {
+  margin: 0 0 0 30px;
+  padding: 10px 0 0 20px;
+  font-size: 88%;
+  line-height: 1.5em;
+  color: #666;
+  background: url(http://www.blogblog.com/tictac/quotes.gif) no-repeat top left;
+  }
+
+blockquote p {
+  margin-top: 0;
+  }
+
+abbr, acronym {
+  cursor: help;
+  font-style: normal;
+  border-bottom: 1px dotted;
+  }
+
+code {
+  color: #f63;
+  white-space: pre;
+  background: #F9F9F9;
+  border: 1px solid #000;
+  display: block;
+  padding: 4px;
+  overflow: auto;
+  font-size: 12px;
+  width: 440px;
+  max-height: 300px;
+}
+
+hr {
+  display: none;
+  }
+
+img {
+  border: none;
+  }
+
+/* unordered list style */
+
+ul {
+  list-style: none;
+  margin: 0 0 20px 30px;
+  padding: 0;
+  }
+
+li {
+  list-style: none;
+  padding-left: 14px;
+  margin-bottom: 3px;
+  background: url(http://www.blogblog.com/tictac/tictac_orange.gif) no-repeat 0 6px;
+  }
+
+/* links */
+
+a:link {
+  color: #69c;
+  }
+
+a:visited {
+  color: #666699;
+  }
+
+a:hover {
+  color: #693;
+  }
+
+a:active {
+  color: #cc3333;
+  text-decoration: none;
+  }
+
+/* ---( layout structure )---*/
+
+@media all {
+  #wrap {
+    width: 847px;
+    margin: 0 auto;
+    text-align: left;
+    background: url(http://www.blogblog.com/tictac/tile.gif) repeat-y;
+    }
+
+  #content {
+    margin-left: 62px; /* to avoid the BMH */
+    }
+
+  #main-content {
+    float: left;
+    width: 460px;
+    margin: 20px 0 0 0;
+    padding: 0;
+    line-height: 1.5em;
+    }
+
+  #sidebar {
+    margin: 0 41px 0 547px;
+    padding: 20px 0 0 0;
+    font-size: 85%;
+    line-height: 1.4em;
+    color: #999;
+    background: url(http://www.blogblog.com/tictac/sidebar_bg.gif) no-repeat 0 0;
+    }
+  }
+@media handheld {
+  #wrap {
+    width: 90%;
+    background: none;
+    }
+
+  #content {
+    margin:0 2% 0 2%;
+    }
+
+  #main-content {
+    float: none;
+    width: 100%;
+    }
+
+  #sidebar {
+    margin: 0 2% 0 2%;
+    }
+  }
+
+
+/* ---( header and site name )--- */
+
+@media all {
+  #blog-header {
+    margin: 0;
+    padding: 0;
+    font-family: "Lucida Grande", "Trebuchet MS";
+    background: #e0e0e0 url(http://www.blogblog.com/tictac/top_div.gif) no-repeat top left;
+    }
+
+  #blog-header h1 {
+    margin: 0;
+    padding: 45px 60px 50px 160px;
+    font-size: 200%;
+    color: #fff;
+    text-shadow: #81A75B 2px 2px 2px;
+    background: url(http://www.blogblog.com/tictac/top_h1.gif) no-repeat bottom left;
+    }
+  }
+@media handheld {
+  #blog-header {
+    background: #99cc66;
+    }
+
+  #blog-header h1 {
+    background: none;
+    }
+  }
+
+#blog-header h1 a {
+  text-decoration: none;
+  color: #fff;
+  }
+
+#blog-header h1 a:hover {
+  color: #eee;
+  }
+
+/* ---( main column )--- */
+
+h2.date-header {
+  margin-top: 0;
+  padding-left: 14px;
+  font-size: 90%;
+  color: #f93;
+  background: url(http://www.blogblog.com/tictac/date_icon.gif) no-repeat 0 50%;
+  }
+
+h3.post-title {
+  margin-top: 0;
+  font-family: "Lucida Grande", "Trebuchet MS";
+  font-size: 130%;
+  letter-spacing: -1px;
+  color: #f63;
+  }
+
+.post {
+  margin: 0 0 1.5em 0;
+  padding: 0 0 1.5em 14px;
+  border-bottom: 1px solid #ddd;
+  }
+
+.post-footer {
+  margin: 0;
+  padding: 0 0 0 14px;
+  font-size: 88%;
+  color: #999;
+  background: url(http://www.blogblog.com/tictac/tictac_grey.gif) no-repeat 0 8px;
+  }
+
+.post img {
+  padding: 6px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #c0c0c0;
+  border-right: 1px solid #c0c0c0;
+  }
+
+/* comment styles */
+
+#comments {
+  padding-top: 10px;
+  font-size: 85%;
+  line-height: 1.5em;
+  color: #666;
+  background: #eee url(http://www.blogblog.com/tictac/comments_curve.gif) no-repeat top left;
+  }
+
+#comments h4 {
+  margin: 20px 0 15px 0;
+  padding: 8px 0 0 40px;
+  font-family: "Lucida Grande", "Trebuchet MS";
+  font-size: 130%;
+  color: #666;
+  background: url(http://www.blogblog.com/tictac/bubbles.gif) no-repeat 10px 0;
+  height: 29px !important; /* for most browsers */
+  height /**/:37px; /* for IE5/Win */
+  }
+  
+#comments ul {
+  margin-left: 0;
+  }
+
+#comments li {
+  background: none;
+  padding-left: 0;
+  }
+  
+.comment-body {
+  padding: 0 10px 0 25px;
+  background: url(http://www.blogblog.com/tictac/tictac_orange.gif) no-repeat 10px 5px;
+  }
+
+.comment-body p {
+  margin-bottom: 0;
+  }
+
+.comment-data {
+  margin: 4px 0 0 0;
+  padding: 0 10px 1em 60px;
+  color: #999;
+  border-bottom: 1px solid #ddd;
+  background: url(http://www.blogblog.com/tictac/comment_arrow.gif) no-repeat 44px 2px;
+  }
+
+
+.deleted-comment {
+  font-style:italic;
+  color:gray;
+  }
+
+.comment-link {
+  margin-left:.6em;
+  }
+
+/* ---( sidebar )--- */
+
+h2.sidebar-title {
+  margin: 0 0 0 0;
+  padding: 25px 0 0 50px;
+  font-family: "Lucida Grande", "Trebuchet MS";
+  font-size: 130%;
+  color: #666;
+  height: 32px;
+  background: url(http://www.blogblog.com/tictac/sidebar_icon.gif) no-repeat 20px 15px;
+  height: 32px !important; /* for most browsers */
+  height /**/:57px; /* for IE5/Win */
+  }
+
+#sidebar ul, #sidebar p {
+  margin: 0;
+  padding: 5px 20px 1em 20px;
+  border-bottom: 1px solid #ddd;
+  }
+
+#sidebar li {
+  background: url(http://www.blogblog.com/tictac/tictac_green.gif) no-repeat 0 5px;
+  }
+
+/* profile block */
+
+.profile-datablock {
+  margin: 0;
+  padding: 5px 20px 0 20px;
+  }
+
+.profile-datablock dd {
+  margin: 0;
+  padding: 0;
+  }
+
+.profile-img img {
+  float: left;
+  margin: 0 10px 0 0;
+  padding: 4px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #c0c0c0;
+  border-right: 1px solid #c0c0c0;
+  background: #fff;
+  }
+
+#sidebar p.profile-link {
+  padding-left: 36px;
+  background: url(http://www.blogblog.com/tictac/profile.gif) no-repeat 20px 4px;
+  }
+
+p#powered-by, #sidebar p.profile-textblock {
+  margin-top: 1em;
+  border: none;
+  }
+
+/* ---( footer )--- */
+
+.clear { /* to fix IE6 padding-top issue */
+  clear: both;
+  height: 0;
+  }
+
+@media all {
+  #footer {
+    margin: 0;
+    padding: 0 0 9px 0;
+    font-size: 85%;
+    color: #ddd;
+    background: url(http://www.blogblog.com/tictac/bottom_sill.gif) no-repeat bottom left;
+    }
+
+  #footer p {
+    margin: 0;
+    padding: 20px 320px 20px 95px;
+    background: url(http://www.blogblog.com/tictac/bottom_sash.gif) no-repeat top left;
+    }
+  }
+@media handheld {
+  #footer {
+    background: none;
+    }
+
+  #footer p {
+    background: none;
+    }
+  }
+
+
+/* ---- overrides for post page ---- */
+
+.post {
+  padding: 0;
+  border: none;
+  }
+
+
+</style>
+
+
+<!-- --><style type="text/css">@import url(http://www.blogger.com/css/navbar/classic.css);
+div.b-mobile {display:none;}
+</style>
+
+</head><body><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener("load",
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<iframe src="js_estruturas-de-controle-e-objetos_arquivos/navbar.html" marginwidth="0" marginheight="0" id="navbar-iframe" title="Blogger Navigation and Search" scrolling="no" width="100%" frameborder="0" height="30"></iframe>
+<div></div>
+
+<div id="wrap"> <!-- #wrap - for centering -->
+
+<!-- Blog Header -->
+<div id="blog-header">
+  <h1>
+    <a href="http://jsdev.blogspot.com/">
+	JavaScript Developer
+	</a>
+  </h1>
+</div>
+
+
+<div id="content"> <!-- #content wrapper -->
+
+<!-- Begin #main-content -->
+<div id="main-content">
+
+<div class="adsense" style="padding: 0px 3px 0.5em; text-align: center;">
+<script type="text/javascript"><!--
+google_ad_client="pub-1970509783106566";
+google_ad_host="pub-1556223355139109";
+google_ad_width=468;
+google_ad_height=60;
+google_ad_format="468x60_as";
+google_ad_type="text";
+google_color_border="E0E0E0";
+google_color_bg="E0E0E0";
+google_color_link="FF6633";
+google_color_url="FF6633";
+google_color_text="FF9933";
+//--></script>
+<script type="text/javascript" src="js_estruturas-de-controle-e-objetos_arquivos/show_ads.js">
+</script><script> window.google_render_ad(); </script><iframe name="google_ads_frame" src="js_estruturas-de-controle-e-objetos_arquivos/ads.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="468" frameborder="0" height="60"></iframe>
+
+
+</div>
+
+
+    
+  <h2 class="date-header">Segunda-feira, Setembro 11, 2006</h2>
+  
+  
+     
+  <!-- Begin .post -->
+  <div class="post"><a name="115800933951330072"></a>
+     
+    
+    <h3 class="post-title">
+	 
+	 Estruturas de Controle e Objetos
+	 
+    </h3>
+    
+     
+    <div class="post-body">
+    
+      <p></p><div style="clear: both;"></div>Como
+dito no artigo anterior, hoje iremos ver as estruturas de controle do
+JavaScript e vamos iniciar os estudos a programação orientada a objetos
+em JavaScript. Como eu disse antes, não tenho interção de ensinar
+lógica aqui, por isso irei apenas deixar alguns exemplos comentados
+usando as estruturas de controle, mandem e-mail ou comentários em caso
+de dúvidas.<br><br><b>Estrutura <i>if</i> e estrura <i>else</i>:</b><br><br><code>var a = 3;<br>var b = 5;<br>var c = 3;<br><br>if(a &lt; b) { //se a for menor que b<br> alert('"a" é menor que "b"');<br>} else { //caso contrario<br> alert('"a" não é menor que "b"');<br>}<br><br>if(a == c) { //se a for igual a c<br> alert('"a" é igual a "c"');<br>}</code><br><br><b>Estrutura <i>switch case</i>:</b><br><br><code>var a = 3;<br><br>switch(a) {<br> case 1: //se a for 1<br>  alert('"a" é 1');<br>  break;<br> case 2: //se a for 2<br>  alert('"a" é 2');<br>  break;<br> case 3: //se a for 3<br>  alert('"a" é 3');<br>  break;<br> case 4: //se a for 4<br>  alert('"a" é 4');<br>  break;<br> default: //se a nao for nenhum dos casos, entao use o padrao<br>  alert('"a" não está em nenhum dos outros valores');<br>}</code><br><br>Lembrando que o <b>switch case</b> do JavaScript também aceita valores de string, exemplo:<br><br><code>var a = 'pessoa';<br><br>switch(a) {<br> case 'pessoa':<br>  alert('anda sobre 2 pernas');<br>  break;<br> case 'cachorro':<br>  alert('anda sobre 4 pernas');<br>  break;<br> case 'passaro':<br>  alert('voa');<br>  break;<br> default:<br>  alert('desconhecido');<br>}</code><br><br><b>Estrutura <i>while</i>:</b><br><br><code>var a = 1;<br><br>while(a &lt; 10) {<br> alert(a + ' vezes');<br> a++;<br>}</code><br><br><b>Estrutura <i>for</i>:</b><br><br><code>for(var i = 0; i &lt; 10; i++) {<br> alert('ciclo ' + i);<br>}</code><br><br>Ainda existe outra estrutura para o <b>for</b>, que é o chamado <b>for in</b>, vamos ver isso ainda nesse artigo mais adiante.<br><br>Temos a estrutura <b>with</b> mas também deixaremos ela mais para frente.<br><br><b>Objetos</b><br>Vamos
+agora iniciar nossos estudos quanto a criação de objetos com
+JavaScript. Como dito antes, tudo em JavaScript são objetos, você as
+vezes cria objetos e os usa sem nem se dar conta disso, vamos ver 2
+maneiras de iniciar um objeto em branco:<br><br><code>var meuObjeto = new Object();<br>var outroObject = {};</code><br><br>Use qual você preferir, eu prefiro a segunda porque assim eu escrevo menos :P<br>Agora temos incríveis objetos em branco que não fazem nada!! Não é maravilhoso?<br>Brincadeiras
+de lado, em JavaScript todos os objetos são dinâmicos, ou seja, eu
+posso adicionar recursos a eles a qualquer hora, criar variáveis e
+métodos que nunca existiram nele, podemos mudar isso apenas no objeto
+atual, ou podemos modificar o seu <b>prototype</b>, modificando o <b>prototype</b> nós podemos adicionar variáveis e métodos para todas as instâncias de um objeto. Vamos então criar nosso primeiro objeto útil:<br><br><code>var Circunferencia = function() {};<br>Circunferencia.prototype.raio = 1; //valor padrao<br><br>Circunferencia.prototype.diametro = function() {<br> return this.raio * 2;<br>};<br><br>Circunferencia.prototype.perimetro = function() {<br> return 2 * Math.PI * this.raio;<br>};<br><br>Circunferencia.prototype.area = function() {<br> return Math.PI * this.raio * this.raio;<br>};<br><br>var b = new Circunferencia();<br><br>b.raio = 5;<br>alert(b.diametro());<br>alert(b.perimetro());<br>alert(b.area());<br><br>b.raio = 7;<br>alert(b.diametro());<br>alert(b.perimetro());<br>alert(b.area());<br><br>b.raio = 10;<br>alert(b.diametro());<br>alert(b.perimetro());<br>alert(b.area());</code><br><br>O
+objeto para ter seu prototype modificado precisa iniciar-se a partir de
+uma função, os objetos que sao iniciados das outras formas servem mais
+como estruturas de dados, para transferir informações.<br><br>Temos acima um simples objeto <b>Circunferencia</b> que tem a variável <b>raio</b> e os métodos <b>diametro()</b>, <b>perimetro()</b> e <b>area</b>. Nós estamos adicionando esses métodos no objeto <b>prototype</b>
+dentro da nossa classe, isso porque quando mudamos o prototype, nós
+alteramos a classe propriamente dita, então todas as instâncias de bola
+terão esses métodos/variáveis. Veja que quando estamos dentro de um
+método e queremos acessar outros recursos da classe, temos que colocar
+o <b>this</b> seguido de um <b>.</b> para termos a referencia dessas
+variáveis/métodos. Alguns agora podem estar se perguntando: "e como eu
+faço pra criar um inicializador para minha classe?". Ai é só
+colocar-mos algo na função de criação, assim ela se torna o
+inicializador, vamos ver isso:<br><br><code>var Circunferencia = function(raio) {<br> this.raio = raio;<br>};<br><br>Circunferencia.prototype.diametro = function() {<br> return this.raio * 2;<br>};<br><br>Circunferencia.prototype.perimetro = function() {<br> return 2 * Math.PI * this.raio;<br>};<br><br>Circunferencia.prototype.area = function() {<br> return Math.PI * this.raio * this.raio;<br>};<br><br>var b = new Circunferencia(5);<br><br>alert(b.diametro());<br>alert(b.perimetro());<br>alert(b.area());<br><br>b.raio = 7;<br>alert(b.diametro());<br>alert(b.perimetro());<br>alert(b.area());<br><br>b.raio = 10;<br>alert(b.diametro());<br>alert(b.perimetro());<br>alert(b.area());</code><br><br>Simples não? Na verdade não estamos criando exatamente um objeto novo, e sim modificando um objeto do tipo <b>function</b>, parece meio louco, mas logo logo você se acostuma.<br><br>Antes de terminarmos vamos usar nosso exemplo anterior para demostrar o uso de <b>for in</b> e <b>with</b>:<br><br><code>var Circunferencia = function(raio) {<br> this.raio = raio;<br>};<br><br>Circunferencia.prototype.diametro = function() {<br> return this.raio * 2;<br>};<br><br>Circunferencia.prototype.perimetro = function() {<br> return 2 * Math.PI * this.raio;<br>};<br><br>Circunferencia.prototype.area = function() {<br> return Math.PI * this.raio * this.raio;<br>};<br><br>var b = new Circunferencia(5);<br><br>with(b) {<br> alert(diametro());<br> alert(perimetro());<br> alert(area());<br><br> raio = 7;<br> alert(diametro());<br> alert(perimetro());<br> alert(area());<br><br> raio = 10;<br> alert(diametro());<br> alert(perimetro());<br> alert(area());<br>}<br><br>for(var p in b) {<br> alert(p + ' ==&gt; ' + b[p]);<br>}</code><br><br>Como vimos acima, o <b>with</b>
+é usado para manter um objeto quando ele vai ser muito usado, assim
+sempre que apontar-mos as coisas, é como se já estivemos avisando que
+estão na variável que definimos no <b>with</b>. Já o <b>for in</b> serve para passarmos por tudo que tem dentro de um objeto, dizemos o nome da chave (<b>p</b> no nosso caso) <b>in</b>
+e o nome da variável, assim como se fosse um array associativo, podemos
+pegar os métodos/variáveis de um objeto passando seu nome dentro de
+cochetes.<br><br>Segue agora a referêcia do Object, todos os objetos do JavaScript contém os métodos e propriedades citadas abaixo:<br><br><code style="white-space: normal;"><b>Object (Built-in Object)</b><br>Object
+is the basic object from which all other objects are derived. It
+defines methods common to all objects that are often overridden to
+provide functionality specific to each object type. For example, the
+Array object provides a toString() method that functions as one would
+expect an array’s toString() method to behave.This object also permits
+the creation of user-defined objects and instances are quite often used
+as associative arrays.<br><br><b>Constructor</b><br>var instanceName = new Object(); <br><br>This statement creates a new (generic) object.<br><br><b>Properties</b><br><b>prototype</b>
+The prototype for the object. This object defines the properties and
+methods common to all objects of this type. (IE4+ (JScript 3.0+), MOZ,
+N3+ (JavaScript 1.1+), ECMA Edition 1)<br><br><b>Methods</b><br><b>hasOwnProperty(property)</b>
+Returns a Boolean indicating whether the object has an instance
+property by the name given in the string property. (IE5.5+, MOZ/N6+,
+ECMA Edition 3)<br><br><b>isPrototypeOf(obj)</b> Returns a Boolean
+indicating if the object referenced by obj is in the object’s prototype
+chain. (IE5.5+, MOZ/N6+, ECMA Edition 3)<br><br><b>propertyIsEnumerable(property)</b>
+Returns a Boolean indicating if the property with the name given in the
+string property will be enumerated in a for/in loop. (IE5.5+, MOZ/N6+,
+ECMA Edition 3)<br><br><b>toSource()</b> Returns a string containing a JavaScript literal that describes the object. (MOZ, N4.06+ (JavaScript 1.3+)) <br><br><b>toString()</b>
+Returns the object a string, by default "[object Object]". Very often
+overridden to provide specific functionality. (IE4+ (JScript 3.0+),
+MOZ, N2+ (JavaScript 1.0+), ECMA Edition 1)<br><br><b>unwatch(property)</b> Disables watching of the object’s property given by the string property. (N4 (JavaScript 1.2))<br><br><b>valueOf()</b>
+Returns the primitive value associated with the object, by default the
+string "[object Object]". Often overridden to provide specific
+functionality. (IE4+ (JScript 3.0+), N3+ (JavaScript 1.1+), ECMA
+Edition 1)<br><br><b>watch(property, handler)</b> Sets a watch on the
+object’s property given in string property. Whenever the value of the
+property changes, the function handler is invoked with three arguments:
+the name of the property, the old value, and the new value it is being
+set to. The handler can override the setting of the new value by
+returning a value, which is set in its place. (N4 (JavaScript 1.2))<br><br><b>Support</b><br>Supported in IE4+ (JScript 3.0+), MOZ, N2+ (JavaScript 1.0+), ECMAScript Edition 1.<br></code><br><br>Por
+hoje é tudo, como já sabem: dúvidas, críticas, sugestões, podem me
+mandar um e-mail (wilkerlucio@gmail.com) ou deixem um comentário ;)<div style="clear: both; padding-bottom: 0.25em;"></div>
+    
+    </div>
+    
+    <p class="post-footer">posted by Wilker Lúcio at 
+      <a href="http://jsdev.blogspot.com/2006/09/estruturas-de-controle-e-objetos.html" title="permanent link">6:14 PM</a> 
+       <span class="item-control blog-admin pid-498761067"><a style="border: medium none ;" href="http://www.blogger.com/post-edit.g?blogID=34235652&amp;postID=115800933951330072" title="Editar postagem"><img class="icon-action" alt="" src="js_estruturas-de-controle-e-objetos_arquivos/icon18_edit_allbkg.html" width="18" height="18"></a></span></p>
+  
+  </div>
+  <!-- End .post -->
+  
+  
+   <!-- Begin #comments -->
+ 
+
+  <div id="comments">
+
+	<a name="comments"></a>
+    
+    <h4>4 Comments:</h4>
+    
+    <ul>
+      
+      <li id="c115811917134474956"><a name="c115811917134474956"></a>
+        <div class="comment-body">
+         <p>Parabens pelos artigos, estão ótimos, feed assinada! :D<br><br>Ah, vc podia por um link pro feedburner, pra facilitar a assinatura da feed :)</p>
+        </div>
+        <p class="comment-data">By <span style="line-height: 16px;" class="comment-icon anon-comment-icon"><img src="js_estruturas-de-controle-e-objetos_arquivos/anon16-rounded.html" alt="Anonymous" style="display: inline;"></span>&nbsp;<span class="anon-comment-author">Luã de Souza</span>, at <a href="#c115811917134474956" title="comment permalink">12:46 AM</a>
+	  <span class="item-control blog-admin pid-143589697"><a style="border: medium none ;" href="http://www.blogger.com/delete-comment.g?blogID=34235652&amp;postID=115811917134474956" title="Excluir comentário"><span class="delete-comment-icon">&nbsp;</span></a></span></p>
+      </li>
+      
+      <li id="c115834050013701799"><a name="c115834050013701799"></a>
+        <div class="comment-body">
+         <p>Muito
+legal as dicas... É importante para quem está começando a programar
+agora e bom para tirar dúvidas também... Continue assim !</p>
+        </div>
+        <p class="comment-data">By <span style="line-height: 16px;" class="comment-icon anon-comment-icon"><img src="js_estruturas-de-controle-e-objetos_arquivos/anon16-rounded.html" alt="Anonymous" style="display: inline;"></span>&nbsp;<span class="anon-comment-author">dcardoso</span>, at <a href="#c115834050013701799" title="comment permalink">2:15 PM</a>
+	  <span class="item-control blog-admin pid-143589697"><a style="border: medium none ;" href="http://www.blogger.com/delete-comment.g?blogID=34235652&amp;postID=115834050013701799" title="Excluir comentário"><span class="delete-comment-icon">&nbsp;</span></a></span></p>
+      </li>
+      
+      <li id="c115880482260459132"><a name="c115880482260459132"></a>
+        <div class="comment-body">
+         <p>Preciso de uma lista detalhada com todos os objetos do javascript. Sabe onde posso encontrar?</p>
+        </div>
+        <p class="comment-data">By <span style="line-height: 16px;" class="comment-icon anon-comment-icon"><img src="js_estruturas-de-controle-e-objetos_arquivos/anon16-rounded.html" alt="Anonymous" style="display: inline;"></span>&nbsp;<span class="anon-comment-author">Anônimo</span>, at <a href="#c115880482260459132" title="comment permalink">11:13 PM</a>
+	  <span class="item-control blog-admin pid-143589697"><a style="border: medium none ;" href="http://www.blogger.com/delete-comment.g?blogID=34235652&amp;postID=115880482260459132" title="Excluir comentário"><span class="delete-comment-icon">&nbsp;</span></a></span></p>
+      </li>
+      
+      <li id="c115883747664486720"><a name="c115883747664486720"></a>
+        <div class="comment-body">
+         <p>MUITO bom cara!<br>Vou começar a aprender Java Script aqui com você, muito melhor que qualquer outro curso ou tutorial!<br><br>VALEU!</p>
+        </div>
+        <p class="comment-data">By <span style="line-height: 16px;" class="comment-icon anon-comment-icon"><img src="js_estruturas-de-controle-e-objetos_arquivos/anon16-rounded.html" alt="Anonymous" style="display: inline;"></span>&nbsp;<span class="anon-comment-author">Anônimo</span>, at <a href="#c115883747664486720" title="comment permalink">8:17 AM</a>
+	  <span class="item-control blog-admin pid-143589697"><a style="border: medium none ;" href="http://www.blogger.com/delete-comment.g?blogID=34235652&amp;postID=115883747664486720" title="Excluir comentário"><span class="delete-comment-icon">&nbsp;</span></a></span></p>
+      </li>
+      
+    </ul>
+	
+	<p class="comment-data">
+    <a class="comment-link" href="https://www.blogger.com/comment.g?blogID=34235652&amp;postID=115800933951330072&amp;isPopup=true" onclick="window.open(this.href, 'bloggerPopup', 'toolbar=0,scrollbars=1,location=0,statusbar=1,menubar=0,resizable=1,width=400,height=450');return false;">Postar um comentário</a>
+    <br><br>
+
+		    
+    
+
+
+
+	<a href="http://jsdev.blogspot.com/">&lt;&lt; Home</a>
+    </p>
+    </div>
+  
+
+  <!-- End #comments -->
+
+
+
+  <hr>
+</div><!-- End #main-content -->
+</div><!-- End #content -->
+
+
+
+<!-- Begin #sidebar -->
+<div id="sidebar">
+
+  <h2 class="sidebar-title">Sobre</h2>
+  
+  <p></p>
+  
+   <!-- Begin #profile-container -->
+   
+   <div id="profile-container"><h2 class="sidebar-title">Quem sou eu</h2>
+<dl class="profile-datablock">
+<dd class="profile-data"><strong>Nome:</strong>  Wilker Lúcio </dd>
+<dd class="profile-data"><strong>Local:</strong>  Recife, Pernambuco, Brazil </dd></dl>
+
+<p class="profile-link"><a href="http://www.blogger.com/profile/08197133298620910758">Visualizar meu perfil completo</a></p></div>
+   
+     <!-- End #profile -->
+    
+        
+  
+  <h2 class="sidebar-title">Anteriores</h2>
+  
+  <ul id="recently">
+    
+        <li><a href="http://jsdev.blogspot.com/2006/09/funes-com-mais-detalhes.html">Funções com mais detalhes</a></li>
+     
+        <li><a href="http://jsdev.blogspot.com/2006/09/conceitos-variveis-e-funes.html">Conceitos, Variáveis e Funções</a></li>
+     
+  </ul>
+  
+  
+  
+  <!--<h2 class="sidebar-title">Novidade</h2>
+  
+  <p>This is a paragraph of text in the sidebar.</p>
+  -->
+
+<center><br>
+  <script type="text/javascript"><!--
+google_ad_client = "pub-1970509783106566";
+google_ad_host = "pub-1599271086004685";
+google_ad_width = 120;
+google_ad_height = 240;
+google_ad_format = "120x240_as_rimg";
+google_cpa_choice = "CAAQ3eeWnAIaCAo8Ln_DWGwyKIu-93M";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript" src="js_estruturas-de-controle-e-objetos_arquivos/show_ads.js">
+</script><script> window.google_render_ad(); </script><iframe name="google_ads_frame" src="js_estruturas-de-controle-e-objetos_arquivos/ads_002.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="120" frameborder="0" height="240"></iframe>
+
+  <p id="powered-by"><a href="http://www.blogger.com/"><img src="js_estruturas-de-controle-e-objetos_arquivos/bloggerbutton1.html" alt="Powered by Blogger"></a></p>
+
+</center>
+</div>
+<!-- End #sidebar -->
+
+<div class="clear">&nbsp;</div>
+
+<div id="footer">
+   <p><!-- If you'd like, you could place footer information here. -->&nbsp;</p>
+</div>
+
+</div> <!-- end #wrap -->
+
+<!-- c(~) -->
+</body></html>

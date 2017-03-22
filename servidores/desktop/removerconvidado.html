@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - Remover Convidado</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">Remover Convidado</h2>
+
+
+<p>Edite o arquivo: sudo gedit /etc/lightdm/lightdm.conf</p>
+
+<p><strong>original:</strong></p>
+
+<p>[SeatDefaults]<br />
+greeter-session=unity-greeter<br />
+user-session=ubuntu</p>
+
+<p><br />
+<strong>Modifique para:</strong></p>
+
+<p>[SeatDefaults]<br />
+greeter-session=unity-greeter<br />
+user-session=ubuntu<br />
+allow-guest=false</p>
+
+<p>Reinicie ou execute: sudo restart lightdm</p>
+
+<p><strong>Fonte da informa&ccedil;&atilde;o: </strong></p>
+
+<p>&lt;a href=&quot;http://ftbeowulf.wordpress.com/2011/10/19/how-to-disable-the-ubuntu-11-10-guest-session/&quot;&gt;http://ftbeowulf.wordpress.com/2011/10/19/how-to-disable-the-ubuntu-11-10-guest-session/&lt;/a&gt;</p>
+
+<p>&nbsp;</p>
+

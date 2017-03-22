@@ -1,0 +1,133 @@
+Outros Helpers do Cake
+
+2.4
+Helpers are now loaded during View construction. This ensures that helpers are always available.
+
+
+Criando helper
+/app/View/Helper/HelloHelper.php
+
+class ShowHelper extends AppHelper {
+    public function hello($name) {
+	return 'Hello: '. $name;
+    }
+}
+
+Usando:
+echo $this->Show->hello('World');
+
+
+NumberHelper
+
+App::import('Helper', 'Number');
+$Number = new NumberHelper(new View(null));
+$number = '535';
+echo $Number->currency($number, 'BRR');
+
+Precisão
+
+App::import('Helper', 'Number');
+$Number = new NumberHelper(new View(null));
+$number = '535.45678';
+echo $Number->precision(456.91873645, 2);// Outputs: 456.92
+
+Porcentagem
+
+App::import('Helper', 'Number');
+$Number = new NumberHelper(new View(null));
+echo $Number->toPercentage(45.691873645); // Outputs: 45.69%
+
+CakeNumber
+
+App::uses('CakeNumber', 'Utility');
+echo CakeNumber::format('123456.7890', array(
+    'places' => 2,
+    'before' => 'R$ ',
+    'escape' => false,
+    'decimals' => ',',
+    'thousands' => '.'
+));
+
+Retorna: R$ 123.456,79 
+Desabilitar o cache:
+No core.php descomentar a linha abaixo
+// Configure::write('Cache.disable', true);
+
+
+CakePHP Ajax Helper
+
+autoComplete ($field, $url="", $options=array())
+div ($id, $options=array())
+divEnd ($id)
+drag ($id, $options=array())
+drop ($id, $options=array())
+dropRemote ($id, $options=array(), $ajaxOptions=array())
+editor ($id, $url, $options=array())
+form ($params=null, $type= 'post', $options=array())
+isAjax ()
+link ($title, $href=null, $options=array(), $confirm=null, $escapeTitle=true)
+observeField ($field_id, $options=array())
+observeForm ($field_id, $options=array())
+remoteFunction ($options=null)
+remoteTimer ($options=null)
+slider ($id, $track_id, $options=array())
+sortable ($id, $options=array())
+submit ($title= 'Submit', $options=array())
+        
+
+CakePHP Text Helper
+
+highlight ($text, $phrase, $highlighter= '< span class="highlight">\1</span >')
+stripLinks ($text)
+autoLinkUrls ($text, $htmlOptions = array())
+autoLinkEmails ($text, $htmlOptions = array())
+autoLink ($text, $htmlOptions = array())
+truncate ($text, $length, $ending = '...', $exact = true)
+trim ()
+excerpt ($text, $phrase, $radius = 100, $ending = "...")
+flay ($text, $allowHtml = false)
+        
+
+CakePHP Time Helper
+
+dayAsSql ($date_string, $field_name, $return = false)
+daysAsSql ($begin, $end, $field_name, $return = false)
+fromString ($date_string)
+isThisYear ($date_string, $return = false)
+isToday ($date_string, $return = false)
+isTomorrow ($date_string, $return = false)
+nice ($date_string=null, $return = false)
+niceShort ($date_string=null, $return = false)
+relativeTime ($datetime_string, $format = 'j/n/y', $return = false)
+timeAgoInWords ($datetime_string, $format = 'j/n/y', $backwards = false, $return = false)
+toAtom ($date_string, $return = false)
+toRSS ($date_string, $return = false)
+toUnix ($date_string, $return = false)
+trim ($string, $length, $ending = '..')
+wasWithinLast ($timeInterval, $date_string, $return = false)
+wasYesterday ($date_string, $return = false)
+
+Para que o TimeHelper Funcione:
+Formatar Usando o TimeHelper
+App::import( 'Helper', 'Time' );
+$time = new TimeHelper(new View);
+echo $time->format('d/m/Y', '2011-08-22 11:53:00');
+        
+
+CakePHP Number Helper
+
+precision ($number, $precision = 3)
+toReadableSize ($size)
+toPercentage ($number, $precision = 2)
+        
+
+http://book.cakephp.org/2.0/en/views/helpers.html
+http://book.cakephp.org/2.0/en/core-libraries/toc-helpers.html
+http://book.cakephp.org/2.0/en/core-libraries/helpers/js.html
+http://book.cakephp.org/2.0/en/core-libraries/helpers/number.html
+http://book.cakephp.org/2.0/en/core-libraries/helpers/paginator.html
+http://book.cakephp.org/2.0/en/core-libraries/helpers/rss.html
+http://book.cakephp.org/2.0/en/core-libraries/helpers/session.html
+http://book.cakephp.org/2.0/en/core-libraries/helpers/text.html
+http://book.cakephp.org/2.0/en/core-libraries/helpers/time.html
+

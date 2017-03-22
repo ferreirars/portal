@@ -1,0 +1,78 @@
+
+
+	public function total() {		
+		$mes = $this->request->data['Despesa']['mes'];
+		$total=$this->Despesa->despesasTotal($mes);
+
+		if($total > 0){
+			$this->Session->setFlash(__('Despesas do mês de '.$mes));	
+			$this->set('total', $total);
+		}else{
+			$this->Session->setFlash(__('Nenhuma despesa cadastrada no mês de '.$mes));			
+			return $this->redirect(array('action' => 'index'));
+		}
+	}
+
+
+	public function recibo($id) {
+
+		if (!$this->Recibo->exists($id)) {
+			throw new NotFoundException(__('Invalid recibo'));
+		}		
+		$options = array('conditions' => array('Recibo.id' => $id));
+		$this->set('recibo', $this->Recibo->find('first', $options));
+		$rec=$this->Recibo->find('first', $options);
+
+		$mes = $rec['Recibo']['mes'];		
+
+		$mesquery = $this->Relatorio->query("select numero from relatorios where mes = '$mes'");
+		$nr=$mesquery[0]['relatorios']['numero'];
+
+		if($nr=='101'){
+			$this->Session->setFlash(__('Este relatório já está cadastrado!'));
+			$this->redirect(array('action' => 'index'));
+		}
+
+		$cag = $this->Despesa->cageceTotal($mes);
+		if($cag == 0){
+			$this->Session->setFlash(__('Despesas não cadastradas para este mês!'));
+			$this->redirect(array('action' => 'index'));
+		}
+
+		if($cag > 0){
+			$vencimento = '10/'.$mes;
+			$pessoasTotal = $this->Unidade->pessoasTotal();
+			$unidadesTotal = $this->Unidade->unidadesTotal();
+			$despesasCondTotal = $this->Despesa->despesasCondTotal($mes);
+			$cotaCond = round(($despesasCondTotal/$unidadesTotal),2);
+			$cageceTotal = $this->Despesa->cageceTotal($mes);
+
+			// Todos os aptos
+			for ($x=1;$x<13;$x++){
+				if($x < 6) 	$numero = 100+$x;
+				if($x >= 6 && $x <10)$numero = 195+$x;
+				if($x==10) $numero = '536A';
+				if($x==11) $numero = '538';
+				if($x==12) $numero = '540';
+
+				$inquilino = $this->Unidade->inquilino($numero);
+				$pessoasApto = $this->Unidade->pessoasApto($numero);
+				$cotaAgua = round(($cageceTotal/$pessoasTotal)*$pessoasApto,2);
+				$multa = $this->Extra->multa($numero,$mes);
+				if(!$multa) $multa=0;
+				$observacao = $this->Extra->observacao($numero,$mes);
+				$total = $cotaAgua + $cotaCond + $multa;
+
+				$rel=$this->Relatorio->query("insert into relatorios
+			 (numero,mes,vencimento,inquilino,pessoas,cagece,condominio,multa,total,observacao) values
+	 ('$numero','$mes','$vencimento','$inquilino','$pessoasApto','$cotaAgua','$cotaCond','$multa','$total','$observacao')");
+			}
+		
+			$this->Session->setFlash(__('Recibos cadastrados com sucesso! Veja o relatório!'));
+			$this->redirect(array('controller'=>'relatorios','action' => 'index'));
+		}else{
+			$this->Session->setFlash(__('As despesas deste mês não foram cadastradas ainda!'));
+			$this->redirect(array('action' => 'index'));
+		}
+	}
+

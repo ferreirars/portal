@@ -1,0 +1,48 @@
+select * from information_schema.tables
+ where table_schema='condominio' and table_name='despesas';
+
+
+SELECT column_name, column_type FROM INFORMATION_SCHEMA.columns where table_name='despesas'
+
+Field Type
+SELECT column_name, column_type FROM INFORMATION_SCHEMA.columns where table_name='despesas' and column_name='descricao'
+
+Ou
+SHOW COLUMNS FROM despesas WHERE Field = 'descricao'
+
+Field Len
+SELECT character_maximum_length as len FROM INFORMATION_SCHEMA.columns where table_name='$table' and column_name='$fldName'
+
+SELECT VERSION( )	Server version string
+SELECT DATABASE( )	Current database name (empty if none)
+SELECT USER( )	Current username
+SHOW STATUS	Server status indicators
+SHOW VARIABLES	Server configuration variables
+
+Consulta com metadados para retornar os nomes de todas as tabelas de um banco:
+SELECT * FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema = 'joomla';
+
+Retornar todos os bancos:
+SELECT * FROM INFORMATION_SCHEMA.schemata
+
+SELECT TABLE_SCHEMA, TABLE_NAME, ENGINE, TABLE_ROWS, DATA_LENGTH, AUTO_INCREMENT FROM TABLES WHERE TABLE_SCHEMA = 'nomeBanco';
+
+SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, COLUMN_TYPE, COLLATION_NAME 
+FROM COLUMNS WHERE 1 = 1 AND TABLE_SCHEMA='condominio' AND COLUMN_NAME='descricao';
+
+SELECT COLLATION('abc')
+
+SHOW TABLES
+
+Primary Key de uma tabela
+SHOW INDEX FROM despesas
+
+Foreign Key (somente para tabela com chave estrangeira)
+select column_name, concat(referenced_table_name, '.', referenced_column_name) as 'references' 
+from information_schema.key_column_usage where referenced_table_name is not null and table_name='$table';
+-- Retorna todas as chaves estrangeiras
+
+use information_schema;
+show tables;
+
+

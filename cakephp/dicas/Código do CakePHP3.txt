@@ -1,0 +1,146 @@
+Código do CakePHP3
+
+Controller
+
+class ArticlesController extends AppController
+{
+
+	public function initialize()
+    {
+        parent::initialize();
+		// Requerido
+        $this->loadComponent('Flash'); // Include the FlashComponent
+    }
+
+    public function index()
+    {
+        $articles = $this->Articles->find('all');
+        $this->set(compact('articles'));
+    }
+
+    public function view($id = null)
+    {
+        $article = $this->Articles->get($id);
+        $this->set(compact('article'));
+    }
+
+    public function add()
+    {
+        $article = $this->Articles->newEntity();
+        if ($this->request->is('post')) {
+            $article = $this->Articles->patchEntity($article, $this->request->data);
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to add your article.'));
+        }
+        $this->set('article', $article);
+    }
+
+	public function edit($id = null)
+	{
+		$article = $this->Articles->get($id);
+		if ($this->request->is(['post', 'put'])) {
+		    $this->Articles->patchEntity($article, $this->request->data);
+		    if ($this->Articles->save($article)) {
+		        $this->Flash->success(__('Your article has been updated.'));
+		        return $this->redirect(['action' => 'index']);
+		    }
+		    $this->Flash->error(__('Unable to update your article.'));
+		}
+
+		$this->set('article', $article);
+	}
+
+	public function delete($id)
+	{
+		$this->request->allowMethod(['post', 'delete']);
+
+		$article = $this->Articles->get($id);
+		if ($this->Articles->delete($article)) {
+		    $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+		    return $this->redirect(['action' => 'index']);
+		}
+	}
+}
+
+Template/view index.ctp
+
+<!-- File: src/Template/Articles/index.ctp  (edit links added) -->
+
+<h1>Blog articles</h1>
+<p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Created</th>
+        <th>Action</th>
+    </tr>
+
+<!-- Here's where we iterate through our $articles query object, printing out article info -->
+
+<?php foreach ($articles as $article): ?>
+    <tr>
+        <td><?= $article->id ?></td>
+        <td>
+            <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+        </td>
+        <td>
+            <?= $article->created->format(DATE_RFC850) ?>
+        </td>
+        <td>
+            <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+        </td>
+		<td>
+            <?= $this->Form->postLink(
+                'Delete',
+                ['action' => 'delete', $article->id],
+                ['confirm' => 'Are you sure?'])
+            ?>
+            <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+        </td>
+    </tr>
+<?php endforeach; ?>
+
+</table>
+
+<!-- File: src/Template/Articles/view.ctp -->
+
+<h1><?= h($article->title) ?></h1>
+<p><?= h($article->body) ?></p>
+<p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
+
+<!-- File: src/Template/Articles/add.ctp -->
+
+<h1>Add Article</h1>
+<?php
+    echo $this->Form->create($article);
+    echo $this->Form->input('title');
+    echo $this->Form->input('body', ['rows' => '3']);
+    echo $this->Form->button(__('Save Article'));
+    echo $this->Form->end();
+?>
+
+<!-- File: src/Template/Articles/edit.ctp -->
+
+<h1>Edit Article</h1>
+<?php
+    echo $this->Form->create($article);
+    echo $this->Form->input('title');
+    echo $this->Form->input('body', ['rows' => '3']);
+    echo $this->Form->button(__('Save Article'));
+    echo $this->Form->end();
+?>
+
+
+    <?= $this->Form->create($articles, [
+          'url'   => [
+               'controller' => 'Articles','action' => 'busca'
+           ], 
+          'id'    => 'web-form', 
+          'class' =>'panel-body wrapper-lg'
+       ]
+	) ?>
+

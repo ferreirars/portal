@@ -1,0 +1,96 @@
+
+Para adicionar um novo código: model, controller e view:
+Quero ver numa view o total das despesas
+
+model:
+	public function despesasTotal($mes){
+        $despesas = $this->find('all', array(
+            'conditions'=>array('Despesa.data'=>$mes),			
+            'fields'=>array('sum(Despesa.valor) as total')
+        ));
+
+		if(isset($despesas[0][0]['total'])){
+			return $despesas[0][0]['total'];
+		}
+	}
+
+controller:
+	public function total() {		
+		$mes = $this->request->data['Despesa']['mes'];
+		$total=$this->Despesa->despesasTotal($mes);
+
+		if($total > 0){
+			$this->Session->setFlash(__('Despesas do mês de '.$mes));	
+			$this->set('total', $total);
+		}else{
+			$this->Session->setFlash(__('Nenhuma despesa cadastrada no mês de '.$mes));			
+			return $this->redirect(array('action' => 'index'));
+		}
+	}
+
+view:
+<div class="despesas view">
+<h2><?php echo __('Total de Despesas do Mês'); ?></h2>
+	<dl>
+		<dt><?php echo __('Valor'); ?></dt>
+		<dd>
+			<?php echo h($total); ?>
+			&nbsp;
+		</dd>
+	</dl>
+</div>
+<div class="actions">
+	<h3><?php echo __('Actions'); ?></h3>
+</div>
+
+
+Quero ver na view index o total das despesas:
+
+model:
+	public function despesasTotal($mes){
+        $despesas = $this->find('all', array(
+            'conditions'=>array('Despesa.data'=>$mes),			
+            'fields'=>array('sum(Despesa.valor) as total')
+        ));
+
+		if(isset($despesas[0][0]['total'])){
+			return $despesas[0][0]['total'];
+		}
+	}
+
+	public function index() {
+		$this->Despesa->recursive = 0;
+		$this->set('despesas', $this->Paginator->paginate());
+
+		// Total
+		if(isset($this->request->data['Despesa']['mes'])){
+				$mes = $this->request->data['Despesa']['mes'];
+				$total=$this->Despesa->despesasTotal($mes);
+
+				if($total > 0){
+					$this->set('total', $total);
+				}
+		}
+	}
+
+view:
+Adicionar ao final da index.ctp, na div actions, abaixo do link Nova Despesa:
+<div class="actions">
+	<h3><?php echo __('Actions'); ?></h3>
+...
+
+	<?php echo $this->Form->create('Despesa', array('action' => 'index')); ?>
+	<?php echo $this->Form->input('mes', array('label'=>'Total deste mês')); ?>
+	<?php echo $this->Form->end(__('Enviar')); ?>
+
+	<?php
+	if(isset($total)){?>
+	<h2><?php echo __('Total do Mês'); ?></h2>
+		<dl>
+			<dt><?php echo __('Valor'). ' - ' .h($total); ?></dt>
+		</dl>
+	<?php
+	}
+	?>
+</div>
+

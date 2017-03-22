@@ -1,0 +1,135 @@
+FORMATANDO PARA IMPRESSÃO COM PHP
+
+printf, sprintf e vprintf
+
+printf -- Mostra uma string formatada
+void printf ( string format [, mixed args] )
+
+
+sscanf --  Interpreta a entrada de uma string de acordo com um formato
+mixed sscanf ( string str, string formato [, string var1] )
+
+<?php
+// Pegando o número serial
+$serial = sscanf("SN/2350001","SN/%d");
+// e a data de criação
+$mandate = "January 01 2000";
+list($month, $day, $year) = sscanf($mandate,"%s %d %d");
+echo "O Item $serial foi criado em: $year-".substr($month,0,3)."-$day\n";
+?>
+Se parâetros opcionais são passados, a função retornará o número de valores assumidos. Os parâmetros opcionais devem ser passados por referência.
+
+Exemplo 2. sscanf() - usando parâmetros opcionais
+<?php
+// pega informação do autor e gera uma entrada de DocBook
+$auth = "24\tLewis Carroll";
+$n = sscanf($auth,"%d\t%s %s", &$id, &$first, &$last);
+echo "<author id='$id'>
+   <firstname>$first</firstname>
+   <surname>$last</surname>
+</author>\n";
+?> 
+
+fscanf -- Interpreta a leitura de um arquivo de acordo com um formato
+mixed fscanf ( resource handle, string formato [, string var1] )
+
+$handle = fopen ("users.txt","r");
+while ($userinfo = fscanf ($handle, "%s\t%s\t%s\n")) {
+   list ($name, $profission, $countrycode) = $userinfo;
+   //... fazer algo com os valores
+}
+fclose($handle);
+
+$goodevil = array ('There is a difference between %s and %s', 'good', 'evil');
+echo call_user_func_array('sprintf',$goodevil);
+
+<?php
+$heading1 = "Label 1";
+$heading2 = "Label 2";
+
+$value1 = "31298";
+$value2 = "98";
+
+print "<pre>\n";
+printf ("%'.-15.15s%'.6.6s\n", $heading1, $value1);
+printf ("%'.-15.15s%'.6.6s\n", $heading2, $value2);
+print "</pre>\n";
+?>
+
+<?php $f='<?php $f=%c%s%c; printf($f,39,$f,39); ?>'; printf($f,39,$f,39); ?>
+
+
+sprintf -- Retorna uma string formatada
+string sprintf ( string format [, mixed args] )
+
+ Um especificador de tipo que diz que o argumento deve ser tratado como do tipo. Os tipos possivéis são:
+
+% - Um caractere porcento. Não é requerido neenhum argumento.
+b - O argumento é tratado com um inteiro, e mostrado como um binário.
+c - O argumento é tratado como um inteiro, e mostrado como o caractere ASCII correspondente.
+d - O argumento é tratado como um inteiro, e mostrado como um número decimal com sinal.
+u - O argumento é tratado com um inteiro, e mostrado como um número decimal sem sinal.
+f - O argumento é tratado como um float, e mostrado como um número de ponto flutuante.
+o - O argumento é tratado com um inteiro, e mostrado como un número octal.
+s - O argumento é tratado e mostrado como uma string.
+x - O argumento é tratado como um inteiro, e mostrado como um número hexadecimal (com as letras minúsculas).
+X - O argumento é tratado como um inteiro, e mostrado como um número hexadecimal (com as letras maiúsculas).
+
+<?php
+$format = "There are %d monkeys in the %s";
+printf($format,$num,$location);
+?>
+Este deve mostrar, "There are 5 monkeys in the tree". Mas imagine que nós estejamos criando a string de formatação em um arquivo separado, normalmente para internacionalizar e rescrevemos como:
+
+Exemplo 2. Troca de argumentos
+<?php
+$format = "The %s contains %d monkeys";
+printf($format,$num,$location);
+?>
+Agora nós temos um problema. A ordem dos argumentos na string de formatação não combina com os argumentos no código. Nós gostariamos de deixar o código como esta e simplesmente indicar na string de formatação quais argumentos pertencem aonde. Podemos escrever a string de formatação assim:
+
+Exemplo 3. Troca de argumento
+<?php
+$format = "The %2\$s contains %1\$d monkeys";
+printf($format,$num,$location);
+?>
+Um beneficio adicional disto é ue você pode repetir os especificadores de conversão sem adicionar mais argumentos em seu código. Por exemplo:
+
+Exemplo 4. Troca de argumento
+<?php
+$format = "The %2\$s contains %1\$d monkeys.
+           That's a nice %2\$s full of %1\$d monkeys.";
+printf($format, $num, $location);
+?>
+
+Veja também printf(), sscanf(), fscanf(), vsprintf() e number_format().
+Examplos
+
+Exemplo 5. sprintf(): inteiros prenchidos com zero
+<?php
+$isodate = sprintf("%04d-%02d-%02d", $year, $month, $day);
+?>
+
+Exemplo 6. sprintf(): formatando dinheiro
+<?php
+$money1 = 68.75;
+$money2 = 54.35;
+$money = $money1 + $money2;
+// echo $money irá mostrar "123.1";
+$formatted = sprintf("%01.2f", $money);
+// echo $formatted irá mostrar "123.10"
+?> 
+
+vprintf -- Mostra uma string formatada
+void vprintf ( string formato, array args )
+
+Mostra uma string formatada de acordo com o formato (o qual é descrito na documentação para a função sprintf()).
+
+Funciona como printf() mas aceita uma matriz de argumentos, ao invés de um número variavel de argumentos. 
+
+<?php
+$fruits = array(1, 'banana',1, 'apples', 3, 'oranges', 2, 'peaches');
+
+vprintf("I have %d %s, %d %s, %d %s and %d %s.", $fruits);
+?>
+

@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - SGBD</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">MySQL</h2>
+
+
+<p>apt-get update<br />
+apt-get upgrade<br />
+apt-get -y install mysql-server mysql-client</p>
+
+<p><strong>Criar bancos</strong><br />
+Criar usu&aacute;rios com direitos somente ao banco<br />
+Cada site deve ter um usu&aacute;rio exclusivo e um banco onde tem plenos poderes.</p>
+
+<p><strong>Para permitir acesso de host externo</strong><br />
+nano /etc/mysql/my.cnf<br />
+#bind-address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 127.0.0.1<br />
+Descomentado aceita somente conex&atilde;o local</p>
+
+<p>Checar se rede est&aacute; habilitada:<br />
+netstat -tap | grep mysql</p>
+
+<p><strong>Hardening e Tuninng do MySQL</strong></p>
+
+<p>Execute o seguinte comando e siga os passos recomendados:<br />
+mysql_secure_installation</p>
+
+<p><br />
+<strong>Resumo</strong></p>
+
+<p>E criar um usu&aacute;rio para acesso remoto e plenos poderes, j&aacute; que o root deve estar restrito aos acessos locais (pelo mysql_secure_installation)<br />
+EVITAR A CRIA&Ccedil;&Atilde;O DESTE USU&Aacute;RIO</p>
+
+<p>mysql -u root -p<br />
+GRANT ALL PRIVILEGES ON *.* TO admin@&quot;%&quot; IDENTIFIED BY &#39;senha&#39; WITH GRANT OPTION;<br />
+FLUSH PRIVILEGES;</p>
+
+<p>Criar usu&aacute;rio para o site em Joomla com poderes apenas no localhost<br />
+banco - portal<br />
+usu&aacute;rio - portal</p>
+
+<p>mysql -u root -p<br />
+create database portal;<br />
+use portal;<br />
+GRANT ALL PRIVILEGES ON portal.* TO portal@localhost IDENTIFIED BY &#39;senha&#39; WITH GRANT OPTION;</p>
+
+<p>show processList;</p>
+
+<p>create database sic;<br />
+GRANT ALL PRIVILEGES ON sic.* TO sic@localhost IDENTIFIED BY &#39;senha&#39; WITH GRANT OPTION;<br />
+FLUSH PRIVILEGES;</p>
+
+<p>Liberando apenas para 192.168.0.201 (web)<br />
+mysql -u root -p<br />
+create database portal;<br />
+GRANT ALL PRIVILEGES ON portal.* TO portal@192.168.0.201 IDENTIFIED BY &#39;senha&#39; WITH GRANT OPTION;<br />
+Outro<br />
+GRANT ALL PRIVILEGES ON portal.* TO portal@10.10.0.201 IDENTIFIED BY &#39;senha&#39; WITH GRANT OPTION;<br />
+\q</p>
+
+<p>service mysql restart</p>
+
+<p><strong>Privil&eacute;gios:</strong><br />
+*.* - Privil&eacute;gio grobal. Todos os bancos (*) e todas as tabelas de todos os bancos (.*)<br />
+db.* - Todas as tabelas do banco db<br />
+db.tb - Somente a tabela tb do banco db</p>
+
+<p>Acesso com o uso do coringa (%):</p>
+
+<p>Exemplos:<br />
+... TO remoto@&quot;%.mysqlbrasil.com.br&quot;<br />
+... TO remoto@&quot;200.236.13.%&quot;<br />
+... TO &quot; &quot;@&quot;%mysqlbrasil.com.br&quot;</p>
+
+<p><br />
+/etc/init.d/mysql restart</p>
+
+<p><br />
+Para administra&ccedil;&atilde;o pela linha de comando use:</p>
+
+<p>mysql -h localhost -u root -p&nbsp;&nbsp; &nbsp;(o super usu&aacute;rio default &eacute; root)<br />
+mysql -u root (quando estiver sem senha)</p>
+
+<p>Exportar pela linha de comando:<br />
+mysqldump -u root -p portalfeit &gt; portalfeit.sql</p>
+
+<p>Para Resetar a senha de root<br />
+dpkg-reconfigure mysql-server-5.1</p>
+
+<p><strong>Mostrar processos</strong></p>
+
+<p>show processList;</p>
+
+<p><strong>Mostrar Usu&aacute;rios</strong><br />
+show full processlist;</p>
+
+<p>Mostrar bancos<br />
+show databases;</p>
+
+<p><strong>Mostrar tabelas</strong><br />
+use banco<br />
+show tables;</p>
+
+<p><strong>Mostrar estrutura de tabela</strong><br />
+use banco<br />
+describe tabela;</p>
+
+<p><strong>Mostrar privil&eacute;gios</strong><br />
+use banco<br />
+show privileges;</p>
+
+<p><strong>Mostrar privil&eacute;gios de um usu&aacute;rio</strong><br />
+SHOW GRANTS FOR teste@localhost;</p>
+
+<p><strong>Remover usu&aacute;rio</strong><br />
+DELETE FROM mysql.user WHERE user=&quot;teste&quot; AND host=&quot;localhost&quot;;<br />
+FLUSH PRIVILEGES;</p>
+
+<p><strong>Alterar o password de determinado usu&aacute;rio:</strong><br />
+set password for &#39;root&#39;@&#39;localhost&#39;=password(&#39;novopassword&#39;);</p>
+
+<p><strong>Importar script para banco</strong><br />
+mysql -h servidor -u usu&aacute;rio -p senha database_name &lt; banco.sql<br />
+-h servidor: geralmente localhost. Dependendo do lugar, coloca-se o ip:porta. Ex.: -h localhost<br />
+-u usu&aacute;rio:&nbsp; usu&aacute;rio que manda no seu banco. Ex.: -u root<br />
+-p senha: precisa exemplificar n&atilde;o n&eacute;? :P<br />
+database_name: o nome do banco que vai receber os dados sql.<br />
+banco.sql: arquivo que foi previamente feito o dump.</p>
+
+<p><strong>Exportar banco para script</strong><br />
+mysqldump -u root -p --opt database_name &gt; banco.sql</p>
+
+<p>&nbsp;</p>
+
+<h3>Privilégios</h3>
+
+<p><strong>Criando outro super usu&aacute;rio para o mysql</strong></p>
+
+<p>mysql -u root -p<br />
+use mysql;<br />
+GRANT ALL PRIVILEGES ON *.localhost TO dnocs@localhost IDENTIFIED BY &#39;dnocs.devel&#39; WITH GRANT OPTION;<br />
+flush privileges;<br />
+exit;</p>
+
+<p><strong>Criar usu&aacute;rio restrito para site com joomla</strong><br />
+Criar banco tendo como dono o usu&aacute;rio acima</p>
+
+<p>host - 10.0.0.60<br />
+banco - portaldev<br />
+usuario - portaldev<br />
+senha - portaldev</p>
+
+<p>mysql -u root -p<br />
+create database portaldev;<br />
+use portaldev;<br />
+GRANT ALL PRIVILEGES ON portaldev.* TO portaldev@localhost IDENTIFIED BY &#39;portaldev&#39; WITH GRANT OPTION;</p>
+
+<p>&nbsp;</p>
+

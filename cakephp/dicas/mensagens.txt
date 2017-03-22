@@ -1,0 +1,30 @@
+Mensagens diversas no CakePHP
+
+
+Controller::flash(string $message, string $url, integer $pause, string $layout)
+
+// In the controller.
+$this->Session->setFlash('Your stuff has been saved.');
+
+// In the view.
+echo $this->Session->flash();
+
+// set a bad message.
+$this->Session->setFlash('Something bad.', 'default', array(), 'bad');
+
+// set a good message.
+$this->Session->setFlash('Something good.', 'default', array(), 'good');
+
+// in a view.
+echo $this->Session->flash('good');
+echo $this->Session->flash('bad');
+
+$this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'));
+
+<div id="flashMessage" class="example_class">Example message text</div>
+
+$this->Session->setFlash(__('<script>alert('Usuario foi salvo!'); </script>', true));
+
+
+http://book.cakephp.org/2.0/en/core-libraries/components/sessions.html
+

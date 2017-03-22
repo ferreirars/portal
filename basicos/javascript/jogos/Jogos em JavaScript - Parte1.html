@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+	<title>iMasters - Por uma Internet mais criativa e dinâmica</title>
+	<meta name="resource-types" content="document">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta name="revisit-after" content="1">
+	<meta name="classification" content="Internet">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta name="Description" content="Comunidade de profissionais, estudantes e mestres em tecnlogias e ferramentas voltadas para o desenvolvimento web.">
+
+	<meta name="Keywords" content="programação, microsoft, asp, php, internet, linux, curso online, webmaster, java, flash, delphi, sql, oracle, cursos online, javascript, css, XHTML, HTML,  photoshop, semantica, web standards,  interbase, fireworks, dreamweaver, tableless, standards, browsers, compatibilidade, XML, usabilidade, acessibilidade, web, internet">
+	<meta name="robots" content="ALL">
+	<meta name="distribution" content="Global">
+	<meta name="rating" content="General">
+	<meta name="author" content="WebStudio iMasters">
+	<meta name="language" content="pt-br">
+	<meta name="doc-class" content="Completed">
+	<meta name="doc-rights" content="Public">
+	<link rel="shortcut icon" href="http://www.imasters.com.br/favicon.ico">
+
+	<!-- base href="http://www.imasters.com.br/" -->
+	<style type="text/css" media="screen">
+		
+		#imprimir { width:487px; }
+		body { font-family:Arial; font-size: 12px; }
+		span { float:left font-size:11px; padding:2px; }
+		h1 { font-size:16px; padding: 3px; }
+		h2 { font-size:14px; }
+		h3 { font-size:13px; }
+		h3 { font-size:12px; }
+		
+	</style>
+</head><body>
+<div id="imprimir">
+	<img src="Jogos%20em%20JavaScript%20-%20Parte1_arquivos/topo_imprimir.gif">
+	<br>
+	<span>Wilker Silva</span>
+	<span>Segunda-feira, 09 de abril de 2007</span>
+	<h1>Jogos em JavaScript</h1>
+	
+<p>Olá amigos! Esse é meu primeiro artigo para o iMasters e vamos
+conversar sobre um assunto que é no mínimo diferente: "Desenvolvimento
+de jogos em JavaScript".</p>
+
+<p>Isso mesmo. Algo que alguns consideram inviável, ou muito pesado,
+vou mostrar aqui técnicas para drawing, e também falarei sobre técnicas
+para desenvolvimento de jogos em geral.</p>
+
+<p>Para começar nossa conversa, inicialmente iremos desenvolver jogos
+que rodam em "browsers compatíveis! "Ahn? Como assim?". Eu considero
+compatíveis browsers como Firefox, Opera, Safari... em geral. Todos,
+menos o IE. </p>
+
+<p>Para executar uma das principais partes do jogo, que é o processo de
+renderização (a parte que desenha as coisas na tela) nós usaremos um
+recurso chamado Canvas. </p>
+
+<p>O canvas foi inserido no Firefox na versão 1.5, e também roda em
+Opera e outros. Eu testarei meus códigos em Firefox 2.0 e Opera 9.
+Existem algumas gambiarras que fazem algo semelhante em IE, mas não
+achei nada com suporte a desenho de imagens, que é algo essencial para
+nossos jogos. Então, infelizmente, ao menos por enquanto, nossos jogos
+não irão funcionar em Internet Explorer. </p>
+
+<p>Até o final da série de artigos faremos um jogo de nave espacial com inimigos, vidas, itens e um bocado de coisa.</p>
+
+<p>Deixando as histórias de lado, vamos ao que interessa!</p>
+
+<p>Hoje vamos entender a base do recurso Canvas. Vamos aprender a fazer desenhos simples.</p>
+
+<h3>Canvas</h3>
+
+<p>Vamos ver como criar um canvas inicialmente na tela: </p>
+
+<div class="codigo"><pre><code>&lt;html&gt; 
+&lt;head&gt; 
+&lt;title&gt; Testando o Canvas &lt;/title&gt; 
+&lt;/head&gt; 
+&lt;body&gt; 
+&lt;canvas id="mycanvas" width="300" height="200"&gt;&lt;/canvas&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; </code></pre></div>
+
+<p>Ao executar esse belíssimo código acima, vamos ver uma "incrível" tela em branco.</p>
+Mas calma, nosso canvas está lá, mas precisamos desenhar nele para aparecer algo.
+
+<p>Vamos começar a fazer alguns testes (a brincadeira começa agora) </p>
+
+<div class="codigo"><pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt; Testando o Canvas &lt;/title&gt;
+&lt;script type="text/javascript"&gt;
+
+window.onload = function() {
+	var canvas = document.getElementById("mycanvas");
+	
+	if(canvas.getContext) {
+		var ctx = canvas.getContext("2d");
+
+		ctx.fillRect(10, 15, 30, 20);
+	}
+}
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;canvas id="mycanvas" width="300" height="200"&gt;&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+
+<p>Agora sim, já temos alguma coisa. Temos um lindo quadrado desenhado.</p>
+
+<p>Brincadeiras a parte, esse código serve para demonstrar o esqueleto
+padrão para usar o canvas, e também para ter uma idéia de como funciona
+o processo de renderização. Como visto acima, os métodos para drawing
+(para efetuar operações de desenho) não ficam diretamente no canvas, e
+sim num context, que é obtido a partir do método canvas.getContext(). O
+modo 2D é o único existente atualmente. Esse canvas segue o padrão do
+whatwg, e de acordo com o mesmo, o único contexto estabelecido por
+padrão é o 2D, e eles tem previsão de colocar um contexto 3D com
+implementação em OpenGL futuramente (aí você imagina as possibilidades
+futuras).</p>
+
+<p>Vamos ver uma figura abaixo, apenas para ficar com uma noção melhor
+sobre as coordenadas que colocamos nos parâmetros do fillRect (como diz
+o nome, ele desenha um retângulo preenchido. Os argumentos são
+respectivamente: x, y, width, height).</p>
+
+<p><img src="Jogos%20em%20JavaScript%20-%20Parte1_arquivos/canvas_grid_imt.png" alt=""></p>
+
+<p>Acho que, com essa figura, deu pra entender as coordenadas e medidas
+que usarmos. Essa figura foi extraída do site do Mozilla (não fui eu
+que desenvolvi).</p>
+
+<p>Vamos agora ver os métodos para desenhar disponíveis no nosso contexto:</p>
+
+<ul>
+<li><strong>fillRect(x, y, width, height)</strong> - <span class="c2">Desenha um retângulo preenchido</span></li>
+
+<li><strong>strokeRect(x, y, width, height)</strong> - <span class="c2">Desenha as linhas de um retângulo</span></li>
+
+<li><strong>clearRect(x, y, width, height)</strong> - <span class="c2">Limpa uma área do desenho</span></li>
+
+<li><strong>drawImage()</strong> - <span class="c2">Desenha uma imagem (ela tem várias variações nos parâmetros de chamada, vou descrevê-los mais embaixo no artigo)</span></li>
+
+<li><strong>beginPath()</strong> - <span class="c2">Inicia o desenho de um caminho</span></li>
+
+</ul>
+
+<p><strong>Obs:</strong> todos os métodos abaixo devem ser chamados depois uma chamada ao <strong>beginPath</strong></p>
+
+<ul>
+<li><strong>moveTo(x, y)</strong> - <span class="c2">Move a posição para desenho</span></li>
+
+<li><strong>lineTo(x, y)</strong> - <span class="c2">Desenha uma linha</span></li>
+
+<li><strong>arc(x, y, radius, startAngle, endAngle, anticlockwise)</strong> - <span class="c2">Desenha um arco</span></li>
+
+<li><strong>quadraticCurveTo(cp1x, cp1y, x, y)</strong> - <span class="c2">Desenha uma curva arredondada</span></li>
+
+<li><strong>bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)</strong> - <span class="c2">Desenha uma curva de bezier</span></li>
+
+<li><strong>rect(x, y, width, height)</strong> - <span class="c2">Desenha um retângulo no path</span></li>
+
+<li><strong>closePath()</strong> - <span class="c2">Faz a linha que liga ao inicio do path</span></li>
+
+<li><strong>fill()</strong> - <span class="c2">Termina um path preenchendo o conteúdo</span></li>
+
+<li><strong>stroke()</strong> - <span class="c2">Terminar um path desenhando as linhas</span></li>
+
+</ul>
+
+<p>Pronto, eu postei os métodos apenas para demonstrar os recursos. Na criação de jogos, basicamente só iremos usar: <strong>fillRect e drawImage</strong></p>
+
+<p>Outra coisa interessante de conhecer é o fillStyle e strokeStyle.
+Com eles podemos definir várias coisas como cor de desenho,
+transparência, gradientes, patterns e outros. Está fora de escopo falar
+sobre todos eles aqui. Eu vou mostrar um exemplo mudando de cor. Quem
+tiver interesse e quiser ver todos os recursos do canvas, entre no site
+do Mozilla e leia um artigo completo e muito bom sobre o canvas: <a href="http://developer.mozilla.org/en/docs/Canvas_tutorial:Basic_usage" class="ext">http://developer.mozilla.org/en/docs/Canvas_tutorial:Basic_usage</a>. </p>
+
+<p>Vamos ao nosso exemplo:</p>
+
+<p><img src="Jogos%20em%20JavaScript%20-%20Parte1_arquivos/sorriso_imt.gif" alt=""></p>
+
+<div class="codigo"><pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt; Testando o Canvas &lt;/title&gt;
+&lt;script type="text/javascript"&gt;
+
+window.onload = function() {
+	var canvas = document.getElementById("mycanvas");
+	
+	if(canvas.getContext) {
+		var ctx = canvas.getContext("2d");
+		
+		ctx.fillStyle = "#FFEAB6";
+		
+		ctx.beginPath();
+		ctx.arc(75,75,50,0,Math.PI*2,true); // Ciclo externo
+		ctx.fill();
+		
+		ctx.strokeStyle = "#F00";
+		
+		ctx.beginPath();
+		ctx.arc(75,75,35,0,Math.PI,false);   // Boca (clockwise)
+		ctx.stroke();
+		
+		ctx.strokeStyle = "#00F";
+		
+		ctx.beginPath();
+		ctx.arc(60,65,5,0,Math.PI*2,true);  // Olho esquerdo
+		ctx.moveTo(95,65);
+		ctx.arc(90,65,5,0,Math.PI*2,true);  // Olho direito
+		ctx.stroke();
+	}
+}
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;canvas id="mycanvas" width="300" height="200"&gt;&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+
+<p>Pronto. Com isso terminamos a cobertura básica do Canvas. A idéia
+foi apenas apresentar esse recurso para vocês, para não deixar esse
+artigo sobre jogos tão parado. Vamos fazer uma animação bem simples, só
+para ver algo em movimento. É um efeito de um espiral se formando de
+dentro para fora, só para ver algo se mexendo mesmo.</p>
+
+<div class="codigo"><pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt; Testando o Canvas &lt;/title&gt;
+&lt;script type="text/javascript"&gt;
+
+var raio = 0;
+var mov = 0;
+var ctx = null;
+var center = null;
+
+espiral = function() {
+	raio += .1;
+	mov += .04;
+	
+	var x = center[0] + Math.sin(mov) * raio;
+	var y = center[1] + Math.cos(mov) * raio;
+	
+	ctx.fillRect(x, y, 1, 1);
+};
+
+window.onload = function() {
+	var canvas = document.getElementById("mycanvas");
+	
+	if(canvas.getContext) {
+		ctx = canvas.getContext("2d");
+		
+		center = [canvas.width / 2, canvas.height / 2];
+		
+		setInterval(espiral, 10);
+	}
+};
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;canvas id="mycanvas" width="300" height="200"&gt;&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+
+<p>Terminamos por aqui.</p>
+
+<p>Aprendemos como funciona o canvas, e como desenhar coisas simples
+nele. No próximo artigo vamos começar a falar de jogos realmente.
+Iremos criar o nosso GamePanel que é a base onde os jogos irão rodar, e
+também já começaremos nosso jogo fazendo o background.</p>
+
+<p>Espero que tenham gostado do artigo. Nos vemos semana que vem.</p>
+
+</div>
+</body></html>

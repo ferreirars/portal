@@ -1,0 +1,34 @@
+Configurando o Editor TinyMCE no Cake
+
+
+Adicionar o editor nos campos textarea torna o trabalho do usuário algo mais produtivo e prazeroso.
+
+Download - http://www.tinymce.com/download/download.php
+Esta implementação não é compatível com a versão 4.0.x do editor. Apenas compatível com a 3.x.
+Baixe o último da versão 3.x. Baixei o 3.5.8.
+
+- Descompacte e copie a pasta tinymce/jscripts/tiny_mce para /app/webroot/js, para que fique assim: 
+app/webroot/js/tiny_mce 
+
+- Adicione ao início do controller Clientes (ou no AppController para todos): 
+public $helpers = array('Tinymce');
+
+- Crie o helper app/View/Helper/TinymceHelper.php, copiando daqui:
+http://bakery.cakephp.org/articles/galitul/2012/04/11/helper_tinymce_for_cakephp_2
+
+- Finalmente substitua o campo "obs" da view View/Clientes/add.ctp e da edit.ctp, por: 
+
+    echo $this->Tinymce->input('Cliente.obs', array( 
+        'label' => 'Observação' 
+        ),array( 
+            'language'=>'en' 
+        ), 
+        'bbcode' 
+    ); 
+
+Logicamente só irá funcionar nas views add e edit.
+
+É uma versão bem simples do editor. A meu ver atende bem, mas se quizer poderá configurar para que apareça mais recursos e até poderá traduzir.
+
+
+

@@ -1,0 +1,948 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+           
+ 
+ 
+ <script src="js-debugger-ug_arquivos/tigris.js" type="text/javascript"></script>
+ <script src="js-debugger-ug_arquivos/companion-projects.js" type="text/javascript"></script>
+ <link rel="stylesheet" type="text/css" href="js-debugger-ug_arquivos/netbeans_002.css">
+ 
+                                                  <title>
+        testwww:        JavaScript Debugger User's Guide for NetBeans IDE 6.5/6.7
+    </title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta http-equiv="Content-Style-Type" content="text/css">
+ <meta name="SourceCastVersion" content="3.5.1.19.11">
+ <link rel="shortcut icon" href="http://www.netbeans.org/favicon.ico" type="image/x-icon">
+
+
+        <meta name="author" content="troy.giunipero@sun.com">
+        
+        <meta name="description" content="A tutorial demonstrating how to debug JavaScript
+            functionality in web applications using the NetBeans debugger.">
+
+        <meta name="keywords" content="NetBeans, IDE, integrated development environment, Ajax,
+            JavaScript, JavaScript Editor, debug, debugger, fisheye, web 2.0, open source,
+            web technology">
+
+        <link rel="stylesheet" type="text/css" href="js-debugger-ug_arquivos/netbeans.css">
+        <link rel="stylesheet" type="text/css" href="js-debugger-ug_arquivos/lytebox.css" media="screen">
+        <script type="text/javascript" src="js-debugger-ug_arquivos/lytebox-compressed.js"></script>
+
+        
+    
+<meta name="keywords" content="java IDE, java editor, java Platform, free, open source, java development, j2ee support, development enviroment, web development, NetBeans, IDE, java">
+
+
+ <script language="JavaScript" type="text/javascript">
+ <!--
+ var username="guest";
+ //-->
+ </script>
+</head><body class="composite">
+     
+ 
+  
+ 
+ 
+ 
+ <!-- begin TopTabs  -->
+
+<!-- end TopTabs -->
+<!-- Begin Content Area -->
+ 
+ 
+
+ 
+
+<!-- Servlet-Specific template -->
+
+
+
+ 
+ 
+ 
+
+        
+                 
+          
+  
+
+ 
+ 
+
+
+
+
+<!--
+*     Copyright © 2009 Sun Microsystems, Inc. All rights reserved.
+*     Use is subject to license terms.
+-->
+
+        <h1>JavaScript Debugger User's Guide</h1>
+
+        <p>The NetBeans JavaScript debugger provides you with a set of tools that aid
+            in the process of inspecting, monitoring and editing JavaScript code. You
+            can use the debugger to identify errors, or step through execution and explore
+            the state of your application at any given moment. Numerous debugging windows
+            are also at your disposal, affording an intuitive interface to examine variable
+            and expression values, threads, sessions, breakpoints and more.</p>
+
+        <p>The NetBeans JavaScript debugger offers a common user experience for both
+            Firefox and Internet Explorer. Debugger support for FireFox is based on
+            <a href="http://getfirebug.com/">Firebug</a>, whereas for Internet Explorer
+            it is based on the <a href="http://www.microsoft.com/downloads/details.aspx?familyid=2F465BE0-94FD-4569-B3C4-DFFDF19CCD99&amp;displaylang=en">Active
+            Scripting debugger framework</a>.</p>
+
+        <p><strong>Contents</strong></p>
+
+        <p><img src="js-debugger-ug_arquivos/netbeans-stamp65-67.gif" class="stamp" alt="Content on this page applies to NetBeans IDE versions 6.5 and 6.7" title="Content on this page applies to NetBeans IDE versions 6.5 and 6.7" width="114" height="114"></p>
+
+        <ul class="toc">
+            <li><a href="#enable">Enabling and Disabling the Debugger</a></li>
+            <li><a href="#start">Starting the Debugger for the First Time</a>
+
+                <ul>
+                    <li><a href="#ie">Internet Explorer</a></li>
+                    <li><a href="#firefox">Firefox</a></li>
+                </ul></li>
+
+            <li><a href="#run">Running the Debugger</a>
+            
+                <ul>
+                    <li><a href="#debugProject">Debugging a Project</a></li>
+                    <li><a href="#debugFile">Debugging a File</a></li>
+                    <li><a href="#debugExternal">Debugging an External Source</a></li>
+                </ul></li>
+
+            <li><a href="#work">Working with the Toolbar and Editor</a>
+
+                <ul>
+                    <li><a href="#toolbar">Using the Debugger Toolbar</a></li>
+                    <li><a href="#editorBreakpoints">Setting Breakpoints</a></li>
+                    <li><a href="#editorTooltips">Examining Tooltips</a></li>
+                </ul></li>
+
+            <li><a href="#examine">Examining the Debugger Windows</a>
+
+                <ul>
+                    <li><a href="#sessions">Sessions Window</a></li>
+                    <li><a href="#localVar">Local Variables Window</a></li>
+                    <li><a href="#watches">Watches Window</a></li>
+                    <li><a href="#callStack">Call Stack Window</a></li>
+                    <li><a href="#threads">Threads Window</a></li>
+                    <li><a href="#sources">Sources Window</a></li>
+                    <li><a href="#breakpoints">Breakpoints Window</a></li>
+                </ul></li>
+
+            <li><a href="#configure">Configuring the Debugger</a></li>
+            <li><a href="#seeAlso">See Also</a></li>
+        </ul>
+
+        <p><strong>To complete this document, you need the following software and resources.</strong></p>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th class="tblheader" scope="col">Software or Resource</th>
+                    <th class="tblheader" scope="col">Version Required</th>
+                </tr>
+                <tr>
+                    <td class="tbltd1"><a href="http://www.netbeans.org/downloads/index.html">NetBeans
+                        IDE</a></td>
+                    <td class="tbltd1">Java, PHP, or Ruby, version 6.5 or 6.7</td>
+                </tr>
+                <tr>
+                    <td class="tbltd1"><a href="http://java.sun.com/javase/downloads/index.jsp">Java
+                        Development Kit (JDK)</a></td>
+                    <td class="tbltd1">version 5 or more recent</td>
+                </tr>
+                <tr>
+                    <td class="tbltd1">NetBeans extension for Firefox <em>or</em> IE (<em>auto-installed</em>)</td>
+                    <td class="tbltd1">version 0.6</td>
+                </tr>
+                <tr>
+                    <td class="tbltd1">Firebug add-on for Firefox (<em>auto-installed</em>)
+                        <br><em class="indent margin-around">or</em>
+                        <br><a href="http://www.microsoft.com/downloads/details.aspx?familyid=2F465BE0-94FD-4569-B3C4-DFFDF19CCD99&amp;displaylang=en">Active
+                            Scripting debugger framework</a> for IE</td>
+                    <td class="tbltd1">version 1.2
+                        <br><em class="margin-around indent">&nbsp;</em>
+                        <br>v1.0a</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong class="notes">Notes:</strong></p>
+
+        <ul>
+            <li>The Firebug add-on and NetBeans extensions are included in the IDE. When
+                you run the debugger for the first time, the IDE checks for and installs
+                these into your browser. If you are using Internet Explorer, the IDE
+                prompts to you download and install the
+                <a href="http://www.microsoft.com/downloads/details.aspx?familyid=2F465BE0-94FD-4569-B3C4-DFFDF19CCD99&amp;displaylang=en">Active
+                Scripting debugger framework</a>.</li>
+            <li>The NetBeans JavaScript debugger is compatible with Internet Explorer versions 6
+                and 7, and Firefox version 2.0.0.x and 3.</li>
+            <li>For Internet Explorer users, the debugger is supported in Windows XP SP2
+                and Vista.</li>
+        </ul>
+
+        <br><a name="enable"></a>
+        <h2>Enabling and Disabling the Debugger</h2>
+
+        <p>By default, the JavaScript debugger is disabled in the IDE. When <a href="#start">starting
+            the debugger for the first time</a> however, the IDE presents you with a
+            <a href="#enable-debugger">dialog</a> that allows you to activate it for your browser.</p>
+            
+        <p>At all times, you can activate or disable the debugger from the Project Properties
+            window.</p>
+
+        <ol>
+            <li>In the Projects window, right-click your project and choose Properties.</li>
+            <li>In the Project Properties dialog, select the Debug category.</li>
+            <li>Toggle the <code>Debug Web Application (Client side JavaScript)</code> option.</li>
+            <li>Select the browser you plan to use (Firefox or Internet Explorer).
+
+            <br>
+            <img src="js-debugger-ug_arquivos/proj-properties.png" alt="JavaScript Debugger options displayed in Project Properties" class="margin-around b-all" title="JavaScript Debugger options are displayed in Project Properties"></li>
+            <li>Click OK to close the window.</li>
+        </ol>
+
+        <p><strong class="notes">Note: </strong>It is possible to run both server-side
+            and client-side debuggers concurrently. You are able to switch between debugging
+            sessions using the <a href="#sessions">Sessions Window</a>. If you run both
+            sessions, and want to terminate these sessions, you will need to click the Finish
+            Session (&nbsp;<img src="js-debugger-ug_arquivos/finish-session-button.png" alt="Finish Session button">&nbsp;) button in the <a href="#toolbar">debugger
+            toolbar</a> for as many sessions as are running.</p>
+
+        <br><a name="start"></a>
+        <h2>Starting the Debugger for the First Time</h2>
+            
+        <p>When you run the debugger for the first time, the IDE first checks if you have 
+            the appropriate resources and extensions installed in your browser.</p>
+            
+        <ul>
+            <li><a href="#ie">Internet Explorer</a></li>            
+            <li><a href="#firefox">Firefox</a></li>
+        </ul>
+        
+        <div class="indent">
+            <a name="ie"></a>
+            <h3>Internet Explorer</h3>
+            
+            <ol>
+                <li>Start the debugger by right-clicking your project in the Projects window
+                    and choosing Debug.</li>
+
+                <li>In the dialog box that displays, select the <code>Server side Java with client
+                    side JavaScript in the selected browser</code> option. Then select Internet Explorer.
+
+                    <br><a name="enable-debugger"></a>
+                    <img src="js-debugger-ug_arquivos/ie-debug-proj-dialog.png" class="margin-around" alt="Dialog box enabling you to specify server and/or client-side debugging" title="Dialog box enables you to specify server and/or client-side debugging">
+
+                    <br>
+                    <p><strong class="notes">Note: </strong>You can also disable the server-side debugger, or disable the
+                        client-side debugger at a later stage from your project's Properties dialog box (In
+                        the Projects window, right-click the project node and choose Properties). See
+                        <a href="#enable">Enabling and Disabling the Debugger</a>.</p></li>
+
+                <li>Click Debug. When you select the client-side debugging option for Internet Explorer and
+                    click Debug, the IDE first ensures that you have the <a href="http://www.microsoft.com/downloads/details.aspx?familyid=2F465BE0-94FD-4569-B3C4-DFFDF19CCD99&amp;displaylang=en">Active
+                    Scripting debugger framework</a> installed. If it have not been installed, you are
+                    prompted to download and install the framework.
+
+                    <br>
+                    <img src="js-debugger-ug_arquivos/install-active-scripting.png" class="margin-around" alt="Dialog box prompting to install the Active Scripting debugger framework" title="Dialog box prompts for installation of the Active Scripting debugger framework">
+
+                    <br>
+                    Your browser is launched to the location on Microsoft's website where you can
+                    download the framework. Download and install the framework.</li>
+
+                <li>Once you receive confirmation that the Active Scripting debugger framework has been
+                    installed, return to the IDE and click OK. The IDE checks if you have the NetBeans
+                    Internet Explorer extension registered in your browser. If not, a dialog displays,
+                    prompting you to enable the IDE to install the NetBeans Internet Explorer extension.
+
+                </li><li>Click OK. The IDE registers the extension in your browser, the debugging session is
+                    initiated, and the welcome page of the application you are running the debugging
+                    session on displays in your browser.</li>
+
+                <li>Return focus to the IDE. The <a href="#toolbar">debugger toolbar</a> is displayed
+                    above the editor. All icons of the toolbar are activated when the code becomes
+                    suspended. The project index page opens in the IDE's editor.
+
+                    <br><br>
+                    By default, numerous windows are activated in the lower region of the IDE, including
+                    the <a href="#watches">Watches</a>, <a href="#localVar">Local Variables</a>, and
+                    <a href="#callStack">Call Stack</a> windows. The debugger console initially displays
+                    in the Output window, indicating that a debugging session has been started. The debugger
+                    console can be used during a debugging session to show evaluation errors, thrown exceptions,
+                    and other information.
+
+                    <br>
+                    <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/ie-debugger-console.png" rel="lytebox" title="Output window displaying debugger console and other debugging windows">
+                        <img src="js-debugger-ug_arquivos/ie-debugger-console-small.png" class="margin-around" alt="Output window displaying debugger console"></a>
+                </li>
+            </ol>
+
+            <a name="firefox"></a>
+            <h3>Firefox</h3>
+            
+            <ol>
+                <li>Start the debugger by right-clicking your project in the Projects window 
+                    and choosing Debug.</li>
+
+                <li>In the dialog box that displays, select the <code>Server side Java with client
+                    side JavaScript in the selected browser</code> option. Then select Firefox.
+
+                    <br>
+                    <img src="js-debugger-ug_arquivos/firefox-debug-proj-dialog.png" class="margin-around b-all" alt="Dialog box enabling you to specify server and/or client-side debugging" title="Dialog box enables you to specify server and/or client-side debugging">
+
+                    <br>
+                    <p><strong class="notes">Note: </strong>You can also disable the server-side debugger, or disable the
+                        client-side debugger at a later stage from your project's Properties dialog box (In
+                        the Projects window, right-click the project node and choose Properties). See
+                        <a href="#enable">Enabling and Disabling the Debugger</a>.</p></li>
+                    
+                <li>Click Debug. When you select the client-side debugging option for Firefox and click Debug,
+                    the IDE ensures that you have the Firebug add-on and NetBeans Firefox extension 
+                    installed in Firefox. If these have not been installed, the IDE attempts to 
+                    install them.
+                            
+                    <br>
+                    <img src="js-debugger-ug_arquivos/install-ext.png" class="margin-around b-all" alt="Dialog box notifying of additional required add-ons for Firefox" title="Dialog box notifies of additional required add-ons for Firefox">                            
+
+                    <p class="alert">Make sure that Firefox is shut down before clicking OK. If not,
+                        the browser cannot load with the add-on and extension activated, and you will
+                        need to restart the browser manually, then rerun the debugger.</p></li>
+
+                <li>Click OK. Both components are installed and the browser starts, displaying
+                    the welcome page of the application you are running the debugging session on.
+
+                    <br><br>
+                    Once Firebug and the NetBeans Firefox extension have been successfully
+                    installed, their icons display in the lower right corner of the Firefox
+                    browser:
+
+                    <ul>
+                        <li><strong>Firebug: </strong>
+                            <img src="js-debugger-ug_arquivos/firebug-icon.png" alt="Firebug icon"></li>
+                        <li><strong>NetBeans Firefox extension: </strong>
+                            <img src="js-debugger-ug_arquivos/nb-icon.png" alt="NetBeans Firefox extension icon"></li>
+                    </ul>
+
+                    <p>Upon clicking on the NetBeans Firefox extension icon, you can view a
+                        dialog box that contains details about the extension.</p>
+
+                    <img src="js-debugger-ug_arquivos/nb-firefox-dialog.png" alt="Dialog box displaying details on the NetBeans Firefox extension" class="margin-around b-all" title="Dialog box displays details on the NetBeans Firefox extension"></li>
+
+                <li>Return focus to the IDE. The <a href="#toolbar">debugger toolbar</a> is displayed
+                    above the editor. All icons of the toolbar are activated when the code becomes
+                    suspended. The project index page opens in the IDE's editor.
+
+                    <br><br>
+                    By default, numerous windows are activated in the lower region of the IDE, including
+                    the <a href="#watches">Watches</a>, <a href="#localVar">Local Variables</a>, and
+                    <a href="#callStack">Call Stack</a> windows. The debugger console initially displays
+                    in the Output window, indicating that a debugging session has been started. The debugger
+                    console can be used during a debugging session to show evaluation errors, thrown exceptions,
+                    and other information.
+
+                    <br>
+                    <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/debugger-console.png" rel="lytebox" title="Output window displaying debugger console and other debugging windows">
+                        <img src="js-debugger-ug_arquivos/debugger-console-small.png" class="margin-around" alt="Output window displaying debugger console"></a>
+                </li>
+            </ol>
+        </div>
+
+        <br><a name="run"></a>
+        <h2>Running the Debugger</h2>
+
+        <p>You can begin a debugging session either on a project, or on an individual
+            file. Provided you have an Internet connection, you can also point the debugger
+            to any URL online, and inspect JavaScript resources made publicly available.</p>
+
+        <ul>
+            <li><a href="#debugProject">Debugging a Project</a></li>
+            <li><a href="#debugFile">Debugging a File</a></li>
+            <li><a href="#debugExternal">Debugging an External Source</a></li>
+        </ul>
+
+        <div class="indent">
+            <a name="debugProject"></a>
+            <h3>Debugging a Project</h3>
+
+            <p>You can run the JavaScript debugger on an entire project.</p>
+
+            <ol>
+                <li>Right-click the project node in the Projects window and choose Debug. The
+                    index file is opened in the editor if the debugger is not suspended.</li>
+            </ol>
+
+            <p><strong class="notes">Note: </strong>If the project you want to debug is set
+                as the main project, you can also choose Debug &gt; Debug Main Project from
+                the IDE's main menu, or choose the Debug Project icon
+                (&nbsp;<img src="js-debugger-ug_arquivos/debug-icon.png" alt="Debug Project icon">&nbsp;) in the main toolbar. To set a main project,
+                right-click the project you want to set and choose Set as Main Project.</p>
+
+            <a name="debugFile"></a>
+            <h3>Debugging a File</h3>
+
+            <p>You can run the debugger on an individual file, such as an HTML or JSP file.</p>
+
+            <ol>
+                <li>Right-click the file in the Projects window and choose Debug File.
+                    Likewise, you can choose Debug &gt; Debug File from the IDE's main
+                    menu. The file being debugged opens in the editor if the debugger
+                    is not suspended.</li>
+            </ol>
+
+            <a name="debugExternal"></a>
+            <h3>Debugging an External Source</h3>
+
+            <p>If you are connected to the Internet, it is possible to run the debugger
+                on an external URL. This enables you to view and examine JavaScript code
+                included in pages made publicly available.</p>
+
+            <ol>
+                <li>Choose Debug &gt; Attach Debugger from the IDE's main menu.</li>
+                <li>In the Attach Debugger dialog, select Web Page Debugger (JavaScript) from the
+                    Debugger drop-down list.</li>
+                <li>Enter the URL to the page you want to run the debugger on, then click OK.
+
+                    <br><br>
+                    <img src="js-debugger-ug_arquivos/attach-debugger.png" alt="Attach Debugger dialog displaying a sample URL" class="margin-around b-all" title="Enter a URL in the Attach Debugger dialog"></li>
+            </ol>
+
+            <p>When debugging an external source, you can use the <a href="#sources">Sources window</a>
+                to view the URL paths of all resources being used. You can also use the <a href="#work">editor
+                and toolbar</a> to step through and examine code on a line-by-line basis.</p>
+        </div>
+
+        <br><a name="work"></a>
+        <h2>Working with the Toolbar and Editor</h2>
+
+        <p>The editor enables you to view the contents of files. So when you are debugging, the
+            editor, in combination with the debugger toolbar, provides you with the ability to
+            step through your code during execution in order to see how the contents of your files
+            affect what is happening in a browser.</p>
+
+        <p><strong class="notes">Note: </strong>Pages generated from server-side scripting technologies,
+            such as ASP, JSP, PHP, and Ruby, are rendered in read-only format (<code>[r/o]</code>, as
+            indicated in the tab of a file opened in the editor). Server-side scripts dynamically prepare
+            content to be displayed in the client browser. The IDE's editor displays these files according
+            to the content in your browser's cache.</p>
+
+        <ul>
+            <li><a href="#toolbar">Using the Debugger Toolbar</a></li>
+            <li><a href="#editorBreakpoints">Setting Breakpoints</a></li>
+            <li><a href="#editorTooltips">Examining Tooltips</a></li>
+        </ul>
+        
+        <div class="indent">
+            <a name="toolbar"></a>
+            <h3>Using the Debugger Toolbar</h3>
+
+            <p>When you run a debugging session, the debugger toolbar displays above the editor.
+                Depending on whether you configured the debugger to suspend under certain conditions
+                (You can specify debugging settings in the Options window  - see <a href="#configure">Configuring
+                the Debugger</a>.), the toolbar displays either in an active or suspended state.</p>
+
+            <table class="cell" width="600">
+                <tbody><tr>
+                    <td class="align-right cell"><strong>Active State:</strong></td>
+                    <td>
+                        <img src="js-debugger-ug_arquivos/debugger-toolbar.png" class="margin-around" alt="Debugger toolbar in active state" title="Debugger toolbar in active state">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">The debugging session is active, and debugging windows contain data 
+                        based on the state of files and scripts loaded in your browser. You can click
+                        Pause to suspend the debugger on the next JavaScript call.</td>
+                </tr>
+
+                <tr>
+                    <td class="align-right cell"><strong>Suspended State:</strong></td>
+                    <td>
+                        <img src="js-debugger-ug_arquivos/debugger-toolbar2.png" class="margin-around" alt="Debugger toolbar in suspended state" title="Debugger toolbar in suspended state">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">The debugging session is suspended. If execution is stopped
+                        at a specific point in your files, the editor indicates its line location
+                        with a green background and arrow badge (&nbsp;<img src="js-debugger-ug_arquivos/arrow-badge.png" alt="Arrow badge">&nbsp;) in the left margin. You can use the toolbar to
+                        step through your code.</td>
+                </tr>
+            </tbody></table>
+
+            <br>
+            <p>The toolbar provides you with the following actions:</p>
+
+            <table class="cell align-left" width="600">
+                <tbody><tr>
+                    <td class="align-right cell"><strong>Finish Session</strong>
+                        (&nbsp;<img src="js-debugger-ug_arquivos/finish-session-button.png" alt="Finish Debugging Session button">&nbsp;)</td>
+                    <td>Finish debugging session</td>
+                </tr>
+                <tr>
+                    <td class="align-right cell"><strong>Pause</strong>
+                        (&nbsp;<img src="js-debugger-ug_arquivos/pause-button.png" alt="Pause button">&nbsp;)</td>
+                    <td>Suspend debugging session</td>
+                </tr>
+                <tr>
+                    <td class="align-right cell"><strong>Resume</strong>
+                        (&nbsp;<img src="js-debugger-ug_arquivos/resume-button.png" alt="Resume button">&nbsp;)</td>
+                    <td>Resume debugging session</td>
+                </tr>
+                <tr>
+                    <td class="align-right cell"><strong>Step Over</strong>
+                        (&nbsp;<img src="js-debugger-ug_arquivos/step-over-button.png" alt="Step Over button">&nbsp;)</td>
+                    <td>Step over an execution statement</td>
+                </tr>
+                <tr>
+                    <td class="align-right cell"><strong>Step Into</strong>
+                        (&nbsp;<img src="js-debugger-ug_arquivos/step-into-button.png" alt="Step Into button">&nbsp;)</td>
+                    <td>Step into a function call</td>
+                </tr>
+                <tr>
+                    <td class="align-right cell"><strong>Step Out</strong>
+                        (&nbsp;<img src="js-debugger-ug_arquivos/step-out-button.png" alt="Step Out button">&nbsp;)</td>
+                    <td>Step out of the current function call</td>
+                </tr>
+                <tr>
+                    <td class="align-right cell"><strong>Run to Cursor</strong>
+                        (&nbsp;<img src="js-debugger-ug_arquivos/run-to-cursor-button.png" alt="Run to Cursor button">&nbsp;)</td>
+                    <td>Run execution to the position of the cursor</td>
+                </tr>
+            </tbody></table>
+
+            <p><strong class="notes">Note: </strong>When there are multiple JavaScript statements on 
+                a single line, choosing Step Over in Internet Explorer results in progressing to the
+                next statement within the same line. In the case of FireFox, the debugger executes all
+                statements on a given line, then moves to next line.</p>
+
+            <a name="editorBreakpoints"></a>
+            <h3>Setting Breakpoints</h3>
+
+            <p>Set breakpoints in your files to tell the debugger where to stop during execution.
+                You can set breakpoints in HTML and JavaScript files. You can also set breakpoints 
+                within JavaScript code of any read-only (<code>[r/o]</code>) files that the IDE has
+                accessed from your browser's cache.</p>
+
+            <p>To set a breakpoint, click in the left margin of the editor on the line
+                where you want the breakpoint to be set.</p>
+
+            <div class="indent">
+                <img src="js-debugger-ug_arquivos/set-breakpoint.png" class="margin-around b-all" alt="Breakpoint set in the editor" title="Breakpoints can be set in the editor">
+            </div>
+
+            <p>You can remove the breakpoint by clicking on the breakpoint badge
+                (&nbsp;<img src="js-debugger-ug_arquivos/breakpoint-badge.png" alt="Breakpoint badge">&nbsp;).</p>
+
+            <p>It is also possible to temporarily disable breakpoints. To do so, right-click
+                on a breakpoint badge and choose Breakpoint &gt; ✓ Enabled. This toggles the
+                breakpoint into a disabled state, resulting in a grey badge
+                (&nbsp;<img src="js-debugger-ug_arquivos/disabled-breakpoint-badge.png" alt="Breakpoint badge">&nbsp;) displaying in the left margin.</p>
+
+            <p>If the debugger encounters a breakpoint upon executing, it stops on the breakpoint,
+                enabling you to examine variables in the debugging windows, and step through
+                any code following the breakpoint.</p>
+
+            <div class="indent">
+                <img src="js-debugger-ug_arquivos/stop-on-breakpoint.png" class="margin-around b-all" alt="Debugger suspended on a breakpoint" title="Debugger suspends on breakpoints">
+            </div>
+
+            <p>It is also possible to customize breakpoints, by setting a hit count and/or
+                conditional expression, so that the debugger stops on the breakpoint only
+                when the hit count is met, or the conditional expression evaluates to true.
+                Instructions on customizing breakpoints are also discussed below, under
+                <a href="#breakpoints">Breakpoints window</a>. To customize a breakpoint,
+                right-click on a breakpoint badge in the left margin of the editor, and choose
+                Breakpoint (or Disabled Breakpoint) &gt; Properties.</p>
+
+            <div class="indent">
+                <img src="js-debugger-ug_arquivos/disable-breakpoint.png" class="margin-around b-all" alt="Disabled breakpoint set in the editor" title="Disabled breakpoints are indicated by a grey badge in the editor">
+            </div>
+
+            <a name="editorTooltips"></a>
+            <h3>Examining Tooltips</h3>
+
+            <p>When the debugger is suspended during a debugging session, you can hover your mouse
+                over a JavaScript identifier in the editor to display a tooltip. If the identifier
+                is valid in the selected call stack frame, its value is displayed. You can also select
+                JavaScript expressions. The value of the expression in shown in a tooltip.</p>
+
+            <div class="indent">
+                <img src="js-debugger-ug_arquivos/tool-tip.png" title="Tool tips display in the editor" alt="Tool tip displayed in editor" class="margin-around b-all">
+            </div>
+        </div>
+
+        <br><a name="examine"></a>
+        <h2>Examining the Debugger Windows</h2>
+
+        <p>The IDE provides you with numerous windows that form an integral part of the
+            JavaScript debugger. When you run a debugging session, the debugger windows
+            enable you to keep track of variable and expression values as you step through
+            code, examine the call stack of an executing thread, verify source URL's, and
+            switch between sessions if you are running concurrent debugging sessions.</p>
+
+        <ul>
+            <li><a href="#sessions">Sessions Window</a></li>
+            <li><a href="#localVar">Local Variables Window</a></li>
+            <li><a href="#watches">Watches Window</a></li>
+            <li><a href="#callStack">Call Stack Window</a></li>
+            <li><a href="#threads">Threads Window</a></li>
+            <li><a href="#sources">Sources Window</a></li>
+            <li><a href="#breakpoints">Breakpoints Window</a></li>
+        </ul>
+
+        <p>All debugger windows can be accessed from the IDE's Window &gt; Debugging menu.
+            Once a debugging session is active, you can begin making use of the debugger
+            windows.</p>
+
+        <div class="indent">
+            <img src="js-debugger-ug_arquivos/debugger-menu.png" class="margin-around" alt="Debugger menu accessed from the IDE's main menu" title="Debugger menu accessed from the IDE's main menu">
+        </div>
+
+        <div class="indent">
+            <a name="sessions"></a>
+            <h3>Sessions Window</h3>
+
+            <p>The Sessions window shows any debugging sessions that are currently active.
+                When you start a JavaScript debugging session, you can see an entry for the
+                JavaScript debugger in the Sessions window.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/sessions-win.png" rel="lytebox" title="Sessions window displays sessions that are currently active">
+                    <img src="js-debugger-ug_arquivos/sessions-win-small.png" alt="Sessions window displaying a FireFox Debugger session" class="margin-around"></a>
+            </div>
+
+            <p class="tip">The NetBeans IDE also enables you to run multiple debugger sessions
+                simultaneously. For example, if you are working in a Java-based project and
+                have enabled the client-side as well as the server-side debugger, you can
+                identify two sessions listed in the Sessions window.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/sessions-win2.png" rel="lytebox" title="Sessions window displays multiple sessions">
+                    <img src="js-debugger-ug_arquivos/sessions-win2-small.png" alt="Sessions window displaying multiple sessions" class="margin-around"></a>
+            </div>
+
+            <p>The current session (i.e., the session that you can control using the debugger
+                toolbar) is indicated by the more prominent icon (
+                <img src="js-debugger-ug_arquivos/current-session-icon.png" alt="Current session icon"> ). To switch sessions, you can double-click on the
+                session you want to make current, or right-click a non-current session and choose
+                Make Current.</p>
+
+            <p><strong class="notes">Note: </strong>It is not recommended to switch sessions if the
+                session you are currently working in is suspended.</p>
+
+            <p>You can also use the right-click pop-up window to terminate a session (right-click
+                and choose Finish), or toggle between debugging the current thread or all threads
+                within the session (right-click and choose Scope &gt; Debug All Threads or Debug
+                Current Thread).</p>
+
+            <a name="localVar"></a>
+            <h3>Local Variables Window</h3>
+
+            <p>When the debugger is suspended, the Local Variables window displays the local variables
+                of the current <code>window</code> object for the selected callstack frame. It shows
+                the two top nodes:</p>
+
+            <ul>
+                <li><strong><code>scope</code></strong>: The scope of the function call for the current
+                    frame. All properties listed represent variables you can fetch under the current scope.</li>
+                <li><strong><code>this</code></strong>: The value of the <code>this</code> keyword for the
+                    current frame. All properties listed represent the current reference to <code>this</code>.</li>
+            </ul>
+
+            <p class="tips"><code>scope</code> and <code>this</code> are terms that belong to JavaScript
+                syntax and should be properly understood in order to make use of the Local Variables
+                window. To gain more insight, see the following articles on <a href="http://www.quirksmode.org/js/this.html"><code>this</code></a>
+                and <a href="http://www.digital-web.com/articles/scope_in_javascript/"><code>scope</code></a>.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/local-vars-win.png" rel="lytebox" title="Local Variables window displays variable information for the current call stack frame">
+                    <img src="js-debugger-ug_arquivos/local-vars-win-small.png" alt="Local Variables window displaying sample variable information" class="margin-around"></a>
+            </div>
+
+            <p>The scope node is always expanded. Aside from showing local variables and parameters of the
+                function call associated with the selected callstack frame, the following additional nodes
+                are shown:</p>
+
+            <ul>
+                <li><strong><code>arguments</code></strong>: actual arguments as opposed to the declared
+                    formal parameters</li>
+                <li><strong><code>arguments.length</code></strong>: the number of actual arguments passed
+                    into the function</li>
+                <li><strong><code>arguments.callee.length</code></strong>: the expected number of arguments
+                    as declared in the function signature</li>
+                <li><strong><code>parent scope</code></strong>: information about the scope outside of the
+                    scope of the current function call</li>
+            </ul>
+
+            <p>As you step through the code, the values of some local variables may change. Such local variables
+                are shown in bold in the Local variables window.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/local-vars-bold.png" rel="lytebox" title="Local Variables window displays variable information for the current call stack frame">
+                    <img src="js-debugger-ug_arquivos/local-vars-bold-small.png" alt="Local Variables window displaying sample variable information" class="margin-around"></a>
+            </div>
+
+            <p>You can also click directly into the Value column and manually change variable values.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/local-vars-change.png" rel="lytebox" title="Directly change variable values in the Local Variables window">
+                    <img src="js-debugger-ug_arquivos/local-vars-change-small.png" alt="Local Variables window displaying a manually changed value" class="margin-around"></a>
+            </div>
+
+            <br>
+            <p><strong class="notes">Notes:</strong></p>
+
+            <ul>
+                <li>For IE users, due to a limitation in the Active Scripting Debugger API's,
+                    it is not always possible to determine the variable type. In such cases,
+                    variables displayed in the Local Variables window indicate that they are
+                    of the generic type <code>{Object}</code>.</li>
+                <li>The <code>parent scope</code> node is not available in the Local Variables
+                    window for IE users.</li>
+            </ul>
+
+            <a name="watches"></a>
+            <h3>Watches Window</h3>
+
+            <p>The Watches window enables you to keep track of the values of specific expressions
+                as you step through code.</p>
+
+            <p>You can add watches by right-clicking in the Watches window or the editor and
+                choosing New Watch from the popup menu. To remove a watch, right-click and
+                choose Delete from the popup menu.</p>
+
+            <div class="indent">
+                <img src="js-debugger-ug_arquivos/new-watch.png" title="New Watch dialog enables you to set a watch on a JavaScript expression" alt="New Watch dialog" class="margin-around b-all">
+            </div>
+
+            <p class="tip">In the editor, first highlight the expression you want to create a
+                watch for, then right-click and choose New Watch. The highlighted expression
+                is automatically added to the dialog text field.</p>
+
+            <p>You can add arbitrary JavaScript expressions to the
+                Watches window. The debugger evaluates the watch expression in the selected
+                callstack frame and if successful, it displays the value of the expression.
+                Expressions can be variables, such as those listed in the Local Variables window,
+                or any JavaScript expression that can be evaluated and provide a value relevant
+                to the debugging session.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/watches-win.png" rel="lytebox" title="Watches window displays watches that you set on JavaScript expressions">
+                    <img src="js-debugger-ug_arquivos/watches-win-small.png" alt="Watches window displaying sample watches" class="margin-around"></a>
+            </div>
+
+            <a name="callStack"></a>
+            <h3>Call Stack Window</h3>
+
+            <p>The Call Stack window lists the sequence of calls made during execution. When
+                the debugger is suspended, the Call Stack window shows the sequence of function
+                calls (i.e., the <em>call stack</em>). On initial suspension, the top-most stack
+                frame is selected automatically.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/call-stack-win.png" rel="lytebox" title="Call Stack window displays the sequence of calls made during execution">
+                    <img src="js-debugger-ug_arquivos/call-stack-win-small.png" alt="Call Stack window displaying a sample sequence of calls" class="margin-around"></a>
+            </div>
+
+            <p>You can double-click on a call stack frame to select it, then explore any
+                variable or expression values for that frame in the <a href="#localVar">Local
+                Variables</a> and <a href="#watches">Watches</a> windows.</p>
+
+            <p>The Call Stack window contains two columns:</p>
+
+            <ul>
+                <li><strong>Name</strong>: The name of the function that was called</li>
+                <li><strong>Resolved Location</strong>: The URL indicating where the
+                    function was called, including the file name and line number</li>
+            </ul>
+
+            <p>You can also navigate directly to the location where the call took place
+                by right-clicking in the Call Stack window and choosing Go to Source.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/go-to-source.png" rel="lytebox" title="Context-sensitive pop-up options display in the Call Stack window">
+                    <img src="js-debugger-ug_arquivos/go-to-source-small.png" alt="Context-sensitive pop-up options displayed in the Call Stack window" class="margin-around"></a>
+            </div>
+
+            <p>The file that contains the location of the call stack frame opens in the
+                editor with the cursor positioned on the line which triggered the call.
+                The editor also provides highlighting features for call stack frames, so
+                previous frames in the call stack are indicated by a purple badge
+                (&nbsp;<img src="js-debugger-ug_arquivos/frame-icon.png" alt="call stack frame badge">&nbsp;) in the left margin, and display with
+                a light purple background.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/editor-call-frame.png" rel="lytebox" title="Editor provides highlighting features to identify call stack frames">
+                    <img src="js-debugger-ug_arquivos/editor-call-frame-small.png" alt="Editor displaying highlighting features for call stack frames" class="margin-around b-all"></a>
+            </div>
+
+            <a name="threads"></a>
+            <h3>Threads Window</h3>
+
+            <p>The Threads window lists the window and frames of pages existing in the debugging 
+                session. In JavaScript, each window or frame represents an execution context. So,
+                if you are running the debugger on a file that includes multiple frames, the
+                Threads window displays the structure of the page, listing each frame as an individual 
+                thread. The Threads window also details the current state of each window and frame,
+                and supplies a reason for suspension.</p>
+
+            <p>Similar to other debugging windows, you can employ the Go to Source option to
+                navigate directly to the path or URL indicated in the Name column of your selection.
+                Right-click a window or frame, and choose Go to Source from the pop-up menu.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/threads-win.png" rel="lytebox" title="Threads window displays all execution contexts during a debugger session">
+                    <img src="js-debugger-ug_arquivos/threads-win-small.png" alt="Threads window displaying a multi-framed page" class="margin-around"></a>
+            </div>
+
+            <a name="sources"></a>
+            <h3>Sources Window</h3>
+
+            <p>The Sources window displays all the files and scripts loaded for the debugging
+                session. They are listed in the order that they are loaded by the browser.
+                For JavaScript files in your project, the debugger shows the path to the file on
+                your computer. For remote resources, the URL of the file is shown. As with other
+                debugging windows, you can employ the Go to Source option to navigate directly to
+                the path indicated in your selection. Right-click a source file, and choose Go to
+                Source from the pop-up menu. The file opens in the editor for you to view.</p>
+
+            <p>If you are working with local files, the Sources window differentiates between the
+                actual source file, and the rendered source file contained in your browser's cache.
+                You can view the file contained in your browser's cache by choosing Go to Client
+                Source. The file opens in the editor in read-only format
+
+            </p><div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/sources-win.png" rel="lytebox" title="Sources window displays loaded JavaScript files">
+                    <img src="js-debugger-ug_arquivos/sources-win-small.png" alt="Sources window showing loaded files with right-click pop-up menu" class="margin-around"></a>
+            </div>
+
+            <a name="breakpoints"></a>
+            <h3>Breakpoints Window</h3>
+
+            <p>You can use the Breakpoints window to view all breakpoints that you have set in the IDE.</p>
+
+            <div class="indent">
+                <a href="http://testwww.netbeans.org/images/articles/65/web/js-debugger-users-guide/breakpoints-win.png" rel="lytebox" title="Breakpoints window displays all breakpoints">
+                    <img src="js-debugger-ug_arquivos/breakpoints-win-small.png" alt="Breakpoints window showing sample breakpoints" class="margin-around"></a>
+            </div>
+
+            <p>From the Breakpoints window you can enable or disable individual breakpoints by toggling
+                the option beneath the Enabled column. You can also customize breakpoints by right-clicking
+                a breakpoint and choosing Customize. The Breakpoint Customizer enables you to set a hit
+                count and/or conditional expression.</p>
+
+            <div class="indent">
+                <img src="js-debugger-ug_arquivos/breakpoint-customizer.png" title="Set a hit count and/or conditional expression using the Breakpoint Customizer" alt="Breakpoint Customizer" class="margin-around b-all">
+            </div>
+
+            <p>It is possible to set the condition for the hit count so that the debugger breaks when the
+                hit count is equal to, greater than or equal to, or a multiple of a given number.</p>
+
+            <p>When a conditional expression is specified, the debugger stops on the breakpoint only
+                if the expression evaluates to <code>true</code>. Likewise, if both a conditional
+                expression and a hit count condition are specified, the breakpoint is acknowledged only
+                if both evaluate to <code>true</code>. You can use <code>!(condition)</code> to negate
+                the condition. A customized breakpoint is indicated by a <img alt="Customized breakpoint badge" src="js-debugger-ug_arquivos/customize-badge.png">
+                badge in the Breakpoints window and left margin of the editor.</p>
+        </div>
+
+        <br><a name="configure"></a>
+        <h2>Configuring the Debugger</h2>
+
+        <p>The NetBeans IDE provides you with the ability to configure the JavaScript debugger.
+            You can adjust the way the debugger behaves using options available in the JavaScript
+            pane of the IDE's Options window. To open the Options window, choose Tools &gt; Options
+            (NetBeans &gt; Preferences on Mac) from the main menu. Then choose Miscellaneous &gt;
+            JavaScript.</p>
+
+        <div class="indent">
+            <img src="js-debugger-ug_arquivos/debugger-options.png" title="The Options window provides debugger configuration options" alt="Options window displaying debugger configuration options" class="margin-around b-all">
+        </div>
+
+        <br>
+        <p>Debugger options include the following:</p>
+
+        <ul>
+            <li><strong>Suspend on Debugger Keyword</strong>: Prompt the debugger to suspend by
+                inserting the <code>debugger;</code> statement into your JavaScript code.</li>
+            <li><strong>Suspend on Errors</strong>: Prompt the debugger to suspend when encountering
+                any JavaScript errors.</li>
+            <li><strong>Suspend on Exceptions</strong>: Prompt the debugger to suspend when encountering
+                any JavaScript exceptions. For Internet Explorer, the debugger suspends as it would for 
+                a breakpoint, but with a status of <code>EXCEPTION</code>. The actual message for the
+                exception is shown in the Console for the current debugging session. For Firefox, exceptions
+                are listed in the <a href="#localVar">Local Variables window</a>, detailing the output
+                message beneath the Values column.</li>
+            <li><strong>Suspend on First Line</strong>: Prompt the debugger to suspend on the first
+                line of a file included in a debugging session. For IE users, the debugger stops on the
+                first JavaScript statement to be executed at runtime. For FireFox users, it stops on the
+                first line of JavaScript code.</li>
+            <li><strong>Show Constants</strong>: Specify whether to display constants and their values
+                in the <a href="#localVar">Local Variables window</a> (When enabled, constant values can
+                clutter the window.)</li>
+            <li><strong>Show Functions</strong>: Specify whether to list functions in the Value column of
+                the <a href="#localVar">Local Variables window</a> (When enabled, functions can clutter
+                the window.)</li>
+            <li><strong>Ignore Query Strings</strong>: Specify whether to ignore URL query strings for
+                breakpoints. For example, when enabled, if a breakpoint is set on a line in
+                <code>http://www.foo.com</code>, the debugger will suspend in the event that the requested
+                URL is <code>http://www.foo.com?search=34</code>. This option can be useful if query
+                strings are dynamically added.</li>
+        </ul>
+
+        <div class="feedback-box">
+            <a href="http://testwww.netbeans.org/about/contact_form.html?to=3&amp;subject=Feedback:%20JavaScript%20Debugger%20User%27s%20Guide">Send
+                Us Your Feedback</a></div>
+
+        <br style="clear: both;">
+
+        <a name="seeAlso"></a>
+        <h2>See Also</h2>
+
+        <p>For more information about Ajax and Java technology on <a href="http://netbeans.org/">netbeans.org</a>,
+            see the following resources:</p>
+
+        <ul>
+            <li><a href="http://testwww.netbeans.org/kb/docs/web/js-debugger-screencast.html">Working with the JavaScript Debugger</a>. A screencast
+                demonstrating how to use the JavaScript debugger on a web project.</li>
+            <li><a href="http://testwww.netbeans.org/kb/docs/web/ajax-quickstart.html">Introduction to Ajax</a>. Describes how to build a simple
+                application while teaching the underlying process flow of an Ajax request.</li>
+            <li><a href="http://testwww.netbeans.org/kb/61/ide/javascript-editor.html">Editing JavaScript</a>. A document describing
+                basic JavaScript editing features provided by the NetBeans IDE.</li>
+            <li><a href="http://testwww.netbeans.org/kb/docs/php/debugging.html">Debugging PHP Source Code in the NetBeans IDE</a>. An explanation
+                of the use of Xdebug with NetBeans IDE to debug PHP applications.</li>
+            <li><a href="http://testwww.netbeans.org/kb/61/web/ajax-text-scriptaculous.html">Creating an Ajax Application with
+                Script.aculo.us</a>. Describes the use of Java Persistence APIs to implement server-side
+                pagination while retrieving and displaying results in a text field using Ajax functionality.</li>
+            <li><a href="http://testwww.netbeans.org/kb/docs/web/ajax-textfield.html">Creating an Ajax Autocompletion Textfield with Dynamic
+                Faces</a>. A demonstration of Ajax functionality using the Dynamic Faces component library
+                with a Woodstock JSF 1.2 Text Field component.</li>
+        </ul>
+
+<!-- /Servlet-Specific template -->
+<!-- end of right navigation -->
+
+<!-- servlets and anything not on www or testwww -->
+
+
+
+
+ 
+ 
+ 
+
+ 
+ 
+
+
+
+
+<div style="display: none;" class="grey" id="lbOverlay"></div><div style="display: none;" id="lbMain"><div class="grey" id="lbOuterContainer"><div style="display: none;" id="lbIframeContainer"><iframe style="display: none;" name="lbIframe" id="lbIframe"></iframe></div><div id="lbImageContainer"><img id="lbImage"><div id="lbHoverNav"><a href="#" class="grey" id="lbPrev"></a><a href="#" class="grey" id="lbNext"></a></div></div><div id="lbLoading"></div></div><div class="grey" id="lbDetailsContainer"><div class="grey" id="lbDetailsData"><div id="lbDetails"><span id="lbCaption"></span><span id="lbNumberDisplay"></span><span style="display: none;" id="lbNavDisplay"></span></div><div id="lbBottomNav"><a href="#" class="grey" id="lbClose"></a><a style="display: none;" href="#" class="grey" id="lbPause"></a><a style="display: none;" href="#" class="grey" id="lbPlay"></a></div></div></div></div></body></html>

@@ -1,0 +1,40 @@
+EJ - The only JavaScript library you’ll ever need
+Published on Tuesday, November 7th, 2006
+Updated March 2nd 2007
+
+If you like this code, I sincerely recommend that you take a look at the DOMAssistant JavaScript library.
+
+The web is littered with full-blown JavaScript libraries who say they will save your day and make your web development life much easier. You get encouraged to include these “mere 80 KB” libraries that is supposed to be the solution to all your needs, and practically make the web site work by itself. Needless to say, I’m not a big follower of JavaScript libraries,, especially since they almost always include lots of superfluous code, so I thought I’d put together a tiny library with only essential JavaScript functions.
+
+The result of that is EJ - Essential JavaScript.
+
+EJ consists of functions that I use all the time and they make writing JavaScript go faster and the result is being able to do work more efficiently. It is also about having the things you would write again and again for every web site you produce in one neat and tiny file instead, to be able to focus on the new things you need to address. Here are the functions included:
+EJ functions
+
+$
+    It is a shorthand function for document.getElementById. To get a reference to an element, just supply the id of the element you’re looking for:
+    $("element-id").
+getElementsByClassName
+    A function to get all elements with a certain class name. More thoroughly described in The Ultimate getElementsByClassName.
+addClassName
+    A function to add a class name to an element. It automatically takes into consideration if the element already has that class, and doesn’t apply it again if that’s the case. It also adds necessary spaces if the element already has other class names. Called like this:
+    addClassName(elementReference, "class-name-to-add");
+removeClassName
+    A function to remove a class name from an element. It automatically removes the class name and any eventual trailing space. If the className property of the element starts or ends with a space after this operation has been completed, it removes them as well. Called like this:
+    removeClassName(elementReference, "class-name-to-remove");
+
+EJ-E
+
+EJ-E stands for Essential JavaScript-Extended, and it includes some more functions that are often useful in a more JavaScript-dense developing environment. It includes all the functions in the basic EJ file, and it adds these as well:
+
+getElementsByAttribute
+    A function to get all elements with a certain attribute, and, if you want to, a certain value in that attribute as well. More thoroughly described in Monday code giveaway: getElementsByAttribute.
+preventDefaultBehavior
+    A way to prevent the default behavior of an element; for instance, stopping the behavior of a link. Just pass in the event as a parameter:
+    preventDefaultBehavior(event).
+getStyle
+    A very handy way to find out the rendered CSS styles on an element. Described in detail in Get the rendered style of an element.
+Support for Array.push in IE 5.0
+    If IE 5.0 is part of your target audience, support for the push method of the Array is added. Note: it is only applied to web browsers who doesn’t already support it.
+
+

@@ -1,0 +1,44 @@
+Paginação
+
+    public $paginate = [
+       'limit' => 15,
+       'order' => ['Clientes.id' => 'asc']
+    ];
+
+Forms
+echo $this->Form->input("termo", ['label' => '',"placeholder" => "Seja criterioso em sua busca..."]);
+
+
+Cake 3 Dicas
+
+$this->request->params['controller'];
+
+<?php if (!empty($event->users)): ?>
+        <ul>
+            <?php foreach ($event->users as $user): ?>
+                <li><?= h($user->name) ?> (<?= h($user->email) ?>)</li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Nobody has been invited to attend this event</p>
+    <?php endif; ?>
+
+
+
+Customizando o Prompt do Windows
+
+Adicionar tecla de atalho
+
+Clicar sobre o item do Prompr com botão direito
+Propriedades
+Ctrl+Alt+C
+
+
+Aumentando Tamanho da tela
+Abrir prompt 
+Clicar na barra de títulos acima com o botão direito
+Propriedades
+Layout
+Em Tamenho da janela aumente a gosto
+Arraste a janela para uma posição mais de seu agrado
+Desmarque a caixa abaixo Deise o sistema posicionar a jenala

@@ -1,0 +1,4 @@
+Instalando Cake no Ubuntu/Debian
+
+aptitude install cakephp cakephp-scripts
+

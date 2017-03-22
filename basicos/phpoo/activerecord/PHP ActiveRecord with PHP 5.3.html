@@ -1,0 +1,710 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>PHP ActiveRecord with PHP 5.3 &laquo;  Derivante</title>
+	<link rel="stylesheet" href="http://www.derivante.com/wp-content/themes/modernist/style.css" type="text/css" media="screen" />
+	<!--[if lt IE 8]>
+	<link rel="stylesheet" href="http://www.derivante.com/wp-content/themes/modernist/ie-fixes.css" type="text/css" media="screen" />
+	<![endif]-->	
+	<link rel="pingback" href="http://www.derivante.com/xmlrpc.php" />
+	<script type="text/javascript" charset="utf-8">
+	//<![CDATA[
+		sfHover = function() {
+			var sfEls = document.getElementById("nav").getElementsByTagName("LI");
+			for (var i=0; i<sfEls.length; i++) {
+				sfEls[i].onmouseover=function() {
+					this.className+=" sfhover";
+				}
+				sfEls[i].onmouseout=function() {
+					this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+				}
+			}
+		}
+		if (window.attachEvent) window.attachEvent("onload", sfHover);		
+	//]]>
+	</script>
+	<link rel="alternate" type="application/rss+xml" title="Derivante &raquo; Feed" href="http://www.derivante.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Derivante &raquo; Comments Feed" href="http://www.derivante.com/comments/feed/" />
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.06 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-6336664-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	// End of Google Analytics for WordPress by Yoast v4.0
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="Derivante &raquo; PHP ActiveRecord with PHP 5.3 Comments Feed" href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/feed/" />
+<script type='text/javascript' src='http://www.derivante.com/wp-includes/js/jquery/jquery.js?ver=1.4.2'></script>
+<script type='text/javascript' src='http://www.derivante.com/wp-content/plugins/collapsing-categories/collapsFunctions.js?ver=1.7'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.derivante.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.derivante.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='Derivante' href='http://www.derivante.com/' />
+<link rel='start' title='Turning the page &#8212; PHP, Symfony, ORM' href='http://www.derivante.com/2008/07/18/turning-the-page-php-symfony-orm/' />
+<link rel='prev' title='SOLR Performance Benchmarks – Single vs. Multi-core Index Shards' href='http://www.derivante.com/2009/05/05/solr-performance-benchmarks-single-vs-multi-core-index-shards/' />
+<link rel='next' title='PHP ActiveRecord Available for Beta Testing' href='http://www.derivante.com/2009/05/19/php-activerecord-available-for-beta-testing/' />
+<meta name="generator" content="WordPress 3.0.1" />
+<link rel='canonical' href='http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/' />
+<link rel='shortlink' href='http://www.derivante.com/?p=391' />
+<style type='text/css'>
+    #sidebar span.collapsing.categories {
+        border:0;
+        padding:0; 
+        margin:0; 
+        cursor:pointer;
+}
+#sidebar li.collapsing.categories.item a.self {font-weight:bold}
+#sidebar ul.collapsing.categories.list ul.collapsing.categories.list:before {content:'';} 
+#sidebar ul.collapsing.categories.list li.collapsing.categories.item:before {content:'';} 
+#sidebar ul.collapsing.categories.list li.collapsing.categories.item {list-style-type:none}
+#sidebar ul.collapsing.categories.list li.collapsing.categories {
+       text-indent:-1em;
+       padding-left:1em;
+       margin:0;
+}
+#sidebar ul.collapsing.categories.list li.collapsing.categories.item:before {content: '\00BB \00A0' !important;} 
+#sidebar ul.collapsing.categories.list .sym {
+   font-size:1.2em;
+   font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
+    cursor:pointer;
+    padding-right:5px;}
+    </style>
+
+<!-- platinum seo pack 1.3.7 -->
+<meta name="robots" content="index,follow,noodp,noydir" />
+<meta name="description" content="Update! Find the latest here. PHP 5.3 gets ActiveRecord! A quick search to find an implementation of active record for php on google is discouraging when" />
+<meta name="keywords" content="activerecord, database, ORM, PHP, php 5.3,PHP" />
+<link rel="canonical" href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/" />
+<!-- /platinum one seo pack -->
+		<link rel='alternate' type='application/rss+xml' title="Forums RSS" href="http://www.derivante.com/wp-content/plugins/wp-forum/feed.php?topic=all" />
+		<link rel='stylesheet' type='text/css' href="http://www.derivante.com/wp-content/plugins/wp-forum/skins/exclusive/style.css"  />
+		
+		
+		<script language="JavaScript" type="text/javascript" src="http://www.derivante.com/wp-content/plugins/wp-forum/js/script.js"></script>
+
+	<script language="JavaScript" type="text/javascript">
+		function wpf_confirm(){
+			var answer = confirm ('Remove this post?');
+			if (!answer)
+				return false;
+			else
+				return true;
+		}
+
+		</script> 
+
+
+		
+	<style type="text/css">
+        #header {
+			height: 132px;
+            background: url();
+        }
+		
+		#header a {
+				    color: #21759B;
+		}
+		    </style></head>
+
+<body class="single single-post postid-391">
+
+<div id="wrapper">	
+	<div id="header-wrapper">
+		<div id="nav">
+			<ul>
+							</ul>
+		</div>
+		
+		<div id="header">
+			<h1><a href="http://www.derivante.com">Derivante</a></h1>
+		</div>
+	</div>
+	
+	<hr />
+	
+	<div id="content">					
+		<div id="post-391" class="post-391 post type-post hentry category-php tag-activerecord tag-orm tag-php-53">
+			<div class="post-header">
+				<h2><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/" rel="bookmark" title="Permanent Link to PHP ActiveRecord with PHP 5.3">PHP ActiveRecord with PHP 5.3</a></h2>
+				<p>by Jacques Fuentes on May 14, 2009</p>
+			</div>
+			
+			<h3>Update!</h3>
+<p>Find the latest <a href="http://www.derivante.com/2009/05/19/php-activerecord-available-for-beta-testing/" >here</a>. </p>
+<h2>PHP 5.3 gets ActiveRecord!</h2>
+<p><img height="51" width="95" alt="php-med-trans-light" src="http://www.derivante.com/wp-content/uploads/2009/05/php-med-trans-light.gif" title="php-med-trans-light" style="margin: 15px;" class="alignleft size-full wp-image-425"/>A quick search to find an implementation of active record for php on <a title="google" href="http://www.google.com/search?q=php+activerecord" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.google.com']);" target="_blank">google</a> is discouraging when one considers the state of ActiveRecord for Ruby on Rails. The reader will notice that the top results are from very old posts and the rest of the results preview minimial implementations. Of course, eventually, PHP will see a robust active record similar to RoR. Fortunately, that time is now, thanks to <a href="http://downloads.php.net/johannes/php-5.3.0RC2.tar.gz" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','downloads.php.net']);">PHP 5.3</a> and the beneficial <a href="http://wiki.php.net/doc/scratchpad/upgrade/53" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','wiki.php.net']);">new</a> <a href="http://www.sitepoint.com/article/whats-new-php-5-3/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.sitepoint.com']);">features</a>: closures, late static binding, and <a href="http://us2.php.net/manual/en/language.namespaces.rationale.php" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','us2.php.net']);">namespaces</a>.</p>
+<p>My friend Kien and I have improved upon an earlier version of an ORM that he had written prior to PHP 5.3. The ActiveRecord we have created is inspired by Ruby on Rails and we have tried to maintain their conventions while deviating mainly because of convenience or necessity. Our main goal for this project has been to allow PHP developers tackle larger projects with greater agility. However, we also hope that use of this resource will push the PHP community further by learning the wonderful benefits of the Ruby on Rails stack. Enough with the rambling, let's get to the interesting piece!</p>
+<p><span id="more-391"></span></p>
+<h2>Overview</h2>
+<p>Allow me to reiterate the fact that we have tried to maintain similarity between our implementation and rails' ActiveRecord to avoid headaches and increase programmer bandwidth. Keeping this similarity in mind, we have tried to re-produce many of the features. Here is a list of those features:</p>
+<ul>
+<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/#finder_methods" >Finder methods</a></li>
+<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/#dynamic_methods" >Dynamic finder methods</a></li>
+<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/#writer_methods" >Writer methods</a></li>
+<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/#relationships" >Relationships</a></li>
+<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/#validations" >Validations</a></li>
+<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/#callbacks" >Callbacks</a></li>
+<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/#serializations" >Serializations</a></li>
+<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/#adapters" >Support for multiple adapters</a></li>
+<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/#misc_options" >Miscellaneous options</a></li>
+</ul>
+<p><br/><br />
+There are other features such as named scopes, additional adapters, <strong>transactions</strong> (something we want sooner than later), and a few others we hope to add in the future, but we believe this is a great start. We are hoping to have the code hosted on launchpad or the like within a week or two and a website with documentation. Be sure to check back here shortly for updates!</p>
+<h2> Configuration </h2>
+<p>Setup is very easy and straight-forward. There are essentially only two configuration points you must concern yourself with:</p>
+<ul>
+<li>Setting the model auto_load directory.</li>
+<li>Configuring your database connections</li>
+</ul>
+<p>Examples:<br />
+<code></p>
+<pre class="php">&nbsp;
+ActiveRecord\Config::<span style="color: #006600;">initialize</span><span style="color: #66cc66;">&#40;</span><span style="color: #000000; font-weight: bold;">function</span><span style="color: #66cc66;">&#40;</span><span style="color: #0000ff;">$cfg</span><span style="color: #66cc66;">&#41;</span>
+<span style="color: #66cc66;">&#123;</span>
+    <span style="color: #0000ff;">$cfg</span>-&gt;<span style="color: #006600;">set_model_directory</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'/path/to/your/model_directory'</span><span style="color: #66cc66;">&#41;</span>;
+    <span style="color: #0000ff;">$cfg</span>-&gt;<span style="color: #006600;">set_connections</span><span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'development'</span> =&gt;
+       <span style="color: #ff0000;">'mysql://username:password@localhost/database_name'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #66cc66;">&#125;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#Alternatively (w/o the 5.3 closure):</span>
+<span style="color: #0000ff;">$cfg</span> = ActiveRecord\Config::<span style="color: #006600;">instance</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #0000ff;">$cfg</span>-&gt;<span style="color: #006600;">set_model_directory</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'/path/to/your/model_directory'</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #0000ff;">$cfg</span>-&gt;<span style="color: #006600;">set_connections</span><span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'development'</span> =&gt;
+    <span style="color: #ff0000;">'mysql://username:password@localhost/database_name'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;</pre>
+<p></code></p>
+<p>Once you have configured these two settings you are done. ActiveRecord takes care of the rest for you. It does not require that you map your table schema to yaml/xml files. It will query the database for this information and cache it so that it does not make multiple calls to the database for a single schema.</p>
+<h2><a name="finder_methods">Finder methods</a></h2>
+<p>ActiveRecord supports a number of methods by which you can find records either by primary key or you can construct your own complex conditions array with other options such as:  order, limit, select, group.<br />
+<code></p>
+<pre class="php">&nbsp;
+<span style="color: #808080; font-style: italic;">#find by primary key</span>
+Author::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">3</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#same as above but expecting multiple results</span>
+Author::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span>,<span style="color: #cc66cc;">2</span>,<span style="color: #cc66cc;">3</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#find the first record with limit</span>
+Author::<span style="color: #006600;">first</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>; 
+&nbsp;
+<span style="color: #808080; font-style: italic;">#find last record by order and limit</span>
+Author::<span style="color: #006600;">last</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>; 
+&nbsp;
+Author::<span style="color: #006600;">all</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>; 
+&nbsp;
+<span style="color: #808080; font-style: italic;">#this may be evil - but you can pass your raw sql to this method</span>
+Author::<span style="color: #006600;">find_by_sql</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">## you can also pass many options to finder methods</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">#sql =&gt; ORDER BY name</span>
+Author::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">3</span>,<a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'order'</span> =&gt; <span style="color: #ff0000;">'name'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#sql =&gt; WHERE author_id IN (1,2,3)</span>
+<span style="color: #808080; font-style: italic;">#find all with conditions as array</span>
+Author::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'all'</span>,
+  <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'conditions'</span> =&gt; <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'author_id IN(?)'</span>,<a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span>,<span style="color: #cc66cc;">2</span>,<span style="color: #cc66cc;">3</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#sql =&gt; WHERE author_id = 3</span>
+<span style="color: #808080; font-style: italic;">#find with conditions as string</span>
+Author::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'first'</span>,<a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'conditions'</span> =&gt; <span style="color: #ff0000;">'author_id=3'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#sql =&gt; GROUP BY name</span>
+Author::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">3</span>, <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'group'</span> =&gt; <span style="color: #ff0000;">'name'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#sql =&gt; LIMIT 0,3</span>
+Author::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'all'</span>, <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'limit'</span> =&gt; <span style="color: #cc66cc;">3</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#sql =&gt; select * from `author` INNER JOIN etc...</span>
+Author::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'all'</span>, <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'joins'</span> =&gt;
+  <span style="color: #ff0000;">'INNER JOIN book on (book.author_id = author.id)'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#sql =&gt; SELECT name FROM table</span>
+Author::<span style="color: #006600;">first</span><span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'select'</span> =&gt; <span style="color: #ff0000;">'name'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#these methods do not return records</span>
+<span style="color: #808080; font-style: italic;">#return true/false</span>
+Author::<span style="color: #006600;">exists</span><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#return integer</span>
+Author::<a style="text-decoration: none;" href="http://www.php.net/count" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">count</span></a><span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'conditions'</span> =&gt; <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'name = ?'</span>, <span style="color: #ff0000;">'John'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># access is self-evident</span>
+<span style="color: #0000ff;">$book</span> = Book::<span style="color: #006600;">first</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+<a style="text-decoration: none;" href="http://www.php.net/echo" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">title</span>;
+<a style="text-decoration: none;" href="http://www.php.net/echo" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">author_id</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#returns an array</span>
+<span style="color: #0000ff;">$books</span> = Book::<span style="color: #006600;">all</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+<a style="text-decoration: none;" href="http://www.php.net/echo" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$books</span><span style="color: #66cc66;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #66cc66;">&#93;</span>-&gt;<span style="color: #006600;">title</span>;
+&nbsp;</pre>
+<p></code></p>
+<h2><a name="dynamic_methods">Dynamic finder methods</a></h2>
+<p>ActiveRecord within rails makes clever use of finders by allowing you to dynamically create methods based on the attribute names. This means you can easily make a "find_by_attribute_name" query without having to explicitly define it in the class. We also make use of this feature by using a new PHP 5.3 magic method: __callStatic().<br />
+<code></p>
+<pre class="php">&nbsp;
+Author::<span style="color: #006600;">find_by_name</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'George Bush'</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #808080; font-style: italic;">#you can make use of and/or</span>
+Author::<span style="color: #006600;">find_by_name_or_author_id</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'George Bush'</span>, <span style="color: #cc66cc;">2</span><span style="color: #66cc66;">&#41;</span>;
+Person::<span style="color: #006600;">find_by_first_name_and_last_name</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'Obama'</span>, <span style="color: #ff0000;">'Mama'</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #808080; font-style: italic;">#also have find_all_by</span>
+Author::<span style="color: #006600;">find_all_by_name</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'Tito'</span><span style="color: #66cc66;">&#41;</span>;
+Author::<span style="color: #006600;">find_all_by_name</span><span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'Tito'</span>,<span style="color: #ff0000;">'Bill Clinton'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;</pre>
+<p></code></p>
+<h2><a name="writer_methods">Writer methods</a></h2>
+<p>What good is it to have an object that encapsulates a record from the database if you can't do anything with it?<br />
+<code></p>
+<pre class="php">&nbsp;
+<span style="color: #808080; font-style: italic;">#call to SQL insert since it knows that it is a new record</span>
+<span style="color: #0000ff;">$book</span> = <span style="color: #000000; font-weight: bold;">new</span> Artist<span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'name'</span> =&gt; <span style="color: #ff0000;">'Tito'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">save</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">## updates</span>
+<span style="color: #808080; font-style: italic;">#only update 'dirty' attributes meaning the sql would only update</span>
+<span style="color: #808080; font-style: italic;">#fields that have been changed</span>
+<span style="color: #0000ff;">$book</span> = Book::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">title</span> = <span style="color: #ff0000;">'new title!'</span>;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">save</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#this will automatically call save</span>
+<span style="color: #0000ff;">$book</span> = Book::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">update_attributes</span><span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'title'</span> =&gt; <span style="color: #ff0000;">'new title!'</span>,
+  <span style="color: #ff0000;">'price'</span> =&gt; <span style="color: #cc66cc;">5.00</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#will also make call to save</span>
+<span style="color: #0000ff;">$book</span> = Book::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">update_attribute</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'title'</span>, <span style="color: #ff0000;">'some new title'</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #0000ff;">$book</span> = <span style="color: #000000; font-weight: bold;">new</span> Book;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">title</span> = <span style="color: #ff0000;">'new title!'</span>;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">author_id</span> = <span style="color: #cc66cc;">5</span>;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">save</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">created_at</span> <span style="color: #808080; font-style: italic;"># we also support created_at/updated_at timestamps where applicable</span>
+<a style="text-decoration: none;" href="http://www.php.net/echo" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">id</span>; <span style="color: #808080; font-style: italic;">#id is also set to the auto increment value from the db</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">#delete</span>
+<span style="color: #0000ff;">$author</span> = Author::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">4</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #0000ff;">$author</span>-&gt;<span style="color: #006600;">delete</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#you can pass readonly on the find so that you cannot save a model</span>
+<span style="color: #0000ff;">$book</span> = Book::<span style="color: #006600;">first</span><span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'readonly'</span> =&gt; <span style="color: #000000; font-weight: bold;">true</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">title</span> = <span style="color: #ff0000;">'new'</span>; <span style="color: #808080; font-style: italic;"># or you could set it here by doing $book-&gt;readonly(true);</span>
+<span style="color: #808080; font-style: italic;">#this will throw an ActiveRecord\ReadonlyException</span>
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">save</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;</pre>
+<p></code></p>
+<h2><a name="relationships">Relationships</a></h2>
+<p>Associations are the complex piece of ActiveRecord. They accept many of the same options as with rails.<br />
+<code></p>
+<pre class="php">&nbsp;
+<span style="color: #808080; font-style: italic;">#relationships are declared with a static var</span>
+<span style="color: #000000; font-weight: bold;">class</span> Book <span style="color: #000000; font-weight: bold;">extends</span> ActiveRecord\Model <span style="color: #66cc66;">&#123;</span>
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$belongs_to</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span>
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'publisher'</span><span style="color: #66cc66;">&#41;</span>,
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'author'</span>, <span style="color: #ff0000;">'readonly'</span> =&gt; <span style="color: #000000; font-weight: bold;">true</span>, <span style="color: #ff0000;">'select'</span> =&gt; <span style="color: #ff0000;">'name'</span>, <span style="color: #ff0000;">'conditions'</span> =&gt; <span style="color: #ff0000;">&quot;name != 'jax'&quot;</span><span style="color: #66cc66;">&#41;</span>,
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'another'</span>, <span style="color: #ff0000;">'class_name'</span> =&gt; <span style="color: #ff0000;">'SomeModel'</span><span style="color: #66cc66;">&#41;</span>
+  <span style="color: #66cc66;">&#41;</span>;
+  <span style="color: #808080; font-style: italic;">#has_many accepts select/conditions/limit/readonly/group/primary_key</span>
+  <span style="color: #808080; font-style: italic;">#has_many also takes a through option which you can use with source</span>
+  <span style="color: #808080; font-style: italic;">#to clarify the class</span>
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$has_many</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span>
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'revisions'</span><span style="color: #66cc66;">&#41;</span>,
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'editors'</span>, <span style="color: #ff0000;">'through'</span> =&gt; <span style="color: #ff0000;">'revisions'</span><span style="color: #66cc66;">&#41;</span>
+  <span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$has_one</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span>
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'something'</span><span style="color: #66cc66;">&#41;</span>
+  <span style="color: #66cc66;">&#41;</span>;
+<span style="color: #66cc66;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">#the 0 index declaration array of each association is the &quot;attribute_name&quot;</span>
+<span style="color: #808080; font-style: italic;">#which you use to access on the model like so:</span>
+<span style="color: #0000ff;">$book</span> = Book::<span style="color: #006600;">first</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+<a style="text-decoration: none;" href="http://www.php.net/echo" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">publisher</span>-&gt;<span style="color: #006600;">name</span>;
+<a style="text-decoration: none;" href="http://www.php.net/echo" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">author</span>-&gt;<span style="color: #006600;">name</span>; <span style="color: #808080; font-style: italic;"># we only have name as an attribute b/c of the select opt</span>
+<span style="color: #808080; font-style: italic;">#below will throw a readonlyException due to the option -- see the writer</span>
+<span style="color: #808080; font-style: italic;">#methods section</span>
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">author</span>-&gt;<span style="color: #006600;">save</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#has_many</span>
+<a style="text-decoration: none;" href="http://www.php.net/echo" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">revisions</span><span style="color: #66cc66;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #66cc66;">&#93;</span>-&gt;<span style="color: #006600;">id</span>;
+<span style="color: #808080; font-style: italic;">#has_many through</span>
+<a style="text-decoration: none;" href="http://www.php.net/echo" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">editors</span><span style="color: #66cc66;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #66cc66;">&#93;</span>-&gt;<span style="color: #006600;">name</span>;
+&nbsp;</pre>
+<p></code></p>
+<h2><a name="validations">Validations</a></h2>
+<p>This is rather self-explanatory. Before save/update/insert, your validations will be called for each declaration you have made and will save the model if all validations have passed. Otherwise, you will have access to an errors attribute which you can use to get back validation error messages.</p>
+<pre class="php">&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> Book <span style="color: #000000; font-weight: bold;">extends</span> ActiveRecord\Model
+<span style="color: #66cc66;">&#123;</span>
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$validates_format_of</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span>
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'title'</span>, <span style="color: #ff0000;">'with'</span> =&gt; <span style="color: #ff0000;">'/^[a-zW]*$/'</span>, <span style="color: #ff0000;">'allow_blank'</span> =&gt; <span style="color: #000000; font-weight: bold;">true</span><span style="color: #66cc66;">&#41;</span>
+  <span style="color: #66cc66;">&#41;</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$validates_exclusion_of</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span>
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'title'</span>, <span style="color: #ff0000;">'in'</span> =&gt; <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'blah'</span>, <span style="color: #ff0000;">'alpha'</span>, <span style="color: #ff0000;">'bravo'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>
+  <span style="color: #66cc66;">&#41;</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$validates_inclusion_of</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span>
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'title'</span>, <span style="color: #ff0000;">'within'</span> =&gt; <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'tragedy of dubya'</span>, <span style="color: #ff0000;">'sharks wit laserz'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>
+  <span style="color: #66cc66;">&#41;</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$validates_length_of</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span>
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'title'</span>, <span style="color: #ff0000;">'within'</span> =&gt; <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">5</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>,
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'attribute2'</span>, <span style="color: #ff0000;">'in'</span> =&gt; <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span>,<span style="color: #cc66cc;">2</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>,
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'attribute3'</span>, <span style="color: #ff0000;">'is'</span> =&gt; <span style="color: #cc66cc;">4</span>, <span style="color: #ff0000;">'allow_null'</span> =&gt; <span style="color: #000000; font-weight: bold;">true</span><span style="color: #66cc66;">&#41;</span>
+  <span style="color: #66cc66;">&#41;</span>;
+  <span style="color: #808080; font-style: italic;"># same as above since it is just an alias</span>
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$validates_size_of</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$validates_numericality_of</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span>
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'title'</span><span style="color: #66cc66;">&#41;</span>
+  <span style="color: #66cc66;">&#41;</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$validates_presence_of</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span>
+    <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'title'</span><span style="color: #66cc66;">&#41;</span>
+  <span style="color: #66cc66;">&#41;</span>;
+<span style="color: #66cc66;">&#125;</span>;
+&nbsp;
+<span style="color: #0000ff;">$book</span> = <span style="color: #000000; font-weight: bold;">new</span> Book;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">title</span> = <span style="color: #ff0000;">'this is not part of the inclusion'</span>;
+<span style="color: #b1b100;">if</span> <span style="color: #66cc66;">&#40;</span>!<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">save</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>
+  <a style="text-decoration: none;" href="http://www.php.net/print_r" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">print_r</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">errors</span>-&gt;<span style="color: #006600;">on</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'title'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;</pre>
+<h2><a name="callbacks">Callbacks</a></h2>
+<p>Callbacks allow you to take command of your model before/after certain events during its lifecycle. You can define methods in your model that will occur as callbacks before or after other methods are invoked on the model. Unfortunately, even though PHP 5.3 has closures, you cannot use them in a static var declaration so you must define/use methods.<br />
+<code></p>
+<pre class="php">&nbsp;
+<span style="color: #808080; font-style: italic;">#below are the possible declarations that you can make</span>
+<span style="color: #808080; font-style: italic;">#if your callback returns false for a before_* then it will cancel the</span>
+<span style="color: #808080; font-style: italic;">#action and the rest of the callbacks</span>
+<span style="color: #000000; font-weight: bold;">class</span> Book <span style="color: #000000; font-weight: bold;">extends</span> ActiveRecordModel<span style="color: #66cc66;">&#123;</span>
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$after_construct</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$before_save</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'do_something_before_save'</span><span style="color: #66cc66;">&#41;</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$after_save</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$before_create</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$after_create</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$before_update</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$after_update</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$before_validation</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$after_validation</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$before_validation_on_create</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$after_validation_on_create</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$before_validation_on_update</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$after_validation_on_update</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$before_destroy</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$after_destroy</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">#this will be called directly before save()</span>
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> do_something_before_save<span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span> <span style="color: #66cc66;">&#123;</span><span style="color: #66cc66;">&#125;</span>
+<span style="color: #66cc66;">&#125;</span>
+&nbsp;</pre>
+<p></code></p>
+<h2><a name="serializations">Serializations</a></h2>
+<p><code></p>
+<pre class="php">&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> Book <span style="color: #000000; font-weight: bold;">extends</span> ActiveRecord\Model<span style="color: #66cc66;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> upper_title<span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#123;</span>
+    <span style="color: #b1b100;">return</span> <a style="text-decoration: none;" href="http://www.php.net/strtoupper" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">strtoupper</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">title</span><span style="color: #66cc66;">&#41;</span>;
+  <span style="color: #66cc66;">&#125;</span>
+<span style="color: #66cc66;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">#produces: {title: 'sharks wit lazers', author_id: 2}</span>
+<span style="color: #0000ff;">$book</span> = Book::<span style="color: #006600;">find</span><span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">to_json</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>; 
+&nbsp;
+<span style="color: #808080; font-style: italic;">#produces: {title: 'sharks wit lazers'}</span>
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">to_json</span><span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'except'</span> =&gt; <span style="color: #ff0000;">'author_id'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#produces:  {upper_title: 'SHARKS WIT LAZERS'}</span>
+<span style="color: #808080; font-style: italic;">#make methods an array of methods and it will call them all</span>
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">to_json</span><span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'methods'</span> =&gt; <span style="color: #ff0000;">'upper_title'</span>, <span style="color: #ff0000;">'only'</span> =&gt; <span style="color: #ff0000;">'upper_title'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>; 
+&nbsp;
+<span style="color: #808080; font-style: italic;">#produces {title: 'sharks wit lazers', author_id: 2}</span>
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">to_json</span><span style="color: #66cc66;">&#40;</span><a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'include'</span> =&gt; <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'author'</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">#also support xml w/ the same options but need more tests =)</span>
+<span style="color: #0000ff;">$book</span>-&gt;<span style="color: #006600;">to_xml</span><span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;
+&nbsp;</pre>
+<p></code></p>
+<h2><a name="adapters">Support for multiple adapters</a></h2>
+<p>Currently, there exists support only for <strong>MySQL</strong> (also through mysqli) and <strong>sqlite3</strong>. Right now there are only two contributors to the code base; however, we hope to attract more coders to the project that can help support additional adapters such as postgres and oracle. The connection/adapter piece of the code has been sufficiently abstracted so that it should not be difficult to create more adapters when the time comes.</p>
+<h2><a name="misc_options">Miscellaneous Options</a></h2>
+<p>When declaring a model you can also specify the primary_key and table_name. Protected/accessible declarations are available so that you can avoid mass assignment problems. Attributes can be aliased so that you may access them via different names.<br />
+<code></p>
+<pre class="php">&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> Book <span style="color: #000000; font-weight: bold;">extends</span> ActiveRecord\Model<span style="color: #66cc66;">&#123;</span>
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$primary_key</span> = <span style="color: #ff0000;">'book_id'</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$table_name</span> = <span style="color: #ff0000;">'book_table'</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$attr_accessible</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'author_id'</span><span style="color: #66cc66;">&#41;</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$attr_protected</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'book_id'</span><span style="color: #66cc66;">&#41;</span>;
+  <a style="text-decoration: none;" href="http://www.php.net/static" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$alias_attribute</span> = <a style="text-decoration: none;" href="http://www.php.net/array" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.php.net']);"><span style="color: #000066;">array</span></a><span style="color: #66cc66;">&#40;</span>
+    <span style="color: #ff0000;">'new_alias'</span> =&gt; <span style="color: #ff0000;">'actual_attribute'</span>,
+    <span style="color: #ff0000;">'new_alias_two'</span> =&gt; <span style="color: #ff0000;">'other_actual_attribute'</span>
+  <span style="color: #66cc66;">&#41;</span>;
+<span style="color: #66cc66;">&#125;</span>
+&nbsp;</pre>
+<p></code></p>
+<h2>The Future</h2>
+<p>As I stated previously, very shortly the code will be available on launchpad. We are also in the works of putting up a website to host tutorials and documentation for the code. I will make additional posts once those milestones have been reached. Thanks for reading.</p>
+						
+			<div class="post-meta">
+				<ul>
+					<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/#comments" title="Comment on PHP ActiveRecord with PHP 5.3">19 comments</a> &bull; Tagged as: <a href="http://www.derivante.com/tag/activerecord/" rel="tag">activerecord</a>, <a href="http://www.derivante.com/tag/orm/" rel="tag">ORM</a>, <a href="http://www.derivante.com/tag/php-53/" rel="tag">php 5.3</a></li>
+					<li>Share on <a href="http://twitter.com/home?status=Currently reading: PHP ActiveRecord with PHP 5.3 http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/">Twitter</a>, <a href="http://www.facebook.com/share.php?u=http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/&amp;t=PHP ActiveRecord with PHP 5.3">Facebook</a>, <a href="http://del.icio.us/post?v=4;url=http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/">Delicious</a>, <a href="http://digg.com/submit?url=http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/">Digg</a>, <a href="http://www.reddit.com/submit?url=http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/&amp;title=PHP ActiveRecord with PHP 5.3">Reddit</a></li>
+									</ul>
+			</div>
+		</div>
+
+				
+	
+	
+
+	<div class="post-comments" id="comments">
+		<h2>19 comments</h2>
+	
+		   <div class="pingback even thread-even depth-1" id="comment-503">
+      <div class="comment-avatar">
+               </div>
+
+ 	  <div class="comment-body">
+		 				
+			<p>[...] derivante wikipedia devshed nordmann phplens adodb [...]</p>
+			
+			<p class="comment-meta">by <a href="http://phaddo.vacau.com/?p=42" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://phaddo.vacau.com/?p=42']);"  rel='external nofollow' class='url'>La slovenia è + vicina a noi. | PhpCode</a> on December 10, 2010 at 6:57 pm. <a rel='nofollow' class='comment-reply-link' href='/2009/05/14/php-activerecord-with-php-53/?replytocom=503#respond' onclick='return addComment.moveForm("comment-503", "503", "respond", "391")'>Reply</a> <a href="#comment-503" title="Permanent Link for this comment">#</a></p>
+	  </div>
+</div>
+   <div class="pingback odd alt thread-odd thread-alt depth-1" id="comment-489">
+      <div class="comment-avatar">
+               </div>
+
+ 	  <div class="comment-body">
+		 				
+			<p>[...] <a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/"  rel="nofollow">http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/</a> [...]</p>
+			
+			<p class="comment-meta">by <a href="http://www.symfonylab.com/is-there-life-out-there-or-what-is-your-ideal-orm-for-php/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.symfonylab.com/is-there-life-out-there-or-what-is-your-ideal-orm-for-php/']);"  rel='external nofollow' class='url'>Is there life out there (or what is your ideal ORM for PHP)? | SymfonyLab</a> on August 18, 2010 at 6:34 pm. <a rel='nofollow' class='comment-reply-link' href='/2009/05/14/php-activerecord-with-php-53/?replytocom=489#respond' onclick='return addComment.moveForm("comment-489", "489", "respond", "391")'>Reply</a> <a href="#comment-489" title="Permanent Link for this comment">#</a></p>
+	  </div>
+</div>
+   <div class="comment even thread-even depth-1" id="comment-422">
+      <div class="comment-avatar">
+         <img alt='' src='http://0.gravatar.com/avatar/0222c59ba47272c5a91386c9229f4ed7?s=54&amp;d=wavatar&amp;r=R' class='avatar avatar-54 photo' height='54' width='54' />      </div>
+
+ 	  <div class="comment-body">
+		 				
+			<p><strong>Good Site on Cloud Computing and SaaS</strong> &#8211; We are periodically looking for good blog information<br />
+related to Rackspace Cloud. Also we are looking for contributors to add value to our blog.</p>
+<p>Keep up the great work! </p>
+<p><strong>Thanks</strong></p>
+			
+			<p class="comment-meta">by <a href="http://www.cloudtweaks.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.cloudtweaks.com']);"  rel='external nofollow' class='url'>Josef Nakai</a> on March 19, 2010 at 1:17 pm. <a rel='nofollow' class='comment-reply-link' href='/2009/05/14/php-activerecord-with-php-53/?replytocom=422#respond' onclick='return addComment.moveForm("comment-422", "422", "respond", "391")'>Reply</a> <a href="#comment-422" title="Permanent Link for this comment">#</a></p>
+	  </div>
+</div>
+   <div class="pingback odd alt thread-odd thread-alt depth-1" id="comment-368">
+      <div class="comment-avatar">
+               </div>
+
+ 	  <div class="comment-body">
+		 				
+			<p>[...] mapping tools and frameworks. part one: php &bull; ORM in the PHP World &bull; ORM in PHP &bull; PHP ActiveRecord with PHP 5.3 &bull; LightOrm: Описание на русском языке &bull; PHP ActiveRecord Available [...]</p>
+			
+			<p class="comment-meta">by <a href="http://tigor.com.ua/blog/2009/10/21/orm-in-the-php-world/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://tigor.com.ua/blog/2009/10/21/orm-in-the-php-world/']);"  rel='external nofollow' class='url'>ORM в мире PHP | Блог веб-разработчика</a> on October 22, 2009 at 8:11 am. <a rel='nofollow' class='comment-reply-link' href='/2009/05/14/php-activerecord-with-php-53/?replytocom=368#respond' onclick='return addComment.moveForm("comment-368", "368", "respond", "391")'>Reply</a> <a href="#comment-368" title="Permanent Link for this comment">#</a></p>
+	  </div>
+</div>
+   <div class="comment byuser comment-author-omega even thread-even depth-1" id="comment-238">
+      <div class="comment-avatar">
+         <img alt='' src='http://0.gravatar.com/avatar/a5d6ca1107e75169a207f106b6f8d95c?s=54&amp;d=wavatar&amp;r=R' class='avatar avatar-54 photo' height='54' width='54' />      </div>
+
+ 	  <div class="comment-body">
+		 				
+			<p>What about many-many polymorphic relationships?</p>
+<p>Is there going to be an IRC channel?  I&#8217;d love to have somewhere to talk theory and design!</p>
+			
+			<p class="comment-meta">by omega on July 22, 2009 at 6:18 pm. <a rel='nofollow' class='comment-reply-link' href='/2009/05/14/php-activerecord-with-php-53/?replytocom=238#respond' onclick='return addComment.moveForm("comment-238", "238", "respond", "391")'>Reply</a> <a href="#comment-238" title="Permanent Link for this comment">#</a></p>
+	  </div>
+</div>
+   <div class="comment odd alt thread-odd thread-alt depth-1" id="comment-129">
+      <div class="comment-avatar">
+         <img alt='' src='http://1.gravatar.com/avatar/9f995475ca776283989edb6f0da02379?s=54&amp;d=wavatar&amp;r=R' class='avatar avatar-54 photo' height='54' width='54' />      </div>
+
+ 	  <div class="comment-body">
+		 				
+			<p>I have to use this in my development.</p>
+<p>I propose full replace existing validation syntax. Many items &#8211; it&#8217;s bad.</p>
+<p>I rewrite previous example to next:</p>
+<p>static $validates = array(<br />
+&#8216;title&#8217; =&gt; &#8216;with:&#8221;^[a-zW]*$&#8221;, blank:1, len:1-5, exclude: &#8220;blah,alpha,bravo&#8221;, within: &#8220;tragedy of dubya,sharks wit laserz&#8221;, null: 1&#8242;,<br />
+&#8216;column2&#8242; =&gt; &#8216;len: 10-50&#8242;<br />
+);</p>
+<p>P.S. Please see next propositions, and if you have &#8211; contact with me by email.</p>
+			
+			<p class="comment-meta">by <a href="http://danilchenko.pp.ua" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://danilchenko.pp.ua']);"  rel='external nofollow' class='url'>Anton Danil'chenko</a> on June 9, 2009 at 5:26 pm. <a rel='nofollow' class='comment-reply-link' href='/2009/05/14/php-activerecord-with-php-53/?replytocom=129#respond' onclick='return addComment.moveForm("comment-129", "129", "respond", "391")'>Reply</a> <a href="#comment-129" title="Permanent Link for this comment">#</a></p>
+	  </div>
+</div>
+   <div class="pingback even thread-even depth-1" id="comment-109">
+      <div class="comment-avatar">
+               </div>
+
+ 	  <div class="comment-body">
+		 				
+			<p>[...] brings me to what I&#8217;m really excited about. Recently we pushed out PHP ActiveRecord for everyone! This tutorial goes over the steps necessary to build your environment. You&#8217;ll be able [...]</p>
+			
+			<p class="comment-meta">by <a href="http://www.derivante.com/2009/05/21/php-rapid-application-development-with-zf18-and-ar/"   rel='external nofollow' class='url'>Derivante &raquo; PHP Rapid Application Development with ZF1.8 and AR</a> on May 21, 2009 at 5:33 pm. <a rel='nofollow' class='comment-reply-link' href='/2009/05/14/php-activerecord-with-php-53/?replytocom=109#respond' onclick='return addComment.moveForm("comment-109", "109", "respond", "391")'>Reply</a> <a href="#comment-109" title="Permanent Link for this comment">#</a></p>
+	  </div>
+</div>
+   <div class="comment byuser comment-author-jpfuentes2 bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-101">
+      <div class="comment-avatar">
+         <img alt='' src='http://1.gravatar.com/avatar/3db14b2f00f79fc0eb472ea7a9968768?s=54&amp;d=wavatar&amp;r=R' class='avatar avatar-54 photo' height='54' width='54' />      </div>
+
+ 	  <div class="comment-body">
+		 				
+			<p>Felipe, right now we are not supporting composite primary keys, although, it is most certainly on our to-do list for the future. We have tried to structure our code so that there isn&#8217;t a significant amount of work required to implement it, but we simply did not consider it high priority for the first release.</p>
+			
+			<p class="comment-meta">by <a href="http://www.derivante.com/authors/jacques-fuentes/"   rel='external nofollow' class='url'>Jacques Fuentes</a> on May 19, 2009 at 4:11 pm. <a rel='nofollow' class='comment-reply-link' href='/2009/05/14/php-activerecord-with-php-53/?replytocom=101#respond' onclick='return addComment.moveForm("comment-101", "101", "respond", "391")'>Reply</a> <a href="#comment-101" title="Permanent Link for this comment">#</a></p>
+	  </div>
+</div>
+   <div class="comment even thread-even depth-1" id="comment-100">
+      <div class="comment-avatar">
+         <img alt='' src='http://1.gravatar.com/avatar/929ed9958756c5c829a9eed068910646?s=54&amp;d=wavatar&amp;r=R' class='avatar avatar-54 photo' height='54' width='54' />      </div>
+
+ 	  <div class="comment-body">
+		 				
+			<p>Quite interesting, and I can also implement other frameworks, because it doesn&#8217;t &#8220;lock&#8221; me in a specific file structure.<br />
+But, what happens if I have a multiple primary Key? Would that PK become an Array?</p>
+			
+			<p class="comment-meta">by <a href="http://thewebmind.org" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://thewebmind.org']);"  rel='external nofollow' class='url'>Felipe</a> on May 19, 2009 at 1:42 pm. <a rel='nofollow' class='comment-reply-link' href='/2009/05/14/php-activerecord-with-php-53/?replytocom=100#respond' onclick='return addComment.moveForm("comment-100", "100", "respond", "391")'>Reply</a> <a href="#comment-100" title="Permanent Link for this comment">#</a></p>
+	  </div>
+</div>
+	
+				<div class="comment-navigation">
+			<ul>
+				<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/comment-page-1/#comments" >&laquo; Older Comments</a></li>
+				<li></li>
+			</ul>
+		</div>
+			</div>
+
+
+
+	<div id="respond" class="post-comments comment-form">
+		<h2>Leave your comment</h2>
+	
+			
+		<form action="http://www.derivante.com/wp-comments-post.php" method="post">
+		
+		<!-- <p>You can use these XHTML tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p> -->
+		
+				
+		<table>
+			<tr>
+				<th>
+					<label for="author">Name</label>
+					<p>Required. </p>
+				</th>
+				<td>
+					<input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required='true' />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="email">Email</label>
+					<p>Required. Not published.</p>
+				</th>
+				<td>
+					<input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required='true' />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="url">Website</label>
+					<p>If you have one.</p>
+				</th>
+				<td>
+					<input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+				</td>
+			</tr>
+				
+				
+			<tr>
+				<th>
+					<label for="comment">Comment</label>
+				</th>
+				<td>
+					<textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th />
+				<td>
+					<input name="submit" type="submit" id="submit" tabindex="5" value="Submit" />
+				</td>
+			</tr>
+		</table>
+	
+		<input type='hidden' name='comment_post_ID' value='391' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+		<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="a383e0f1ef" /></p>	
+		</form>
+	</div>
+</div>
+
+<hr />
+
+		
+	<div id="sidebar">
+			<div class="section">		<h2>Recent Posts</h2>		<ul>
+				<li><a href="http://www.derivante.com/2010/04/23/extensible-php-caching-library/" title="Extensible PHP Caching Library">Extensible PHP Caching Library</a></li>
+				<li><a href="http://www.derivante.com/2009/10/29/activerecord-and-zend_paginator_adapter_interface/" title="ActiveRecord and Zend_Paginator_Adapter_Interface">ActiveRecord and Zend_Paginator_Adapter_Interface</a></li>
+				<li><a href="http://www.derivante.com/2009/09/01/php-content-rating-confidence/" title="PHP Content Rating / Confidence">PHP Content Rating / Confidence</a></li>
+				<li><a href="http://www.derivante.com/2009/07/08/php-google-analytics-api/" title="PHP Google Analytics API">PHP Google Analytics API</a></li>
+				<li><a href="http://www.derivante.com/2009/06/23/solr-filtering-performance-increase/" title="SOLR Filtering Performance Increase">SOLR Filtering Performance Increase</a></li>
+				<li><a href="http://www.derivante.com/2009/05/21/php-rapid-application-development-with-zf18-and-ar/" title="PHP Rapid Application Development with ZF1.8 and AR">PHP Rapid Application Development with ZF1.8 and AR</a></li>
+				<li><a href="http://www.derivante.com/2009/05/19/php-activerecord-available-for-beta-testing/" title="PHP ActiveRecord Available for Beta Testing">PHP ActiveRecord Available for Beta Testing</a></li>
+				<li><a href="http://www.derivante.com/2009/05/14/php-activerecord-with-php-53/" title="PHP ActiveRecord with PHP 5.3">PHP ActiveRecord with PHP 5.3</a></li>
+				<li><a href="http://www.derivante.com/2009/05/05/solr-performance-benchmarks-single-vs-multi-core-index-shards/" title="SOLR Performance Benchmarks – Single vs. Multi-core Index Shards">SOLR Performance Benchmarks – Single vs. Multi-core Index Shards</a></li>
+				<li><a href="http://www.derivante.com/2009/04/27/100x-increase-in-solr-performance-and-throughput/" title="100x Increase in SOLR Performance and Throughput">100x Increase in SOLR Performance and Throughput</a></li>
+				</ul>
+		</div><div class="section"><h2>Categories</h2>		<ul>
+	<li class="cat-item cat-item-23"><a href="http://www.derivante.com/category/framework/" title="View all posts filed under Framework">Framework</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="http://www.derivante.com/category/general/" title="View all posts filed under General">General</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://www.derivante.com/category/linux/" title="View all posts filed under Linux">Linux</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.derivante.com/category/php/" title="View all posts filed under PHP">PHP</a>
+</li>
+	<li class="cat-item cat-item-80"><a href="http://www.derivante.com/category/web-technology/solr/" title="View all posts filed under SOLR">SOLR</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.derivante.com/category/sql/" title="View all posts filed under SQL">SQL</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://www.derivante.com/category/uncategorized/" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-26"><a href="http://www.derivante.com/category/web-architecture/" title="View all posts filed under Web Architecture">Web Architecture</a>
+</li>
+	<li class="cat-item cat-item-27"><a href="http://www.derivante.com/category/web-technology/" title="View all posts filed under Web Technology">Web Technology</a>
+</li>
+		</ul>
+</div><div class="section"><h2>Recent Comments</h2><ul id="recentcomments"><li class="recentcomments"><a href="http://www.pharmacieverbier.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.pharmacieverbier.com']);"  rel='external nofollow' class='url'>Levitra sans ordonnance</a> on <a href="http://www.derivante.com/2009/09/01/php-content-rating-confidence/comment-page-1/#comment-605">PHP Content Rating / Confidence</a></li><li class="recentcomments"><a href="http://link" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://link']);"  rel='external nofollow' class='url'>Fzevgspb</a> on <a href="http://www.derivante.com/2009/05/05/solr-performance-benchmarks-single-vs-multi-core-index-shards/comment-page-2/#comment-602">SOLR Performance Benchmarks – Single vs. Multi-core Index Shards</a></li><li class="recentcomments">rajat rastogi on <a href="http://www.derivante.com/2009/04/27/100x-increase-in-solr-performance-and-throughput/comment-page-1/#comment-591">100x Increase in SOLR Performance and Throughput</a></li><li class="recentcomments">rajat rastogi on <a href="http://www.derivante.com/2009/04/27/100x-increase-in-solr-performance-and-throughput/comment-page-1/#comment-590">100x Increase in SOLR Performance and Throughput</a></li><li class="recentcomments"><a href="http://www.dogsandpuppiesnews.info" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.dogsandpuppiesnews.info']);"  rel='external nofollow' class='url'>dogs and puppies</a> on <a href="http://www.derivante.com/2009/10/29/activerecord-and-zend_paginator_adapter_interface/comment-page-1/#comment-588">ActiveRecord and Zend_Paginator_Adapter_Interface</a></li><li class="recentcomments"><a href="http://www.topescara.com/hotel_pescara" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.topescara.com/hotel_pescara']);"  rel='external nofollow' class='url'>Pescara Abruzzo</a> on <a href="http://www.derivante.com/2009/03/31/bayesian-filter-training-with-n-gram/comment-page-1/#comment-583">Bayesian filter training with N-gram</a></li><li class="recentcomments">Clay vanSchalkwijk on <a href="http://www.derivante.com/2009/04/20/phpkml-polyline-simplification-with-douglas-peucker/comment-page-1/#comment-582">PHP/KML Polyline Simplification with Douglas-Peucker</a></li><li class="recentcomments">zdf on <a href="http://www.derivante.com/2009/04/20/phpkml-polyline-simplification-with-douglas-peucker/comment-page-1/#comment-576">PHP/KML Polyline Simplification with Douglas-Peucker</a></li><li class="recentcomments"><a href="http://www.fuzhijie.me/?p=412" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.fuzhijie.me/?p=412']);"  rel='external nofollow' class='url'>绚丽也尘埃 &raquo; Solr multicore配置</a> on <a href="http://www.derivante.com/2009/05/05/solr-performance-benchmarks-single-vs-multi-core-index-shards/comment-page-1/#comment-575">SOLR Performance Benchmarks – Single vs. Multi-core Index Shards</a></li><li class="recentcomments"><a href="https://github.com/alixaxel/phunction/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','https://github.com/alixaxel/phunction/']);"  rel='external nofollow' class='url'>Alix Axel</a> on <a href="http://www.derivante.com/2009/09/01/php-content-rating-confidence/comment-page-1/#comment-573">PHP Content Rating / Confidence</a></li></ul></div></div>
+
+<hr />				<script type="text/javascript" >	
+			
+			var skinurl = 'http://www.derivante.com/wp-content/plugins/wp-forum/skins/exclusive';			fold();
+		function notify(){
+				
+			var answer = confirm ('');
+			if (!answer)
+				return false;
+			else
+				return true;
+		}
+
+		</script>
+			<div id="footer">
+		</div>
+	</div>
+</body>
+</html>
+<!-- WP Super Cache is installed but broken. The path to wp-cache-phase1.php in wp-content/advanced-cache.php must be fixed! -->

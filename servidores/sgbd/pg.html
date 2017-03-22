@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<!-- Visualize by TEMPLATED	templated.co @templatedco Released for free under the Creative Commons Attribution 3.0 license (templated.co/license) -->
+<html>
+	<head>
+		<title>RibaFS - SGBD</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="stylesheet" href="/assets/css/menu.css" />				
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+<body>
+<br>
+<script src="/assets/js/jquery.min.js"></script>
+<script>
+   $(function(){
+       $('#menu').load("./menu.html");
+   });
+</script>
+<div id="menu"></div>
+<!-- Final do Cabeçalho -->
+
+<!-- Início do conteúdo-->
+<meta charset="UTF-8" >
+<style>
+#conteudo{
+	padding: 10px;
+	font-family: 'Arial', Helvetica, sans-serif;
+	margin: 0 auto;
+	width: 800px;
+	padding-bottom: 50px;
+    background-color: #fff;
+	color: #000;	
+}
+#rodape{
+	margin-top: 400px;
+}
+</style>
+
+<!-- Início de conteudo -->
+<div id='conteudo'>
+<h2 align="center" class="titulo">PostgreSQL</h2>
+
+
+<p>apt-get update<br />
+apt-get install postgresql postgresql-doc postgresql-9.5-slony1 postgresql-9.5-postgis</p>
+
+<p>EVITAR TROCAR A SENHA, DEIXANDO O ACESSO SOMENTE ATRAV&Eacute;S DO ROOT MESMO<br />
+passwd postgres&nbsp;&nbsp; &nbsp;(Alterar a senha no Sistema Operacional)</p>
+
+<p><strong>Permitir Acesso somente Local</strong><br />
+Para permitir que aplicativos e sites criados com o PHP tenham acesso atrav&eacute;s de uma conex&atilde;o onde usam &#39;host=localhost&#39;, ou seja, local, devemos executar como root.</p>
+
+<p><br />
+<strong>Criar bancos</strong><br />
+Criar usu&aacute;rios com direitos somente ao banco<br />
+Cada site deve ter um usu&aacute;rio exclusivo e um banco onde tem plenos poderes.</p>
+
+<p><br />
+<strong>CRIAR MAIS DOIS USU&Aacute;RIOS</strong><br />
+Criar usu&aacute;rios que n&atilde;o podem criar usu&aacute;rios, bancos nem roles</p>
+
+<p>su - postgres<br />
+createuser ribafs<br />
+createuser joao<br />
+<br />
+<strong>Alterar a senha dentro do SGBD</strong><br />
+psql<br />
+ALTER USER postgres WITH PASSWORD &#39;senha&#39;;<br />
+\q &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;para sair</p>
+
+<p>cp /etc/postgresql/9.1/main/postgresql.conf /etc/postgresql/9.1/main/postgresql.confCOP<br />
+nano /etc/postgresql/9.1/main/postgresql.conf</p>
+
+<p>listen_addresses = &#39;*&#39;&nbsp;&nbsp; &nbsp;(Escutar todas os IPs. Controlar no pg_hba.conf)</p>
+
+<p><br />
+Neste arquivo (pg_hba.conf) voc&ecirc; consegue restringir o acesso ao seu banco de dados por IP, por usu&aacute;rio, por tipo de senha, etc.</p>
+
+<p>cp /etc/postgresql/9.1/main/pg_hba.conf /etc/postgresql/9.1/main/pg_hba.confCOP<br />
+nano /etc/postgresql/9.1/main/pg_hba.conf</p>
+
+<p><strong>Liberar o IP do sysadmin (10.40.0.103)</strong></p>
+
+<p># Database administrative login by UNIX sockets<br />
+local&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; postgres&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ident&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;(Usu&aacute;rio postgres usa a mesma senha do SO)</p>
+
+<p># TYPE&nbsp; DATABASE&nbsp;&nbsp;&nbsp; USER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CIDR-ADDRESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; METHOD</p>
+
+<p># &quot;local&quot; is for Unix domain socket connections only<br />
+local&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ident<br />
+# IPv4 local connections:<br />
+host&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 127.0.0.1/32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; md5<br />
+host&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.40.0.133/32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; md5</p>
+
+<p>Toda uma rede:<br />
+host&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.0.0.0/24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; md5<br />
+exit</p>
+
+<p>/etc/init.d/postgresql restart</p>
+
+<p>Para n&atilde;o atribuir senha para o postgres, usando somente atrav&eacute;s do root podemos usar:<br />
+su postgres -c psql postgres</p>
+
+<p>Alguns scripts em<br />
+/usr/share/postgresql/8.4/</p>
+
+<p><strong>Uso Remoto do PostgreSQL</strong></p>
+
+<p>Acesso remoto do IP 192.168.1.67<br />
+No postgresql.conf listen_addresses deve estar com &#39;*&#39;</p>
+
+<p>Alterar o pg_hba.conf na linha do IP para trust<br />
+host&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 192.168.1.67/32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; md5</p>
+
+<p>Para toda a rede:<br />
+host&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 192.168.1.0/24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; md5</p>
+
+<p>Restartar<br />
+/etc/init.d/postgresql restart</p>
+
+<p>Acessar com:<br />
+psql -h IP -U usuario -d banco</p>
+
+<p>ou<br />
+psql -h IP -U usuario</p>
+
+<p>Listar bancos remotamente<br />
+psql -l -h 192.168.1.12 -U postgres</p>
+
+<p>Ajuda<br />
+psql --help</p>
+
+<p><br />
+<strong>Backup local e restore remoto</strong><br />
+pg_dump banco | psql -h hostname banco -U postgres</p>
+
+<p>pg_restore apoena -f</p>
+
+<p><br />
+<strong>M&aacute;scara Explicada</strong></p>
+
+<p>Apenas para iluminar um pouco, aquele n&uacute;mero que vem depois da barra &quot;/&quot;<br />
+significa o n&uacute;mero de bits que ele vai utilizar na mascara. Vejamos.</p>
+
+<p>Suponha que voce deixe 189.0.0.0/24, o que vai acontecer?</p>
+
+<p>1) Voce vai tentar conectar no IP do seu servidor a partir de seu IP de<br />
+origem IP<br />
+2) Seu servidor vai pegar o seu IP de origem e fazer um calculo de<br />
+mascara usando 24 bits, numa compara&ccedil;&atilde;o XOR bit-a-bit que vai resultar<br />
+em 189.22.33.0<br />
+3) Ele vai pegar o resultado do calculo acima e comparar com seu arquivo<br />
+e vai identificar que 189.22.33.0 N&Atilde;O &Eacute; IGUAL A 189.0.0.0.</p>
+
+<p>Portanto voc&ecirc; tem que utilizar 189.0.0.0/8, pois assim ele vai pegar o<br />
+seu IP IP, vai fazer uma comparacao XOR bit-a-bit e vai ter<br />
+como resultado 189.0.0.0, com esse resultado ele vai comprar com o<br />
+189.0.0.0 e vai reconhecer a IGUALDADE entre eles e vai aceitar.</p>
+
+<p><strong>Em resumo.</strong></p>
+
+<p>IP/8&nbsp; =&gt; IP/255.0.0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 192.0.0.0<br />
+IP/16 =&gt; IP/255.255.0.0&nbsp;&nbsp;&nbsp;&nbsp; = 192.168.0.0<br />
+IP/24 =&gt; IP/255.255.255.0&nbsp;&nbsp; = 192.168.1.0<br />
+IP/32 =&gt; IP/255.255.255.255 = 192.168.1.12</p>
+
+<p>Outras mascaras s&atilde;o poss&iacute;veis atrav&eacute;s de deslocamento de bit do parte da<br />
+rede para o host, obtendo-se sub-redes, mas ai ja acabamos fungindo do<br />
+escopo da lista.<br />
+--<br />
+Dickson S. Guedes</p>
+
+<p><br />
+<strong>Criar Usu&aacute;rios com privil&eacute;gios Restritos</strong></p>
+
+<p>Permitir Acesso somente Local<br />
+Para permitir que aplicativos e sites criados com o PHP tenham acesso atrav&eacute;s de uma conex&atilde;o onde usam &#39;host=localhost&#39;, ou seja, local, devemos executar como root.</p>
+
+<p>Neste arquivo (pg_hba.conf) voc&ecirc; consegue restringir o acesso ao seu banco de dados por IP, por usu&aacute;rio, por tipo de senha, etc.</p>
+
+<p>cp /etc/postgresql/8.4/main/pg_hba.conf /etc/postgresql/8.4/main/pg_hba.confCOP<br />
+nano /etc/postgresql/8.4/main/pg_hba.conf</p>
+
+<p>Liberar o IP do servidor WEB (10.10.0.102) e do servidor de Email (10.10.0.103)</p>
+
+<p># Database administrative login by UNIX sockets<br />
+local&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; postgres&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ident&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;(Usu&aacute;rio postgres usa a mesma senha do SO)</p>
+
+<p># TYPE&nbsp; DATABASE&nbsp;&nbsp;&nbsp; USER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CIDR-ADDRESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; METHOD</p>
+
+<p># &quot;local&quot; is for Unix domain socket connections only<br />
+local&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ident<br />
+# IPv4 local connections:<br />
+host&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 127.0.0.1/32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; md5<br />
+host&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.10.0.102/32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; md5<br />
+#host&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.10.0.103/32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; md5</p>
+
+<p>Toda uma rede:<br />
+host&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.0.0.0/24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; md5<br />
+exit</p>
+
+<p>/etc/init.d/postgresql restart</p>
+
+<p>&nbsp;</p>
+

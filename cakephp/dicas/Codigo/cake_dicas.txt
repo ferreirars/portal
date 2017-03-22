@@ -1,0 +1,123 @@
+debug($this->Auth->login());
+
+Receber hash de senha
+echo Security::hash('senhaaqui', null, true);
+
+print $this->Auth->password('admin');
+
+- app_controller
+function beforeFilter() {
+   $this->redirect (array('controller'=>'pages'));
+}
+
+- views->layouts->default.ctp
+$categorias = $this->requestAction("/categorias/categoriasPai/");
+
+
+Action de form
+echo $form->create('Post', array('action' => 'whatever'));
+echo $form->create('Post', array('url' => '/controller_name/action_name'));
+
+Next, by default, Cake expects to identify the user by fields named 'username' and 'password'. So, if you want to change that, you'll need to do this:
+
+class AppController extends Controller {
+  public $components = array(
+    'Session',
+    'Auth' => array(
+      'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+      'logoutRedirect' => array('controller' => 'users', 'action' => 'home'),
+      'authError' => 'You cannot view this page',
+      'authorize' => array('controller'),
+      'authenticate' => array(
+          'Form' => array( // THIS IS WHERE YOU CHANGE THE DEFAULT FIELDS
+             'fields' => array('username' => 'user_id','password' => 'user_password')
+          )
+       )
+    )
+  );
+
+
+}
+
+
+
+function beforeFilter() {
+      $this->Auth->loginAction=array('controller'=>'users','action'=>'login');
+      $this->Auth->loginRedirect=array('controller'=>'users','action'=>'alert');
+      $this->Auth->logoutRedirect=array('controller'=>'users','action'=>'login');
+      $this->Auth->loginError=__('Invalid username or password',true);
+      $this->Auth->authorize='controller';
+  }
+
+
+By default the AuthComponent will use the password supplied and will append a salt taken from the config file:
+<?php
+Configure::read('Security.salt');
+?>
+
+Validações
+<?php
+public $validate = array(
+    'username' => array(
+        'notempty' => array(
+            'rule' => array('notempty'),
+            'message' => 'Username cannot be empty',
+        ),
+        'unique' => array(
+            'rule' => array('isUnique'),
+            'message' => 'That username already exists. Please choose another',
+            'on'=>'create',
+        ),
+        'alphaNumeric' => array(
+            'rule' => 'alphaNumeric',
+            'required' => true,
+            'message' => 'Username can consist of letters and numbers only'
+        ),
+        'between' => array(
+            'rule' => array('between', 5, 15),
+            'message' => 'Username must be Between 5 and 15 characters'
+        )
+    ),
+    'email' => array(
+        'email' => array(
+            'rule' => array('email'),
+            'message' => 'Please use a valid email',
+        ),
+        'notempty' => array(
+            'rule' => array('notEmpty'),
+            'message'=> 'Email cannot be empty',
+        ),
+        'unique' => array(
+            'rule' => 'isUnique',
+            'message' => 'The email you entered has already been registered',
+            'on'=>'create'
+        ),
+    ),
+    'password' => array(
+        'notempty' => array(
+            'rule' => array('notempty'),
+            'message' => 'Password cannot be empty',
+        ),
+        'mingLength' => array(
+            'rule' => array('minLength', 6),
+            'message' => 'Mimimum 6 characters long',
+        ),
+        'maxgLength' => array(
+            'rule' => array('maxLength', 30),
+            'message' => 'Maximum 30 characters long',
+        )
+    ),
+);
+?>
+
+public $components = array(
+   'Auth' => array(
+     'authenticate' => array(
+       'Form' => array (
+          'fields' => array('username'=>'email','password'=>'user_password')
+        )
+     )
+   )
+);
+
+

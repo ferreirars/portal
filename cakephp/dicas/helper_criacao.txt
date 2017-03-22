@@ -1,0 +1,48 @@
+Exemplo de criação e uso de helper
+
+Colocar um valor de um determinado objeto disponível em sua view no layout geral.
+
+Este helper tem como função servir de título da página.
+
+views/layouts/default.ctp
+
+<div id="container">
+  <?php $session->flash(); ?>
+  
+  <?php if ($h->show_title()): ?>
+    <h1><?php echo $h->show_title(); ?></h1>
+  <?php endif; ?>
+  
+  <div id="content">
+    <?php echo $content_for_layout; ?>
+  </div>
+</div>
+
+views/pages/show.ctp
+
+<?php $h->title($page["Page"]["name"]); ?>
+ 
+<div class="content_cms">
+  <?php echo $page["Page"]["body"] ?>
+</div>
+
+views/helpers/h.php
+
+<?php
+class HHelper extends Helper
+{
+  var $title;
+ 
+  public function title($title='')
+  {
+    $this->title = $title;
+  }
+ 
+  public function show_title()
+  {
+    return $this->title;
+  }
+}
+?>
+
+

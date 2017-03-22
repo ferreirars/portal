@@ -1,0 +1,73 @@
+/* Estilo genérico */
+body {
+	margin:0;
+	padding:0;
+	border:none;
+	font: 11px/1.5 Verdana, Arial, Helvetica, sans-serif;
+	background:#ffe;
+	color:#333;
+	text-align:center;
+}
+
+#tudo {
+	width:950px;     
+	margin:0 auto;
+	text-align:left;
+}
+
+#logomarca {
+	height:50px;
+	border-bottom:1px solid #c30;
+}
+
+#rodape {
+	clear:both;
+	text-align:center;
+	border-top:1px solid #c30;
+}
+
+ul, ol {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+h1, h2, h3 {
+	margin: 0.8em 0;
+	color:#c30;
+	font-size:1.4em;
+}
+
+h2 {
+	font-size:1.2em;
+}
+
+h3 {
+	font-size:1.0em;
+}
+	
+.dest {
+	color:#039;
+}
+
+/* Estilo para 3 colunas */
+#principal {
+	float:left;
+	width:620px;
+	margin-left:10px; 	
+	text-align:justify;
+	border:dotted #c30;
+	border-width: 0 1px;
+	padding: 0 10px;
+}
+
+#menuesq {
+	width:160px;
+	float:left;
+}
+
+#menudir {
+	width:120px;
+	float:right;
+}
+
